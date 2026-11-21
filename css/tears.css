@@ -1,0 +1,5954 @@
+/* Common Styles */
+/* ----------------------------------------- */
+/*  Fonts                                    */
+/* ----------------------------------------- */
+/* Use local system serif/sans-serif fallbacks; no external font files required. */
+/* ----------------------------------------- */
+/*  Sheet Styles                             */
+/* ----------------------------------------- */
+:root {
+  --htbah-color-black: #000;
+  --htbah-color-dark: #191813;
+  --htbah-color-faint: #c9c7b8;
+  --htbah-color-beige: #b5b3a4;
+  --htbah-color-tan: #7a7971;
+  --htbah-color-olive: #4b4a44;
+  --htbah-color-crimson: #44191A;
+  --htbah-color-groove: #eeede0;
+  --htbah-color-gold: #9f9275;
+  --htbah-color-gold-rgb: 159, 146, 117;
+  --htbah-color-red: #ed1c24;
+  --htbah-color-blue: #4682b4;
+  --htbah-color-green: #205b15;
+  --htbah-color-maroon: #741b2b;
+  --htbah-color-parchment: #f1ebe8;
+  --htbah-color-scrollbar: var(--htbah-color-gold);
+  --htbah-color-card: #f8f4f1;
+  --htbah-color-hp-1: #1b4b29;
+  --htbah-color-hp-2: #3ba55d;
+  --htbah-color-hp-3: #276d3c;
+  --htbah-color-hd-1: #401f25;
+  --htbah-color-hd-2: var(--htbah-color-maroon);
+  --htbah-color-hd-3: #500000;
+  --htbah-color-mp-1: #1e3a5f;
+  --htbah-color-mp-2: #4682b4;
+  --htbah-color-mp-3: #2c5282;
+  --htbah-color-sc-1: #433754;
+  --htbah-color-sc-2: #776493;
+  --htbah-color-blue-white: #cfd2da;
+  --htbah-color-blue-gray-1: #242731;
+  --htbah-color-blue-gray-2: #252830;
+  --htbah-color-blue-gray-3: #434857;
+  --htbah-color-iron-gray: #313131;
+  --htbah-color-light-gray: #3d3d3d;
+  --htbah-color-dark-gray: #0d0b0b;
+  --htbah-color-success: #006c00;
+  --htbah-color-success-background: #c7d0c0;
+  --htbah-color-success-critical: green;
+  --htbah-color-failure: #6e0000;
+  --htbah-color-failure-background: #ffdddd;
+  --htbah-color-failure-critical: red;
+  --htbah-background-10: rgba(0, 0, 0, 0.1);
+  --htbah-background-5: rgba(0, 0, 0, 0.05);
+  --htbah-background-card: var(--htbah-color-card);
+  --htbah-background-parchment: var(--htbah-color-parchment);
+  --htbah-border-dark: 1px solid #999;
+  --htbah-border-light: 1px solid #CCC;
+  --htbah-border-groove: 2px groove var(--htbah-color-groove);
+  --htbah-border-dotted: 1px dotted #bbb;
+  --htbah-border-gold: 1px solid var(--htbah-color-gold);
+  --htbah-font-modesto: "Modesto Condensed", "Palatino Linotype", serif;
+  --htbah-font-roboto: Roboto, sans-serif;
+  --htbah-font-roboto-condensed: "Roboto Condensed", sans-serif;
+  --htbah-font-roboto-slab: "Roboto Slab", serif;
+  --htbah-shadow-45: rgba(0, 0, 0, 0.45);
+  --htbah-shadow-15: rgba(0, 0, 0, 0.15);
+  --htbah-highlight-45: rgba(255, 255, 255, 0.45);
+  --font-size-9: 0.5625rem;
+  --font-size-10: 0.625rem;
+  --font-size-21: 1.1375rem;
+  --font-size-23: 1.4375rem;
+  --font-size-30: 1.875rem;
+  --font-size-36: 2.25rem;
+  --font-size-42: 2.625rem;
+  --font-size-46: 2.875rem;
+  --htbah-capacity-container-background-color: oklch(57.5% 0.012 101);
+  --htbah-capacity-container-border-color: oklch(20.8% 0.01 98);
+  --htbah-capacity-background-color: oklch(62% 0.05 246);
+  --htbah-capacity-border-color: oklch(91% 0.044 252.5);
+  --htbah-capacity-text-color: oklch(95% 0 0);
+
+  /* details-tab specific variables */
+  --details-item-background: var(--htbah-color-card);
+  
+  /* inventory-tab specific variables */
+  --inventory-item-background: var(--htbah-background-parchment);
+}
+
+
+/* ----------------------------------------- */
+/*  Flexbox                                  */
+/* ----------------------------------------- */
+.tears .flexrow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.tears .flexrow > * {
+  flex: 1;
+}
+.tears .flexrow .flex1 {
+  flex: 1;
+}
+.tears .flexrow .flex2 {
+  flex: 2;
+}
+.tears .flexrow .flex3 {
+  flex: 3;
+}
+.tears .flexrow .flex4 {
+  flex: 4;
+}
+.tears .flexcol {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.tears .flexcol > * {
+  flex: 1;
+}
+.tears .flexcol .flex1 {
+  flex: 1;
+}
+.tears .flexcol .flex2 {
+  flex: 2;
+}
+.tears .flexcol .flex3 {
+  flex: 3;
+}
+.tears .flexcol .flex4 {
+  flex: 4;
+}
+#context-menu [data-group-id]:has(li) {
+  position: relative;
+  margin-block-start: 0.5rem;
+}
+#context-menu [data-group-id]:has(li)::before {
+  content: "";
+  position: absolute;
+  inset-inline: 1rem;
+  inset-block-start: -0.25rem;
+  border-block-start: 1px solid rgba(255, 255, 255, 0.15);
+}
+/* ---------------------------------- */
+/*  Slide Toggles                     */
+/* ---------------------------------- */
+.tears slide-toggle {
+  --slide-toggle-height: 20px;
+  --slide-toggle-width: 36px;
+  --slide-toggle-padding: 3px;
+  --slide-toggle-track-color-unchecked: black;
+  --slide-toggle-track-color-checked: #3ba55d;
+  --slide-toggle-thumb-color: white;
+  --slide-toggle-thumb-width: calc(var(--slide-toggle-height) - var(--slide-toggle-padding) * 2);
+  --slide-toggle-thumb-height: var(--slide-toggle-thumb-width);
+  --slide-toggle-transition-time: 250ms;
+  display: inline-block;
+  width: var(--slide-toggle-width);
+  height: var(--slide-toggle-height);
+  cursor: pointer;
+  /* Checked state */
+}
+.tears slide-toggle .slide-toggle-track {
+  width: 100%;
+  height: 100%;
+  background: var(--slide-toggle-track-color-unchecked);
+  border-radius: calc((var(--slide-toggle-height) * 2) / 3);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  padding: var(--slide-toggle-padding);
+}
+.tears slide-toggle .slide-toggle-thumb {
+  width: var(--slide-toggle-thumb-width);
+  height: var(--slide-toggle-thumb-height);
+  border-radius: 100%;
+  background: var(--slide-toggle-thumb-color);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.45);
+  text-align: center;
+  transition: margin-left var(--slide-toggle-transition-time) ease;
+}
+.tears slide-toggle[checked] .slide-toggle-track {
+  background: var(--slide-toggle-track-color-checked);
+}
+.tears slide-toggle[checked] .slide-toggle-thumb {
+  margin-left: calc(100% - var(--slide-toggle-thumb-width));
+}
+/* ---------------------------------- */
+/*  Icon                              */
+/* ---------------------------------- */
+.tears htbah-icon.fa-fw {
+  --icon-width: 1.25em;
+}
+/* ---------------------------------- */
+/*  Item List Controls                */
+/* ---------------------------------- */
+.tears item-list-controls search {
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  background: var(--htbah-background-card);
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  border: var(--htbah-border-gold);
+  padding-right: 0.25rem;
+  position: relative;
+}
+.tears item-list-controls search > input[type="text"] {
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 0.75rem 0.5rem 0.75rem 2.25rem;
+  font-size: var(--font-size-16);
+  height: unset;
+}
+item-list-controls search > input[type="text"]:hover,
+.tears item-list-controls search > input[type="text"]:focus-visible {
+  box-shadow: 0 0 12px var(--htbah-color-gold);
+}
+.tears item-list-controls search::before {
+  content: "\f002";
+  font-family: var(--font-awesome);
+  font-weight: bold;
+  color: var(--htbah-color-gold);
+  position: absolute;
+  left: 0.75rem;
+}
+.tears item-list-controls search .filter-list {
+  display: none;
+  position: absolute;
+  flex-direction: column;
+  inset: 100% auto auto -50px;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px var(--htbah-shadow-45);
+  background: var(--htbah-background-card);
+  min-width: 145px;
+  z-index: 1;
+}
+.tears item-list-controls search .filter-list > li {
+  padding: 0 0.75rem;
+}
+.tears item-list-controls search .filter-list > li:hover {
+  background: var(--htbah-background-parchment);
+}
+.tears item-list-controls search .filter-list > li:first-child {
+  border-radius: 3px 3px 0 0;
+}
+.tears item-list-controls search .filter-list > li:last-child {
+  border-radius: 0 0 3px 3px;
+}
+.tears item-list-controls search .filter-list > li:last-child .filter-item {
+  border: none;
+}
+.tears item-list-controls search .filter-list .filter-item {
+  font-weight: normal;
+  padding: 0.5rem 1.75rem 0.5rem 0;
+  justify-content: start;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  background: none;
+  border-radius: 0;
+  border: none;
+  margin: 0;
+  line-height: normal;
+  border-bottom: 1px solid var(--color-border-light-1);
+  box-shadow: none;
+  text-transform: unset;
+}
+item-list-controls search .filter-list .filter-item:hover,
+.tears item-list-controls search .filter-list .filter-item:focus {
+  box-shadow: none;
+}
+.tears item-list-controls search .filter-list .filter-item.active {
+  font-weight: bold;
+  position: relative;
+}
+.tears item-list-controls search .filter-list .filter-item.active::after {
+  content: "\f00c";
+  font-family: var(--font-awesome);
+  position: absolute;
+  right: 0.5rem;
+  color: var(--htbah-color-gold);
+}
+.tears item-list-controls search .dropdown {
+  position: relative;
+}
+.tears item-list-controls search .dropdown:focus-within .filter {
+  color: var(--htbah-color-gold);
+  border-right: 1px solid var(--color-border-light-1);
+}
+.tears item-list-controls search .dropdown:focus-within .filter-list {
+  display: flex;
+}
+.tears item-list-controls search .dropdown:has(.filter-item.active) .filter {
+  color: var(--htbah-color-red);
+}
+.tears item-list-controls search .controls {
+  display: flex;
+  padding: 0.5rem 0;
+  align-self: stretch;
+  align-items: stretch;
+}
+.tears item-list-controls search .filter-control {
+  height: 100%;
+  color: var(--htbah-color-gold);
+  font-size: var(--font-size-16);
+  padding: 0 0.375rem;
+}
+.tears item-list-controls search .filter-control.active {
+  color: var(--color-text-dark-primary);
+}
+.tears item-list-controls search .filter-control:hover:not(.disabled) {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+item-list-controls search .filter-control:hover:not(.disabled),
+.tears item-list-controls search .filter-control:focus {
+  box-shadow: none;
+}
+.tears item-list-controls search .filter-control.filter {
+  border-right: 1px solid var(--color-border-light-1);
+  padding-right: 0.625rem;
+}
+.tears item-list-controls search .filter-control.filter:hover {
+  border-right: 1px solid var(--color-border-light-1);
+}
+.tears item-list-controls search .filter-control[data-action="sort"] {
+  padding-left: 0.625rem;
+}
+
+/* ---------------------------------- */
+/*  All HowToBeAHero Apps                    */
+/* ---------------------------------- */
+.tears {
+  /* ---------------------------------- */
+  /*  Frame Styling                     */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Common App Components             */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Meters                            */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Form Elements                     */
+  /* ---------------------------------- */
+  /* Reset button & input styles */
+  /* Inputs & Buttons */
+  /* Reset select styles */
+  /* Reset textarea styles */
+  /* FA icon-based slide-toggle */
+  /* Pips */
+  /* ---------------------------------- */
+  /*  System Badge                      */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Pause                             */
+  /* ---------------------------------- */
+  --color-text-dark-primary: var(--htbah-color-blue-white);
+  --color-text-dark-secondary: var(--htbah-color-gold);
+  --color-text-dark-5: var(--htbah-color-gold);
+  --htbah-border-dotted: 1px dotted var(--htbah-color-blue-gray-3);
+  --color-border-light-1: var(--htbah-color-blue-gray-1);
+  --color-border-light-tertiary: var(--color-border-light-2);
+  --htbah-color-light-gray: var(--htbah-color-dark-gray);
+  --htbah-color-iron-gray: var(--htbah-color-blue-gray-2);
+  --htbah-background-card: var(--htbah-color-blue-gray-2);
+  --htbah-background-parchment: var(--htbah-color-blue-gray-2);
+  --htbah-border-gold: 1px solid var(--htbah-color-blue-gray-1);
+  --filigree-background-color: var(--htbah-color-blue-gray-2);
+  --filigree-border-color: var(--htbah-color-blue-gray-3);
+  font-family: var(--htbah-font-roboto);
+  color: var(--htbah-color-dark);
+}
+
+.tears .window-header {
+  border: none;
+  align-items: center;
+}
+.tears.sheet.actor .window-header .header-button {
+  border-radius: 100%;
+  background: rgba(0, 0, 0, 0.25);
+  width: 18px;
+  height: 18px;
+  aspect-ratio: 1;
+  line-height: unset;
+  display: grid;
+  place-content: center;
+}
+.tears.sheet.actor .window-header .header-button > i {
+  margin: 0;
+}
+
+/* Ensure FontAwesome icons display properly on header controls */
+.tears .window-header .header-control[class*="fa-"]:before {
+  font-family: "Font Awesome 6 Free", "Font Awesome 5 Free", "FontAwesome" !important;
+  font-weight: 900 !important;
+  font-size: 12px !important;
+  display: inline-block !important;
+  width: auto !important;
+  text-align: center !important;
+}
+
+/* Force solid style for FontAwesome 6 */
+.tears .window-header .header-control.fa-solid:before {
+  font-family: "Font Awesome 6 Free" !important;
+  font-weight: 900 !important;
+}
+
+/* Unicode fallbacks for when FontAwesome completely fails to load */
+.tears .window-header .header-control.fa-times:before {
+  content: "✕" !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.tears .window-header .header-control.fa-xmark:before {
+  content: "✕" !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.tears .window-header .header-control.fa-cog:before,
+.tears .window-header .header-control.fa-gear:before {
+  content: "⚙" !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.tears .window-header .header-control.fa-ellipsis-vertical:before {
+  content: "⋮" !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.tears .window-header .header-control.fa-download:before {
+  content: "⬇" !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.tears .window-header .header-control.fa-passport:before {
+  content: "📋︎" !important;
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+
+.tears.sheet.actor .window-header .header-button,
+.tears.sheet.actor .window-header .document-id-link {
+  margin-top: 0.25rem;
+}
+.tears.window-app.minimized .window-header .document-id-link {
+  display: block;
+  margin-top: 0;
+}.tears .window-content {
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  border-radius: 5px;
+  padding: 0;
+  background: var(--htbah-color-parchment);
+  overflow: visible;
+}
+
+.tears.sheet.actor.character .window-content {
+  background: var(--htbah-color-dark-gray);
+}
+
+.tears.sheet.actor.character .window-content::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 300px;
+  border-radius: 5px 5px 0 0;
+  opacity: 0.95;
+  background: url("../ui/character-sheet-imgs/banner-character-whitetree.webp") no-repeat top center / cover;
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+  mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+/* Fix background image in compact mode */
+.tears.sheet.actor.character.compact .window-content::before {
+  height: var(--htbah-sheet-header-height);
+  border-radius: 5px;
+}
+
+.tears.sheet.actor.character .sheet-header {
+  background: none;
+  position: relative;
+}
+
+.tears.sheet.actor.character .sheet-body {
+  background: none;
+}
+
+.tears.sheet.actor.character .sheet-body .abilities .ability,
+.tears.sheet.actor.character .sheet-body .tools .ability,
+.tears.sheet.actor.character .sheet-body .saves .ability {
+  color: var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .drop {
+  color: white;
+  border-color: white;
+}
+
+.tears.sheet.actor.character .sheet-body .pill-lg .name .title {
+  color: var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-body .pill-lg.texture {
+  border: 1px solid var(--htbah-color-blue-gray-1);
+  --background-color: var(--htbah-color-blue-gray-2);
+  background-blend-mode: soft-light;
+}
+
+.tears.sheet.actor.character .sheet-body .pill-lg.texture::before {
+  opacity: unset;
+}
+
+.tears.sheet.actor.character .sheet-body .pills-group.empty > h3 > a {
+  color: var(--htbah-color-gold);
+}
+
+/* ---------------------------------- */
+/*  Rollable items                    */
+/* ---------------------------------- */
+
+/* Add d20 indicator for rollable content */
+/* Generic rollable indicator for all rollable elements */
+.tears .rollable {
+  position: relative;
+}
+
+.tears .rollable::after {
+  content: "\f6cf";  /* d20 icon */
+  font-family: var(--font-awesome);
+  font-weight: bold;
+  position: absolute;
+  font-size: 17px;
+  color: var(--htbah-color-gold);
+  text-shadow: 0 0 3px var(--color-shadow-dark);
+  transition: all 0.2s ease;
+  pointer-events: none;
+}
+
+.tears .rollable:hover::after {
+  opacity: 1;
+  transform: scale(1.1);
+  text-shadow: 0 0 6px var(--htbah-color-gold);
+}
+
+/* Specific positioning for different contexts */
+
+/* Header items */
+.tears .sheet-header .header-stat-column .stat-content .header-item.rollable::after {
+  top: -10px;
+  right: -10px;
+  opacity: 1;
+}
+
+/* Skill Set scores */
+.tears .skillSet-scores .rollable::after {
+  top: 0px;
+  right: 4px;
+}
+
+.tears .favorites .rollable::after {
+  top: 0;
+  right: 4px;
+  transform: none;
+}
+
+/* Favorites */
+.tears .favorites .rollable::after {
+  top: 0;
+  right: 4px;
+}
+
+/* Items list */
+.tears .items-list .item-name.rollable::after {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 2px;
+}
+
+.tears .items-list .item-name.rollable:hover::after {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Pills and similar containers */
+.tears .pill-lg.rollable::after {
+  top: 4px;
+  right: 8px;
+}
+
+/* Ensure the d20 icon doesn't appear on rollable controls */
+.tears .item-controls .rollable::after,
+.tears .deletion-control.rollable::after,
+.tears button.rollable::after {
+  display: none;
+}
+
+/* ---------------------------------- */
+
+/* Biography Tab Styles */
+.tears .tab.biography {
+  height: 100%;
+  padding: 0.2rem;
+  color: var(--htbah-color-blue-white);
+}
+
+/* Top section with characteristics */
+.tears .tab.biography .top {
+  margin-bottom: 0.5rem;
+  padding: 0.2rem;
+  background: var(--htbah-color-blue-gray-2);
+  border: 1px solid var(--htbah-color-blue-gray-1);
+  border-radius: 4px;
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+}
+
+/* Characteristics grid and styling */
+.tears .tab.biography .characteristics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.tears .tab.biography .characteristics li {
+  margin-bottom: 0.5rem;
+}
+
+.tears .tab.biography .characteristics label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tears .tab.biography .characteristics .label {
+  background: linear-gradient(to right, var(--htbah-color-hd-1) 0%, var(--htbah-color-hd-2) 100%);
+  color: white;
+  font-family: var(--htbah-font-roboto-condensed);
+  text-transform: uppercase;
+  font-size: var(--font-size-12);
+  font-weight: bold;
+  padding: 0.5rem;
+  border-radius: 3px;
+  /*border: 1px solid var(--htbah-color-gold);*/
+  margin-bottom: 0.25rem;
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+}
+
+/* Input container styling to match the rest of the layout */
+.tears .tab.biography .characteristics label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+/* Input and span styling for characteristics */
+.tears .tab.biography .characteristics input,
+.tears .tab.biography .characteristics .value {
+  background: var(--htbah-color-blue-gray-2);
+  border: 1px solid var(--htbah-color-blue-gray-3);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: var(--htbah-color-blue-white);
+  min-height: 2.5rem;
+  display: block;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-16);
+}
+
+/* Middle and Bottom sections */
+.tears .tab.biography .middle,
+.tears .tab.biography .bottom {
+  background: var(--htbah-color-blue-gray-2);
+  border: 1px solid var(--htbah-color-blue-gray-1);
+  border-radius: 4px;
+  padding: 0.2rem;
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  margin-bottom: 0.5rem;
+}
+
+/* Headers styling */
+.tears .tab.biography .middle h3,
+.tears .tab.biography .bottom h3 {
+  display: flex;
+  font-family: var(--htbah-font-roboto-condensed);
+  text-transform: uppercase;
+  background: linear-gradient(to right, var(--htbah-color-hd-1) 0%, var(--htbah-color-hd-2) 100%);
+  border: none;
+  color: white;
+  padding: 0.5rem;
+  margin: 0 0 0.5rem 0;
+  border-radius: 3px;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  /*border: 1px solid var(--htbah-color-gold);*/
+}
+
+/* Icon styling in headers */
+.tears .tab.biography h3.icon htbah-icon {
+  --icon-fill: white;
+  margin-right: 0.25rem;
+}
+
+/* Middle section - Appearance (fixed height) */
+.tears .tab.biography .middle textarea.untext,
+.tears .tab.biography .middle p {
+  width: 100%;
+  height: 100px;
+  background: var(--htbah-color-blue-gray-2);
+  border: 1px solid var(--htbah-color-blue-gray-3);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: var(--htbah-color-blue-white);
+  margin: 0;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-16);
+  line-height: 1.5;
+  resize: none;
+}
+
+/* Bottom section - Biography (flexible height) */
+.tears .tab.biography .bottom textarea.untext,
+.tears .tab.biography .bottom p {
+  width: 100%;
+  min-height: 140px;
+  max-height: 400px; /* Fixed height to prevent viewport interference */
+  background: var(--htbah-color-blue-gray-2);
+  border: 1px solid var(--htbah-color-blue-gray-3);
+  border-radius: 4px;
+  padding: 0.5rem;
+  color: var(--htbah-color-blue-white);
+  margin: 0;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  line-height: 1.5;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* Common textarea styles */
+.tears .tab.biography textarea.untext {
+  background: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Text formatting */
+.tears .tab.biography p {
+  white-space: pre-wrap;
+  overflow-y: auto;
+}
+
+/* Focus and hover states */
+.tears .tab.biography textarea.untext:focus,
+.tears .tab.biography textarea.untext:hover {
+  border-color: var(--htbah-color-gold);
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .ability-score::before {
+  background-image: url("ui/ability-score-tab-dark.svg");
+}
+
+.tears.sheet.actor.character .ability-score .label {
+  font-weight: bold;
+}
+
+.tears.sheet.actor.character .ability-score .mod {
+  color: var(--htbah-color-blue-white);
+}
+
+.tears .items-section {
+  border: none;
+}
+
+.tears .items-section .item .item-name .tags {
+  --icon-fill: var(--htbah-color-gold);
+  opacity: unset;
+}
+
+.tears .items-section .item .item-controls .item-control {
+  color: var(--htbah-color-blue-gray-3);
+}
+
+.tears .items-section .item .item-controls .item-control[data-context-menu] {
+  color: var(--htbah-color-gold);
+}
+
+.tears .items-section .item .item-controls .item-control.active {
+  color: var(--htbah-color-gold);
+}
+
+.tears .items-section .item-controls .info-control {
+  color: var(--htbah-color-gold);
+}
+
+.tears .editable .items-section .item-controls .item-control {
+  color: var(--htbah-color-gold);
+}
+
+/* High Contrast */
+.tears.htbah-flag-high-contrast.sheet {
+  --color-text-dark-primary: #000000;
+  --htbah-color-gold: #e3ce9e;
+  --htbah-color-scrollbar: var(--htbah-color-maroon);
+}
+
+.tears.htbah-flag-high-contrast .card {
+  border-color: var(--htbah-color-dark);
+}
+
+.tears.htbah-flag-high-contrast .pill-lg {
+  border-color: var(--htbah-color-dark);
+}
+
+.tears.htbah-flag-high-contrast .pill-lg.empty {
+  opacity: 0.5;
+}
+
+.tears.htbah-flag-high-contrast .meter .label :is(.value, .max) {
+  text-shadow: 0 0 2px var(--htbah-color-dark);
+  filter: drop-shadow(0 0 2px var(--htbah-color-dark));
+}
+.tears .roboto-upper {
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.tears .roboto-condensed-upper {
+  font-family: var(--htbah-font-roboto-condensed);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.tears .card {
+  border-radius: 4px;
+  background: var(--htbah-background-card);
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  border: var(--htbah-border-gold);
+}
+.tears .card .header {
+  background: linear-gradient(to right, var(--htbah-color-hd-1), var(--htbah-color-hd-2));
+  color: white;
+  border-radius: 3px 3px 0 0;
+  border-bottom: var(--htbah-border-gold);
+}
+.tears .card .header.disabled {
+  background: linear-gradient(to right, var(--color-border-dark-3), var(--color-border-light-2));
+}
+.tears .card .header h3 {
+  border: none;
+  margin: 0;
+  padding: 0.5rem;
+  font-family: var(--htbah-font-roboto-slab);
+  font-size: var(--font-size-13);
+  font-weight: bold;
+  line-height: 1;
+}
+.tears .card .header .radio-button {
+  background: var(--htbah-color-light-gray);
+}
+.tears .card .header .radio-button[aria-pressed="true"]::before {
+  background: var(--htbah-color-gold);
+}
+.tears .card .info {
+  display: flex;
+  align-items: stretch;
+  padding: 0.5rem 0;
+}
+.tears .card .info > div {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-right: 1px solid var(--color-border-light-1);
+}
+.tears .card .info > div:last-child {
+  border: none;
+}
+.tears .card .info > div .label {
+  font-family: var(--htbah-font-roboto-condensed);
+  font-size: var(--font-size-10);
+  color: var(--color-text-dark-5);
+  text-transform: uppercase;
+}
+.tears .card .info > div .value {
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-16);
+}
+.tears .card .info > div .sign {
+  color: var(--htbah-color-gold);
+}
+.tears .unlist {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.tears h1,
+.tears h2,
+.tears h3 {
+  border: none;
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+}
+.tears h2 {
+  font-size: 1.4em;
+}
+.tears h1 {
+  font-size: 1.5em;
+}
+.tears h3.icon {
+  border-bottom: 1px solid var(--htbah-color-black);
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.375rem;
+}
+.tears h3.icon > i {
+  font-size: var(--font-size-14);
+}
+.tears h3.icon > span {
+  font-size: var(--font-size-13);
+}
+.tears h3.icon > htbah-icon {
+  font-size: var(--font-size-14);
+  --icon-fill: var(--color-text-dark-primary);
+}
+.tears h3.icon > a {
+  margin-left: auto;
+  font-size: var(--font-size-12);
+  color: var(--htbah-color-gold);
+}
+.tears proficiency-cycle {
+  width: 15px;
+  height: 15px;
+}
+.tears .pill-lg {
+  background: var(--htbah-background-card);
+  border: var(--htbah-border-gold);
+  border-width: 2px;
+  border-radius: 5px;
+  box-shadow: 0 0 12px var(--htbah-shadow-15);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  height: 50px;
+  max-width: 280px;
+  position: relative;
+}
+.tears .pill-lg.empty {
+  border: 2px dashed var(--htbah-color-black);
+  color: var(--htbah-color-black);
+  border-radius: 4px;
+  display: grid;
+  place-content: center;
+  opacity: 0.25;
+}
+.tears .pill-lg .gold-icon {
+  width: 32px;
+  height: 32px;
+}
+.tears .pill-lg .name {
+  flex: 1;
+}
+.tears .pill-lg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--underlay) no-repeat center / cover;
+  filter: grayscale(1);
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  border-radius: 5px;
+}
+.tears .pills {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+.tears .pills .pill {
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  font-size: var(--font-size-11);
+  text-transform: uppercase;
+  border: 1px solid var(--color-border-dark-5);
+  border-radius: 3px;
+  background: var(--htbah-color-card);
+  padding: 0.1875rem 0.375rem;
+  display: flex;
+  gap: 0.25rem;
+}
+.tears .pills .pill.green,
+.tears .pills .pill.maroon {
+  color: var(--htbah-color-gold);
+}
+.tears .pills .pill.green {
+  background-color: var(--htbah-color-green);
+}
+.tears .pills .pill.maroon {
+  background-color: var(--htbah-color-maroon);
+}
+.tears .pills .pill.pill-sm {
+  color: #4e4e4e;
+  border: 1px dotted var(--color-border-dark-5);
+  background-color: transparent;
+}
+.tears .pills .pill > .separator {
+  color: var(--htbah-color-gold);
+}
+.tears .gold-button {
+  position: absolute; /* Changed to absolute */
+  right: 20px; /* Align to the right side */
+  bottom: 0;
+  border: none;
+  border-radius: 4px;
+  background: var(--htbah-color-black);
+  color: var(--htbah-color-gold);
+  width: 30px;
+  height: 30px;
+  margin: 0;
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  font-size: var(--font-size-14);
+  display: grid;
+  place-content: center;
+  line-height: normal;
+}
+.tears .gold-button::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 3px;
+}
+.tears .gold-button:not(:disabled):is(:hover, :focus) {
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+.tears .gold-button > i {
+  margin: 0;
+}
+.tears .gold-icon {
+  border: 2px solid var(--htbah-color-gold);
+  box-shadow: 0 0 4px var(--htbah-shadow-45);
+  border-radius: 0;
+  background-color: var(--htbah-color-light-gray);
+  object-fit: cover;
+  object-position: top;
+}
+.tears .name-stacked {
+  display: flex;
+  flex-direction: column;
+}
+.tears .name-stacked .title {
+  font-family: var(--htbah-font-roboto-slab);
+  font-size: var(--font-size-14);
+  font-weight: bold;
+}
+.tears .name-stacked .subtitle {
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-10);
+  color: var(--color-text-dark-5);
+}
+.tears a.deletion-control {
+  width: 32px;
+  height: 32px;
+  color: var(--htbah-color-red);
+  display: flex;
+  justify-content: end;
+  font-size: var(--font-size-11);
+}
+.tears .meter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.tears .meter-group + .meter-group {
+  margin-top: 0.5rem;
+}
+.tears .meter {
+  --meter-background: var(--htbah-color-light-gray);
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 4px;
+  background: var(--meter-background);
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.25);
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.tears .meter.progress,
+.tears .meter .progress {
+  --bar-percentage: 0%;
+  --border-width: 3px;
+  overflow: hidden;
+}
+.tears .meter.progress::before,
+.tears .meter .progress::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: calc(var(--bar-percentage) - var(--border-width));
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
+  border-radius: 4px;
+}
+.tears .meter .label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.75rem;
+  color: var(--color-text-dark-primary);
+}
+
+.tears .meter .label[hidden] {
+  display: none;
+}
+
+.tears .meter .label .separator {
+  color: var(--color-text-dark-primary);
+}
+.tears .meter .label .bonus {
+  margin-inline-start: auto;
+  font-size: var(--font-size-14);
+  opacity: 0.8;
+}
+.tears input.uninput,
+.tears button.unbutton {
+  --border: none;
+  border: var(--border);
+  box-shadow: none;
+}
+.tears input.uninput:hover,
+.tears button.unbutton:hover,
+.tears input.uninput:focus,
+.tears button.unbutton:focus {
+  box-shadow: none;
+  border: var(--border);
+}
+.tears input.uninput {
+  color: inherit;
+  font-weight: inherit;
+  height: unset;
+}
+.tears button.unbutton {
+  background: none;
+  margin: 0;
+  border-radius: 0;
+  line-height: normal;
+}
+.tears button.unbutton > i {
+  margin: 0;
+}
+.tears input,
+.tears button {
+  transition: all 250ms ease;
+}
+.tears button {
+  background: var(--htbah-background-card);
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  font-size: var(--font-size-13);
+  text-transform: uppercase;
+  padding: 3px;
+  border: 1px solid var(--color-border-light-2);
+  box-shadow: 0 0 8px var(--htbah-shadow-15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+.tears button:disabled {
+  cursor: default;
+  color: var(--color-text-dark-inactive);
+}
+.tears button:hover:not(:disabled),
+.tears button:focus {
+  box-shadow: 0 0 5px var(--color-shadow-primary);
+}
+.tears button.radio-button {
+  width: 13px;
+  height: 13px;
+  border-radius: 100%;
+  background: none;
+  box-shadow: inset 0 0 6px var(--htbah-shadow-45);
+  padding: 3px;
+  display: grid;
+  border: none;
+  justify-content: unset;
+}
+.tears button.radio-button:hover {
+  filter: drop-shadow(0 0 6px var(--htbah-color-gold));
+}
+.tears button.radio-button[aria-pressed="true"]::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border-radius: 100%;
+  background: var(--color-border-dark-5);
+}
+.tears select {
+  color: inherit;
+}
+.tears select.unselect {
+  border: none;
+  padding: 0;
+  background: transparent;
+  height: unset;
+}
+.tears textarea.untext {
+  background: none;
+  border: none;
+}
+.tears textarea.untext:focus {
+  box-shadow: none;
+}
+.tears .form-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+}
+.tears .form-grid.form-grid-20 > * {
+  flex-basis: 20%;
+}
+.tears .form-grid input {
+  border: 2px solid var(--htbah-color-gold);
+  border-radius: 8px;
+  padding: 0.5rem;
+  background: var(--htbah-color-parchment);
+  font-size: var(--font-size-14);
+  height: unset;
+  width: 100%;
+}
+.tears .form-grid input:focus {
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+.tears .form-grid input::placeholder {
+  color: var(--htbah-color-gold);
+}
+.tears .form-grid input[type="number"] {
+  font-weight: bold;
+}
+.tears label.input-stack {
+  display: flex;
+  flex-direction: column;
+}
+.tears label.input-stack span {
+  text-align: center;
+  font-size: var(--font-size-10);
+  color: var(--color-text-dark-5);
+}
+.tears label.input-stack input {
+  text-align: center;
+}
+.tears label.tears slide-toggle {
+  display: block;
+}
+.tears label.slide-toggle > input {
+  display: none;
+}
+.tears label.slide-toggle:has(input:not([disabled])) {
+  cursor: pointer;
+}
+.tears .pips {
+  display: flex;
+  gap: 5px;
+  padding: 10px 12px;
+}
+.tears .pips .pip {
+  background: var(--htbah-color-light-gray);
+  border: 2px solid var(--htbah-color-gold);
+  border-radius: 100%;
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-content: center;
+  font-weight: bold;
+  font-size: var(--font-size-18);
+  box-shadow: 0 0 6px var(--htbah-shadow-45);
+  margin: 0;
+}
+.tears .pips .pip.filled {
+  background: var(--htbah-color-gold);
+}
+.tears .pips .pip:not(:disabled):is(:hover, :focus) {
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+.tears.sheet .sidebar-heading {
+  margin: 6px 0;
+  padding: 3px 8px;
+  border-top: 1px solid var(--color-border-dark-4);
+  border-bottom: 1px solid var(--color-border-dark-4);
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+}
+.tears.sheet .sidebar-heading h2 {
+  font-size: var(--font-size-16);
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-primary);
+  font-weight: normal;
+}
+.tears.sheet .sidebar-heading ul.links {
+  flex: 1;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  font-size: var(--font-size-11);
+  justify-content: center;
+}
+.tears.system-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem;
+}
+.tears.system-badge > img {
+  height: 32px;
+  border: none;
+  object-fit: contain;
+}
+.tears.system-badge .system-info {
+  font-size: var(--font-size-16);
+}
+.tears.system-badge .system-info i {
+  padding-inline-start: 2px;
+  font-size: var(--font-size-12);
+}
+.tears#pause {
+  background: none;
+  animation: pulsate 3s infinite ease-in-out;
+}
+.tears#pause img {
+  opacity: 0.75;
+}
+.tears#pause figcaption {
+  color: var(--htbah-color-gold);
+  font-size: var(--font-size-46);
+  text-shadow: 2px 2px 2px var(--color-shadow-dark);
+  font-family: var(--htbah-font-modesto);
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 0;
+  margin: 0;
+}
+@keyframes pulsate {
+  0% {
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+  50% {
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  }
+  100% {
+    filter: drop-shadow(0 0 0 rgba(255, 255, 255, 0));
+  }
+}
+@media (prefers-reduced-motion) {
+  .tears#pause {
+    animation: none;
+  }
+}
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+/* ================================== */
+/*  DIALOG SYSTEM                     */
+/* ================================== */
+
+/* ---------------------------------- */
+/*  Base Legacy Dialog Support       */
+/* ---------------------------------- */
+.tears.dialog {
+  font-family: var(--htbah-font-roboto);
+  color: var(--htbah-color-dark);
+  background: var(--htbah-color-tan);
+  border: 1px solid var(--htbah-color-tan);
+  box-shadow: 0 4px 8px rgba(25, 24, 19, 0.3);
+  border-radius: 5px;
+}
+.tears.dialog > .window-header {
+  background: var(--htbah-color-dark) !important;
+  border-bottom: 1px solid var(--htbah-color-tan);
+  padding: 8px 12px;
+  border-radius: 5px 5px 0 0;
+}
+.tears.dialog > .window-header h4.window-title {
+  color: var(--htbah-color-dark) !important;
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  margin: 0;
+  visibility: visible;
+}
+.tears.dialog > .window-header .header-button.close {
+  color: var(--htbah-color-dark);
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-14);
+  padding: 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+.tears.dialog > .window-header .header-button.close:hover {
+  color: var(--htbah-color-tan);
+  background: var(--htbah-color-faint);
+}
+.tears.dialog > .window-content {
+  padding: 16px;
+  background: var(--htbah-color-faint) !important;
+  color: var(--htbah-color-dark) !important;
+}
+.tears.dialog form {
+  padding: 0;
+  color: var(--htbah-color-dark);
+}
+.tears.dialog form > header {
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-18);
+  text-align: center;
+  margin-bottom: 1em;
+  color: var(--htbah-color-dark);
+}
+.tears.dialog label {
+  color: var(--htbah-color-dark) !important;
+  font-weight: 600;
+  font-size: var(--font-size-14);
+}
+.tears.dialog input[type="text"] {
+  color: var(--htbah-color-dark);
+  background: var(--htbah-color-faint);
+  border: 1px solid var(--htbah-color-tan);
+  border-radius: 4px;
+  padding: 6px 10px;
+}
+
+/* Override inline styles for dialog content */
+.tears.dialog .dialog-content {
+  color: var(--htbah-color-dark) !important;
+}
+
+.tears.dialog .dialog-content div {
+  color: var(--htbah-color-dark) !important;
+}
+
+.tears.dialog .dialog-content p {
+  color: var(--htbah-color-dark) !important;
+}
+
+.tears.dialog .dialog-content strong {
+  color: var(--htbah-color-dark) !important;
+  font-weight: bold;
+}
+
+/* Legacy dialog buttons - matching roll dialog styling */
+.tears.dialog .dialog-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-top: 1px solid var(--htbah-color-tan);
+  background: var(--htbah-color-beige);
+  border-radius: 0 0 5px 5px;
+  margin: 16px -16px -16px -16px;
+}
+
+/* Base dialog button styling */
+.tears.dialog .dialog-buttons .dialog-button,
+.tears.dialog .dialog-buttons button {
+  background: var(--htbah-color-faint);
+  color: var(--htbah-color-dark);
+  border: 1px solid var(--htbah-color-tan);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tears.dialog .dialog-buttons .dialog-button:hover,
+.tears.dialog .dialog-buttons .dialog-button:focus,
+.tears.dialog .dialog-buttons button:hover,
+.tears.dialog .dialog-buttons button:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 2px 4px rgba(25, 24, 19, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Primary/default button styling */
+.tears.dialog .dialog-buttons .dialog-button.default,
+.tears.dialog .dialog-buttons .dialog-button.primary,
+.tears.dialog .dialog-buttons button.default,
+.tears.dialog .dialog-buttons button.primary {
+  background: var(--htbah-color-tan);
+  color: var(--htbah-color-faint);
+  border-color: var(--htbah-color-tan);
+  font-weight: 600;
+}
+
+.tears.dialog .dialog-buttons .dialog-button.default:hover,
+.tears.dialog .dialog-buttons .dialog-button.default:focus,
+.tears.dialog .dialog-buttons .dialog-button.primary:hover,
+.tears.dialog .dialog-buttons .dialog-button.primary:focus,
+.tears.dialog .dialog-buttons button.default:hover,
+.tears.dialog .dialog-buttons button.default:focus,
+.tears.dialog .dialog-buttons button.primary:hover,
+.tears.dialog .dialog-buttons button.primary:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 3px 6px rgba(25, 24, 19, 0.4);
+}
+
+/* Secondary/cancel button styling */
+.tears.dialog .dialog-buttons .dialog-button.secondary,
+.tears.dialog .dialog-buttons .dialog-button.cancel,
+.tears.dialog .dialog-buttons button.secondary,
+.tears.dialog .dialog-buttons button.cancel {
+  background: var(--htbah-color-faint);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+}
+
+.tears.dialog .dialog-buttons .dialog-button.secondary:hover,
+.tears.dialog .dialog-buttons .dialog-button.secondary:focus,
+.tears.dialog .dialog-buttons .dialog-button.cancel:hover,
+.tears.dialog .dialog-buttons .dialog-button.cancel:focus,
+.tears.dialog .dialog-buttons button.secondary:hover,
+.tears.dialog .dialog-buttons button.secondary:focus,
+.tears.dialog .dialog-buttons button.cancel:hover,
+.tears.dialog .dialog-buttons button.cancel:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 2px 4px rgba(25, 24, 19, 0.3);
+}
+/* ---------------------------------- */
+/*  Create Document Dialog            */
+/* ---------------------------------- */
+
+/* Match roll dialog styling exactly for create-document dialog */
+.tears.create-document.dialog {
+  font-family: var(--htbah-font-roboto);
+  color: var(--htbah-color-dark);
+  background: var(--htbah-color-tan);
+  border: 1px solid var(--htbah-color-tan);
+  box-shadow: 0 4px 8px rgba(25, 24, 19, 0.3);
+  border-radius: 5px;
+}
+
+.tears.create-document.dialog .window-header {
+  background: var(--htbah-color-dark) !important;
+  border-bottom: 1px solid var(--htbah-color-tan);
+  padding: 8px 12px;
+  border-radius: 5px 5px 0 0;
+}
+
+.tears.create-document.dialog .window-header h4.window-title {
+  color: var(--htbah-color-tan) !important;
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  margin: 0;
+}
+
+.tears.create-document.dialog .window-header .header-button.close {
+  color: var(--htbah-color-tan);
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-14);
+  padding: 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.tears.create-document.dialog .window-header .header-button.close:hover {
+  color: var(--htbah-color-faint);
+  background: rgba(var(--htbah-color-tan-rgb), 0.2);
+}
+
+.tears.create-document.dialog .window-content {
+  padding: 16px;
+  background: var(--htbah-color-faint) !important;
+  color: var(--htbah-color-dark) !important;
+}
+
+.tears.create-document.dialog form {
+  color: var(--htbah-color-dark) !important;
+}
+
+.tears.create-document form header {
+  padding: 0;
+  margin-bottom: 1em;
+}
+
+.tears.create-document .document-name {
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-18);
+  text-align: center;
+  background: var(--htbah-color-faint);
+  color: var(--htbah-color-dark) !important;
+  border: 1px solid var(--htbah-color-tan);
+  border-radius: 4px;
+  padding: 6px 10px;
+  width: 100%;
+}
+
+.tears.create-document ol {
+  background: var(--htbah-color-beige);
+  border: 1px solid var(--htbah-color-tan);
+  border-radius: 4px;
+}
+
+.tears.create-document ol label {
+  color: var(--htbah-color-dark) !important;
+  font-weight: 600;
+  font-size: var(--font-size-14);
+}
+
+.tears.create-document ol label span {
+  color: var(--htbah-color-dark) !important;
+}
+
+.tears.create-document.dialog .dialog-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-top: 1px solid var(--htbah-color-tan);
+  background: var(--htbah-color-beige);
+  border-radius: 0 0 5px 5px;
+  margin: 16px -16px -16px -16px;
+}
+
+.tears.create-document.dialog .dialog-buttons button {
+  background: var(--htbah-color-tan);
+  color: var(--htbah-color-faint);
+  border: 1px solid var(--htbah-color-tan);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.tears.create-document.dialog .dialog-buttons button:hover,
+.tears.create-document.dialog .dialog-buttons button:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 3px 6px rgba(25, 24, 19, 0.4);
+}
+.tears.create-document .document-name:hover,
+.tears.create-document .document-name:focus {
+  box-shadow: none;
+}
+.tears.create-document ol {
+  padding: 0.25rem 0.5rem;
+}
+.tears.create-document ol li {
+  padding: 0.25rem 0.5rem;
+  border-bottom: var(--htbah-border-dotted);
+}
+.tears.create-document ol li:hover {
+  background: var(--htbah-color-parchment);
+}
+.tears.create-document ol li:last-child {
+  border: none;
+}
+.tears.create-document ol label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+}
+.tears.create-document ol label > span {
+  flex: 1;
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-14);
+}
+.tears.create-document ol img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  object-position: center;
+  border: none;
+}
+.tears.create-document select {
+  border: 1px solid var(--color-border-light-2);
+  background: var(--htbah-background-10);
+  padding: 0 0.5rem;
+  flex: none;
+}
+.tears.create-document .dialog-buttons select {
+  flex: 1;
+  min-block-size: 28px;
+}
+.tears.create-document .dialog-buttons button {
+  flex: 1 0 50%;
+}
+
+/* ---------------------------------- */
+/* Dialog Classes                     */
+/* ---------------------------------- */
+
+.tears.roll-dialog:has(.htbah-roll-dialog) {
+  font-family: var(--htbah-font-roboto);
+  color: var(--htbah-color-dark);
+  background: var(--htbah-color-tan);
+  border: 1px solid var(--htbah-color-tan);
+  box-shadow: 0 4px 8px rgba(25, 24, 19, 0.3);
+  border-radius: 5px;
+}
+
+.tears.roll-dialog .htbah-roll-dialog {
+  color: var(--htbah-color-dark);
+}
+
+/* ============================================ */
+/* ROLL DIALOG                                  */
+/* ============================================ */
+
+.tears.roll-dialog .window-header {
+  background: var(--htbah-color-dark);
+  border-bottom: 1px solid var(--htbah-color-tan);
+  padding: 8px 12px;
+  border-radius: 5px 5px 0 0;
+}
+
+.tears.roll-dialog .window-header h4.window-title {
+  color: var(--htbah-color-dark);
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  margin: 0;
+}
+
+.tears.roll-dialog .window-header .header-button.close {
+  color: var(--htbah-color-dark);
+  background: transparent;
+  border: none;
+  font-size: var(--font-size-14);
+  padding: 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.tears.roll-dialog .window-header .header-button.close:hover {
+  color: var(--htbah-color-tan);
+  background: var(--htbah-color-faint);
+}
+
+.tears.roll-dialog .window-content {
+  padding: 16px;
+  background: var(--htbah-color-faint);
+  color: var(--htbah-color-dark);
+}
+
+.tears.roll-dialog .dialog-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 12px 16px;
+  border-top: 1px solid var(--htbah-color-tan);
+  background: var(--htbah-color-beige);
+  border-radius: 0 0 5px 5px;
+  margin: 16px -16px -16px -16px; /* Negative margins to extend to dialog edges */
+}
+
+/* Base dialog button styling */
+.tears.roll-dialog .dialog-buttons .dialog-button {
+  background: var(--htbah-color-faint);
+  color: var(--htbah-color-dark);
+  border: 1px solid var(--htbah-color-tan);
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  font-weight: 500;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.tears.roll-dialog .dialog-buttons .dialog-button:hover,
+.tears.roll-dialog .dialog-buttons .dialog-button:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 2px 4px rgba(25, 24, 19, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Primary/default button styling */
+.tears.roll-dialog .dialog-buttons .dialog-button.default,
+.tears.roll-dialog .dialog-buttons .dialog-button.primary {
+  background: var(--htbah-color-tan);
+  color: var(--htbah-color-faint);
+  border-color: var(--htbah-color-tan);
+  font-weight: 600;
+}
+
+.tears.roll-dialog .dialog-buttons .dialog-button.default:hover,
+.tears.roll-dialog .dialog-buttons .dialog-button.default:focus,
+.tears.roll-dialog .dialog-buttons .dialog-button.primary:hover,
+.tears.roll-dialog .dialog-buttons .dialog-button.primary:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 3px 6px rgba(25, 24, 19, 0.4);
+}
+
+/* Secondary/cancel button styling */
+.tears.roll-dialog .dialog-buttons .dialog-button.secondary,
+.tears.roll-dialog .dialog-buttons .dialog-button.cancel {
+  background: var(--htbah-color-faint);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+}
+
+.tears.roll-dialog .dialog-buttons .dialog-button.secondary:hover,
+.tears.roll-dialog .dialog-buttons .dialog-button.secondary:focus,
+.tears.roll-dialog .dialog-buttons .dialog-button.cancel:hover,
+.tears.roll-dialog .dialog-buttons .dialog-button.cancel:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 2px 4px rgba(25, 24, 19, 0.3);
+}
+
+/* ---------------------------------- */
+/*  Roll Dialog Specific              */
+/* ---------------------------------- */
+
+/* Roll dialog content styling */
+.tears.roll-dialog .htbah-roll-dialog {
+  color: var(--htbah-color-dark);
+}
+
+.tears.roll-dialog .htbah-roll-dialog h2 {
+  color: var(--htbah-color-dark);
+  margin-bottom: 1em;
+  font-size: var(--font-size-18);
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+}
+
+.tears.roll-dialog .htbah-roll-dialog label {
+  color: var(--htbah-color-dark);
+  font-weight: 600;
+  font-size: var(--font-size-14);
+}
+
+.tears.roll-dialog .htbah-roll-dialog .roll-info {
+  margin-bottom: 16px;
+  padding: 12px;
+  background: var(--htbah-color-beige);
+  border: 1px solid var(--htbah-color-tan);
+  border-radius: 4px;
+}
+
+.tears.roll-dialog .htbah-roll-dialog .form-group {
+  margin-bottom: 16px;
+}
+
+.tears.roll-dialog .htbah-roll-dialog .form-group input {
+  width: 100px;
+  margin-left: 8px;
+  padding: 6px 10px;
+  color: var(--htbah-color-dark);
+  background: var(--htbah-color-faint);
+  border: 1px solid var(--htbah-color-tan);
+  border-radius: 3px;
+  font-family: var(--htbah-font-roboto);
+}
+
+.tears.roll-dialog .htbah-roll-dialog .form-group input:focus {
+  outline: none;
+  border-color: var(--htbah-color-tan);
+  background: var(--htbah-color-beige);
+  box-shadow: 0 0 3px rgba(25, 24, 19, 0.3);
+}
+
+.tears.roll-dialog .htbah-roll-dialog .hint {
+  display: block;
+  color: var(--htbah-color-tan);
+  font-size: var(--font-size-12);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+.tears.roll-dialog .htbah-roll-dialog .final-formula {
+  margin-top: 16px;
+  padding: 12px;
+  background: var(--htbah-color-beige);
+  border: 1px solid var(--htbah-color-tan);
+  border-radius: 4px;
+  font-weight: 600;
+  color: var(--htbah-color-dark);
+}
+
+.tears.roll-dialog .htbah-roll-dialog .result-formula {
+  font-family: var(--font-family-monospace);
+  font-size: var(--font-size-15);
+  color: #c9302c;
+  font-weight: bold;
+  background: rgba(201, 48, 44, 0.1);
+  padding: 4px 8px;
+  border-radius: 3px;
+  border: 1px solid rgba(201, 48, 44, 0.2);
+}
+
+.tears.roll-dialog .htbah-roll-dialog .formula {
+  font-family: var(--font-family-monospace);
+  color: var(--htbah-color-dark);
+  font-weight: 600;
+  background: var(--htbah-color-faint);
+  padding: 4px 8px;
+  border-radius: 3px;
+  border: 1px solid var(--htbah-color-tan);
+}
+
+/* Roll button specific styling */
+.tears.roll-dialog .dialog-buttons .dialog-button.roll {
+  background: var(--htbah-color-tan);
+  color: var(--htbah-color-faint);
+  border-color: var(--htbah-color-tan);
+  font-weight: 600;
+}
+
+.tears.roll-dialog .dialog-buttons .dialog-button.roll:hover,
+.tears.roll-dialog .dialog-buttons .dialog-button.roll:focus {
+  background: var(--htbah-color-beige);
+  color: var(--htbah-color-dark);
+  border-color: var(--htbah-color-tan);
+  box-shadow: 0 3px 6px rgba(25, 24, 19, 0.4);
+}
+
+/* ---------------------------------- */
+/*  Context Menus                     */
+/* ---------------------------------- */
+#context-menu.tears {
+  position: fixed;
+  z-index: var(--z-index-tooltip);
+  border-radius: 3px;
+  box-shadow: 0 3px 6px var(--htbah-shadow-45);
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-13);
+  font-weight: bold;
+  color: var(--color-text-dark-primary);
+  width: max-content;
+  min-width: 145px;
+}
+#context-menu.tears .context-item {
+  padding: 8px 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  border-bottom: 1px solid var(--color-border-light-1);
+}
+
+#context-menu.tears .context-item:last-child {
+  border-bottom: none;
+}
+#context-menu.tears .context-item:hover {
+  color: var(--color-text-dark-primary);
+  text-shadow: none;
+  background: var(--htbah-color-parchment);
+}
+#context-menu.tears .context-item i {
+  font-size: var(--font-size-11);
+  color: var(--color-text-dark-5);
+  margin: 0;
+}
+#context-menu.tears .context-item htbah-icon {
+  --icon-fill: var(--color-text-dark-5);
+  margin-right: 5px;
+}
+#context-menu.tears .context-items > .context-item:first-child {
+  border-radius: 3px 3px 0 0;
+}
+#context-menu.tears .context-items > .context-item:last-child {
+  border-radius: 0 0 3px 3px;
+}
+#context-menu.tears .context-group:first-child > ol > .context-item:first-child {
+  border-radius: 3px 3px 0 0;
+}
+#context-menu.tears .context-group:last-child > ol > .context-item:last-child {
+  border-radius: 0 0 3px 3px;
+}
+#context-menu.tears [data-group-id]:has(li)::before {
+  border-block-start: 1px solid var(--color-border-light-1);
+}
+/* Disable pointer events on the target while the context menu is open as a workaround for core tooltip logic not
+   accommodating fixed position context menus */
+.tears .context {
+  pointer-events: none;
+}
+/* ---------------------------------- */
+/*  Window Handles                    */
+/* ---------------------------------- */
+:is(.tears, .tears-journal) .window-resizable-handle {
+  border-radius: 0;
+  border: none;
+  background: transparent;
+  color: var(--htbah-color-black);
+  overflow: hidden;
+  font-size: 16px;
+  cursor: nwse-resize;
+  opacity: 0.4;
+}
+:is(.tears, .tears-journal) .window-resizable-handle > i {
+  position: absolute;
+  bottom: -3px;
+  right: 1px;
+}
+:is(.tears, .tears-journal) .window-resizable-handle > i::before {
+  content: "\f7a5";
+}
+/* ---------------------------------- */
+/*  Basic Structure                   */
+/* ---------------------------------- */
+.tears.sheet.actor.character {
+  --htbah-sheet-header-height: 170px;
+  --htbah-sheet-header-right-width: 280px;
+  --htbah-sheet-sidebar-width: 230px;
+  background: transparent;
+  min-width: 1200px;
+  min-height: 700px;
+  box-shadow: none;
+  /* ---------------------------------- */
+  /*  Outer Window                      */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Minimized                         */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Sheet Header                      */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Navigation                        */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Sheet Body                        */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Child Creation                    */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Biography                         */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Collapsed                         */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Limited Sheets                    */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Edit Mode                         */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Locked                            */
+  /* ---------------------------------- */
+  /* ---------------------------------- */
+  /*  Accessibility                     */
+  /* ---------------------------------- */
+}
+
+/* ---------------------------------- */
+/*  Sheet Header                      */
+/* ---------------------------------- */
+
+.tears.sheet.actor.character::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+  border: var(--htbah-border-gold);
+  box-shadow: 0 0 20px var(--color-shadow-dark);
+  border-radius: 5px;
+}
+.tears.sheet.actor.character > header {
+  background: transparent;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; /* Space between toggles */
+}
+.tears.sheet.actor.character > header .window-title {
+  visibility: hidden;
+}
+
+/* Edit/Play Mode Toggle */
+.tears.sheet.actor.character > header > slide-toggle.mode-slider {
+  --slide-toggle-track-color-checked: var(--htbah-color-gold);
+  --slide-toggle-track-color-unchecked: var(--htbah-color-light-gray);
+  flex: none;
+}
+.tears.sheet.actor.character > header > slide-toggle.mode-slider .slide-toggle-thumb {
+  line-height: 12px;
+}
+.tears.sheet.actor.character > header > slide-toggle.mode-slider .slide-toggle-thumb::before {
+  content: "\f0ad";
+  font-family: var(--font-awesome);
+  color: var(--htbah-color-light-gray);
+  font-weight: bold;
+  font-size: var(--font-size-9);
+}
+.tears.sheet.actor.character > header > slide-toggle.mode-slider[checked] .slide-toggle-thumb::before {
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .window-content {
+  margin-top: -35px;
+}
+.tears.sheet.actor.character.minimized {
+  border: unset;
+  min-width: 500px !important;
+  min-height: unset !important;
+  width: auto !important;
+  height: auto !important;
+}
+.tears.sheet.actor.character.minimized > header {
+  align-items: center;
+}
+.tears.sheet.actor.character.minimized > header .header-button,
+.tears.sheet.actor.character.minimized > header .document-id-link {
+  margin-top: 0;
+}
+.tears.sheet.actor.character.minimized > header .window-title {
+  visibility: visible;
+}
+.tears.sheet.actor.character.minimized nav.tabs {
+  display: none;
+}
+.tears.sheet.actor.character.minimized .window-content {
+  display: none;
+}
+
+/* When both compact and minimized, remove compact mode height constraints but keep min-width */
+.tears.sheet.actor.character.compact.minimized {
+  min-width: 500px !important;
+  min-height: unset !important;
+  height: auto !important;
+  max-height: unset !important;
+}
+
+/* Compact Mode - Hide sheet body but keep header visible */
+.tears.sheet.actor.character.compact {
+  min-height: var(--htbah-sheet-header-height) !important;
+  height: var(--htbah-sheet-header-height) !important;
+  max-height: var(--htbah-sheet-header-height) !important;
+  resize: none !important;
+}
+
+.tears.sheet.actor.character.compact .sheet-body {
+  display: none;
+}
+
+.tears.sheet.actor.character.compact nav.tabs {
+  display: none;
+}
+
+.tears.sheet.actor.character.compact .window-content {
+  height: 100% !important;
+  min-height: unset !important;
+}
+
+.tears.sheet.actor.character.compact form {
+  height: 100% !important;
+  min-height: unset !important;
+}
+
+/* Compact Mode Toggle */
+.tears.sheet.actor.character > header > slide-toggle.compact-slider {
+  --slide-toggle-track-color-checked: #8B0000;
+  --slide-toggle-track-color-unchecked: var(--htbah-color-light-gray);
+  flex: none;
+}
+
+.tears.sheet.actor.character > header > slide-toggle.compact-slider .slide-toggle-thumb {
+  line-height: 12px;
+}
+
+.tears.sheet.actor.character > header > slide-toggle.compact-slider .slide-toggle-thumb::before {
+  content: "\f71c"; /* fas fa-sword */
+  font-family: var(--font-awesome);
+  color: #8B0000;
+  font-weight: bold;
+  font-size: var(--font-size-9);
+}
+
+.tears.sheet.actor.character > header > slide-toggle.compact-slider[checked] .slide-toggle-thumb::before {
+  color: #8B0000;
+}
+
+/* Header Container */
+.tears.sheet.actor.character .sheet-header {
+  flex: 0 0 var(--htbah-sheet-header-height);
+  border: none;
+  border-radius: 5px 5px 0 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0;
+  background: transparent;
+}
+
+/* Left Column - Name */
+.tears.sheet.actor.character .sheet-header .header-left {
+  flex: 1;  /* Increased from 1 to 2 to take more space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 1.5rem 0 3rem;
+  gap: 0.25rem;
+}
+
+.tears.sheet.actor.character .sheet-header .header-left .document-name {
+  color: var(--color-text-dark-primary);
+  font-size: var(--font-size-46);
+  text-shadow: 2px 2px 2px var(--color-shadow-dark);
+  font-family: var(--htbah-font-modesto);
+  font-weight: bold;
+  letter-spacing: 2px;
+  padding: 0;
+  margin: 0;
+  transition: font-size 250ms ease;
+}
+
+.tears.sheet.actor.character .sheet-header .header-left input.document-name {
+  padding: 0.3125rem 0.75rem;
+  border-radius: 6px;
+}
+
+/* Center Column - Box */
+.tears.sheet.actor.character .sheet-header .header-center {
+  flex: 1;  /* Kept at 1 to reduce relative space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  padding-right: 2rem;
+  margin-left: auto;  /* Push content to the right */
+}
+
+.tears.sheet.actor.character .sheet-header .header-center .center-box {
+  background: linear-gradient(to right, var(--htbah-color-hd-1), var(--htbah-color-hd-2));
+  border-radius: 8px;
+  padding: 0.5rem;
+  height: 135px;
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  color: var(--htbah-color-gold);
+  border: 1px solid var(--htbah-color-gold);
+  box-shadow: 0 0 10px var(--color-shadow-dark);
+}
+
+/* Inner Stat Columns */
+.tears.sheet.actor.character .sheet-header .header-stat-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.25rem;
+  border-right: 1px solid var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column:last-child {
+  border-right: none;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-header {
+  color: var(--htbah-color-gold);
+  font-family: var(--htbah-font-roboto-condensed);
+  font-size: var(--font-size-16);
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--htbah-color-gold);
+  text-shadow: 0 0 10px var(--color-shadow-dark);
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+/* Empty Drop Area Styling */
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content .drop {
+  border: 2px dashed var(--htbah-color-gold);
+  border-radius: 4px;
+  padding: 0.625rem 0.5rem;
+  font-size: var(--font-size-13);
+  opacity: 0.5;
+  justify-content: center;
+  color: var(--htbah-color-gold);
+  margin-bottom: 0.5rem;
+  width: 90%;
+  top: 4px;
+  text-align: center;
+  list-style: none;
+  transition: all 0.2s ease;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content:hover .drop {
+  opacity: 0.8;
+  box-shadow: 0 0 8px var(--htbah-color-gold);
+}
+
+/* Filled Header Item Styling */
+.tears.sheet.actor.character .sheet-header .header-stat-column .header-item {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 4px;
+  width: 90%;
+  transition: all 0.2s ease;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .header-item:hover {
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 8px var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .header-item img {
+  width: 64px;
+  height: 64px;
+  margin-right: 8px;
+  border: none;
+  border-radius: 2px;
+  box-shadow: 0 0 4px var(--color-shadow-dark);
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .header-item .item-name {
+  flex: 1;
+  margin-right: 8px;
+  font-size: var(--font-size-13);
+  color: var(--htbah-color-gold);
+  text-shadow: 1px 1px 1px var(--color-shadow-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .header-item .item-remove {
+  position: relative;
+  color: var(--htbah-color-gold);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 2px;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .header-item .item-remove:hover {
+  opacity: 1;
+  text-shadow: 0 0 8px var(--htbah-color-gold);
+}
+
+/* D20 Icon Styling */
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content .fa-dice-d20 {
+  font-size: 2rem;
+  color: var(--htbah-color-groove);
+  text-shadow: 0 0 8px var(--htbah-shadow-45);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content .fa-dice-d20:hover {
+  color: var(--htbah-color-gold);
+  transform: scale(1.1);
+  text-shadow: 0 0 12px var(--htbah-color-gold);
+}
+
+/* Right Column */
+.tears.sheet.actor.character .sheet-header .header-right {
+  flex: 0.1;  /* Reduced from 1 to 0.5 to take less space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 3rem;
+  position: relative;
+}
+
+/* Drag Over State */
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content.dragover {
+  background: rgba(var(--htbah-color-gold-rgb), 0.1);
+  box-shadow: inset 0 0 8px var(--htbah-color-gold);
+}
+
+/* Skillset Category Drag Over State */
+.tears.sheet.actor.character .skillSet-category.dragover {
+  background: rgba(var(--htbah-color-gold-rgb), 0.1);
+  box-shadow: inset 0 0 8px var(--htbah-color-gold);
+  border-radius: 4px;
+}
+
+/* Inventory Section Drag Over State */
+.tears.sheet.actor.character .items-section.dragover {
+  background: rgba(var(--htbah-color-gold-rgb), 0.1);
+  box-shadow: inset 0 0 8px var(--htbah-color-gold);
+  border-radius: 4px;
+  transform: scale(1.02);
+  transition: all 0.2s ease;
+}
+/* Item Exchange Drag Over State */
+.tears.sheet.actor.character.item-exchange-dragover {
+  background: rgba(var(--htbah-color-blue), 0.1);
+  box-shadow: inset 0 0 12px var(--htbah-color-blue);
+  border: 2px solid var(--htbah-color-blue);
+  border-radius: 8px;
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+.tears.sheet.actor.character.item-exchange-dragover::before {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: var(--htbah-color-blue);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Actor Selector Dialog Styles */
+.tears.actor-selector .actor-selector-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tears.actor-selector .dialog-content {
+  flex: 1;
+  padding: 1rem;
+}
+
+.tears.actor-selector .document-list-search {
+  margin-bottom: 1rem;
+}
+
+.tears.actor-selector .search-input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 4px;
+  background: var(--htbah-color-parchment);
+  color: var(--htbah-color-dark);
+}
+
+.tears.actor-selector .document-sections-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.tears.actor-selector .document-item {
+  margin-bottom: 0.5rem;
+}
+
+.tears.actor-selector .document-item label {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  border: 1px solid var(--htbah-color-beige);
+  border-radius: 4px;
+  background: var(--htbah-color-card);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tears.actor-selector .document-item label:hover,
+.tears.actor-selector .document-item.selected label {
+  background: rgba(var(--htbah-color-gold-rgb), 0.1);
+  border-color: var(--htbah-color-gold);
+}
+
+.tears.actor-selector .document-item input[type="radio"] {
+  margin-right: 1rem;
+}
+
+.tears.actor-selector .document-item .image {
+  width: 64px;
+  height: 64px;
+  border-radius: 4px;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.tears.actor-selector .item-details {
+  flex: 1;
+}
+
+.tears.actor-selector .item-name {
+  font-weight: bold;
+  color: var(--htbah-color-dark);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.tears.actor-selector .item-extra {
+  font-size: 0.875rem;
+  color: var(--htbah-color-tan);
+}
+
+.tears.actor-selector .item-extra.npc-indicator {
+  background: var(--htbah-color-blue);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.tears.actor-selector .item-extra.character-indicator {
+  background: var(--htbah-color-green);
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+
+.tears.actor-selector .no-actors-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--htbah-color-tan);
+}
+
+.tears.actor-selector .dialog-buttons {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--htbah-color-beige);
+  justify-content: flex-end;
+}
+
+.tears.actor-selector .dialog-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 4px;
+  background: var(--htbah-color-card);
+  color: var(--htbah-color-dark);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.tears.actor-selector .dialog-button:hover:not([disabled]) {
+  background: rgba(var(--htbah-color-gold-rgb), 0.1);
+}
+
+.tears.actor-selector .dialog-button.default {
+  background: var(--htbah-color-gold);
+  color: white;
+}
+
+.tears.actor-selector .dialog-button.default:hover:not([disabled]) {
+  background: var(--htbah-color-tan);
+}
+
+.tears.actor-selector .dialog-button[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Actor Sheet Mode Toggles */
+.tears.sheet.actor .window-header .mode-slider {
+  margin-right: 0.5rem;
+}
+
+/* Input Styles */
+.tears.sheet.actor.character .sheet-header input {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid transparent;
+  transition: all 250ms ease;
+}
+
+.tears.sheet.actor.character .sheet-header input:hover,
+.tears.sheet.actor.character .sheet-header input:focus {
+  border: 1px solid var(--htbah-color-gold);
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .right {
+  position: relative;
+}
+
+.tears button.unbutton {
+  background: none;
+  margin: 0;
+  border-radius: 0;
+  line-height: normal;
+}
+.tears input.uninput, .tears button.unbutton {
+  --border: none;
+  border: var(--border);
+  box-shadow: none;
+}
+.tears button {
+  background: var(--htbah-background-card);
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  font-size: var(--font-size-13);
+  text-transform: uppercase;
+  padding: 3px;
+  border: 1px solid var(--color-border-light-2);
+  box-shadow: 0 0 8px var(--htbah-shadow-15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+}
+
+/* ----------------------------------------- */
+/*  Items Lists                              */
+/* ----------------------------------------- */
+.tears .items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: var(--htbah-color-tan);
+}
+.tears .items-list .item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tears .items-list .item-name {
+  flex: 2;
+  margin: 0;
+  overflow: hidden;
+  font-size: var(--font-size-13);
+  text-align: left;
+  align-items: center;
+}
+.tears .items-list .item-name h3,
+.tears .items-list .item-name h4 {
+  margin: 0;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.tears .items-list .item-controls {
+  flex: 0 0 60px;
+  justify-content: space-between;
+}
+.tears .items-list .item-controls a {
+  font-size: var(--font-size-12);
+  text-align: center;
+}
+.tears .items-list .item {
+  align-items: center;
+  padding: 0 2px;
+  border-bottom: 1px solid var(--htbah-color-faint);
+}
+.tears .items-list .item:last-child {
+  border-bottom: none;
+}
+.tears .items-list .item .item-name {
+  color: var(--htbah-color-gold);
+}
+.tears .items-list .item .item-name .item-image {
+  flex: 0 0 30px;
+  height: 30px;
+  background-size: cover;
+  background-position: 50% 0;
+  border: none;
+  margin-right: 5px;
+}
+.tears .items-list .items-header {
+  height: 28px;
+  margin: 2px 0;
+  padding: 0;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.05);
+  border: var(--htbah-border-groove);
+  font-weight: bold;
+}
+.tears .items-list .items-header > * {
+  font-size: var(--font-size-12);
+  text-align: center;
+}
+.tears .items-list .items-header h3 {
+  padding-left: 5px;
+  font-family: var(--htbah-font-roboto-slab);
+  font-size: var(--font-size-12);
+  font-weight: 700;
+  text-align: left;
+}
+/* ----------------------------------------- */
+/*  Navigation for Charactersheets           */
+/* ----------------------------------------- */
+
+/* Allow tabs to hang outside the window */
+.tears.sheet.actor.character {
+  overflow: visible;
+}
+
+.tears.sheet.actor.character .window-content {
+  overflow: visible;
+}
+
+/* Form container needs relative positioning for absolute nav tabs */
+.tears.sheet.actor.character form.interactable {
+  position: relative;
+  height: 100%; /* This should reference the character sheet's min-height */
+}
+
+.tears.sheet.actor.character nav.tabs {
+  --tab-full-width: 44px;
+  --tab-inactive-width: 34px;
+  position: absolute;
+  left: 100%;
+  top: calc(var(--htbah-sheet-header-height) + 1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  z-index: 10;
+}
+
+.tears.sheet.actor.character nav.tabs > .item {
+  width: var(--tab-full-width);
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  position: relative;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding-right: 12px;
+  background: var(--htbah-color-black);
+  color: var(--htbah-color-gold);
+  --icon-fill: var(--htbah-color-gold);
+  border: 1px solid transparent;
+  border-radius: 0 8px 8px 0;
+  font-size: var(--font-size-14);
+  margin-left: calc((var(--tab-full-width) - var(--tab-inactive-width))* -1);
+  transition: all 250ms ease;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.tears.sheet.actor.character nav.tabs > .item.active, .tears.sheet.actor.character nav.tabs > .item:hover {
+  text-shadow: none;
+  margin: 0;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  border-color: var(--htbah-color-gold);
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character nav.tabs > .item::after {
+  content: "";
+  position: absolute;
+  inset: 4px 4px 4px 0;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid var(--htbah-color-gold);
+  border-left: none;
+  pointer-events: none;
+}
+
+.tabs .item {
+  text-align: center;
+}
+
+/* Navigation tab icons */
+.tears.sheet.actor.character nav.tabs > .item htbah-icon {
+  --icon-size: 20px;
+  --icon-fill: currentColor;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Ensure SVG icons within htbah-icon elements are properly sized */
+.tears.sheet.actor.character nav.tabs > .item htbah-icon svg {
+  width: 20px;
+  height: 20px;
+  max-width: 20px;
+  max-height: 20px;
+}
+
+.tears.sheet.actor.character nav.tabs > .item.active htbah-icon {
+  --icon-fill: var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character nav.tabs > .item:hover htbah-icon {
+  --icon-fill: var(--htbah-color-gold);
+}
+
+/* IMPORTANT: Scope these selectors to prevent interference with FoundryVTT UI */
+.tears a {
+  cursor: pointer;
+}
+/* Apply user-select: none only to sheet elements, not all elements */
+.tears.sheet * {
+  box-sizing: border-box;
+  user-select: none;
+}
+/* Allow box-sizing for all how-to-be-a-hero elements but keep user-select limited */
+.tears * {
+  box-sizing: border-box;
+}
+
+/* ----------------------------------------- */
+/*  Actor tab logic                          */
+/* ----------------------------------------- */
+
+.tears .tab-body .tab {
+  display: none;
+  overflow-wrap: break-word; /* Allow long words to break */
+  word-wrap: break-word; /* Legacy support */
+}
+
+.tears .tab-body .tab.active {
+  display: block;
+}
+
+/* Ensure tab content respects boundaries */
+.tears .tab-body .tab textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.tears .tab-body .tab table,
+.tears .tab-body .tab .form-grid {
+  width: 100%;
+  max-width: 100%;
+  table-layout: fixed; /* For tables to respect width constraints */
+}
+
+/* ----------------------------------------- */
+/*  Character Sidebar and Main divider       */
+/* ----------------------------------------- */
+
+.tears.sheet.actor.character.tab-details .sheet-body .tab-body {
+  
+}
+
+.tears.sheet.actor.character .sheet-body {
+  border-radius: 5px;
+  height: calc(100% - var(--htbah-sheet-header-height)); /* Available height minus header */
+  /*
+  background: url("../ui/texture1.webp") no-repeat top center / auto 770px, url("../ui/texture2.webp") no-repeat bottom center / auto 704px;
+  */
+  /* Main Content */
+  /* Sidebar */
+  /* Tabbed Content */
+  /* Abilities, Tools, & Saving Throws */
+  /* Background Pills */
+  /* Senses & Traits */
+}
+.tears.sheet.actor.character .sheet-body .main-content {
+  display: grid;
+  grid-template-columns: var(--htbah-sheet-sidebar-width) 1fr;
+  gap: 12px;
+  position: absolute;
+  padding: 25px;
+  overflow: hidden auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--htbah-color-scrollbar) transparent;
+  transition: all 450ms ease;
+  padding-bottom: 30px;
+  width: 100%;
+  top: var(--htbah-sheet-header-height);
+  bottom: 0; /* Connect to bottom of the form */
+  box-sizing: border-box; /* Ensures padding is included in width calculation */
+  min-width: 0; /* Prevents grid container from expanding beyond bounds */
+}
+
+/* Ensure grid items don't overflow */
+.tears.sheet.actor.character .sheet-body .main-content > * {
+  min-width: 0; /* Prevents grid items from expanding beyond their column */
+  min-height: 0; /* Prevents grid items from expanding beyond their row */
+  overflow: hidden; /* Prevents content from escaping grid items */
+}
+
+/* Specific constraint for tab-body as the second grid item */
+.tears.sheet.actor.character .sheet-body .main-content .tab-body {
+  overflow: hidden auto; /* Allow vertical scrolling but prevent horizontal overflow */
+  max-width: 100%; /* Ensure it doesn't expand beyond allocated grid space */
+  height: 100%; /* Fill available grid cell height */
+}
+
+/* For any nested content that might have tables, forms, or other wide content */
+.tears.sheet.actor.character .sheet-body .main-content * {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Specific handling for common overflow culprits */
+.tears.sheet.actor.character .sheet-body .main-content table,
+.tears.sheet.actor.character .sheet-body .main-content pre,
+.tears.sheet.actor.character .sheet-body .main-content code {
+  max-width: 100%;
+  overflow-x: auto;
+  word-wrap: break-word;
+}
+.tears.sheet.actor.character .sheet-body .main-content::-webkit-scrollbar-track {
+  box-shadow: none;
+  border-radius: 0;
+}
+.tears.sheet.actor.character .sheet-body .main-content::-webkit-scrollbar-thumb {
+  border: none;
+  background: var(--htbah-color-scrollbar);
+}
+.tears.sheet.actor.character .sheet-body .sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: margin-left 450ms ease;
+  /* Character Card */
+}
+
+/* ----------------------------------------- */
+/*  Character Card                           */
+/* ----------------------------------------- */
+
+.tears.sheet.actor.character .sheet-body .sidebar .card {
+  box-shadow: 0 0 9px var(--color-shadow-dark);
+  border-radius: 3px;
+  border: none;
+  position: relative;
+  background: var(--htbah-color-iron-gray);
+  transform-style: preserve-3d;
+  transform: translateZ(1px);
+  z-index: 1;
+  /* Tabs */
+  /* Collapser */
+  /* Portrait */
+  /* Stats */
+  /* Hit Points & Hit Dice */
+  /* Favourites */
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card > .portrait,
+.tears.sheet.actor.character .sheet-body .sidebar .card > .stats {
+  transform: translateZ(2px);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab {
+  display: grid;
+  place-content: center;
+  background: var(--htbah-color-iron-gray);
+  cursor: pointer;
+  box-shadow: 0 0 6px var(--color-shadow-dark);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab:hover,
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab:focus {
+  box-shadow: 0 0 6px var(--color-shadow-dark);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab.horizontal {
+  width: 32px;
+  height: 20px;
+  border-radius: 0 0 3px 3px;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab.vertical {
+  width: 20px;
+  height: 32px;
+  border-radius: 0 3px 3px 0;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab > i {
+  color: var(--htbah-color-gold);
+  font-size: 12px;
+  margin: 0;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .card-tab.collapser {
+  position: absolute;
+  inset: 0.5rem auto auto 100%;
+  transform: translateZ(-1px);
+  width: 16px;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait > img {
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  border: none;
+  width: 100%;
+  max-height: 300px;
+  min-height: var(--htbah-sheet-sidebar-width);
+  border-radius: 3px 3px 0 0;
+  border-bottom: 2px solid var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait::after {
+  content: "";
+  position: absolute;
+  inset: 6px 6px 8px;
+  border: 2px solid var(--htbah-color-gold);
+  pointer-events: none;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait > label.tears slide-toggle {
+  position: absolute;
+  z-index: 1;
+  padding: 1rem 0;
+  width: 100%;
+  text-align: center;
+  color: var(--htbah-color-gold);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.65) 75%, transparent);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait > label.slide-toggle:has(input:not([disabled])):hover {
+  text-shadow: 0 0 6px var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait.token::after {
+  display: none;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .portrait.token > img {
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  margin-bottom: -1rem;
+  border: none;
+  filter: drop-shadow(0 0 8px var(--htbah-color-black));
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .top {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  position: relative;
+  /* AC */
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .top .pips .pip.filled.death::before {
+  content: "\f54c";
+  font-family: var(--font-awesome);
+  font-size: var(--font-size-11);
+}
+.tears.sheet .sidebar .card .stats .ac { 
+  width: 90px;
+  height: 90px;
+  text-align: center;
+  line-height: 62px;
+  background-image: url(../ui/shield_foreground.svg), url(../ui/shield.svg);
+  background-position: center, center;
+  background-repeat: no-repeat, no-repeat;
+  background-size: calc(100% - 8px), contain;
+  color: var(--color-text-dark-primary);
+  font-size: var(--font-size-23);
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  margin-top: -60px;
+  filter: drop-shadow(0 0 6px var(--color-shadow-dark));
+  position: relative;
+}
+.tears.sheet .sidebar .card .stats .ac::after {
+  content: "";
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 24px;
+  background: var(--htbah-color-gold);
+  clip-path: polygon(50% 100%, 15% 0%, 85% 0%);
+  border-radius: 50% 50% 0 0;
+}
+.tears.sheet .sidebar .card .stats .ac .config-button {
+  color: inherit;
+  font-size: inherit;
+}
+/* Styling for the armor display */
+.tears.sheet .sidebar .card .stats .ac input {
+  border: none;
+  background: transparent;
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+}
+.tears.sheet .sidebar .card .stats .ac input:hover,
+.tears.sheet .sidebar .card .stats .ac input:focus {
+  outline: none;
+  box-shadow: none;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 0.5rem;
+  margin-top: -7px;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge {
+  width: 68px;
+  height: 45px;
+  background: transparent url("../ui/lozenge.svg") no-repeat top center / contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  filter: drop-shadow(0 0 6px var(--htbah-shadow-45));
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .value {
+  font-family: var(--htbah-font-roboto);
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--htbah-color-gold);
+  height: 100%;
+  line-height: 30px;
+  text-shadow: 0 0 4px var(--htbah-highlight-45);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .value .config-button {
+  color: inherit;
+  font-size: inherit;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge .label {
+  font-size: 10px;
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge:nth-child(2) {
+  margin-top: 24px;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge.rollable:hover .value {
+  cursor: pointer;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge.rollable:hover .value > span {
+  display: none;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .stats .lozenges .lozenge.rollable:hover .value::before {
+  content: "\f6cf";
+  font-family: var(--font-awesome);
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter-group {
+  padding: 0 0.5rem;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter-group + .meter-group {
+  margin-top: 0.5rem;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter-group > .label {
+  font-size: var(--font-size-11);
+  color: var(--htbah-color-gold);
+  text-shadow: 0 0 6px var(--htbah-shadow-45);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter-group > .label > .config-button {
+  color: var(--htbah-color-gold);
+}
+
+/* ----------------------------------------- */
+/*  Hit points                               */
+/* ----------------------------------------- */
+/* Base hit points meter */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.hit-points {
+  height: 32px;
+  font-size: var(--font-size-16);
+}
+
+/* Progress bar background */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.hit-points .progress::before {
+  background: linear-gradient(to right, var(--htbah-color-hp-1) 0%, var(--htbah-color-hp-2) 100%);
+  border-right: var(--border-width) solid var(--htbah-color-hp-3);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Temperature states */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.hit-points .temp-positive .label :is(.max, .bonus) {
+  color: color-mix(in oklab, currentcolor, blue 25%);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.hit-points .temp-negative .label :is(.max, .bonus) {
+  color: color-mix(in oklab, currentcolor, red 25%);
+}
+
+/* Hit dice styling */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.hit-dice {
+  height: 25px;
+  font-size: var(--font-size-14);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.hit-dice.progress::before {
+  background: linear-gradient(to right, var(--htbah-color-hd-1) 0%, var(--htbah-color-hd-2) 100%);
+  border-right: var(--border-width) solid var(--htbah-color-hd-3);
+}
+
+/* ----------------------------------------- */
+/*  Mana points                              */
+/* ----------------------------------------- */
+/* Base mana points meter */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points {
+  height: 32px;
+  font-size: var(--font-size-16);
+}
+
+/* Progress bar background */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .progress::before {
+  background: linear-gradient(to right, var(--htbah-color-mp-1) 0%, var(--htbah-color-mp-2) 100%);
+  border-right: var(--border-width) solid var(--htbah-color-mp-3);
+  border-radius: 4px 0 0 4px;
+}
+
+/* Mana bar span vertical alignment */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .label span.value,
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .label span.max {
+  line-height: 32px;
+  vertical-align: middle;
+}
+
+/* Mana bar label container alignment */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .label {
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Mana bar cursor */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .progress {
+  cursor: pointer;
+}
+
+/* Mana bar input vertical alignment */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .label input.uninput.value,
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.mana-points .label input.uninput.max {
+  line-height: normal;
+}
+
+/* Sectioned meter common styles */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned input {
+  width: 40px;
+  height: 100%;
+  text-align: center;
+  border: none;
+  font-weight: bold;
+  background: none;
+  padding: 5px;
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned input:hover,
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned input:focus {
+  box-shadow: 0 0 8px var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned > div {
+  height: 100%;
+}
+
+/* Hit points section */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned > .hit-points {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned > .hit-points > input {
+  position: relative;
+}
+
+/* Label section styling */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  position: relative;
+  padding-inline-start: 0.5rem;
+  padding-inline-end: 0.75rem;
+}
+
+/* Hidden state handling */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label[hidden],
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter input[hidden] {
+  display: none !important;
+}
+
+/* Ensure visible state */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label:not([hidden]),
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter input:not([hidden]) {
+  display: flex;
+}
+
+/* Input styling for editable state */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label input.uninput {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: bold;
+  font-size: inherit;
+  text-align: center;
+  width: 40px;
+  padding: 0;
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label input.uninput:hover,
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label input.uninput:focus {
+  box-shadow: 0 0 8px var(--htbah-color-gold);
+  outline: none;
+}
+
+/* Span styling for non-editable state */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label span.value,
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label span.max {
+  min-width: 40px;
+  text-align: center;
+}
+
+/* Common separator styling */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter .label .separator {
+  color: var(--htbah-color-gold);
+  margin: 0 2px;
+}
+
+/* Temporary HP section */
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned > .tmp {
+  flex: none;
+  width: 50px;
+  border-left: 1px dashed var(--htbah-color-gold);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .card .meter.sectioned > .tmp > input {
+  color: var(--htbah-color-blue);
+}
+
+/* ----------------------------------------- */
+/*  Favorites                               */
+/* ----------------------------------------- */
+
+.tears.sheet.actor.character .sheet-body .sidebar .favorites {
+  flex: 1;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > h3 {
+  border-bottom-color: currentcolor;
+  color: var(--htbah-color-gold);
+  margin-bottom: 0.5rem;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-top: 1px solid var(--color-border-light-1);
+  padding-top: 0.375rem;
+  margin-top: 0.375rem;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul li:first-child:not(.drop) {
+  margin: 0;
+  border: none;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul li.effect:not(.suppressed) {
+  cursor: pointer;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul li.effect:not(.suppressed):hover .title {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul li.effect:not(.suppressed):hover .primary i {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul li.effect.suppressed {
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .drop {
+  border: 2px dashed var(--htbah-color-gold);
+  border-radius: 4px;
+  padding: 0.625rem 0.5rem;
+  font-size: var(--font-size-13);
+  opacity: 0.25;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul figure {
+  position: relative;
+  margin: 0;
+  flex: 0 0 30%;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul img {
+  width: 32px;
+  height: 32px;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .deletion-control {
+  position: absolute;
+  inset: auto auto 2px 2px;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .name-stacked {
+  flex: 0 0 50%;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .name-stacked .title {
+  font-size: var(--font-size-13);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .name-stacked.rollable {
+  cursor: pointer;
+  color: var(--color-text-dark-primary);
+}
+
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .name-stacked:not(.rollable) {
+  cursor: default;
+  color: var(--color-text-dark-primary);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .name-stacked.rollable:hover .title {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info {
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: column;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: var(--font-size-16);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses-sm {
+  font-size: var(--font-size-13);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses {
+  justify-content: space-between;
+  gap: unset;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses .value,
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses .max {
+  width: 24px;
+  text-align: center;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses .separator,
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses .max {
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses input {
+  background: none;
+  padding: 0;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses input:hover,
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.uses input:focus {
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.save {
+  flex-direction: column;
+  gap: unset;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.save .ability {
+  text-transform: uppercase;
+  color: var(--htbah-color-gold);
+  font-size: var(--font-size-10);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary.disabled i,
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary .sign,
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary .passive {
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .primary .passive {
+  font-size: var(--font-size-13);
+  margin-left: 0.25rem;
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul .info .secondary {
+  text-align: center;
+  color: var(--color-text-gold);
+  font-size: var(--font-size-10);
+}
+.tears.sheet.actor.character .sheet-body .sidebar .favorites > ul.value {
+  justify-content: center;
+}
+
+/* ----------------------------------------- */
+/*  SkillSet scores                            */
+/* ----------------------------------------- */
+
+.tears.sheet.actor.character .skillSet-scores {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: calc(var(--htbah-sheet-sidebar-width) + 18px);
+  pointer-events: none;
+  container-type: inline-size;
+}
+.tears.sheet.actor.character .skillSet-scores .rows {
+  padding: 76px 0 76px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 546px;
+  margin-left: auto;
+}
+.tears.sheet.actor.character .skillSet-scores .rows > div {
+  display: flex;
+  gap: 22px;
+}
+.tears.sheet.actor.character .skillSet-scores.optional-skillSet-0 .rows {
+  width: unset;
+  margin: 0;
+  justify-content: center;
+  padding-inline: 12px;
+}
+.tears.sheet.actor.character .skillSet-scores .top {
+  padding-right: calc(var(--htbah-sheet-header-right-width) + 49px);
+  min-height: 72px;
+  margin-left: auto;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score {
+  width: 64px;
+  height: 64px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--htbah-font-roboto);
+  padding-top: 12px;
+  filter: drop-shadow(0 0 6px var(--htbah-shadow-45));
+  pointer-events: all;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent url("../ui/skillSet-score-tab-dark.svg") no-repeat top center / contain;
+  z-index: -1;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score.flipped {
+  padding: 0 0 8px 0;
+  height: 72px;
+  justify-content: start;
+  gap: 2px;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score.flipped::before {
+  transform: scaleY(-1);
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score.flipped .mod {
+  padding: 0;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score.flipped .score {
+  margin: 0;
+  order: -1;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .sign {
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .label {
+  text-transform: uppercase;
+  font-size: var(--font-size-11);
+  color: var(--htbah-color-gold);
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .mod {
+  font-weight: bold;
+  color: var(--htbah-color-black);
+  font-size: var(--font-size-16);
+  padding: 3px 0;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .score {
+  width: 50px;
+  height: 23px;
+  padding: 4px;
+  text-align: center;
+  font-size: var(--font-size-13);
+  color: var(--htbah-color-gold);
+  background: black;
+  border-radius: 3px;
+  margin-top: -2px;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .score > input {
+  padding: 4px;
+  color: var(--htbah-color-gold);
+  width: 50px;
+  height: 23px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+}
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .score > input:hover,
+.tears.sheet.actor.character .skillSet-scores .skillSet-score .score > input:focus {
+  border: 1px solid var(--htbah-color-gold);
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+
+@media (prefers-reduced-motion) {
+  .tears.sheet.actor.character .skillSet-scores .skillSet-score > .concentration {
+    animation: none;
+  }
+}
+@container (min-width: 700px) {
+  .tears.sheet.actor.character .skillSet-scores .rows {
+    justify-content: center;
+    gap: 22px;
+    padding-top: 148px;
+    width: unset;
+    margin: 0;
+  }
+  .tears.sheet.actor.character .skillSet-scores .rows .top {
+    padding: 0;
+    margin: 0;
+    min-height: unset;
+    order: 2;
+  }
+  .tears.sheet.actor.character .skillSet-scores .rows .bottom {
+    padding: 0;
+    margin: 0;
+    min-height: unset;
+    order: 0;
+  }
+  .tears.sheet.actor.character .skillSet-scores .rows .skillSet-score.flipped {
+    padding: 12px 0 0;
+    height: 64px;
+    justify-content: space-between;
+    gap: unset;
+  }
+  .tears.sheet.actor.character .skillSet-scores .rows .skillSet-score.flipped::before {
+    transform: unset;
+  }
+  .tears.sheet.actor.character .skillSet-scores .rows .skillSet-score.flipped .mod {
+    padding: 3px 0;
+  }
+  .tears.sheet.actor.character .skillSet-scores .rows .skillSet-score.flipped .score {
+    margin: -2px 0 0;
+    order: unset;
+  }
+}
+.tears.sheet.actor.character form:not(.tab-details) .skillSet-scores {
+  display: none;
+}
+
+
+/* ----------------------------------------- */
+/*  Create child                             */
+/* ----------------------------------------- */
+
+.tears.sheet.actor.character .create-child {
+  display: none;
+  position: absolute;
+  inset: auto 1rem 1rem auto;
+}
+
+/* Show create-child button based on the active tab class on the parent div */
+.tears.sheet.actor.character.tab-inventory .create-child,
+.tears.sheet.actor.character.tab-magic .create-child {
+  display: block;
+}
+.tears.sheet.actor.character .create-child[hidden] { display: none !important; }
+/* Details Tab Styles */
+.tears .tab.details {
+  /* ----------------------------------------- */
+  /*  SkillSets-container                        */
+  /* ----------------------------------------- */
+}
+
+.tears .tab.details .skillSets-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  min-width: 250px;
+}
+
+.tears .tab.details .skillSets-container > div {
+  flex: 1;
+}
+
+.tears .tab.details .skillSet-check {
+  display: block;
+  width: 100%;
+  position: relative;
+  padding-right: 30px;  /* Space for the d20 icon */
+}
+
+/* Adjust the rollable icon positioning specifically for skillSet checks */
+.tears .tab.details .skillSet-check.rollable::after {
+  top: 50%;
+  transform: translateY(-50%);
+  right: 0;
+}
+
+.tears .tab.details .skillSet-check.rollable:hover::after {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.tears .tab.details filigree-box > .header-content {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 1rem 0.375rem;
+  border: none;
+  font-size: var(--font-size-18);
+  align-items: center;
+  position: relative;
+}
+
+.tears .tab.details filigree-box > .header-content > h3 {
+  flex: 0 0 55%;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.tears .tab.details filigree-box > .header-content > h3 > a {
+  font-family: var(--htbah-font-roboto-slab);
+  font-size: var(--font-size-21);
+  text-decoration: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.tears .tab.details filigree-box > .header-content > .total-column {
+  flex: 0 0 15%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-weight: bold;
+  color: var(--color-text-dark-primary);
+  border-right: 1px solid var(--htbah-color-faint);
+}
+
+/* Modified spacer-column to display items horizontally */
+.tears .tab.details filigree-box > .header-content > .spacer-column {
+  flex: 0 0 5%;
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: center;
+}
+
+/* Modified eureka-column to display items horizontally */
+.tears .tab.details filigree-box > .header-content > .eureka-column {
+  flex: 0 0 25%;
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: center;
+}
+
+/* Modified eureka-column to display items horizontally */
+.tears .tab.details filigree-box > .header-content > .eureka-column > .eureka-value {
+  flex: 0 0 20%;
+  margin: 5px 0;
+  display: flex;
+  flex-direction: row; /* Changed from column to row */
+  align-items: center;  
+}
+
+/* Style the eureka value input - Always Editable (Edit and Play Mode) */
+.tears .tab.details filigree-box > .header-content > .eureka-column > .eureka-value > input {
+  text-align: center;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-16);
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-dark-primary);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+/* Eureka input background color in edit mode */
+.tears .tab.details filigree-box > .header-content > .eureka-column > .eureka-value > input:not(:disabled) {
+  background-color: #3B3B3B;
+}
+
+/* Hidden eureka column - maintains layout width but hides content */
+.tears .tab.details filigree-box > .header-content > .eureka-column.eureka-hidden {
+  visibility: hidden;
+  border-right: none !important;
+}
+
+/* Remove border from total column when eureka is hidden */
+.tears .tab.details filigree-box > .header-content:has(.eureka-column.eureka-hidden) > .total-column {
+  border-right: none !important;
+}
+
+/* Eureka icon styling */
+.tears .tab.details filigree-box > .header-content > .eureka-column > .eureka-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tears .tab.details filigree-box > .header-content > .eureka-column > .eureka-icon htbah-icon {
+  --icon-size: 16px;
+  --icon-fill: var(--htbah-color-faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Style the delimiter */
+.tears .tab.details filigree-box > .header-content > .eureka-column > .delimiter {
+  flex: 0 0 15%;
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  color: var(--color-text-dark-primary);
+  margin: 0 4px; /* Increased margin for better spacing */
+  line-height: 1;
+}
+
+/* Style the eureka max value */
+.tears .tab.details filigree-box > .header-content > .eureka-column > .eureka-max {
+  flex: 0 0 20%;
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  color: var(--color-text-dark-primary);
+  line-height: 1;
+  white-space: nowrap; /* Prevent text wrapping */
+}
+
+.tears .tab.details .skillSets-container.skillSets {
+  margin-top: 10px;
+}
+
+.tears .tab.details .skillSet-category {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tears .tab.details .skillSet-category .skillSets.header {
+  margin-bottom: 10px;
+}
+
+.tears .tab.details .items-list .skillSet-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  color: var(--htbah-color-tan);
+  min-height: 375px;
+}
+
+.tears .tab.details .items-list.skillSet-list {
+  min-height: 375px;
+  padding: 0.75rem 1rem 0.375rem;
+}
+
+/* Details Tab Styles */
+.tears .tab.details .items-list .item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background-color: transparent;
+  transition: all 0.3s ease;
+}
+
+.tears .tab.details .items-list .item-name {
+  flex: 0 0 55%;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  min-width: 0;
+}
+
+.tears .tab.details .items-list .item-name:hover {
+  color: var(--htbah-color-gold);
+}
+
+.tears .tab.details .items-list .item-name h3 {
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--htbah-font-roboto-slab);
+  font-size: var(--font-size-18);
+  font-weight: bold;
+  color: var(--htbah-color-beige);
+}
+
+.tears .tab.details .items-list .item-ability-value {
+  flex: 0 0 15%;
+  text-align: center;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-18);
+  color: var(--htbah-color-beige);
+  border-right: 1px solid var(--htbah-color-faint);
+}
+
+.tears .tab.details .items-list .item-total {
+  flex: 0 0 15%;
+  text-align: center;
+  font-family: var(--htbah-font-roboto);
+  font-size: var(--font-size-18);
+  color: var(--htbah-color-beige);
+}
+
+.tears .tab.details .items-list .item-spacer {
+  flex: 0 0 5%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.tears .tab.details .items-list .item-controls {
+  flex: 0 0 5%;
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.tears .tab.details .items-list .item-control {
+  color: var(--htbah-color-tan);
+  font-size: var(--font-size-14);
+  transition: color 0.3s ease;
+}
+
+.tears .tab.details .items-list .item-control:hover {
+  color: var(--htbah-color-gold);
+}
+
+.tears .tab.details .items-list .item-edit:hover {
+  color: var(--htbah-color-blue-gray-3);
+}
+
+.tears .tab.details .items-list .item-delete:hover {
+  color: var(--htbah-color-red);
+}
+
+/* New flexbox additions */
+.tears .tab.details .skillSet-category {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tears .tab.details .skillSet-category .skillSets.header {
+  margin-bottom: 10px;
+}
+
+.tears .tab.details .skillSet-category .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tears .tab.details .skillSet-category .header-content h3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Ability value Input Group */
+.ability-value-input-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: fit-content;
+  margin: 0 auto; /* Center the entire group if needed */
+}
+
+/* Ability value input - Edit Mode (with border) */
+.ability-value-input-group input.ability-value {
+  width: 35px;
+  height: 24px;
+  text-align: center;
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-dark-primary);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ability value input background color in edit mode */
+.ability-value-input-group input.ability-value:not(.play-mode):not(:disabled) {
+  background-color: #3B3B3B;
+}
+
+/* Ability value input - Play Mode (no border, disabled state) */
+.ability-value-input-group input.ability-value.play-mode,
+.ability-value-input-group input.ability-value:disabled {
+  text-align: center;
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  border: none;
+  border-radius: 4px;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-dark-primary);
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  box-shadow: none;
+  cursor: default;
+}
+
+/* Focus states */
+.ability-value-input-group input.ability-value:focus {
+  outline: none;
+}
+
+/* Remove focus effects for play mode/disabled */
+.ability-value-input-group input.ability-value.play-mode:focus,
+.ability-value-input-group input.ability-value:disabled:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.ability-value-input-group i {
+  cursor: pointer;
+  color: var(--htbah-color-tan);
+  font-size: var(--font-size-12);
+  transition: color 0.2s ease, transform 0.2s ease;
+  position: absolute;
+  /*right: -12px; /* Moved further out to avoid overlap */
+  z-index: 1; /* Ensure icons are above input */
+}
+
+.ability-value-input-group .fa-circle-plus {
+  top: -2px;
+}
+
+.ability-value-input-group .fa-circle-minus {
+  bottom: 0px;
+}
+
+.ability-value-input-group i:hover {
+  color: var(--htbah-color-gold);
+  transform: scale(1.1);
+}
+
+.fa-circle-plus:hover {
+  color: #2a9d8f;
+}
+
+.fa-circle-minus:hover {
+  color: #e76f51;
+}
+
+/* Inventory Tab Styles */
+.tears .tab.inventory {
+  /* Specific styles for the inventory tab */
+  /* ------------------------------------ */
+  /*  Common Styles                       */
+  /* ------------------------------------ */
+  /*  Inventory                           */
+  /* ------------------------------------ */
+  /*  Searching & Filtering               */
+  /* ------------------------------------ */
+}
+/* Inventory Element */
+.tears .tab.inventory .inventory-element {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Top section */
+.tears .tab.inventory .inventory-element .top {
+  display: flex;
+  align-items: start;
+  gap: 1rem;
+}
+
+/* Items List */
+.tears .tab.inventory .items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  container-type: inline-size;
+}
+
+/* Hidden elements */
+.tears .tab.inventory .items-section[hidden],
+.tears .tab.inventory .items-section .items-header[hidden],
+.tears .tab.inventory .items-section .item[hidden] {
+  display: none;
+}
+
+/* Items Section */
+.tears .tab.inventory .items-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Items Header */
+.tears .tab.inventory .items-section .items-header {
+  display: flex;
+  font-family: var(--htbah-font-roboto-condensed);
+  text-transform: uppercase;
+  background: linear-gradient(to right, var(--htbah-color-hd-1) 0%, var(--htbah-color-hd-2) 100%);
+  border: none;
+}
+
+/* Dropzone Indicator - hidden by default, shown during drag operations */
+.tears .tab.inventory .items-section .items-header .dropzone-indicator {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: 1rem;
+  padding: 0.25rem 0.5rem;
+  background: rgba(var(--htbah-color-gold-rgb), 0.1);
+  border: 1px dashed var(--htbah-color-gold);
+  border-radius: 4px;
+  font-size: 0.8em;
+}
+
+/* Show dropzone indicator when actively dragging items */
+.tears.dragging-item .tab.inventory .items-section .items-header .dropzone-indicator {
+  display: flex;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+}
+
+.tears .tab.inventory .items-section .items-header .dropzone-indicator i {
+  color: var(--htbah-color-gold);
+  animation: bounce 1.5s infinite;
+}
+
+.tears .tab.inventory .items-section .items-header .dropzone-text {
+  color: var(--htbah-color-gold);
+  font-weight: normal;
+  text-transform: none;
+  font-size: 1.5em;
+}
+
+/* Enhanced styling during dragover */
+.tears .tab.inventory .items-section.dragover .items-header .dropzone-indicator {
+  background: rgba(var(--htbah-color-gold-rgb), 0.2);
+  opacity: 1;
+  border-style: solid;
+  box-shadow: 0 0 8px var(--htbah-color-gold);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-3px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Item */
+.tears .tab.inventory .items-section .item {
+  display: flex;
+  border-bottom: var(--htbah-border-dotted);
+}
+
+.tears .tab.inventory .items-section .item:last-child {
+  border-bottom: none;
+}
+
+/* Shared column styles */
+.tears .tab.inventory .items-section .item-header,
+.tears .tab.inventory .items-section .item-detail {
+  display: flex;
+  align-items: center;
+  padding: 0.1rem;
+}
+
+/* Item Name Styles */
+.tears .tab.inventory .items-section .item-name {
+  flex: 1;
+  display: flex;
+  gap: 0.5rem;    
+  font-size: var(--font-size-12);
+  align-items: center;
+  line-height: 1;
+  position: relative;
+  text-align: left;
+}
+
+.tears .tab.inventory .items-section .item-name.rollable {
+  cursor: pointer;
+}
+
+.tears .tab.inventory .items-section .item-name.rollable:hover .title {
+  text-shadow: 0 0 8px var(--color-shadow-primary);
+}
+
+.tears .tab.inventory .items-section .item-name .title {
+  transition: text-shadow 250ms ease;
+  font-size: var(--font-size-13);
+}
+
+.tears .tab.inventory .items-section .item-name .item-image {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+}
+
+.tears .tab.inventory .items-section .item-name .name-stacked {
+  display: flex;
+  flex-direction: column;
+}
+
+.tears .tab.inventory .items-section .item-name .name-stacked .title {
+  font-weight: bold;
+  font-size: var(--font-size-18);
+  font-family: var(--htbah-font-roboto-slab);
+  color: var(--htbah-color-beige);
+}
+
+.tears .tab.inventory .items-section .item-name .name-stacked .subtitle {
+  font-size: 0.8em;
+  color: var(--color-text-dark-secondary);
+}
+
+/* Item Quantity Styles */
+.tears .tab.inventory .items-section .item-quantity {
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tears .tab.inventory .items-section .item-quantity input {
+  width: 40px;
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: bold;
+  font-size: var(--font-size-16);
+  font-family: var(--htbah-font-roboto-slab);
+  transition: box-shadow 250ms ease;
+}
+
+.tears .tab.inventory .items-section .item-quantity input:focus-visible,
+.tears .tab.inventory .items-section .item-quantity input:hover {
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+}
+
+.tears .tab.inventory .items-section .item-quantity .adjustment-button {
+  cursor: pointer;
+}
+
+/* Item Controls Styles */
+.tears .tab.inventory .items-section .item-controls {
+  width: 90px; /* Increased from 80px to accommodate larger icons */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  /*gap: 0.2rem;  Increased from 0.375rem for more space between icons */
+  color: var(--htbah-color-gold);
+}
+
+.tears .tab.inventory .items-section .item-controls .item-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  width: 19px; /* Set a fixed width for consistent spacing */
+  height: 28px; /* Set a fixed height for consistent spacing */
+}
+
+.tears .tab.inventory .items-section .item-controls .item-control i {
+  font-size: 14px; /* Increased from the default size */
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.tears .tab.inventory .items-section .item-controls .item-control:hover i {
+  transform: scale(1.1);
+}
+
+.tears .tab.inventory .items-section .item-controls .item-control.active {
+  color: var(--htbah-color-gold);
+}
+
+/* Config Button */
+.tears .tab.inventory .items-section .items-header .config-button {
+  position: absolute;
+  inset: 0.5rem 1.5rem auto auto;
+  color: var(--htbah-color-gold);
+  font-size: var(--font-size-12);
+}
+
+/* Responsive Styles */
+@container (min-width: 600px) {
+  .tears .tab.inventory .items-section .item-formula {
+    display: flex;
+  }
+}
+
+@container (min-width: 650px) {
+  .tears .tab.inventory .items-section .item-school {
+    display: flex;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion) {
+  .tears .tab.inventory .items-section .item-name > .concentration {
+    animation: none;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tears .tab.inventory .items-section .item {
+    flex-wrap: wrap;
+  }
+
+  .tears .tab.inventory .items-section .item-name {
+    flex: 1 0 100%;
+  }
+
+  .tears .tab.inventory .items-section .item-quantity {
+    flex: 0 0 auto;
+  }
+
+  .tears .tab.inventory .items-section .item-controls {
+    width: auto;
+    justify-content: flex-start; /* Align controls to the start on smaller screens */
+  }
+
+  .tears .tab.inventory .items-section .item-controls .item-control {
+    width: 32px; /* Slightly larger on small screens for better touch targets */
+    height: 32px;
+  }
+
+  .tears .tab.inventory .items-section .item-controls .item-control i {
+    font-size: 20px; /* Slightly larger on small screens */
+  }
+}
+
+
+/* ---------------------------------- */
+/*  Currency                          */
+/* ---------------------------------- */
+.tears section.currency,
+.tears .currency-style {
+  display: flex;
+  gap: 1rem;
+}
+.tears section.currency label,
+.tears .currency-style label {
+  position: relative;
+}
+.tears section.currency label i,
+.tears .currency-style label i {
+  display: inline-block;
+  position: absolute;
+  inset: -2px auto auto -2px;
+  filter: drop-shadow(0 0 1px black);
+}
+.tears section.currency input,
+.tears .currency-style input,
+.tears section.currency button,
+.tears .currency-style button {
+  border: var(--htbah-border-gold);
+  background: var(--htbah-background-parchment);
+  box-shadow: 0 0 6px var(--htbah-shadow-15);
+}
+.tears section.currency input:hover,
+.tears .currency-style input:hover,
+.tears section.currency button:hover,
+.tears .currency-style button:hover,
+.tears section.currency input:focus,
+.tears .currency-style input:focus,
+.tears section.currency button:focus,
+.tears .currency-style button:focus {
+  box-shadow: 0 0 6px var(--htbah-color-gold);
+  border: 1px solid var(--htbah-color-gold);
+}
+.tears section.currency input,
+.tears .currency-style input {
+  border-radius: 6px;
+  padding: 0.375rem 0.5rem 0.3755rem 1rem;
+  text-align: right;
+  font-family: var(--htbah-font-roboto);
+  font-weight: bold;
+  font-size: var(--font-size-11);
+  max-width: 80px;
+}
+.tears section.currency button,
+.tears .currency-style button {
+  border-radius: 4px;
+  width: 30px;
+  color: var(--color-text-dark-5);
+}
+/* ---------------------------------- */
+/*  Locked                            */
+/* ---------------------------------- */
+.tears .locked .inventory-element .item .item-quantity input:is(:focus-visible, :hover) {
+  box-shadow: none;
+}
+/* ---------------------------------- */
+/*  Edit Mode                         */
+/* ---------------------------------- */
+.tears .editable .inventory-element .middle .attunement {
+  padding-right: 0;
+}
+.tears .editable .inventory-element .items-section .pips {
+  display: none;
+}
+
+
+/* Item Sheet Window Header - override application styles */
+.tears.sheet.item .window-header {
+  background: black !important;
+  border-bottom: 1px solid var(--htbah-color-gold);
+}
+
+.tears.sheet.item .window-header .window-title {
+  color: var(--htbah-color-gold) !important;
+  font-family: var(--htbah-font-roboto-slab);
+  font-weight: bold;
+}
+
+.tears.sheet.item .window-header .header-button {
+  color: var(--htbah-color-gold) !important;
+}
+
+.tears.sheet.item .window-header .header-button:hover {
+  color: white !important;
+  background: rgba(159, 146, 117, 0.2) !important;
+}
+
+/* Main container */
+.tears.sheet.item .window-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  font-family: var(--htbah-font-roboto);
+  color: var(--htbah-color-dark);
+  /* ----------------------------------------- */
+  /*  Sheet Header                             */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Description                         */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Details Form                        */
+  /* ----------------------------------------- */
+  /* ----------------------------------------- */
+  /*  Item Actions                             */
+  /* ----------------------------------------- */
+}
+
+.tears.tears.sheet.item {
+  background: var(--htbah-sheet-background);
+  border-radius: 5px;
+  box-shadow: 0 0 10px var(--htbah-shadow-15);
+  min-height: min(460px, calc(100vh - 40px));
+  max-height: calc(100vh - 24px);
+  min-width: min(620px, calc(100vw - 32px));
+  max-width: calc(100vw - 24px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Rollable fields may increase the preferred sheet height without locking it. */
+.tears.tears.sheet.item.rollable-expanded {
+  min-height: min(560px, calc(100vh - 40px));
+  max-height: calc(100vh - 24px);
+}
+
+/* Sheet Header */
+.tears.sheet.item .sheet-header {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background-color: var(--htbah-color-card);
+  border-bottom: var(--htbah-border-groove);
+}
+
+.tears.sheet.item .sheet-header img.profile {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #000;
+}
+
+.tears.sheet.item .sheet-header img.profile-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 0;
+  object-fit: cover;
+  margin-right: 15px;
+  border: 2px solid #000;
+}
+
+.tears.sheet.item .sheet-header .header-fields input {
+  font-size: var(--font-size-30);
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+  color: var(--htbah-color-dark);
+  font-family: var(--htbah-font-modesto);
+}
+
+.tears.sheet.item .sheet-header .item-subtitle {
+  flex: 0 0 100px;
+  display: flex;
+  flex-direction: column;
+  height: 60px;
+  margin: 0;
+  padding: 5px;
+  text-align: right;
+  white-space: nowrap;
+  color: var(--htbah-color-tan);
+}
+
+.tears.sheet.item .sheet-header .item-subtitle .item-type {
+  flex-grow: 1;
+  font-size: var(--font-size-20);
+  line-height: 1em;
+  margin: 0;
+}
+
+.tears.sheet.item .sheet-header .item-subtitle .item-status {
+  font-size: var(--font-size-14);
+  line-height: 1em;
+}
+
+.tears.sheet.item .sheet-header .item-subtitle label {
+  display: block;
+  font-size: var(--font-size-14);
+}
+
+.tears.sheet.item .sheet-header .item-subtitle label > input {
+  display: none;
+}
+
+.tears.sheet.item .sheet-header .item-subtitle label:has(input:not([disabled])) {
+  cursor: pointer;
+}
+
+.tears.sheet.item .sheet-header .item-subtitle label:has(input:not([disabled])):hover,
+.tears.sheet.item .sheet-header .item-subtitle label:has(input:not([disabled])):focus-visible {
+  text-shadow: 0 0 4px color-mix(in oklab, var(--color-shadow-primary), transparent);
+}
+
+/* Navigation Tabs */
+.tears.sheet.item .sheet-navigation {
+  background-color: var(--htbah-color-beige);
+  padding: 5px 5px 0;
+  margin-bottom: 5px;
+}
+
+.tears.sheet.item .sheet-navigation .item {
+  padding: 8px 15px;
+  background-color: var(--htbah-color-tan);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: var(--htbah-color-dark);
+  font-family: var(--htbah-font-roboto-condensed);
+  font-size: var(--font-size-18);
+}
+
+.tears.sheet.item .sheet-navigation .item.active {
+  background-color: var(--htbah-color-card);
+  color: var(--htbah-color-dark);
+  font-weight: bold;
+}
+
+/* Sheet Body */
+.tears.sheet.item .sheet-body {
+  display: flex;
+  padding-left: 15px;
+  background-color: var(--htbah-color-card);
+  overflow: hidden;
+  flex: 1;
+}
+
+.tears.sheet.item .sheet-body .tab {
+  padding: 0 5px;
+  overflow: hidden auto;
+  display: flex;
+  width: 100%;
+}
+
+/* Item Properties (Sidebar) */
+.tears.sheet.item .sheet-body .sidebar {
+  flex: 0 0 130px;
+  margin: 0 5px 0 0;
+  padding: 5px 5px 0 0;
+  border-right: var(--htbah-border-groove);
+  color:var(--htbah-color-black);
+  overflow-y: auto;
+  height: 100%;
+}
+
+.tears.sheet.item .sheet-body .sidebar input,
+.tears.sheet.item .sheet-body .sidebar select {
+  color: var(--htbah-color-black);
+  background: var(--htbah-color-beige);
+  border: 1.5px solid var(--htbah-color-tan);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
+
+/* General input styling for enabled fields */
+.tears.sheet.item input:not(:disabled),
+.tears.sheet.item select:not(:disabled),
+.tears.sheet.item textarea:not(:disabled) {
+  border-width: 1.5px;
+  border-style: solid;
+  border-color: var(--htbah-color-tan);
+}
+
+/* Disabled field styling */
+.tears.sheet.item input:disabled,
+.tears.sheet.item select:disabled,
+.tears.sheet.item textarea:disabled {
+  background: color-mix(in srgb, var(--htbah-color-beige) 80%, white 20%) !important;
+  color: color-mix(in srgb, var(--htbah-color-black) 80%, white 20%) !important;
+  border: none !important;
+}
+
+/* Header elements styling */
+.tears.sheet.item h1,
+.tears.sheet.item h2,
+.tears.sheet.item h3,
+.tears.sheet.item h4,
+.tears.sheet.item h5,
+.tears.sheet.item h6 {
+  color: var(--htbah-color-dark-gray);
+  text-shadow: none;
+}
+
+/* Item roll icon styling */
+.tears.sheet.item .roll-button {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.tears.sheet.item .roll-button i[data-action="rollItem"] {
+  font-size: var(--font-size-20);
+  color: var(--htbah-color-gold);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+.tears.sheet.item .roll-button i[data-action="rollItem"]:hover {
+  color: var(--htbah-color-dark);
+  background-color: var(--htbah-color-gold);
+  transform: scale(1.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.tears.sheet.item .roll-button i[data-action="rollItem"]:active {
+  transform: scale(1.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Rollable checkbox styling */
+.tears.sheet.item .rollable-field {
+  margin: 8px 0;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--htbah-color-tan);
+}
+
+.tears.sheet.item .rollable-field label.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-12);
+  font-weight: bold;
+  color: var(--htbah-color-dark);
+  cursor: pointer;
+}
+
+.tears.sheet.item .rollable-field input[type="checkbox"] {
+  margin: 0;
+  width: 16px;
+  height: 16px;
+  accent-color: #000000; /* Modern browsers - makes checkmark black */
+  color: #000000; /* Fallback for older browsers */
+}
+
+/* Additional styling to ensure black checkmark in all browsers */
+.tears.sheet.item .rollable-field input[type="checkbox"]:checked {
+  color: #000000;
+}
+
+/* Custom checkbox styling for maximum compatibility */
+.tears.sheet.item .rollable-field input[type="checkbox"]:checked::after {
+  color: #000000 !important;
+}
+
+/* Main Content Area */
+.tears.sheet.item .sheet-body .main-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Description Tab */
+.tears.sheet.item [data-tab="description"] {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tears.sheet.item [data-tab="description"] .item-description {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tears.sheet.item [data-tab="description"] .item-description .editor {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.tears.sheet.item [data-tab="description"] .item-description .description-header {
+  display: flex;
+  align-items: first baseline;
+  gap: 0.5em;
+  margin-block-end: 0;
+  padding: 0.25rem;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.tears.sheet.item [data-tab="description"] .item-description .description-header .description-edit {
+  margin-inline-start: auto;
+  opacity: 20%;
+}
+
+.tears.sheet.item [data-tab="description"] .item-description .description-header:hover .description-edit {
+  opacity: 100%;
+}
+
+/* Editor styles */
+.tears.sheet.item .editor {
+  height: 100%;
+  border: 1px solid var(--htbah-color-tan);
+  background-color: var(--htbah-color-parchment);
+  padding: 5px;
+}
+
+.tears.sheet.item .editor .editor-content {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Description field styles */
+.tears.sheet.item .description-field {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tears.sheet.item .description-field label {
+  display: none;
+}
+
+.tears.sheet.item .description-field textarea {
+  width: 100%;
+  height: 100%;
+  flex: 1;
+  resize: none;
+  box-sizing: border-box;
+}
+
+/* Item Properties */
+.tears.sheet.item .sheet-body .item-properties {
+  flex: 0 0 130px;
+  margin: 0 5px 0 0;
+  padding: 5px 5px 0 0;
+  border-right: var(--htbah-border-groove);
+  overflow: hidden auto;
+  height: 100%;
+}
+
+.tears.sheet.item .sheet-body .item-properties .form-group {
+  margin: 0;
+}
+
+.tears.sheet.item .sheet-body .item-properties .form-group label {
+  line-height: 20px;
+}
+
+.tears.sheet.item .sheet-body .item-properties .form-group input {
+  text-align: right;
+}
+
+.tears.sheet.item .sheet-body .item-properties .properties-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tears.sheet.item .sheet-body .item-properties .properties-list li {
+  margin: 3px 0;
+  padding: 0 2px;
+  background: rgba(0, 0, 0, 0.05);
+  border: var(--htbah-border-groove);
+  text-align: center;
+  font-size: var(--font-size-12);
+  line-height: 18px;
+}
+
+.tears.sheet.item .sheet-body .item-properties .properties-header {
+  font-weight: bold;
+  color: var(--htbah-color-olive);
+  margin: 0.5em 0 0 0;
+  font-size: var(--font-size-13);
+}
+
+/* Details Tab */
+
+/* Details tab input text color */
+.tears.sheet.item .tab.details input[type="text"],
+.tears.sheet.item .tab.details input[type="number"] {
+  color: var(--htbah-color-dark); /* Change this to your desired text color */
+}
+
+/* Details tab placeholder color */
+.tears.sheet.item form .details input[type="text"]::placeholder,
+.tears.sheet.item form .details input[type="number"]::placeholder {
+  color: var(--color-text-dark-inactive);
+  opacity: 1;
+}
+
+/* If you want to make the text more visible, you can also adjust the background */
+.tears.sheet.item .tab.details input[type="text"],
+.tears.sheet.item .tab.details input[type="number"] {
+  background: var(--htbah-color-parchment); /* Ensures good contrast */
+}
+
+.tears.sheet.item .details input[type="text"],
+.tears.sheet.item .details input[type="number"],
+.tears.sheet.item .details select {
+  height: 24px;
+  border: 1.5px solid var(--htbah-color-tan);
+  background: var(--htbah-color-beige);
+}
+
+.tears.sheet.item .details h3.form-header .config-button {
+  display: block;
+  padding: 3px;
+  float: right;
+  color: var(--htbah-color-tan);
+  font-size: var(--font-size-14);
+  text-align: end;
+}
+
+/* Damage Parts */
+.tears.sheet.item h4.damage-header {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  line-height: 24px;
+  color: var(--htbah-color-olive);
+}
+
+.tears.sheet.item .damage-parts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tears.sheet.item .damage-parts .damage-part {
+  flex: 0 0 100%;
+  padding: 0;
+}
+
+.tears.sheet.item .damage-parts .damage-part input {
+  flex: 3;
+}
+
+.tears.sheet.item .damage-parts .damage-part select {
+  margin-left: 5px;
+  flex: 1;
+}
+/* ----------------------------------------- */
+/*  Active Effects                           */
+/* ----------------------------------------- */
+
+.tears .tab.effects {
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: unset;
+}
+
+/* Effects List */
+.tears .tab.effects .effects-list {
+  flex-grow: 1;
+}
+
+/* Items Section */
+.tears .tab.effects .items-section {
+  /* Add any specific styles for the items section here */
+}
+
+/* Items Header */
+.tears .tab.effects .items-section .items-header {
+  display: flex;
+  font-family: var(--htbah-font-roboto-condensed);
+  text-transform: uppercase;
+  background: linear-gradient(to right, var(--htbah-color-hd-1) 0%, var(--htbah-color-hd-2) 100%);
+  border: none;
+}
+
+/* Effect Details */
+.tears .tab.effects .effect-source,
+.tears .tab.effects .effect-duration,
+.tears .tab.effects .effect-controls {
+  text-align: center;
+  border-inline: 1px solid var(--htbah-color-faint);
+  font-size: var(--font-size-12);
+}
+
+.tears .tab.effects .effect-controls {
+  border: none;
+}
+
+/* Conditions List */
+.tears .tab.effects .conditions-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
+  clip-path: polygon(0 0, calc(100% - 1px) 0, calc(100% - 1px) calc(100% - 1px), 0 calc(100% - 1px));
+  --icon-size: 18px;
+}
+
+/* Condition Item */
+.tears .tab.effects .conditions-list .condition {
+  --border-style: 1px dashed var(--color-border-light-1);
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5625rem 0.75rem;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: var(--border-style);
+  border-right: var(--border-style);
+  color: var(--htbah-color-gold);
+  --icon-fill: var(--htbah-color-gold);
+  --icon-stroke: var(--htbah-color-card);
+}
+
+.tears .tab.effects .conditions-list .condition.active {
+  color: var(--color-text-dark-primary);
+  --icon-fill: var(--color-text-dark-primary);
+  background-color: rgba(0, 255, 0, 0.2);
+}
+
+.tears .tab.effects .conditions-list .condition:hover {
+  background: var(--htbah-color-parchment);
+}
+
+.tears .tab.effects .conditions-list .condition .icon {
+  display: grid;
+}
+
+.tears .tab.effects .conditions-list .condition .name-stacked {
+  flex: 1;
+}
+
+.tears .tab.effects .conditions-list .condition .name-stacked .title {
+  font-size: var(--font-size-16);
+  font-family: var(--htbah-font-roboto-slab);
+}
+
+
+/* Item creation dialog: compact category and monochrome SVG silhouette picker */
+.htbah-item-create-dialog { max-width: min(94vw, 760px); }
+.htbah-item-create-dialog .htbah-create-item { display: flex; flex-direction: column; gap: 1rem; }
+.htbah-item-create-dialog h3 { margin: 0 0 .5rem; font-size: 1rem; }
+.htbah-create-category-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; }
+.htbah-create-category { min-height: 2.5rem; padding: .45rem .3rem; border: 1px solid var(--color-border-light-primary); border-radius: 5px; background: var(--color-cool-5); color: var(--color-light-1); font-weight: 600; cursor: pointer; }
+.htbah-create-category.active { outline: 2px solid var(--color-warm-2); background: var(--color-cool-4); }
+.htbah-icon-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: .45rem; max-height: 300px; overflow-y: auto; padding: .25rem; }
+.htbah-icon-choice { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .25rem; min-height: 76px; padding: .4rem .2rem; border: 1px solid var(--color-border-light-primary); border-radius: 5px; background: var(--color-cool-5); color: var(--color-light-1); cursor: pointer; }
+.htbah-icon-choice img { width: 34px; height: 34px; object-fit: contain; filter: invert(1); }
+.htbah-icon-choice span { font-size: .68rem; line-height: 1.1; text-align: center; }
+.htbah-icon-choice.selected { outline: 2px solid var(--color-warm-2); background: var(--color-cool-4); }
+@media (max-width: 520px) { .htbah-create-category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .htbah-icon-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+
+
+/* ----------------------------------------- */
+/* Responsive character sheet and typography */
+/* ----------------------------------------- */
+.tears.sheet.actor.character {
+  --htbah-sheet-header-height: clamp(126px, 18vh, 170px);
+  --htbah-sheet-sidebar-width: clamp(180px, 19vw, 230px);
+  min-width: min(920px, calc(100vw - 24px)) !important;
+  min-height: min(620px, calc(100vh - 24px)) !important;
+  max-width: calc(100vw - 24px) !important;
+  max-height: calc(100vh - 24px) !important;
+  box-sizing: border-box;
+}
+
+/* The sheet header and body act as independent scaling containers. */
+.tears.sheet.actor.character .sheet-header,
+.tears.sheet.actor.character .sheet-body {
+  container-type: inline-size;
+  --font-size-9: clamp(8px, min(0.75cqw, 1.28vh), 9px);
+  --font-size-10: clamp(9px, min(0.83cqw, 1.42vh), 10px);
+  --font-size-11: clamp(10px, min(0.92cqw, 1.57vh), 11px);
+  --font-size-12: clamp(11px, min(1.00cqw, 1.72vh), 12px);
+  --font-size-13: clamp(12px, min(1.08cqw, 1.85vh), 13px);
+  --font-size-14: clamp(12px, min(1.17cqw, 2vh), 14px);
+  --font-size-15: clamp(13px, min(1.25cqw, 2.14vh), 15px);
+  --font-size-16: clamp(14px, min(1.33cqw, 2.28vh), 16px);
+  --font-size-18: clamp(15px, min(1.50cqw, 2.57vh), 18px);
+  --font-size-21: clamp(17px, min(1.75cqw, 3vh), 21px);
+  --font-size-23: clamp(18px, min(1.92cqw, 3.28vh), 23px);
+  --font-size-30: clamp(22px, min(2.50cqw, 4.28vh), 30px);
+  --font-size-36: clamp(25px, min(3.00cqw, 5.14vh), 36px);
+  --font-size-42: clamp(28px, min(3.50cqw, 6vh), 42px);
+  --font-size-46: clamp(30px, min(3.83cqw, 6.57vh), 46px);
+}
+
+.tears.sheet.actor.character .window-content {
+  min-width: 0;
+  min-height: 0;
+  max-height: calc(100vh - 68px);
+  overflow: hidden;
+}
+
+.tears.sheet.actor.character .sheet-header .header-left {
+  min-width: 0;
+  padding-inline: clamp(0.75rem, 1.25vw, 1.5rem);
+}
+
+.tears.sheet.actor.character .sheet-header .header-left .document-name {
+  font-size: clamp(1.85rem, min(3.8cqw, 5.5vh), 2.875rem);
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.tears.sheet.actor.character .sheet-header .header-center {
+  min-width: 0;
+  padding: 0.5rem;
+}
+
+.tears.sheet.actor.character .sheet-header .header-center .center-box {
+  height: clamp(108px, 17vh, 135px);
+  max-width: 100%;
+}
+
+.tears.sheet.actor.character .sheet-body {
+  min-height: 0;
+}
+
+.tears.sheet.actor.character .sheet-body .main-content {
+  min-width: 0;
+  min-height: 0;
+  padding: clamp(12px, 1.3vw, 25px);
+  gap: clamp(8px, 0.8vw, 12px);
+}
+
+/* Keep the quantity column aligned after removing the Uses column. */
+.tears .tab.inventory .items-section .item-quantity {
+  flex: 0 0 92px;
+  width: 92px;
+  min-width: 0;
+}
+
+.tears .tab.inventory .items-section .items-header {
+  min-height: 32px;
+  height: auto;
+  gap: 2px;
+}
+
+.tears .tab.inventory .items-section .items-header .item-header.item-quantity {
+  padding: 3px 4px;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.1;
+  font-size: clamp(9px, 0.66vw, 10px);
+}
+
+/* The item picker must remain readable on narrow and short windows. */
+.htbah-item-create-dialog {
+  width: min(760px, calc(100vw - 28px)) !important;
+  max-width: calc(100vw - 28px) !important;
+  max-height: calc(100vh - 28px) !important;
+  overflow: hidden;
+}
+
+.htbah-item-create-dialog .window-content {
+  max-height: calc(100vh - 90px);
+  overflow: auto;
+}
+
+.htbah-item-create-dialog .htbah-create-item {
+  min-width: 0;
+  gap: clamp(0.6rem, 1.3vh, 1rem);
+}
+
+.htbah-item-create-dialog h3 {
+  font-size: clamp(0.85rem, 1vw, 1rem);
+  line-height: 1.25;
+}
+
+.htbah-create-category-grid {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 112px), 1fr));
+  gap: clamp(0.25rem, 0.6vw, 0.4rem);
+}
+
+.htbah-create-category {
+  min-width: 0;
+  min-height: 2.8rem;
+  padding: 0.45rem 0.3rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  line-height: 1.15;
+  font-size: clamp(0.68rem, 0.82vw, 0.78rem);
+}
+
+.htbah-icon-grid {
+  max-height: min(300px, 36vh);
+  grid-template-columns: repeat(auto-fit, minmax(76px, 1fr));
+  gap: clamp(0.25rem, 0.6vw, 0.45rem);
+}
+
+.htbah-icon-choice {
+  min-width: 0;
+  min-height: clamp(64px, 9vh, 76px);
+}
+
+.htbah-icon-choice span {
+  font-size: clamp(0.62rem, 0.72vw, 0.7rem);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 1100px) {
+  .tears.sheet.actor.character {
+    --htbah-sheet-sidebar-width: 180px;
+  }
+  .tears.sheet.actor.character .sheet-header .header-left {
+    padding-inline: 0.75rem;
+  }
+  .tears.sheet.actor.character .sheet-header .header-center {
+    padding-inline: 0.35rem;
+  }
+}
+
+@media (max-height: 760px) {
+  .tears.sheet.actor.character {
+    --htbah-sheet-header-height: 126px;
+  }
+  .tears.sheet.actor.character .sheet-header .header-center .center-box {
+    height: 108px;
+  }
+  .tears.sheet.actor.character .sheet-body .main-content {
+    padding-block: 10px;
+  }
+}
+
+@media (max-width: 700px) {
+  .htbah-create-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .htbah-icon-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+
+/* Character sheet follow-up: keep the outside tab rail visible and size the
+   four-slot initiative/header panel as a responsive grid. */
+.tears.sheet.actor.character .window-content {
+  overflow: visible !important;
+}
+
+.tears.sheet.actor.character .sheet-header .header-left {
+  flex: 0 1 40%;
+  width: 40%;
+  min-width: 0;
+}
+
+.tears.sheet.actor.character .sheet-header .header-center {
+  flex: 1 1 60%;
+  width: 60%;
+  max-width: 60%;
+  min-width: 0;
+  margin: 0;
+  padding: 0.5rem clamp(0.25rem, 0.7vw, 0.75rem);
+  overflow: visible;
+  align-items: stretch;
+}
+
+.tears.sheet.actor.character .sheet-header .header-center .center-box {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column {
+  min-width: 0;
+  width: auto;
+  padding-inline: clamp(0.12rem, 0.35vw, 0.35rem);
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-header {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: clamp(0.62rem, 0.9vw, 0.9rem);
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tears.sheet.actor.character .sheet-header .header-stat-column .stat-content .drop {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  padding: clamp(0.3rem, 0.6vw, 0.55rem) 0.2rem;
+  font-size: clamp(0.52rem, 0.72vw, 0.75rem);
+  line-height: 1.15;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.tears.sheet.actor.character .sheet-header .header-right {
+  flex: 0 0 0;
+  width: 0;
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* The tab rail is intentionally placed just outside the sheet edge. */
+.tears.sheet.actor.character nav.tabs {
+  z-index: 20;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .tears.sheet.actor.character .sheet-header .header-left {
+    flex-basis: 34%;
+    width: 34%;
+  }
+  .tears.sheet.actor.character .sheet-header .header-center {
+    flex-basis: 66%;
+    width: 66%;
+    max-width: 66%;
+  }
+  .tears.sheet.actor.character .sheet-header .header-left .document-name {
+    font-size: clamp(1.35rem, 3.1vw, 2rem);
+    letter-spacing: 1px;
+  }
+}
+
+
+/* Item SVGs use the registered icon element so currentColor renders as a light silhouette. */
+.tears .tab.inventory .items-section .item-name img.item-svg-image {
+  filter: invert(1);
+  object-fit: contain;
+  object-position: center;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 3px;
+}
+
+/* Keep Handeln, Wissen and Soziales rollable in compact/combat mode. */
+.tears.sheet.actor.character .compact-skillset-bar {
+  display: none;
+}
+
+.tears.sheet.actor.character.compact {
+  --htbah-compact-skillset-height: 42px;
+  min-height: calc(var(--htbah-sheet-header-height) + var(--htbah-compact-skillset-height)) !important;
+  height: calc(var(--htbah-sheet-header-height) + var(--htbah-compact-skillset-height)) !important;
+  max-height: calc(var(--htbah-sheet-header-height) + var(--htbah-compact-skillset-height)) !important;
+}
+
+.tears.sheet.actor.character.compact .compact-skillset-bar {
+  display: grid;
+  flex: 0 0 var(--htbah-compact-skillset-height);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(4px, 0.6vw, 8px);
+  box-sizing: border-box;
+  padding: 3px clamp(8px, 1vw, 14px) 6px;
+  position: relative;
+  z-index: 2;
+}
+
+.tears.sheet.actor.character.compact .compact-skillset-button {
+  min-width: 0;
+  padding: 4px 8px;
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 5px;
+  background: linear-gradient(90deg, var(--htbah-color-hd-1), var(--htbah-color-hd-2));
+  color: var(--htbah-color-parchment);
+  font-family: var(--htbah-font-roboto-condensed);
+  font-size: clamp(10px, 0.8vw, 13px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tears.sheet.actor.character.compact .compact-skillset-button:hover,
+.tears.sheet.actor.character.compact .compact-skillset-button:focus-visible {
+  background: linear-gradient(90deg, var(--htbah-color-hd-2), var(--htbah-color-maroon));
+  outline: 1px solid var(--htbah-color-parchment);
+  outline-offset: 1px;
+}
+
+/* Damage action menu attached directly to rendered ChatMessage HTML. */
+.htbah-damage-context-menu {
+  position: fixed;
+  z-index: 100000;
+  min-width: 220px;
+  max-width: min(320px, calc(100vw - 12px));
+  padding: 4px;
+  color: var(--htbah-color-parchment, #f1ebe8);
+  background: var(--htbah-color-dark, #191813);
+  border: 1px solid var(--htbah-color-gold, #9f9275);
+  border-radius: 4px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.55);
+}
+
+.htbah-damage-context-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 10px;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 2px;
+  font-family: var(--htbah-font-roboto, Roboto, sans-serif);
+  font-size: 0.9rem;
+  line-height: 1.2;
+  text-align: left;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.htbah-damage-context-menu__item:hover,
+.htbah-damage-context-menu__item:focus-visible {
+  color: #fff;
+  background: var(--htbah-color-maroon, #741b2b);
+  outline: none;
+}
+
+.htbah-damage-context-menu__item i {
+  flex: 0 0 auto;
+  color: var(--htbah-color-gold, #9f9275);
+}
+
+
+/* Existing item editor: choose or replace the inventory SVG icon. */
+.tears.sheet.item .htbah-item-icon-editor {
+  min-width: 0;
+  margin-bottom: 0.75rem;
+}
+.tears.sheet.item .htbah-item-icon-editor .hint {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+.tears.sheet.item .htbah-item-icon-grid {
+  grid-template-columns: repeat(auto-fit, minmax(58px, 1fr));
+  max-height: min(240px, 32vh);
+  gap: 0.3rem;
+}
+.tears.sheet.item .htbah-item-icon-grid .htbah-icon-choice {
+  min-height: 62px;
+  padding: 0.25rem;
+}
+.tears.sheet.item .htbah-item-icon-grid .htbah-icon-choice img {
+  width: 28px;
+  height: 28px;
+}
+.tears.sheet.item .htbah-icon-reset {
+  width: 100%;
+  min-height: 2rem;
+  margin-bottom: 0.4rem;
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 5px;
+  background: var(--color-cool-5);
+  color: var(--color-light-1);
+}
+.tears.sheet.item .htbah-icon-reset.selected {
+  outline: 2px solid var(--color-warm-2);
+}
+.tears.sheet.item .htbah-icon-choice:disabled,
+.tears.sheet.item .htbah-icon-reset:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+
+/* Search field for the expanded local SVG item library. */
+.htbah-icon-search {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  margin: 0 0 0.45rem;
+  padding: 0.35rem 0.5rem;
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 4px;
+  background: var(--color-cool-5);
+  color: var(--color-light-1);
+  box-sizing: border-box;
+}
+.htbah-icon-choice[hidden] { display: none !important; }
+.htbah-icon-grid {
+  max-height: min(340px, 40vh);
+  overscroll-behavior: contain;
+}
+
+
+
+.tears.sheet.item .window-content > form {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+.tears.sheet.item .sheet-body {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+}
+.tears.sheet.item .sheet-body .sidebar {
+  flex: 0 0 clamp(165px, 24%, 220px);
+  min-width: 0;
+}
+.tears.sheet.item .sheet-body .main-content {
+  min-width: 0;
+  min-height: 0;
+}
+.htbah-item-icon-trigger {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  padding: 3px;
+  margin-right: 14px;
+  border: 1px solid var(--htbah-color-gold);
+  border-radius: 4px;
+  background: #111;
+  cursor: pointer;
+}
+.htbah-item-icon-trigger img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(1);
+}
+.htbah-item-icon-trigger:disabled { opacity: .65; cursor: default; }
+.htbah-item-icon-open,
+.htbah-item-image-open {
+  display: block;
+  width: 100%;
+  min-height: 2.25rem;
+  margin: 0 0 .4rem;
+  padding: .4rem .55rem;
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 4px;
+  background: var(--color-cool-5);
+  color: var(--color-light-1);
+  font-size: .78rem;
+  line-height: 1.2;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.htbah-item-icon-open:hover,
+.htbah-item-image-open:hover { background: var(--color-cool-4); }
+
+/* Native, searchable SVG chooser opened from the item image/header. */
+.htbah-item-icon-picker {
+  width: min(820px, calc(100vw - 36px));
+  max-width: calc(100vw - 36px);
+  height: min(700px, calc(100vh - 36px));
+  max-height: calc(100vh - 36px);
+  padding: 0;
+  border: 1px solid var(--htbah-color-gold, #9f9275);
+  border-radius: 7px;
+  background: var(--htbah-color-beige, #d8d3c2);
+  color: var(--htbah-color-dark, #24232a);
+  box-shadow: 0 12px 40px rgba(0,0,0,.6);
+}
+.htbah-item-icon-picker::backdrop { background: rgba(0,0,0,.72); }
+.htbah-item-icon-picker__panel { display:flex; flex-direction:column; height:100%; min-height:0; padding:.8rem; gap:.65rem; }
+.htbah-item-icon-picker__header { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.2rem .25rem .55rem; border-bottom:1px solid var(--htbah-color-gold,#9f9275); }
+.htbah-item-icon-picker__header h2 { margin:0; font-size:1.2rem; line-height:1.25; }
+.htbah-item-icon-picker__close { flex:0 0 2rem; width:2rem; height:2rem; border:0; border-radius:4px; background:var(--color-cool-5); color:var(--color-light-1); font-size:1.4rem; }
+.htbah-item-icon-picker__toolbar { display:flex; gap:.5rem; align-items:stretch; }
+.htbah-item-icon-picker__search { flex:1 1 auto; min-width:0; padding:.55rem .7rem; border:1px solid var(--htbah-color-tan,#9f9275); border-radius:4px; background:#17161c; color:#fff; }
+.htbah-item-icon-picker__reset { flex:0 0 auto; max-width:42%; padding:.45rem .65rem; border:1px solid var(--color-border-light-primary); border-radius:4px; background:var(--color-cool-5); color:var(--color-light-1); white-space:normal; }
+.htbah-item-icon-picker__grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(90px,1fr)); align-content:start; gap:.45rem; flex:1 1 auto; min-height:0; overflow:auto; padding:.2rem; overscroll-behavior:contain; }
+.htbah-item-icon-picker__grid .htbah-icon-choice { min-height:88px; }
+.htbah-item-icon-picker__grid .htbah-icon-choice img { width:40px; height:40px; object-fit:contain; filter:invert(1); }
+.htbah-item-icon-picker__grid .htbah-icon-choice span { overflow-wrap:anywhere; }
+@media (max-width: 560px) {
+  .htbah-item-icon-picker__toolbar { flex-direction:column; }
+  .htbah-item-icon-picker__reset { max-width:none; }
+  .htbah-item-icon-picker__grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+}
+
+
+/* ----------------------------------------- */
+/*  Magic abilities tab                     */
+/* ----------------------------------------- */
+.tears.sheet.actor.character .tab.magic { min-width: 0; overflow: auto; padding: .75rem; }
+.tears .magic-tab { display:flex; flex-direction:column; gap:.75rem; min-width:0; }
+.tears .magic-tab__mana { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.75rem 1rem; border:1px solid var(--htbah-color-gold,#9f9275); border-radius:6px; background:var(--htbah-color-dark,#24232a); color:var(--htbah-color-beige,#ddd6c4); }
+.tears .magic-tab__mana h2 { margin:0; font-size:1.25rem; }
+.tears .magic-tab__mana p { margin:.15rem 0 0; opacity:.75; font-size:.85rem; }
+.tears .magic-tab__mana strong { font-size:1.25rem; white-space:nowrap; }
+.tears .magic-tab__mana-track { height:9px; overflow:hidden; border-radius:8px; background:#141318; }
+.tears .magic-tab__mana-track span { display:block; height:100%; background:#397fc0; border-radius:8px; }
+.tears .magic-ability-list { display:flex; flex-direction:column; gap:.5rem; }
+.tears .magic-ability-card { display:grid; grid-template-columns:54px minmax(0,1fr) auto; align-items:center; gap:.75rem; padding:.65rem; border:1px solid rgba(180,165,135,.35); border-radius:5px; background:var(--htbah-color-dark,#24232a); color:var(--htbah-color-beige,#ddd6c4); }
+.tears .magic-ability-card__icon { display:grid; place-items:center; width:48px; height:48px; border-radius:4px; background:#111016; }
+.tears .magic-ability-card__icon img { max-width:38px; max-height:38px; object-fit:contain; filter:invert(1); }
+.tears .magic-ability-card__details { min-width:0; }
+.tears .magic-ability-card__details h3 { margin:0 0 .2rem; font-size:1rem; }
+.tears .magic-ability-card__details p { margin:0 0 .3rem; font-size:.85rem; opacity:.85; }
+.tears .magic-ability-card__meta { display:flex; flex-wrap:wrap; gap:.35rem .8rem; font-size:.75rem; opacity:.8; }
+.tears .magic-ability-card__actions {
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:.4rem;
+  min-width:max-content;
+}
+.tears .magic-ability-card__actions button { min-height:2rem; }
+/* Keep Use inside each ability card. Do not inherit .gold-button's fixed,
+   bottom-right positioning, which is reserved for the floating create button. */
+.tears .magic-ability-card__actions .magic-use-button {
+  position:relative;
+  inset:auto;
+  width:auto;
+  min-width:7.25rem;
+  height:auto;
+  min-height:2.15rem;
+  margin:0;
+  padding:.4rem .75rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:.4rem;
+  border:1px solid var(--htbah-color-gold,#9f9275);
+  border-radius:4px;
+  background:var(--htbah-color-black,#141318);
+  color:var(--htbah-color-gold,#c7b68e);
+  box-shadow:0 0 6px var(--htbah-shadow-15,rgba(0,0,0,.15));
+  font-size:.8rem;
+  line-height:1.2;
+  white-space:nowrap;
+}
+.tears .magic-ability-card__actions .magic-use-button:hover,
+.tears .magic-ability-card__actions .magic-use-button:focus-visible {
+  border-color:var(--htbah-color-gold,#c7b68e);
+  box-shadow:0 0 7px var(--htbah-color-gold,#c7b68e);
+}
+.tears .magic-ability-card__actions .magic-use-button > i { margin:0; }
+.tears .magic-tab__empty { padding:1.5rem; text-align:center; opacity:.7; border:1px dashed var(--htbah-color-gold,#9f9275); border-radius:6px; }
+@media (max-width: 650px) {
+ .tears .magic-ability-card { grid-template-columns:42px minmax(0,1fr); }
+ .tears .magic-ability-card__icon { width:40px; height:40px; }
+ .tears .magic-ability-card__actions { grid-column:2; justify-content:flex-start; }
+}
+
+
+/* ========================================================================== */
+/* T.E.A.R.S. v0.1 — dossier-style character sheet                            */
+/* Layout inspiration: structured DSA-style tabs, panels and clear values.   */
+/* Original T.E.A.R.S. styling; no DSA artwork or code is used.               */
+/* ========================================================================== */
+.tears.sheet.actor.character {
+  --tears-paper: #f0eadc;
+  --tears-paper-light: #faf7ef;
+  --tears-paper-deep: #e4dac6;
+  --tears-ink: #282a27;
+  --tears-muted: #6a685f;
+  --tears-rule: #b8aa8e;
+  --tears-green: #34483d;
+  --tears-gold: #9b8150;
+  --tears-red: #8a3d3d;
+  color: var(--tears-ink);
+}
+.tears.sheet.actor.character .sheet-body,
+.tears.sheet.actor.character .tab-body,
+.tears.sheet.actor.character .tab.details,
+.tears.sheet.actor.character .tab.combat {
+  background: var(--tears-paper) !important;
+  color: var(--tears-ink) !important;
+}
+.tears.sheet.actor.character .main-content { background: var(--tears-paper); }
+.tears.sheet.actor.character .tabs {
+  background: #ded4c1 !important;
+  border-block: 1px solid var(--tears-rule);
+}
+.tears.sheet.actor.character .tabs .item {
+  color: #4a4b43 !important;
+  font-family: Georgia, serif;
+  letter-spacing: .02em;
+}
+.tears.sheet.actor.character .tabs .item.active {
+  color: var(--tears-green) !important;
+  background: var(--tears-paper-light) !important;
+  border-bottom: 3px solid var(--tears-gold);
+}
+.tears.sheet.actor.character .tears-character-overview {
+  padding: 18px;
+  color: var(--tears-ink);
+  font-family: "Palatino Linotype", Palatino, Georgia, serif;
+}
+.tears.sheet.actor.character .tears-section-heading {
+  display: flex; align-items: end; justify-content: space-between; gap: 16px;
+  margin: 0 0 14px; padding: 0 0 10px; border-bottom: 2px solid var(--tears-green);
+}
+.tears.sheet.actor.character .tears-section-heading h2 {
+  margin: 3px 0 0; color: var(--tears-green); font-family: Georgia, serif;
+  font-size: 1.55rem; font-weight: 700; letter-spacing: .02em;
+}
+.tears.sheet.actor.character .tears-eyebrow {
+  color: var(--tears-gold); font: 700 .65rem/1.2 "Roboto Condensed", sans-serif;
+  letter-spacing: .17em; text-transform: uppercase;
+}
+.tears.sheet.actor.character .tears-character-meta { color: var(--tears-muted); min-width: 180px; }
+.tears.sheet.actor.character .tears-character-meta label,
+.tears.sheet.actor.character .tears-character-fields label,
+.tears.sheet.item .tears-item-editor label {
+  display: flex; flex-direction: column; gap: 4px; color: var(--tears-muted);
+  font: 700 .72rem/1.3 "Roboto Condensed", sans-serif; text-transform: uppercase;
+}
+.tears.sheet.actor.character .tears-panel {
+  margin: 0 0 14px; padding: 13px 14px 14px;
+  border: 1px solid var(--tears-rule); border-top: 3px solid var(--tears-green);
+  border-radius: 4px; background: var(--tears-paper-light);
+  box-shadow: 0 2px 5px rgba(54, 44, 28, .08);
+}
+.tears.sheet.actor.character .tears-panel-heading {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-bottom: 10px; padding-bottom: 7px; border-bottom: 1px solid #d5c8b1;
+}
+.tears.sheet.actor.character .tears-panel-heading h3 {
+  margin: 0; color: var(--tears-green); font: 700 .95rem/1.2 Georgia, serif;
+}
+.tears.sheet.actor.character .tears-panel-heading > span,
+.tears.sheet.actor.character .tears-panel-heading small {
+  color: var(--tears-muted); font: 600 .68rem/1.2 "Roboto Condensed", sans-serif;
+}
+.tears.sheet.actor.character .tears-attribute-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+.tears.sheet.actor.character .tears-attribute-card {
+  display: grid; grid-template-rows: auto 1fr; gap: 5px; padding: 8px 5px;
+  border: 1px solid #d5c8b1; border-radius: 3px; background: #f3eddf; text-align: center;
+}
+.tears.sheet.actor.character .tears-attribute-roll {
+  display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 0;
+  border: 0; background: transparent; color: var(--tears-green); cursor: pointer;
+}
+.tears.sheet.actor.character .tears-attribute-abbr { font: 700 1.15rem/1 Georgia, serif; }
+.tears.sheet.actor.character .tears-attribute-name { font: 600 .62rem/1.15 "Roboto Condensed", sans-serif; color: var(--tears-muted); }
+.tears.sheet.actor.character .tears-attribute-value,
+.tears.sheet.actor.character .tears-attribute-card input {
+  display: block; width: 100%; margin: 0; padding: 4px 2px; border: 0;
+  border-top: 1px solid #cdbd9f; background: transparent; color: var(--tears-ink);
+  text-align: center; font: 700 1.3rem/1 Georgia, serif;
+}
+.tears.sheet.actor.character .tears-rule-hint,
+.tears.sheet.actor.character .tears-talent-note {
+  margin: 8px 0 0; color: var(--tears-muted); font: .7rem/1.4 "Roboto", sans-serif;
+}
+.tears.sheet.actor.character .tears-resource-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tears.sheet.actor.character .tears-resource-number { display: flex; align-items: baseline; gap: 7px; color: var(--tears-ink); }
+.tears.sheet.actor.character .tears-resource-number strong,
+.tears.sheet.actor.character .tears-resource-number input { max-width: 90px; padding: 0; border: 0; background: transparent; color: var(--tears-ink); font: 700 1.55rem/1 Georgia, serif; }
+.tears.sheet.actor.character .tears-resource-number > span { color: var(--tears-muted); }
+.tears.sheet.actor.character .tears-resource-track { height: 7px; margin: 8px 0; overflow: hidden; border-radius: 6px; background: #ded6c6; }
+.tears.sheet.actor.character .tears-resource-track > span { display: block; height: 100%; min-width: 0; }
+.tears.sheet.actor.character .tears-life-track { background: linear-gradient(90deg, #56715c, #314d3a); }
+.tears.sheet.actor.character .tears-mental-track { background: linear-gradient(90deg, #a68b55, #73613f); }
+.tears.sheet.actor.character .tears-resource-panel small { color: var(--tears-muted); font-size: .68rem; }
+.tears.sheet.actor.character .tears-character-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
+.tears.sheet.actor.character .tears-character-fields input,
+.tears.sheet.actor.character .tears-character-meta input,
+.tears.sheet.item .tears-item-editor input,
+.tears.sheet.item .tears-item-editor select,
+.tears.sheet.item .tears-item-description textarea {
+  width: 100%; min-height: 30px; padding: 5px 7px; border: 1px solid #c9baa0;
+  border-radius: 3px; background: #fffdf7; color: var(--tears-ink);
+}
+.tears.sheet.actor.character .tears-talent-heading { margin-top: 22px; }
+.tears.sheet.actor.character .tears-talent-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.tears.sheet.actor.character .tears-talent-group { margin: 0; padding: 10px; }
+.tears.sheet.actor.character .tears-talent-group[data-talent-group="combat"] { grid-column: 1 / -1; }
+.tears.sheet.actor.character .tears-group-total { white-space: nowrap; color: var(--tears-gold) !important; font-weight: 700 !important; }
+.tears.sheet.actor.character .tears-talent-list { display: flex; flex-direction: column; gap: 2px; }
+.tears.sheet.actor.character .tears-talent-row {
+  display: grid; grid-template-columns: minmax(0, 1fr) 48px 34px 28px; gap: 6px;
+  align-items: center; min-height: 31px; padding: 4px 2px; border-bottom: 1px solid #e3dacb;
+}
+.tears.sheet.actor.character .tears-talent-name { display: flex; min-width: 0; flex-direction: column; gap: 1px; }
+.tears.sheet.actor.character .tears-talent-name strong { overflow: hidden; color: var(--tears-ink); font: 600 .77rem/1.2 "Roboto", sans-serif; text-overflow: ellipsis; }
+.tears.sheet.actor.character .tears-talent-name small { color: var(--tears-muted); font: .65rem/1.2 "Roboto Condensed", sans-serif; }
+.tears.sheet.actor.character .tears-talent-points { color: var(--tears-green); text-align: center; font: 700 .88rem/1 Georgia, serif; }
+.tears.sheet.actor.character input.tears-talent-points { width: 44px; padding: 3px; border: 1px solid #c9baa0; border-radius: 3px; background: #fffdf7; }
+.tears.sheet.actor.character .tears-roll-button,
+.tears.sheet.actor.character .tears-edit-button,
+.tears.sheet.actor.character .tears-weapon-row button {
+  width: 28px; height: 27px; padding: 0; border: 1px solid #c5b596;
+  border-radius: 3px; background: #eee5d4; color: var(--tears-green);
+}
+.tears.sheet.actor.character .tears-talent-status { grid-column: 3 / 5; color: var(--tears-muted); font: .6rem/1.2 "Roboto Condensed", sans-serif; text-align: center; }
+.tears.sheet.actor.character .tears-combat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.tears.sheet.actor.character .tears-combat-stat { display: flex; flex-direction: column; gap: 4px; align-items: center; padding: 13px 6px; border: 1px solid #d5c8b1; border-radius: 3px; background: #f3eddf; }
+.tears.sheet.actor.character .tears-combat-stat small { color: var(--tears-gold); font: 700 .75rem/1 "Roboto Condensed", sans-serif; letter-spacing: .12em; }
+.tears.sheet.actor.character .tears-combat-stat strong { color: var(--tears-green); font: 700 1.5rem/1 Georgia, serif; }
+.tears.sheet.actor.character .tears-combat-stat span { color: var(--tears-muted); font: .65rem/1.2 "Roboto Condensed", sans-serif; text-align: center; }
+.tears.sheet.actor.character .tears-primary-action { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border: 1px solid #263e32; border-radius: 3px; background: var(--tears-green); color: #fffaf0; }
+.tears.sheet.actor.character .tears-weapon-list { display: flex; flex-direction: column; }
+.tears.sheet.actor.character .tears-weapon-row { display: grid; grid-template-columns: 32px minmax(0,1fr) auto 28px; gap: 9px; align-items: center; min-height: 42px; padding: 5px 0; border-bottom: 1px solid #e3dacb; }
+.tears.sheet.actor.character .tears-weapon-row img { width: 30px; height: 30px; object-fit: contain; }
+.tears.sheet.actor.character .tears-empty-state { color: var(--tears-muted); font-style: italic; }
+.tears.sheet.actor.character .tears-attribute-shortcuts { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 4px; padding: 6px 12px; background: #e9e0cf; }
+.tears.sheet.actor.character .tears-attribute-shortcuts .compact-skillset-button { display: flex; align-items: center; justify-content: center; gap: 5px; min-width: 0; padding: 4px 6px; border: 1px solid #c5b596; border-radius: 3px; background: #f7f1e5; color: var(--tears-green); }
+.tears.sheet.actor.character .tears-attribute-shortcuts .compact-skillset-button strong { font: 700 .78rem Georgia, serif; }
+.tears.sheet.actor.character .tears-attribute-shortcuts .compact-skillset-button span { overflow: hidden; color: var(--tears-muted); font: .6rem "Roboto Condensed", sans-serif; text-overflow: ellipsis; white-space: nowrap; }
+.tears.sheet.actor.character .sidebar .meter-group .label { color: #3f463f !important; }
+.tears.sheet.actor.character .sidebar .meter-group .label span { color: inherit !important; }
+.tears.sheet.item .tears-item-editor { display: flex; flex-direction: column; gap: 10px; padding: 12px; color: var(--tears-ink); background: var(--tears-paper-light); }
+.tears.sheet.item .tears-item-editor h3 { margin: 0; color: var(--tears-green); font-family: Georgia, serif; }
+.tears.sheet.item .tears-checkbox-label { flex-direction: row !important; align-items: center; text-transform: none !important; }
+.tears.sheet.item .tears-talent-attributes { display: flex; flex-direction: column; gap: 8px; }
+.tears.sheet.item .tears-item-description { padding: 12px; color: var(--tears-ink); }
+.tears-roll-card { padding: 10px; border: 1px solid #b8aa8e; border-top: 3px solid #34483d; border-radius: 4px; background: #faf7ef; color: #282a27; }
+.tears-roll-card__header { display: flex; flex-direction: column; gap: 3px; padding-bottom: 8px; border-bottom: 1px solid #d5c8b1; }
+.tears-roll-card__header strong { color: #34483d; font: 700 1.1rem Georgia, serif; }
+.tears-roll-card__header small { color: #6a685f; }
+.tears-roll-row { display: grid; grid-template-columns: 20px 1fr 32px auto 44px; gap: 7px; align-items: center; padding: 5px 0; border-bottom: 1px solid #e3dacb; }
+.tears-roll-row.success { color: #31513a; }
+.tears-roll-row.failure { color: #7e3535; }
+.tears-roll-die { font-weight: 700; text-align: right; }
+.tears-roll-target, .tears-roll-deficit { color: #6a685f; font-size: .8rem; }
+.tears-roll-summary { display: flex; justify-content: space-around; gap: 10px; padding: 8px 0; }
+.tears-roll-summary > div { display: flex; flex-direction: column; text-align: center; }
+.tears-roll-summary small { color: #6a685f; }
+.tears-roll-summary strong { font: 700 1.2rem Georgia, serif; }
+.tears-roll-outcome { margin-top: 8px; padding: 7px; border-radius: 3px; font-weight: 700; text-align: center; }
+.tears-roll-outcome.is-success { background: #dce7d8; color: #294c33; }
+.tears-roll-outcome.is-failure { background: #f0dddd; color: #713333; }
+.tears-roll-footnote, .tears-roll-penalty { margin: 7px 0 0; color: #6a685f; font-size: .75rem; }
+@media (max-width: 900px) {
+  .tears.sheet.actor.character .tears-attribute-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tears.sheet.actor.character .tears-talent-groups { grid-template-columns: 1fr; }
+  .tears.sheet.actor.character .tears-talent-group[data-talent-group="combat"] { grid-column: auto; }
+  .tears.sheet.actor.character .tears-attribute-shortcuts .compact-skillset-button span { display: none; }
+}
+
+.tears.sheet.actor.character .tears-pool-budget { display: flex; align-items: center; justify-content: end; gap: 6px; margin: 0 0 7px; color: var(--tears-muted); font: .65rem "Roboto Condensed", sans-serif; }
+.tears.sheet.actor.character .tears-pool-budget input { width: 46px; padding: 2px 4px; border: 1px solid #c9baa0; border-radius: 3px; background: #fffdf7; color: var(--tears-ink); text-align: center; }
+.tears.sheet.actor.character .tears-budget-remaining { margin: 5px 0 0; color: #5a6758; font: .65rem "Roboto Condensed", sans-serif; text-align: right; }
+.tears.sheet.actor.character .tears-overbudget { margin: 5px 0 0; color: #8a3d3d; font: 700 .65rem "Roboto Condensed", sans-serif; text-align: right; }
+.tears-roll-card .tears-weapon-summary { display: flex; flex-wrap: wrap; gap: 10px; padding: 8px 0; color: #34483d; font-size: .8rem; }
+
+/* T.E.A.R.S. v0.1 — rebuilt DSA-inspired sheet frame */
+.tears.sheet.actor.character .tears-sheet-header {
+  display: grid !important;
+  grid-template-columns: 112px minmax(0, 1fr) minmax(220px, 290px);
+  gap: 16px;
+  align-items: center;
+  padding: 16px 18px;
+  border-bottom: 3px solid #9b8150;
+  background: #283c34 !important;
+  color: #f7f1e5 !important;
+}
+.tears.sheet.actor.character .tears-sheet-portrait {
+  width: 104px; height: 122px; overflow: hidden; border: 2px solid #b9a477;
+  border-radius: 3px; background: #16241f;
+}
+.tears.sheet.actor.character .tears-sheet-portrait img { width: 100%; height: 100%; object-fit: cover; cursor: pointer; }
+.tears.sheet.actor.character .tears-sheet-identity { min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.tears.sheet.actor.character .tears-sheet-header .tears-eyebrow { color: #c4ae7f; }
+.tears.sheet.actor.character .tears-sheet-header .document-name {
+  display: block; width: 100%; margin: 0; padding: 0; border: 0; background: transparent;
+  color: #fffaf0; font: 700 1.7rem/1.12 Georgia, serif; box-shadow: none;
+}
+.tears.sheet.actor.character .tears-sheet-header input.document-name { border-bottom: 1px solid #8d9a8f; }
+.tears.sheet.actor.character .tears-sheet-subtitle { color: #e0d7c4; font: .85rem/1.35 Georgia, serif; }
+.tears.sheet.actor.character .tears-sheet-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+.tears.sheet.actor.character .tears-sheet-tags span { padding: 2px 7px; border: 1px solid #718276; border-radius: 12px; color: #d7dfd5; font: .65rem "Roboto Condensed", sans-serif; }
+.tears.sheet.actor.character .tears-header-resources { display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px; align-items: center; }
+.tears.sheet.actor.character .tears-header-resource { display: grid; grid-template-columns: auto auto 1fr; gap: 2px 5px; align-items: baseline; min-width: 0; }
+.tears.sheet.actor.character .tears-header-resource-title { grid-column: 1 / -1; display: flex; align-items: baseline; gap: 7px; color: #e4ddcd; }
+.tears.sheet.actor.character .tears-header-resource-title strong { color: #d6bc83; font: 700 1rem Georgia, serif; }
+.tears.sheet.actor.character .tears-header-resource-title span { color: #c5d0c7; font: .65rem "Roboto Condensed", sans-serif; }
+.tears.sheet.actor.character .tears-header-resource-value { color: #fffaf0; font: 700 1.2rem Georgia, serif; }
+.tears.sheet.actor.character .tears-header-resource-max { color: #c1c9c0; font-size: .75rem; }
+.tears.sheet.actor.character .tears-header-resource input { width: 55px; padding: 2px 4px; border: 1px solid #839184; border-radius: 3px; background: #f9f4e8; color: #263a32; font-weight: 700; }
+.tears.sheet.actor.character .tears-header-resource .tears-resource-track { grid-column: 1 / -1; height: 5px; margin: 3px 0 0; background: #172821; }
+.tears.sheet.actor.character .tears-header-resource .tears-life-track { background: #85a58a; }
+.tears.sheet.actor.character .tears-header-resource .tears-mental-track { background: #c4a46b; }
+.tears.sheet.actor.character .tears-initiative-button {
+  grid-column: 1 / -1; display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  min-height: 31px; padding: 5px 9px; border: 1px solid #b9a477; border-radius: 3px;
+  background: #1a2d25; color: #eee5d2; font: 600 .7rem "Roboto Condensed", sans-serif;
+}
+.tears.sheet.actor.character .tears-initiative-button:hover { background: #40574a; }
+.tears.sheet.actor.character .tears-tabs { display: flex; flex-wrap: nowrap; justify-content: flex-start; gap: 2px; min-height: 42px; padding: 0 12px; overflow-x: auto; }
+.tears.sheet.actor.character .tears-tabs .item { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-width: max-content; padding: 9px 14px; border: 0; border-bottom: 3px solid transparent; background: transparent; text-decoration: none; }
+.tears.sheet.actor.character .tears-tabs .item span { font: 600 .76rem "Roboto Condensed", sans-serif; }
+.tears.sheet.actor.character .tears-tabs .item.active { border-bottom-color: #9b8150; }
+.tears.sheet.actor.character .tears-sheet-body,
+.tears.sheet.actor.character .tears-main-content,
+.tears.sheet.actor.character .tears-tab-body { min-width: 0; width: 100%; background: #f0eadc; }
+.tears.sheet.actor.character .tears-tab-body { padding: 0; }
+.tears.sheet.actor.character .tears-tab-body > .tab { display: none; min-width: 0; }
+.tears.sheet.actor.character .tears-tab-body > .tab.active { display: block; }
+.tears.sheet.actor.character .tab.inventory,
+.tears.sheet.actor.character .tab.effects,
+.tears.sheet.actor.character .tab.biography { min-height: 340px; padding: 16px; background: #f0eadc; color: #282a27; }
+.tears.sheet.actor.character .tab.inventory .items-section,
+.tears.sheet.actor.character .tab.effects .effects-section { border-color: #b8aa8e; background: #faf7ef; }
+.tears.sheet.actor.character .tears-character-overview { padding: 18px; }
+.tears.sheet.actor.character .tears-combat-overview { padding: 18px; }
+.tears.sheet.actor.character .create-child[hidden] { display: none !important; }
+@media (max-width: 760px) {
+  .tears.sheet.actor.character .tears-sheet-header { grid-template-columns: 78px minmax(0,1fr); gap: 10px; padding: 10px; }
+  .tears.sheet.actor.character .tears-sheet-portrait { width: 72px; height: 88px; }
+  .tears.sheet.actor.character .tears-sheet-header .document-name { font-size: 1.25rem; }
+  .tears.sheet.actor.character .tears-header-resources { grid-column: 1 / -1; grid-template-columns: 1fr 1fr; }
+  .tears.sheet.actor.character .tears-tabs .item { padding: 8px 9px; }
+  .tears.sheet.actor.character .tears-tabs .item span { font-size: .68rem; }
+}
+
+.tears.sheet.actor.character .tears-profession-profile { display:flex; flex-direction:column; justify-content:center; gap:4px; padding:6px 8px; border:1px dashed #c9baa0; border-radius:3px; background:#f3eddf; }
+.tears.sheet.actor.character .tears-profession-profile > small { color:#6a685f; font:700 .65rem/1.25 "Roboto Condensed",sans-serif; text-transform:uppercase; }
+.tears.sheet.actor.character .tears-profession-profile > div { display:flex; flex-wrap:wrap; gap:5px; }
+.tears.sheet.actor.character .tears-profession-profile span { padding:2px 5px; border-radius:2px; background:#e3dacb; color:#34483d; font:700 .68rem "Roboto Condensed",sans-serif; }
+
+
+/* T.E.A.R.S. v0.1 combat actions and combat-stance controls */
+.tears.sheet.actor.character .tears-stance-controls {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px;
+  margin: 10px 0; padding: 9px 10px; border: 1px dashed #c9baa0;
+  border-radius: 3px; background: #f3eddf; color: var(--tears-ink);
+}
+.tears.sheet.actor.character .tears-stance-controls label {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  color: var(--tears-muted); font: 600 .68rem/1.2 "Roboto Condensed", sans-serif;
+}
+.tears.sheet.actor.character .tears-stance-controls input {
+  width: 54px; min-height: 28px; padding: 3px 5px; border: 1px solid #c9baa0;
+  border-radius: 3px; background: #fffdf7; color: var(--tears-ink); text-align: center;
+}
+.tears.sheet.actor.character .tears-weapon-row {
+  grid-template-columns: 32px minmax(130px, 1fr) minmax(155px, auto) auto;
+}
+.tears.sheet.actor.character .tears-weapon-values {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 5px 9px;
+  color: var(--tears-muted); font: .65rem/1.25 "Roboto Condensed", sans-serif;
+}
+.tears.sheet.actor.character .tears-weapon-values strong { color: var(--tears-green); }
+.tears.sheet.actor.character .tears-weapon-actions {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 3px;
+}
+.tears.sheet.actor.character .tears-weapon-actions button { flex: 0 0 28px; font: 700 .65rem/1 "Roboto Condensed", sans-serif; }
+.tears.sheet.actor.character .tears-weapon-actions button:hover { background: #ded1b7; border-color: #9b8150; }
+@media (max-width: 900px) {
+  .tears.sheet.actor.character .tears-weapon-row { grid-template-columns: 28px minmax(0,1fr); }
+  .tears.sheet.actor.character .tears-weapon-values,
+  .tears.sheet.actor.character .tears-weapon-actions { grid-column: 2; justify-content: flex-start; }
+  .tears.sheet.actor.character .tears-weapon-actions { padding-bottom: 5px; }
+}

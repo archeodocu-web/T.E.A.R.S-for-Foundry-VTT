@@ -1,0 +1,83 @@
+{
+  "id": "tears",
+  "title": "T.E.A.R.S. - Version 0.1",
+  "description": "T.E.A.R.S. Foundry VTT system. Version 0.1 uses the How to Be a Hero technical architecture with T.E.A.R.S. rules and a DSA-inspired character-sheet layout.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "T.E.A.R.S. System Conversion"
+    }
+  ],
+  "url": "",
+  "license": "LICENSE.txt",
+  "readme": "README.md",
+  "bugs": "",
+  "changelog": "CHANGELOG.md",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "14.368",
+    "maximum": "14.999"
+  },
+  "documentTypes": {
+    "Actor": {
+      "character": {},
+      "npc": {}
+    },
+    "Item": {
+      "item": {},
+      "consumable": {},
+      "weapon": {},
+      "armor": {},
+      "tool": {},
+      "ability": {},
+      "magic": {}
+    }
+  },
+  "esmodules": [
+    "module/tears.mjs",
+    "module/components/_module.mjs"
+  ],
+  "styles": [
+    {
+      "src": "css/tears.css"
+    }
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json",
+      "flags": {}
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json",
+      "flags": {}
+    }
+  ],
+  "packs": [],
+  "socket": true,
+  "manifest": "",
+  "download": "",
+  "primaryTokenAttribute": "attributes.health",
+  "flags": {
+    "hotReload": {
+      "extensions": [
+        "css",
+        "html",
+        "json",
+        "mjs"
+      ],
+      "paths": [
+        "lang",
+        "templates",
+        "module/components",
+        "module/documents",
+        "module/helpers",
+        "module/managers",
+        "module/sheets"
+      ]
+    }
+  }
+}
