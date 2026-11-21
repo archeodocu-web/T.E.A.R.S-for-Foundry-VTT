@@ -6407,3 +6407,1316 @@ item-list-controls search .filter-control:hover:not(.disabled),
 @media (max-width: 820px) {
   .tears.sheet.actor.character .tears-point-guide-grid { grid-template-columns: 1fr; }
 }
+
+/* ------------------------------------------------------------
+   T.E.A.R.S. v0.1.5 — DSA-inspired rounded dossier styling
+   Forest green, sage, warm parchment and strong ink contrast.
+   ------------------------------------------------------------ */
+.tears.sheet.actor.character .tears-panel,
+.tears.sheet.item .sidebar-card,
+.tears.sheet.item .sheet-content,
+.tears.sheet.actor.character .tears-point-guide,
+.tears.sheet.actor.character .tears-attribute-card,
+.tears.sheet.actor.character .tears-talent-group {
+  border-radius: 13px !important;
+  box-shadow: 0 3px 10px rgba(20, 43, 29, .08);
+}
+.tears.sheet.actor.character .tears-panel {
+  border: 1px solid #b6c8b3 !important;
+  background: linear-gradient(145deg, #fbfcf7 0%, #edf3e9 100%) !important;
+  padding: 14px !important;
+}
+.tears.sheet.actor.character .tears-attribute-card {
+  border: 1px solid #a9bda7 !important;
+  border-radius: 12px !important;
+  background: #e7efe3 !important;
+  box-shadow: inset 0 1px rgba(255,255,255,.8), 0 2px 6px rgba(18,45,30,.08);
+}
+.tears.sheet.actor.character .tears-attribute-value,
+.tears.sheet.actor.character .tears-attribute-card input,
+.tears.sheet.actor.character .tears-talent-points,
+.tears.sheet.actor.character .tears-resource-number,
+.tears.sheet.actor.character .tears-header-resource-value,
+.tears.sheet.actor.character .tears-header-resource input {
+  color: #101713 !important;
+  font-weight: 800 !important;
+  font-variant-numeric: tabular-nums;
+}
+.tears.sheet.actor.character input[type="number"],
+.tears.sheet.actor.character input[type="text"],
+.tears.sheet.actor.character select,
+.tears.sheet.item input[type="number"],
+.tears.sheet.item input[type="text"],
+.tears.sheet.item select,
+.htbah-item-create-dialog input[type="text"],
+.htbah-item-create-dialog input[type="search"],
+.htbah-item-create-dialog select {
+  color: #101713 !important;
+  background: #fff !important;
+  border: 1px solid #9db29a !important;
+  border-radius: 8px !important;
+  box-shadow: inset 0 1px 2px rgba(12,28,18,.05);
+}
+.tears.sheet.actor.character input:focus,
+.tears.sheet.actor.character select:focus,
+.tears.sheet.item input:focus,
+.tears.sheet.item select:focus,
+.tears-character-builder input:focus,
+.tears-character-builder select:focus {
+  outline: 2px solid #6f9874 !important;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 3px rgba(96,145,103,.16) !important;
+}
+.tears.sheet.actor.character .tears-talent-row {
+  border-bottom: 1px solid #d6e1d2;
+  padding: 7px 5px;
+}
+.tears.sheet.actor.character .tears-hobby-assignment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8px 10px;
+  border: 1px solid #b5c9b1;
+  border-radius: 9px;
+  background: #e6f0e3;
+  color: #14271a;
+}
+.tears.sheet.actor.character .tears-hobby-assignment small,
+.tears.sheet.actor.character .tears-hobby-bonus-tag {
+  color: #315d3c !important;
+  font: 700 .68rem "Roboto Condensed", sans-serif;
+}
+.tears.sheet.actor.character .tears-hobby-bonus-tag {
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: #dcebd7;
+  border: 1px solid #aec5a8;
+}
+.tears.sheet.actor.character .tears-sheet-header {
+  border-radius: 14px 14px 0 0;
+  background: linear-gradient(115deg, #173d2b 0%, #285a3d 62%, #3b6b4a 100%) !important;
+  box-shadow: inset 0 -3px #b9a875, 0 4px 14px rgba(13,34,22,.16);
+}
+.tears.sheet.actor.character .tears-tabs .item {
+  border-radius: 10px 10px 0 0;
+  margin: 0 3px;
+  border: 1px solid #a9bca7;
+}
+.tears.sheet.actor.character .tears-tabs .item.active {
+  background: #edf4e9 !important;
+  color: #193d29 !important;
+  border-color: #8eaa90 !important;
+  box-shadow: inset 0 3px #668d68;
+}
+
+/* Character Builder */
+.tears-character-builder {
+  --tears-forest: #214936;
+  --tears-forest-dark: #173728;
+  --tears-sage: #dfeade;
+  --tears-sage-mid: #c4d7c1;
+  --tears-paper: #f5f1e5;
+  --tears-ink: #172019;
+  min-width: min(96vw, 1080px);
+  max-width: 96vw;
+  max-height: 92vh;
+  padding: 0 !important;
+  border: 1px solid #8da48b !important;
+  border-radius: 17px !important;
+  overflow: hidden;
+  color: var(--tears-ink) !important;
+  background: var(--tears-paper) !important;
+  box-shadow: 0 18px 60px rgba(0,0,0,.35) !important;
+}
+.tears-character-builder::backdrop { background: rgba(9,19,13,.55); backdrop-filter: blur(3px); }
+.tears-character-builder .window-header { display: none !important; }
+.tears-character-builder .window-content { padding: 0 !important; overflow: hidden; background: var(--tears-paper) !important; }
+.tears-builder-form { display: flex; flex-direction: column; min-height: 0; max-height: 92vh; color: var(--tears-ink); }
+.tears-builder-header {
+  display: grid; grid-template-columns: 54px minmax(0,1fr) auto; align-items: center; gap: 14px;
+  padding: 19px 24px; color: #f8f8ef;
+  background: linear-gradient(118deg, #173d2b 0%, #24543a 58%, #416f4d 100%);
+  border-bottom: 3px solid #b9a875;
+}
+.tears-builder-mark { display: grid; place-items: center; width: 50px; height: 50px; border: 1px solid #b8c9a9; border-radius: 14px; color: #e8dfbf; font-size: 1.35rem; background: rgba(255,255,255,.07); }
+.tears-builder-title .tears-eyebrow { color: #c6d6bc; letter-spacing: .18em; font-size: .62rem; font-weight: 800; }
+.tears-builder-title h1 { margin: 3px 0 2px; color: #fff; font: 700 1.65rem/1.05 Georgia, serif; }
+.tears-builder-title p { margin: 0; color: #e1e9dc; font: .78rem "Roboto Condensed", sans-serif; }
+.tears-builder-rule-stamp { padding: 7px 11px; text-align: center; border: 1px solid rgba(228,222,194,.6); border-radius: 9px; color: #d8dfd0; font: .58rem/1.5 "Roboto Condensed", sans-serif; letter-spacing: .14em; }
+.tears-builder-rule-stamp strong { color: #fff; font-size: .75rem; }
+.tears-builder-progress { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 8px; padding: 13px 20px 11px; background: #e5ecdf; border-bottom: 1px solid #bdccb8; }
+.tears-builder-progress button { display: flex; gap: 8px; align-items: center; padding: 7px 9px; border: 1px solid transparent; border-radius: 10px; color: #5a695c; background: transparent; text-align: left; font: 700 .76rem "Roboto Condensed", sans-serif; }
+.tears-builder-progress button span { display: grid; place-items: center; width: 23px; height: 23px; flex: 0 0 23px; border-radius: 50%; border: 1px solid #98ad98; background: #f7f8f2; color: #233e2b; }
+.tears-builder-progress button.active { border-color: #8ba78b; background: #f9fbf6; color: #183a28; box-shadow: 0 2px 7px rgba(31,68,43,.08); }
+.tears-builder-progress button.completed span { background: #285b3d; color: white; border-color: #285b3d; }
+.tears-builder-progress button:disabled { opacity: .75; cursor: default; }
+.tears-builder-content { overflow: auto; padding: 20px 24px 24px; min-height: 0; background-color: #f5f1e5; background-image: repeating-linear-gradient(135deg, rgba(43,83,53,.025) 0 1px, transparent 1px 8px); }
+.tears-builder-step { max-width: 980px; margin: 0 auto; }
+.tears-builder-section-title { margin: 0 0 18px; }
+.tears-builder-section-title > span { color: #54765a; font: 800 .62rem "Roboto Condensed", sans-serif; letter-spacing: .18em; }
+.tears-builder-section-title h2 { margin: 4px 0; color: #1c3928; font: 700 1.55rem Georgia, serif; }
+.tears-builder-section-title p { max-width: 760px; margin: 0; color: #4f5a50; font: .85rem/1.5 "Roboto", sans-serif; }
+.tears-builder-field-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px 15px; margin-bottom: 15px; }
+.tears-builder-field { display: flex; flex-direction: column; gap: 5px; color: #203b29; font: 700 .78rem "Roboto Condensed", sans-serif; }
+.tears-builder-field--wide { grid-column: 1 / -1; }
+.tears-builder-field input, .tears-builder-field select { width: 100%; min-height: 38px; padding: 8px 10px; color: #121b15 !important; background: #fff !important; border: 1px solid #9eb49b !important; border-radius: 8px !important; font: 500 .86rem "Roboto", sans-serif; }
+.tears-builder-field small { color: #68746a; font: .7rem/1.35 "Roboto", sans-serif; }
+.tears-builder-card { margin: 13px 0; padding: 14px 16px; border: 1px solid #c0cdb9; border-radius: 13px; background: linear-gradient(145deg,#fffef9,#edf3e9); box-shadow: 0 3px 10px rgba(25,55,35,.06); }
+.tears-builder-card h3 { margin: 0 0 8px; color: #214936; font: 700 1rem Georgia,serif; }
+.tears-builder-card p { color: #435147; font: .78rem/1.45 "Roboto",sans-serif; }
+.tears-builder-card-heading { display: flex; align-items: center; gap: 10px; margin-bottom: 11px; color: #315f3e; }
+.tears-builder-card-heading > i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #dce9d8; color: #2a5839; }
+.tears-builder-card-heading h3 { margin: 0; }
+.tears-builder-card-heading p { margin: 2px 0 0; }
+.tears-builder-profile-values { display: flex; flex-wrap: wrap; gap: 8px; }
+.tears-builder-profile-values span { padding: 7px 11px; border: 1px solid #b8cbb3; border-radius: 8px; background: #f7faf4; color: #17251b; font: .78rem "Roboto Condensed",sans-serif; }
+.tears-builder-profile-values strong { color: #235237; font-weight: 900; }
+.tears-builder-muted, .tears-builder-hint { margin: 8px 0 0; color: #58665a !important; font: .72rem/1.45 "Roboto",sans-serif !important; }
+.tears-builder-hobby-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 13px; }
+.tears-builder-hobby { position: relative; display: grid; gap: 9px; padding: 12px; border: 1px solid #d0dacb; border-radius: 11px; background: #f7faf4; }
+.tears-builder-hobby-bonus { justify-self: end; margin: -4px -4px -2px 0; padding: 4px 8px; border-radius: 99px; background: #285a3c; color: white; font: 800 .7rem "Roboto Condensed",sans-serif; }
+.tears-builder-points-banner { display: flex; justify-content: space-between; align-items: center; margin: 0 0 14px; padding: 13px 16px; border-radius: 13px; background: #1e4932; color: #fff; box-shadow: 0 5px 14px rgba(25,63,41,.14); }
+.tears-builder-points-banner small { display: block; color: #d5e5d2; font: .68rem "Roboto Condensed",sans-serif; letter-spacing: .05em; }
+.tears-builder-points-banner strong { display: block; margin-top: 2px; color: #fff; font: 800 1.4rem/1 Georgia,serif; font-variant-numeric: tabular-nums; }
+.tears-builder-points-remaining { text-align: right; }
+.tears-builder-attribute-grid { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 10px; }
+.tears-builder-attribute-card { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 8px; border: 1px solid #b8cbb4; border-radius: 13px; background: linear-gradient(145deg,#fffef9,#e6efe2); box-shadow: 0 3px 8px rgba(20,54,33,.07); }
+.tears-builder-attribute-abbr { color: #42674a; font: 900 .78rem "Roboto Condensed",sans-serif; letter-spacing: .1em; }
+.tears-builder-attribute-name { min-height: 1.9em; color: #1b2b20; font: 700 .76rem/1.2 "Roboto Condensed",sans-serif; text-align: center; }
+.tears-builder-attribute-card small { color: #697469; font: .61rem "Roboto",sans-serif; }
+.tears-builder-attribute-card input { width: 100%; height: 42px; border: 1px solid #9db49a; border-radius: 9px; background: white; color: #111913 !important; text-align: center; font: 900 1.25rem Georgia,serif; font-variant-numeric: tabular-nums; }
+.tears-builder-cost-table { display: grid; grid-template-columns: 1fr auto; gap: 6px 18px; max-width: 420px; color: #35483a; font: .8rem "Roboto Condensed",sans-serif; }
+.tears-builder-cost-table strong { color: #17231a; }
+.tears-builder-points-banner [data-live-attribute-points].is-valid { color: #dbf0d7; }
+.tears-builder-points-banner [data-live-attribute-points].is-invalid { color: #ffd1c8; }
+.tears-builder-talent-groups { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; margin-top: 14px; }
+.tears-builder-group-card { overflow: hidden; border: 1px solid #b5c9b0; border-radius: 13px; background: #fbfcf8; box-shadow: 0 3px 9px rgba(20,55,34,.06); }
+.tears-builder-group-card > header { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; border-bottom: 1px solid #c8d7c4; background: #e4eee0; }
+.tears-builder-group-card > header > div { display: flex; align-items: center; gap: 9px; }
+.tears-builder-group-card > header h3 { margin: 0; color: #1e432d; font: 700 .9rem Georgia,serif; }
+.tears-builder-group-card > header small { display: block; margin-top: 2px; color: #59695a; font: .65rem "Roboto Condensed",sans-serif; }
+.tears-builder-group-card > header strong { color: #15251a; font: 800 .95rem Georgia,serif; }
+.tears-builder-group-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 10px; background: #285a3b; color: white; font: 800 .62rem "Roboto Condensed",sans-serif; }
+.tears-builder-talent-list { padding: 4px 11px 9px; }
+.tears-builder-talent-row { display: grid; grid-template-columns: minmax(0,1fr) 56px; gap: 8px; align-items: center; padding: 6px 0; border-bottom: 1px solid #e0e7dc; }
+.tears-builder-talent-row:last-child { border-bottom: 0; }
+.tears-builder-talent-row span { min-width: 0; display: flex; flex-direction: column; }
+.tears-builder-talent-row strong { color: #1b2b20; font: 700 .72rem "Roboto Condensed",sans-serif; }
+.tears-builder-talent-row small { color: #768177; font: .59rem "Roboto",sans-serif; }
+.tears-builder-talent-row input { width: 56px; height: 31px; border: 1px solid #9eb59a; border-radius: 7px; background: white; color: #101713 !important; text-align: center; font: 800 .9rem "Roboto",sans-serif; font-variant-numeric: tabular-nums; }
+.tears-builder-talent-row [data-field], .tears-builder-group-card [data-live-group-remaining] { font-variant-numeric: tabular-nums; }
+.tears-builder-group-card [data-live-group-remaining].is-invalid { color: #a12f2f !important; font-weight: 800; }
+.tears-builder-group-card [data-live-group-remaining].is-valid { color: #2c6a41 !important; }
+.tears-builder-special-list { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 7px 14px; }
+.tears-builder-special-list label { display: flex; align-items: center; gap: 8px; color: #1b2b20; font: .75rem "Roboto Condensed",sans-serif; }
+.tears-builder-special-list input { accent-color: #285a3b; }
+.tears-builder-special-list strong { margin-left: auto; color: #254c33; }
+.tears-builder-special-total { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 9px; border-top: 1px solid #cbd8c7; color: #203b29; font: 700 .77rem "Roboto Condensed",sans-serif; }
+.tears-builder-special-total [data-live-special-points].is-invalid { color: #a12f2f; }
+.tears-builder-special-total [data-live-special-points].is-valid { color: #2c6a41; }
+.tears-builder-review-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.tears-builder-review-grid .tears-builder-card:first-child { grid-column: 1 / -1; }
+.tears-builder-review-grid p { margin: 4px 0; }
+.tears-builder-review-attributes { display: grid; grid-template-columns: repeat(6,1fr); gap: 7px; margin-top: 10px; }
+.tears-builder-review-attributes span { display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 7px; border-radius: 8px; background: #e8f0e4; }
+.tears-builder-review-attributes small { color: #42674a; font: 800 .65rem "Roboto Condensed",sans-serif; }
+.tears-builder-review-attributes strong { color: #111913; font: 800 1.1rem Georgia,serif; }
+.tears-builder-review-line { display: flex; justify-content: space-between; gap: 10px; padding: 5px 0; border-bottom: 1px solid #e0e8dd; color: #344739; font: .73rem "Roboto Condensed",sans-serif; }
+.tears-builder-review-line strong { color: #111913; font-variant-numeric: tabular-nums; }
+.tears-builder-derived { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.tears-builder-derived > div { display: flex; flex-direction: column; gap: 4px; padding: 13px 15px; border: 1px solid #9fb69c; border-radius: 12px; background: #e4eee0; }
+.tears-builder-derived span { color: #36563d; font: 700 .72rem "Roboto Condensed",sans-serif; }
+.tears-builder-derived strong { color: #111913; font: 900 1.5rem Georgia,serif; font-variant-numeric: tabular-nums; }
+.tears-builder-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 13px 20px; border-top: 1px solid #b9c9b5; background: #e6ede1; }
+.tears-builder-footer-actions { display: flex; gap: 9px; }
+.tears-builder-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 38px; padding: 8px 15px; border: 1px solid #9fb29b; border-radius: 9px; cursor: pointer; font: 800 .77rem "Roboto Condensed",sans-serif; transition: transform .12s ease, box-shadow .12s ease; }
+.tears-builder-button:hover { transform: translateY(-1px); box-shadow: 0 4px 10px rgba(25,55,35,.12); }
+.tears-builder-button--quiet { color: #526153; background: transparent; }
+.tears-builder-button--secondary { color: #23452f; background: #f8fbf5; }
+.tears-builder-button--primary { color: #fff; background: linear-gradient(135deg,#285a3b,#1b412b); border-color: #1b412b; }
+.tears-builder-launch { display: inline-flex !important; align-items: center; gap: 7px; margin: 3px 5px; padding: 7px 11px !important; border: 1px solid #668c6a !important; border-radius: 9px !important; color: #fff !important; background: linear-gradient(135deg,#315f40,#1c442d) !important; font: 700 .75rem "Roboto Condensed",sans-serif !important; }
+.tears-quick-weapon-config { margin: 10px 0; padding: 12px; border: 1px solid #a9c0a6; border-radius: 10px; background: #edf4e9; color: #17251b; }
+.tears-quick-weapon-config[hidden] { display: none !important; }
+.tears-quick-weapon-config label { display: block; margin-bottom: 5px; color: #20432e; font: 800 .75rem "Roboto Condensed",sans-serif; }
+.tears-quick-weapon-config select { width: 100%; min-height: 36px; padding: 6px 9px; border: 1px solid #9eb59a; border-radius: 7px; background: #fff; color: #111913 !important; }
+.tears-quick-weapon-config p { margin: 6px 0 0; color: #5b685c; font: .68rem/1.35 "Roboto",sans-serif; }
+@media (max-width: 900px) {
+  .tears-builder-attribute-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .tears-builder-talent-groups { grid-template-columns: 1fr; }
+}
+@media (max-width: 650px) {
+  .tears-character-builder { min-width: 98vw; max-width: 98vw; }
+  .tears-builder-header { grid-template-columns: 42px minmax(0,1fr); padding: 13px; }
+  .tears-builder-mark { width: 40px; height: 40px; }
+  .tears-builder-rule-stamp { display: none; }
+  .tears-builder-progress { grid-template-columns: repeat(2,minmax(0,1fr)); padding: 9px; }
+  .tears-builder-content { padding: 14px; }
+  .tears-builder-field-grid, .tears-builder-hobby-grid, .tears-builder-review-grid, .tears-builder-derived { grid-template-columns: 1fr; }
+  .tears-builder-review-grid .tears-builder-card:first-child { grid-column: auto; }
+  .tears-builder-attribute-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .tears-builder-special-list { grid-template-columns: 1fr; }
+}
+
+/* v0.1.5 — unfinished weapon configuration is visually obvious. */
+.tears-weapon-needs-talent { border: 2px solid #b36b27 !important; box-shadow: 0 0 0 3px rgba(179,107,39,.14); background: #fffdf5 !important; color: #111913 !important; }
+.tears-builder-special-list label.is-disabled { opacity: .48; cursor: not-allowed; }
+.tears-builder-special-list label.is-disabled input { cursor: not-allowed; }
+.tears-builder-special-list label.is-disabled strong { color: #7e897e; }
+
+
+/* v0.1.5 — refined character-creation styling */
+.tears-character-builder .window-content { border-radius: 15px !important; }
+.tears-builder-form { border-radius: 15px; overflow: hidden; background: #f4f1e6; }
+.tears-builder-header { background: linear-gradient(120deg,#123524 0%,#1e4932 48%,#315d3d 100%); box-shadow: inset 0 -1px rgba(255,255,255,.16); }
+.tears-builder-mark { border-radius: 16px; box-shadow: inset 0 0 0 1px rgba(235,235,211,.12), 0 4px 12px rgba(0,0,0,.13); }
+.tears-builder-progress button { transition: background .14s ease,border-color .14s ease,transform .14s ease; }
+.tears-builder-progress button:not(:disabled):hover { transform: translateY(-1px); background: rgba(255,255,255,.65); border-color: #bdcdb8; }
+.tears-builder-content { background-color: #f4f1e6; background-image: repeating-linear-gradient(135deg,rgba(31,74,46,.035) 0 1px,transparent 1px 10px),radial-gradient(ellipse at top right,rgba(113,145,99,.07),transparent 55%); }
+.tears-builder-card,.tears-builder-attribute-card,.tears-builder-group-card,.tears-builder-hobby { border-radius: 15px; box-shadow: 0 4px 13px rgba(20,49,29,.075), inset 0 1px rgba(255,255,255,.78); }
+.tears-builder-card { border-color: #bdcbb6; }
+.tears-builder-card--note { border-left: 4px solid #47744f; background: linear-gradient(145deg,#f8fbf4,#e7efe2); }
+.tears-builder-field input:focus,.tears-builder-field select:focus,.tears-builder-attribute-card input:focus,.tears-builder-talent-row input:focus,.tears-builder-special-list input:focus { outline: 2px solid #47764e !important; outline-offset: 2px; box-shadow: 0 0 0 4px rgba(71,118,78,.14) !important; }
+.tears-builder-attribute-card { border-color: #aabda6; background: linear-gradient(145deg,#fffefa,#e8f0e4); }
+.tears-builder-attribute-card input,.tears-builder-talent-row input { border-color: #91a98e; box-shadow: inset 0 1px 2px rgba(13,31,18,.045); }
+.tears-builder-group-card { border-color: #a8bca4; }
+.tears-builder-group-card > header { background: linear-gradient(100deg,#e5eee1,#d9e6d5); }
+.tears-builder-group-mark { border-radius: 11px; box-shadow: 0 2px 5px rgba(16,47,27,.18); }
+.tears-builder-talent-row { min-height: 45px; }
+.tears-builder-talent-row:hover { background: #f1f6ed; }
+.tears-builder-hobby { background: linear-gradient(145deg,#fbfcf7,#eef4e9); }
+.tears-builder-hobby-bonus { box-shadow: 0 2px 5px rgba(16,55,28,.18); }
+.tears-builder-derived > div { border-radius: 14px; box-shadow: 0 3px 9px rgba(23,58,34,.07); }
+.tears-builder-button { border-radius: 11px; }
+.tears-builder-button--primary { box-shadow: 0 3px 8px rgba(17,55,31,.18); }
+.tears-builder-button:focus-visible,.tears-builder-progress button:focus-visible { outline: 2px solid #8da978; outline-offset: 2px; }
+@media (max-width: 650px) {
+  .tears-builder-content { background-image: repeating-linear-gradient(135deg,rgba(31,74,46,.025) 0 1px,transparent 1px 10px); }
+  .tears-builder-talent-row { grid-template-columns: minmax(0,1fr) 48px; }
+  .tears-builder-talent-row input { width: 48px; }
+}
+
+
+/* ========================================================================== */
+/* T.E.A.R.S. 0.1.7 — unified rounded dossier UI                              */
+/* Rounded folder tabs, nested sub-sections, sage/forest palette, ink contrast */
+/* ========================================================================== */
+:root {
+  --tears-forest-950: #173526;
+  --tears-forest-900: #204936;
+  --tears-forest-800: #2d5b42;
+  --tears-forest-700: #477454;
+  --tears-sage-300: #c9d9c4;
+  --tears-sage-200: #dce8d7;
+  --tears-sage-100: #eef3e9;
+  --tears-paper: #f5f2e8;
+  --tears-paper-light: #fffef9;
+  --tears-ink: #121a14;
+  --tears-muted: #465449;
+  --tears-line: #b9c9b4;
+  --tears-gold: #a18d5c;
+}
+
+/* Main sheet dimensions are controlled by the current Foundry viewport. */
+.tears.sheet.actor.character {
+  max-width: calc(100vw - 16px) !important;
+  min-width: 0 !important;
+  border: 1px solid #9eb29b !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  box-shadow: 0 16px 44px rgba(9, 26, 16, .28) !important;
+}
+.tears.sheet.actor.character > .window-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  border-radius: 0 0 17px 17px !important;
+  background: var(--tears-paper) !important;
+  color: var(--tears-ink) !important;
+}
+.tears.sheet.actor.character form.tears-sheet {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  height: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+.tears.sheet.actor.character .tears-sheet-header {
+  display: grid !important;
+  grid-template-columns: 84px minmax(0, 1fr) minmax(240px, 330px) !important;
+  align-items: center !important;
+  gap: 16px !important;
+  min-width: 0 !important;
+  padding: 14px 18px !important;
+  border-bottom: 3px solid #b8a575 !important;
+  background: linear-gradient(125deg, #173526 0%, #214936 55%, #376b4a 100%) !important;
+}
+.tears.sheet.actor.character .tears-sheet-portrait {
+  width: 80px !important;
+  height: 92px !important;
+  border: 1px solid rgba(233, 224, 190, .8) !important;
+  border-radius: 13px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,.18) !important;
+}
+.tears.sheet.actor.character .tears-sheet-identity { min-width: 0 !important; }
+.tears.sheet.actor.character .tears-sheet-header input.document-name {
+  width: 100% !important;
+  min-width: 0 !important;
+  color: #fff !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(233,242,230,.42) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font: 700 1.65rem/1.2 Georgia, serif !important;
+}
+.tears.sheet.actor.character .tears-header-resources {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+.tears.sheet.actor.character .tears-header-resource { min-width: 0 !important; border-radius: 12px !important; }
+.tears.sheet.actor.character .tears-initiative-button {
+  grid-column: 1 / -1 !important;
+  width: 100% !important;
+  min-height: 34px !important;
+  border-radius: 10px !important;
+  font-weight: 800 !important;
+}
+
+/* Main navigation: folder-like rounded tabs, not square or black boxes. */
+.tears.sheet.actor.character nav.tears-tabs {
+  display: flex !important;
+  flex: 0 0 auto !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-height: 48px !important;
+  padding: 8px 14px 9px !important;
+  overflow: visible !important;
+  border: 0 !important;
+  border-bottom: 1px solid #c3d0be !important;
+  background: linear-gradient(180deg, #e6ede1, #dce7d8) !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item {
+  display: inline-flex !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  min-width: 96px !important;
+  min-height: 34px !important;
+  margin: 0 !important;
+  padding: 7px 13px !important;
+  border: 1px solid #aebfa9 !important;
+  border-radius: 13px 13px 7px 7px !important;
+  background: linear-gradient(180deg, #f9fbf6, #e7eee3) !important;
+  color: #24392a !important;
+  box-shadow: 0 2px 4px rgba(24, 54, 34, .07), inset 0 1px rgba(255,255,255,.95) !important;
+  text-decoration: none !important;
+  transition: transform .13s ease, background .13s ease, box-shadow .13s ease !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item:hover {
+  transform: translateY(-1px) !important;
+  background: #fffef9 !important;
+  box-shadow: 0 4px 9px rgba(24,54,34,.12) !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item.active {
+  border-color: #214936 !important;
+  border-bottom: 3px solid #b5a16a !important;
+  background: linear-gradient(180deg, #2c5b42, #204936) !important;
+  color: #fff !important;
+  box-shadow: 0 4px 9px rgba(18,49,29,.2), inset 0 1px rgba(255,255,255,.12) !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item.active span,
+.tears.sheet.actor.character nav.tears-tabs > .item.active i { color: #fff !important; }
+
+/* Correct the body sizing so every tab uses the available width and height. */
+.tears.sheet.actor.character .tears-sheet-body,
+.tears.sheet.actor.character .tears-main-content,
+.tears.sheet.actor.character .tears-tab-body {
+  display: flex !important;
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+.tears.sheet.actor.character .tears-tab-body {
+  display: block !important;
+  overflow: auto !important;
+  padding: 0 !important;
+  background: var(--tears-paper) !important;
+}
+.tears.sheet.actor.character .tears-tab-body > .tab,
+.tears.sheet.actor.character .tears-tab-body > .tab.active {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+.tears.sheet.actor.character .tears-character-overview,
+.tears.sheet.actor.character .tears-combat-overview,
+.tears.sheet.actor.character .tab.inventory,
+.tears.sheet.actor.character .tab.effects,
+.tears.sheet.actor.character .tab.biography {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  padding: clamp(12px, 2vw, 22px) !important;
+  color: var(--tears-ink) !important;
+  background-color: var(--tears-paper) !important;
+  background-image: repeating-linear-gradient(135deg, rgba(39,83,52,.025) 0 1px, transparent 1px 11px) !important;
+}
+
+/* Reusable rounded dossier cards. Remove inherited black/dark surfaces. */
+.tears.sheet.actor.character .tears-panel,
+.tears.sheet.actor.character .tears-point-guide,
+.tears.sheet.actor.character .tears-attribute-card,
+.tears.sheet.actor.character .tears-talent-group,
+.tears.sheet.actor.character .tears-combat-stat,
+.tears.sheet.actor.character .tears-weapon-row,
+.tears.sheet.actor.character .tears-resource-panel,
+.tears.sheet.actor.character .tears-profession-profile,
+.tears.sheet.actor.character .tears-stance-controls,
+.tears.sheet.actor.character .items-section,
+.tears.sheet.actor.character .tab.biography .top,
+.tears.sheet.actor.character .tab.biography .middle,
+.tears.sheet.actor.character .tab.biography .bottom {
+  border: 1px solid #bdcbb8 !important;
+  border-radius: 15px !important;
+  background: linear-gradient(145deg, #fffefb 0%, #f0f4ec 100%) !important;
+  color: var(--tears-ink) !important;
+  box-shadow: 0 3px 12px rgba(24, 55, 34, .075), inset 0 1px rgba(255,255,255,.9) !important;
+}
+.tears.sheet.actor.character .tears-panel {
+  margin: 0 0 14px !important;
+  padding: 14px 16px !important;
+  border-top: 3px solid #477454 !important;
+}
+.tears.sheet.actor.character .tears-panel-heading {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin: 0 0 12px !important;
+  padding: 0 0 9px !important;
+  border-bottom: 1px solid #d4dfd0 !important;
+}
+.tears.sheet.actor.character .tears-panel-heading h3 {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 5px 11px !important;
+  border-radius: 999px !important;
+  background: #e5eee1 !important;
+  color: #204936 !important;
+  font: 700 .94rem/1.2 Georgia, serif !important;
+}
+.tears.sheet.actor.character .tears-panel-heading > span,
+.tears.sheet.actor.character .tears-panel-heading small {
+  color: #405246 !important;
+  font: 700 .69rem/1.25 "Roboto Condensed", sans-serif !important;
+}
+.tears.sheet.actor.character .tears-section-heading {
+  margin: 0 0 14px !important;
+  padding: 0 0 10px !important;
+  border-bottom: 2px solid #9ab195 !important;
+}
+.tears.sheet.actor.character .tears-section-heading h2 { color: #1d422d !important; }
+
+/* Combat: no unexplained black panel; each sub-area is a distinct rounded folder. */
+.tears.sheet.actor.character .tears-combat-overview { background: transparent !important; }
+.tears.sheet.actor.character .tears-combat-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0,1fr)) !important;
+  gap: 10px !important;
+}
+.tears.sheet.actor.character .tears-combat-stat {
+  min-width: 0 !important;
+  padding: 15px 9px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(145deg, #fffefb, #eaf1e6) !important;
+}
+.tears.sheet.actor.character .tears-combat-stat small { color: #42634a !important; }
+.tears.sheet.actor.character .tears-combat-stat strong { color: #0e1711 !important; font-size: 1.65rem !important; }
+.tears.sheet.actor.character .tears-combat-stat span { color: #3c4d40 !important; }
+.tears.sheet.actor.character .tears-weapon-list { display: grid !important; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; gap: 9px !important; }
+.tears.sheet.actor.character .tears-weapon-row {
+  display: grid !important;
+  grid-template-columns: 38px minmax(0,1fr) !important;
+  gap: 8px 10px !important;
+  align-items: center !important;
+  padding: 10px 12px !important;
+  border-radius: 13px !important;
+  background: #fbfcf7 !important;
+}
+.tears.sheet.actor.character .tears-weapon-row img { grid-row: 1 / 3 !important; width: 36px !important; height: 36px !important; }
+.tears.sheet.actor.character .tears-weapon-row .tears-weapon-values,
+.tears.sheet.actor.character .tears-weapon-row .tears-weapon-actions { grid-column: 2 !important; }
+.tears.sheet.actor.character .tears-weapon-values { display: flex !important; flex-wrap: wrap !important; gap: 6px 10px !important; color: #35473a !important; }
+.tears.sheet.actor.character .tears-weapon-values span { color: #35473a !important; font-size: .72rem !important; }
+.tears.sheet.actor.character .tears-weapon-values strong { color: #101812 !important; }
+.tears.sheet.actor.character .tears-weapon-actions { display: flex !important; flex-wrap: wrap !important; gap: 5px !important; }
+.tears.sheet.actor.character .tears-weapon-row button,
+.tears.sheet.actor.character .tears-primary-action,
+.tears.sheet.actor.character .tears-roll-button,
+.tears.sheet.actor.character .tears-edit-button {
+  min-width: 31px !important;
+  min-height: 30px !important;
+  padding: 5px 9px !important;
+  border: 1px solid #a7bba2 !important;
+  border-radius: 9px !important;
+  background: #e7efe3 !important;
+  color: #1d432c !important;
+  box-shadow: 0 1px 3px rgba(18,48,27,.08) !important;
+}
+.tears.sheet.actor.character .tears-primary-action {
+  border-color: #1e4732 !important;
+  background: linear-gradient(135deg, #2d6143, #1d432d) !important;
+  color: #fff !important;
+}
+.tears.sheet.actor.character .tears-rule-hint {
+  padding: 9px 12px !important;
+  border: 1px solid #d1ddcc !important;
+  border-radius: 10px !important;
+  background: #edf3e9 !important;
+  color: #35483a !important;
+}
+
+/* Talent group cards act like nested folders, with green section labels. */
+.tears.sheet.actor.character .tears-talent-groups { gap: 12px !important; }
+.tears.sheet.actor.character .tears-talent-group { overflow: hidden !important; padding: 0 !important; border-radius: 14px !important; }
+.tears.sheet.actor.character .tears-talent-group > .tears-panel-heading {
+  margin: 0 !important;
+  padding: 10px 12px !important;
+  background: linear-gradient(100deg, #e5eee1, #dbe8d6) !important;
+}
+.tears.sheet.actor.character .tears-talent-group > .tears-panel-heading h3 { background: transparent !important; padding: 0 !important; }
+.tears.sheet.actor.character .tears-talent-group > .tears-pool-budget { margin: 8px 12px !important; }
+.tears.sheet.actor.character .tears-talent-list { padding: 4px 12px 10px !important; }
+.tears.sheet.actor.character .tears-talent-row { min-height: 38px !important; border-bottom: 1px solid #e0e8dc !important; }
+.tears.sheet.actor.character .tears-talent-row:hover { background: #f1f6ee !important; }
+
+/* Inventory sections are clear category folders; sub-items are soft cards. */
+.tears.sheet.actor.character htbah-inventory,
+.tears.sheet.actor.character .inventory-element,
+.tears.sheet.actor.character .inventory-list { display: block !important; width: 100% !important; min-width: 0 !important; }
+.tears.sheet.actor.character .items-section {
+  overflow: hidden !important;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  border-radius: 14px !important;
+  background: #fbfcf7 !important;
+}
+.tears.sheet.actor.character .items-section .items-header {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 90px 70px !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-height: 40px !important;
+  padding: 8px 13px !important;
+  border: 0 !important;
+  border-radius: 13px 13px 0 0 !important;
+  background: linear-gradient(100deg, #28573d, #3d7050) !important;
+  color: #fff !important;
+}
+.tears.sheet.actor.character .items-section .items-header * { color: #fff !important; }
+.tears.sheet.actor.character .items-section .item-list { margin: 0 !important; padding: 5px 10px 9px !important; background: transparent !important; }
+.tears.sheet.actor.character .items-section .item-list > .item {
+  display: grid !important;
+  grid-template-columns: minmax(0,1fr) 112px 76px !important;
+  gap: 8px !important;
+  align-items: center !important;
+  min-width: 0 !important;
+  margin: 3px 0 !important;
+  padding: 6px 8px !important;
+  border: 1px solid #e0e8dc !important;
+  border-radius: 10px !important;
+  background: #fffefb !important;
+  color: #121a14 !important;
+}
+.tears.sheet.actor.character .items-section .item-list > .item:hover { border-color: #a8bea4 !important; background: #f2f7ef !important; }
+.tears.sheet.actor.character .items-section .item-name .title,
+.tears.sheet.actor.character .items-section .item-name .name { color: #142018 !important; }
+.tears.sheet.actor.character .items-section .item-quantity input { max-width: 48px !important; border: 1px solid #b7c8b2 !important; border-radius: 7px !important; background: #fff !important; color: #101713 !important; text-align: center !important; }
+.tears.sheet.actor.character .items-section .item-controls a { color: #2a5539 !important; }
+.tears.sheet.actor.character item-list-controls search { border-radius: 12px !important; background: #fffefb !important; }
+
+/* Biography and remaining text fields: remove legacy charcoal blocks. */
+.tears.sheet.actor.character .tab.biography .top,
+.tears.sheet.actor.character .tab.biography .middle,
+.tears.sheet.actor.character .tab.biography .bottom {
+  margin: 0 0 12px !important;
+  padding: 13px 15px !important;
+  background: #fbfcf7 !important;
+  color: #152018 !important;
+}
+.tears.sheet.actor.character .tab.biography h3,
+.tears.sheet.actor.character .tab.biography label { color: #244a32 !important; }
+.tears.sheet.actor.character .tab.biography textarea,
+.tears.sheet.actor.character .tab.biography input,
+.tears.sheet.actor.character .tab.biography .editor-content {
+  min-width: 0 !important;
+  border: 1px solid #b5c7af !important;
+  border-radius: 10px !important;
+  background: #fffefb !important;
+  color: #111913 !important;
+}
+
+/* Item editor and create-item dialog share the same rounded folder treatment. */
+.tears.sheet.item,
+.tears.dialog.htbah-item-create-dialog,
+.tears.htbah-item-create-dialog {
+  max-width: calc(100vw - 20px) !important;
+  min-width: 0 !important;
+  border: 1px solid #aabda5 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 14px 38px rgba(9,26,16,.25) !important;
+}
+.tears.sheet.item .window-content,
+.tears.htbah-item-create-dialog .window-content,
+.tears.dialog.htbah-item-create-dialog .window-content {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  max-height: calc(100vh - 32px) !important;
+  overflow: auto !important;
+  border-radius: 0 0 15px 15px !important;
+  background: var(--tears-paper) !important;
+  color: var(--tears-ink) !important;
+}
+.tears.sheet.item .sheet-header { background: linear-gradient(120deg, #173526, #315f42) !important; color: #fff !important; }
+.tears.sheet.item .sheet-navigation,
+.tears.sheet.item nav.sheet-navigation { display: flex !important; flex-wrap: wrap !important; gap: 6px !important; padding: 8px 12px !important; background: #e5ede1 !important; }
+.tears.sheet.item .sheet-navigation .item { padding: 7px 13px !important; border: 1px solid #b4c6af !important; border-radius: 12px 12px 6px 6px !important; background: #f8fbf5 !important; color: #23452e !important; }
+.tears.sheet.item .sheet-navigation .item.active { background: #28573d !important; border-color: #28573d !important; color: #fff !important; }
+.tears.sheet.item .sidebar-card,
+.tears.sheet.item .tears-item-editor { border: 1px solid #c0d0bb !important; border-radius: 14px !important; background: #fbfcf7 !important; color: #142018 !important; }
+.tears.sheet.item label,
+.tears.sheet.item h3,
+.tears.sheet.item h4 { color: #244a32 !important; }
+.tears.sheet.item input,
+.tears.sheet.item select,
+.tears.sheet.item textarea,
+.tears.htbah-item-create-dialog input,
+.tears.htbah-item-create-dialog select,
+.tears.htbah-item-create-dialog textarea {
+  border: 1px solid #a9bca4 !important;
+  border-radius: 9px !important;
+  background: #fffefb !important;
+  color: #111913 !important;
+}
+.tears.htbah-item-create-dialog .htbah-create-category-grid { grid-template-columns: repeat(auto-fit, minmax(100px,1fr)) !important; gap: 8px !important; }
+.tears.htbah-item-create-dialog .htbah-create-category,
+.tears.htbah-item-create-dialog .htbah-icon-choice {
+  border: 1px solid #aabda5 !important;
+  border-radius: 11px !important;
+  background: #eaf1e6 !important;
+  color: #15241a !important;
+}
+.tears.htbah-item-create-dialog .htbah-create-category.active,
+.tears.htbah-item-create-dialog .htbah-icon-choice.selected { background: #d6e6d1 !important; border-color: #477454 !important; }
+.tears.htbah-item-create-dialog .htbah-icon-grid { grid-template-columns: repeat(auto-fill, minmax(76px,1fr)) !important; max-height: min(34vh, 260px) !important; }
+.tears.htbah-item-create-dialog .form-footer button,
+.tears.htbah-item-create-dialog .dialog-buttons button { border-radius: 10px !important; }
+
+/* Character Builder: smaller viewport-safe window, polished step folders. */
+.tears-character-builder {
+  width: min(1080px, calc(100vw - 24px)) !important;
+  max-width: calc(100vw - 24px) !important;
+  min-width: 0 !important;
+  max-height: calc(100vh - 28px) !important;
+  border: 1px solid #91a98d !important;
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  background: #f5f2e8 !important;
+}
+.tears-character-builder .window-content { width: 100% !important; max-width: 100% !important; min-width: 0 !important; max-height: calc(100vh - 28px) !important; overflow: hidden !important; }
+.tears-character-builder .tears-builder-form { width: 100% !important; max-width: 100% !important; max-height: calc(100vh - 28px) !important; }
+.tears-character-builder .tears-builder-progress button { border-radius: 12px 12px 7px 7px !important; }
+.tears-character-builder .tears-builder-step { max-width: 100% !important; }
+.tears-character-builder .tears-builder-card,
+.tears-character-builder .tears-builder-group-card,
+.tears-character-builder .tears-builder-attribute-card,
+.tears-character-builder .tears-builder-hobby { border-radius: 15px !important; }
+.tears-character-builder .tears-builder-footer { border-radius: 0 0 16px 16px !important; }
+.tears-builder-launch {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 36px !important;
+  margin: 3px 5px !important;
+  padding: 7px 12px !important;
+  border: 1px solid #214936 !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, #326548, #1c432e) !important;
+  color: #fff !important;
+  box-shadow: 0 3px 8px rgba(21,57,34,.16) !important;
+  font: 800 .78rem "Roboto Condensed", sans-serif !important;
+}
+.tears-builder-launch:hover { filter: brightness(1.08); transform: translateY(-1px); }
+
+/* Readable form controls and focus states across every tab. */
+.tears.sheet.actor.character input,
+.tears.sheet.actor.character select,
+.tears.sheet.actor.character textarea,
+.tears.sheet.item input,
+.tears.sheet.item select,
+.tears.sheet.item textarea,
+.tears.dialog input,
+.tears.dialog select,
+.tears.dialog textarea {
+  color: #101713 !important;
+  caret-color: #101713 !important;
+}
+.tears.sheet.actor.character input:focus,
+.tears.sheet.actor.character select:focus,
+.tears.sheet.actor.character textarea:focus,
+.tears.sheet.item input:focus,
+.tears.sheet.item select:focus,
+.tears.sheet.item textarea:focus,
+.tears-character-builder input:focus,
+.tears-character-builder select:focus {
+  outline: 2px solid #679271 !important;
+  outline-offset: 1px !important;
+  box-shadow: 0 0 0 3px rgba(71,116,84,.16) !important;
+}
+.tears.sheet.actor.character .tears-attribute-value,
+.tears.sheet.actor.character .tears-attribute-card input,
+.tears.sheet.actor.character .tears-resource-number,
+.tears.sheet.actor.character .tears-resource-number strong,
+.tears.sheet.actor.character .tears-resource-number input,
+.tears.sheet.actor.character .tears-header-resource-value,
+.tears.sheet.actor.character .tears-combat-stat strong,
+.tears.sheet.actor.character .tears-talent-points,
+.tears.sheet.actor.character .tears-weapon-values strong,
+.tears.sheet.actor.character .item-quantity input { color: #080d09 !important; font-variant-numeric: tabular-nums lining-nums !important; }
+
+@media (max-width: 900px) {
+  .tears.sheet.actor.character .tears-sheet-header { grid-template-columns: 70px minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .tears-sheet-portrait { width: 66px !important; height: 78px !important; }
+  .tears.sheet.actor.character .tears-header-resources { grid-column: 1 / -1 !important; grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .tears.sheet.actor.character .tears-attribute-grid { grid-template-columns: repeat(3,minmax(0,1fr)) !important; }
+  .tears.sheet.actor.character .tears-resource-grid,
+  .tears.sheet.actor.character .tears-talent-groups { grid-template-columns: minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .tears-combat-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width: 620px) {
+  .tears.sheet.actor.character nav.tears-tabs { gap: 5px !important; padding: 7px !important; }
+  .tears.sheet.actor.character nav.tears-tabs > .item { min-width: 0 !important; flex: 1 1 calc(50% - 5px) !important; padding: 7px 8px !important; }
+  .tears.sheet.actor.character .tears-character-fields { grid-template-columns: minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .tears-weapon-list { grid-template-columns: minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .items-section .items-header { grid-template-columns: minmax(0,1fr) 72px 52px !important; }
+  .tears.sheet.actor.character .items-section .item-list > .item { grid-template-columns: minmax(0,1fr) 92px 54px !important; }
+  .tears-character-builder .tears-builder-header { grid-template-columns: 42px minmax(0,1fr) !important; }
+  .tears-character-builder .tears-builder-rule-stamp { display: none !important; }
+  .tears-character-builder .tears-builder-attribute-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .tears-character-builder .tears-builder-talent-groups,
+  .tears-character-builder .tears-builder-field-grid { grid-template-columns: minmax(0,1fr) !important; }
+}
+
+
+/* ========================================================================== */
+/* T.E.A.R.S. 0.1.8 — coherent DSA-inspired character dossier                */
+/* ========================================================================== */
+.tears.sheet.actor.character,
+.tears.sheet.item,
+.tears.dialog.htbah-item-create-dialog,
+.tears-character-builder {
+  border-radius: 18px !important;
+  overflow: hidden !important;
+  border: 1px solid #a9bca4 !important;
+  box-shadow: 0 18px 46px rgba(14, 35, 21, .24) !important;
+}
+
+.tears.sheet.actor.character > .window-content,
+.tears.sheet.item > .window-content,
+.tears-character-builder > .window-content {
+  background: #f4f2e8 !important;
+  color: #142019 !important;
+  border-radius: 0 0 17px 17px !important;
+}
+
+/* Window header: aligned portrait, name block and resources. */
+.tears.sheet.actor.character .tears-sheet-header {
+  display: grid !important;
+  grid-template-columns: 82px minmax(160px, 1fr) minmax(245px, 350px) !important;
+  align-items: center !important;
+  gap: 16px !important;
+  padding: 14px 18px !important;
+  background: linear-gradient(120deg, #183d2b 0%, #24543a 55%, #396c4a 100%) !important;
+  border-bottom: 3px solid #b9a66d !important;
+}
+.tears.sheet.actor.character .tears-sheet-portrait {
+  width: 78px !important;
+  height: 88px !important;
+  border-radius: 15px !important;
+  border: 1px solid #c8d2b1 !important;
+  overflow: hidden !important;
+  background: #e9eee3 !important;
+}
+.tears.sheet.actor.character .tears-sheet-identity { min-width: 0 !important; gap: 4px !important; }
+.tears.sheet.actor.character .tears-sheet-header input.document-name {
+  width: 100% !important; min-width: 0 !important; color: #fff !important;
+  background: transparent !important; border: 0 !important; border-bottom: 1px solid rgba(255,255,255,.25) !important;
+  border-radius: 0 !important; box-shadow: none !important; font: 700 1.55rem/1.2 Georgia,serif !important;
+}
+.tears.sheet.actor.character .tears-sheet-subtitle { color: #e0eadc !important; }
+.tears.sheet.actor.character .tears-header-resources { display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap: 9px !important; min-width: 0 !important; }
+.tears.sheet.actor.character .tears-header-resource {
+  min-width: 0 !important; padding: 8px 10px !important; border: 1px solid rgba(228,237,217,.22) !important;
+  border-radius: 13px !important; background: rgba(10,35,22,.18) !important; color: #fff !important;
+}
+.tears.sheet.actor.character .tears-header-resource-title strong { color: #e5d4a1 !important; }
+.tears.sheet.actor.character .tears-header-resource-title span,
+.tears.sheet.actor.character .tears-header-resource-max { color: #e3eadd !important; }
+.tears.sheet.actor.character .tears-header-resource-value,
+.tears.sheet.actor.character .tears-header-resource input { color: #fff !important; font-weight: 800 !important; }
+.tears.sheet.actor.character .tears-initiative-button {
+  grid-column: 1 / -1 !important; width: 100% !important; min-height: 35px !important;
+  border: 1px solid #d5c48f !important; border-radius: 11px !important;
+  background: rgba(248,246,232,.12) !important; color: #fff !important;
+}
+
+/* Folder-style navigation: no black square buttons. */
+.tears.sheet.actor.character nav.tears-tabs {
+  display: flex !important; flex-wrap: wrap !important; align-items: end !important; gap: 7px !important;
+  min-height: 50px !important; padding: 8px 14px 0 !important; margin: 0 !important;
+  border: 0 !important; border-bottom: 1px solid #c0cfba !important;
+  background: linear-gradient(180deg,#e8eee3,#dce7d7) !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item {
+  display: inline-flex !important; align-items: center !important; justify-content: center !important; gap: 8px !important;
+  min-width: 100px !important; min-height: 36px !important; margin: 0 !important; padding: 8px 14px !important;
+  border: 1px solid #afc1aa !important; border-bottom: 0 !important;
+  border-radius: 14px 14px 5px 5px !important;
+  background: linear-gradient(180deg,#fcfdf9,#e8efe4) !important; color: #31513a !important;
+  box-shadow: 0 2px 5px rgba(22,51,31,.08) !important; text-decoration: none !important;
+  transition: transform .14s ease,background .14s ease,box-shadow .14s ease !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item:hover { transform: translateY(-2px) !important; background: #fff !important; }
+.tears.sheet.actor.character nav.tears-tabs > .item.active {
+  position: relative !important; top: 1px !important; background: #fffef9 !important; color: #1b432d !important;
+  border-color: #94ae91 !important; border-bottom: 1px solid #fffef9 !important;
+  box-shadow: 0 -2px 8px rgba(21,51,30,.08) !important; font-weight: 800 !important;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item.active::after {
+  content: ""; position: absolute; inset: auto 12px -2px; height: 3px; border-radius: 99px; background: #b7a26a;
+}
+.tears.sheet.actor.character nav.tears-tabs > .item.active span,
+.tears.sheet.actor.character nav.tears-tabs > .item.active i { color: #1b432d !important; }
+
+/* Main scroll region must align to the exact same inner grid on every tab. */
+.tears.sheet.actor.character .tears-sheet-body,
+.tears.sheet.actor.character .tears-main-content,
+.tears.sheet.actor.character .tears-tab-body { width: 100% !important; max-width: 100% !important; min-width: 0 !important; min-height: 0 !important; box-sizing: border-box !important; }
+.tears.sheet.actor.character .tears-sheet-body { display: flex !important; flex: 1 1 auto !important; overflow: hidden !important; }
+.tears.sheet.actor.character .tears-main-content { display: flex !important; flex: 1 1 auto !important; overflow: hidden !important; }
+.tears.sheet.actor.character .tears-tab-body { display: block !important; flex: 1 1 auto !important; overflow: auto !important; padding: 0 !important; background: #f4f2e8 !important; }
+.tears.sheet.actor.character .tears-tab-body > .tab { width: 100% !important; max-width: 100% !important; min-width: 0 !important; box-sizing: border-box !important; }
+.tears.sheet.actor.character .tears-character-overview,
+.tears.sheet.actor.character .tears-combat-overview,
+.tears.sheet.actor.character .tab.inventory,
+.tears.sheet.actor.character .tab.effects,
+.tears.sheet.actor.character .tab.biography {
+  width: 100% !important; max-width: 100% !important; min-width: 0 !important;
+  box-sizing: border-box !important; padding: clamp(12px,1.8vw,22px) !important;
+  color: #17231a !important; background-color: #f4f2e8 !important;
+  background-image: repeating-linear-gradient(135deg,rgba(36,77,47,.022) 0 1px,transparent 1px 12px) !important;
+}
+
+/* The common visual language: parchment cards, consistent radii, readable ink. */
+.tears.sheet.actor.character .tears-panel,
+.tears.sheet.actor.character .tears-point-guide,
+.tears.sheet.actor.character .tears-attribute-card,
+.tears.sheet.actor.character .tears-talent-group,
+.tears.sheet.actor.character .tears-combat-stat,
+.tears.sheet.actor.character .tears-weapon-row,
+.tears.sheet.actor.character .tears-resource-panel,
+.tears.sheet.actor.character .tears-profession-profile,
+.tears.sheet.actor.character .tears-stance-controls,
+.tears.sheet.actor.character .items-section,
+.tears.sheet.item .sidebar-card,
+.tears.sheet.item .tears-item-editor {
+  border: 1px solid #c1cdbb !important; border-radius: 15px !important;
+  background: linear-gradient(145deg,#fffefb,#eef3e9) !important; color: #16231a !important;
+  box-shadow: 0 3px 12px rgba(20,52,31,.07),inset 0 1px rgba(255,255,255,.88) !important;
+}
+.tears.sheet.actor.character .tears-panel { margin: 0 0 14px !important; padding: 14px 16px !important; border-top: 3px solid #6d9270 !important; }
+.tears.sheet.actor.character .tears-panel-heading {
+  display: flex !important; align-items: center !important; justify-content: space-between !important;
+  flex-wrap: wrap !important; gap: 8px !important; margin: 0 0 12px !important; padding: 0 0 9px !important;
+  border-bottom: 1px solid #d5dfd0 !important;
+}
+.tears.sheet.actor.character .tears-panel-heading h3 {
+  display: inline-flex !important; align-items: center !important; margin: 0 !important;
+  padding: 6px 12px !important; border: 1px solid #c1d1bc !important; border-radius: 999px !important;
+  background: #e7efe3 !important; color: #244b32 !important; font: 700 .93rem/1.2 Georgia,serif !important;
+}
+.tears.sheet.actor.character .tears-panel-heading > span,
+.tears.sheet.actor.character .tears-panel-heading small { color: #405448 !important; font: 700 .7rem/1.3 "Roboto Condensed",sans-serif !important; }
+.tears.sheet.actor.character .tears-section-heading { display:flex !important; align-items:end !important; justify-content:space-between !important; flex-wrap:wrap !important; gap:10px !important; margin: 0 0 14px !important; padding: 0 0 10px !important; border-bottom: 2px solid #c3d2bd !important; }
+.tears.sheet.actor.character .tears-section-heading h2 { margin: 2px 0 0 !important; color: #1d432d !important; font: 700 1.35rem Georgia,serif !important; }
+.tears.sheet.actor.character .tears-eyebrow { color: #6b7e6d !important; font: 800 .62rem "Roboto Condensed",sans-serif !important; letter-spacing: .15em !important; }
+.tears.sheet.actor.character .tears-rule-hint { padding: 9px 12px !important; border: 1px solid #d2decc !important; border-radius: 11px !important; background: #edf3e9 !important; color: #405246 !important; }
+
+/* Character core values and derived resources align on one responsive grid. */
+.tears.sheet.actor.character .tears-attribute-grid { display: grid !important; grid-template-columns: repeat(6,minmax(0,1fr)) !important; gap: 9px !important; }
+.tears.sheet.actor.character .tears-attribute-card { min-width: 0 !important; padding: 11px 8px !important; border-radius: 14px !important; text-align: center !important; }
+.tears.sheet.actor.character .tears-attribute-card input,
+.tears.sheet.actor.character .tears-attribute-value { display: block !important; width: 100% !important; margin-top: 6px !important; color: #101812 !important; font: 800 1.35rem Georgia,serif !important; text-align: center !important; }
+.tears.sheet.actor.character .tears-resource-grid { display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr)) !important; gap: 12px !important; }
+.tears.sheet.actor.character .tears-resource-number strong,
+.tears.sheet.actor.character .tears-resource-number input { color: #101812 !important; font: 900 1.6rem Georgia,serif !important; }
+
+/* Combat page: all previously dark mystery panels become clear nested cards. */
+.tears.sheet.actor.character .tears-combat-overview,
+.tears.sheet.actor.character .tears-combat-overview section,
+.tears.sheet.actor.character .tears-combat-overview .tears-panel { background-color: transparent !important; }
+.tears.sheet.actor.character .tears-combat-overview .tears-panel { background: linear-gradient(145deg,#fffefb,#eef3e9) !important; }
+.tears.sheet.actor.character .tears-combat-grid { display: grid !important; grid-template-columns: repeat(4,minmax(0,1fr)) !important; gap: 10px !important; }
+.tears.sheet.actor.character .tears-combat-stat { display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important; gap:4px !important; min-width:0 !important; padding:14px 8px !important; border-radius:15px !important; }
+.tears.sheet.actor.character .tears-combat-stat small { color:#48684d !important; font:800 .68rem "Roboto Condensed",sans-serif !important; }
+.tears.sheet.actor.character .tears-combat-stat strong { color:#101812 !important; font:900 1.65rem Georgia,serif !important; }
+.tears.sheet.actor.character .tears-combat-stat span { color:#425247 !important; font-size:.7rem !important; text-align:center !important; }
+.tears.sheet.actor.character .tears-stance-controls { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:10px !important; padding:12px !important; background:#f6f8f2 !important; }
+.tears.sheet.actor.character .tears-stance-controls label { display:flex !important; flex-direction:column !important; gap:5px !important; color:#294a34 !important; font-weight:700 !important; }
+.tears.sheet.actor.character .tears-primary-action { display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:8px !important; min-height:38px !important; padding:8px 14px !important; border:1px solid #315b40 !important; border-radius:12px !important; background:linear-gradient(135deg,#3b704b,#214a33) !important; color:#fff !important; }
+.tears.sheet.actor.character .tears-weapon-list { display:grid !important; grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr)) !important; gap:10px !important; }
+.tears.sheet.actor.character .tears-weapon-row { display:grid !important; grid-template-columns:42px minmax(0,1fr) !important; gap:9px 11px !important; align-items:center !important; padding:12px !important; border-radius:14px !important; }
+.tears.sheet.actor.character .tears-weapon-row img { grid-row:1 / 3 !important; width:40px !important; height:40px !important; object-fit:contain !important; }
+.tears.sheet.actor.character .tears-weapon-row .tears-weapon-values,
+.tears.sheet.actor.character .tears-weapon-row .tears-weapon-actions { grid-column:2 !important; }
+.tears.sheet.actor.character .tears-weapon-values { display:flex !important; flex-wrap:wrap !important; gap:6px 12px !important; color:#405246 !important; }
+.tears.sheet.actor.character .tears-weapon-values strong { color:#101812 !important; }
+.tears.sheet.actor.character .tears-weapon-actions { display:flex !important; flex-wrap:wrap !important; gap:6px !important; }
+.tears.sheet.actor.character .tears-weapon-actions button,
+.tears.sheet.actor.character .tears-roll-button,
+.tears.sheet.actor.character .tears-edit-button { min-width:32px !important; min-height:31px !important; padding:5px 9px !important; border:1px solid #b7c8b0 !important; border-radius:10px !important; background:#e8f0e4 !important; color:#234a32 !important; }
+
+/* Talent rows: three distinct W20 tokens aligned to their three attributes. */
+.tears.sheet.actor.character .tears-talent-groups { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; align-items:start !important; gap:12px !important; }
+.tears.sheet.actor.character .tears-talent-group { min-width:0 !important; overflow:hidden !important; padding:0 !important; border-radius:15px !important; }
+.tears.sheet.actor.character .tears-talent-group > .tears-panel-heading { margin:0 !important; padding:10px 13px !important; background:linear-gradient(100deg,#e8f0e4,#dce8d8) !important; }
+.tears.sheet.actor.character .tears-talent-group > .tears-panel-heading h3 { margin:0 !important; background:transparent !important; border:0 !important; padding:0 !important; }
+.tears.sheet.actor.character .tears-talent-list { padding:4px 12px 10px !important; }
+.tears.sheet.actor.character .tears-talent-row { display:grid !important; grid-template-columns:minmax(0,1fr) auto auto !important; gap:7px !important; align-items:center !important; min-width:0 !important; min-height:54px !important; padding:7px 3px !important; border-bottom:1px solid #e0e9dd !important; }
+.tears.sheet.actor.character .tears-talent-name { display:flex !important; flex-direction:column !important; gap:5px !important; min-width:0 !important; }
+.tears.sheet.actor.character .tears-talent-name > strong { color:#17251b !important; font:700 .78rem "Roboto Condensed",sans-serif !important; }
+.tears.sheet.actor.character .tears-talent-dice-preview { display:flex !important; flex-wrap:wrap !important; gap:4px !important; }
+.tears.sheet.actor.character .tears-talent-die-chip { display:inline-flex !important; align-items:center !important; gap:3px !important; padding:2px 5px !important; border:1px solid #c1d0bb !important; border-radius:7px !important; background:#edf3e9 !important; color:#314d37 !important; line-height:1 !important; }
+.tears.sheet.actor.character .tears-talent-die-chip i { color:#5c8060 !important; font-size:.62rem !important; }
+.tears.sheet.actor.character .tears-talent-die-chip b { color:#425b47 !important; font:800 .57rem "Roboto Condensed",sans-serif !important; }
+.tears.sheet.actor.character .tears-talent-die-chip strong { color:#101812 !important; font:900 .67rem "Roboto",sans-serif !important; font-variant-numeric:tabular-nums !important; }
+.tears.sheet.actor.character .tears-talent-points { color:#101812 !important; font-weight:900 !important; font-variant-numeric:tabular-nums !important; }
+
+/* Inventory category headers read as folders; item rows are nested soft pills. */
+.tears.sheet.actor.character htbah-inventory,
+.tears.sheet.actor.character .inventory-element,
+.tears.sheet.actor.character .inventory-list { display:block !important; width:100% !important; min-width:0 !important; }
+.tears.sheet.actor.character .items-section { overflow:hidden !important; margin:0 0 13px !important; padding:0 !important; border-radius:15px !important; background:#fbfcf8 !important; }
+.tears.sheet.actor.character .items-section .items-header { display:grid !important; grid-template-columns:minmax(0,1fr) 86px 64px !important; align-items:center !important; gap:8px !important; min-height:42px !important; padding:8px 13px !important; border:0 !important; border-radius:14px 14px 0 0 !important; background:linear-gradient(100deg,#315e40,#527b56) !important; color:#fff !important; }
+.tears.sheet.actor.character .items-section .items-header * { color:#fff !important; }
+.tears.sheet.actor.character .items-section .item-list { margin:0 !important; padding:6px 10px 9px !important; background:transparent !important; }
+.tears.sheet.actor.character .items-section .item-list > .item { display:grid !important; grid-template-columns:minmax(0,1fr) 108px 70px !important; gap:8px !important; align-items:center !important; min-width:0 !important; margin:4px 0 !important; padding:7px 9px !important; border:1px solid #e1e9dd !important; border-radius:11px !important; background:#fffefb !important; color:#142019 !important; }
+.tears.sheet.actor.character .items-section .item-list > .item:hover { border-color:#b2c7ab !important; background:#f2f7ef !important; }
+.tears.sheet.actor.character .items-section .item-name .title { color:#17251b !important; }
+.tears.sheet.actor.character .items-section .item-quantity input { max-width:48px !important; border:1px solid #b9cbb3 !important; border-radius:8px !important; background:#fff !important; color:#111913 !important; text-align:center !important; }
+.tears.sheet.actor.character .items-section .item-controls a { color:#315d40 !important; }
+
+/* Submenus and item editor use the same soft green folder language. */
+.tears.sheet.item .window-content { padding:0 !important; overflow:auto !important; }
+.tears.sheet.item .sheet-header { display:flex !important; align-items:center !important; gap:12px !important; padding:12px 16px !important; background:linear-gradient(120deg,#193d2b,#376a49) !important; color:#fff !important; }
+.tears.sheet.item .sheet-header .charname input { color:#fff !important; background:transparent !important; border:0 !important; border-bottom:1px solid rgba(255,255,255,.3) !important; }
+.tears.sheet.item .sheet-navigation,
+.tears.sheet.item nav.sheet-navigation { display:flex !important; flex-wrap:wrap !important; gap:7px !important; padding:9px 13px !important; margin:0 !important; border-bottom:1px solid #c5d2bf !important; background:#e5ede1 !important; }
+.tears.sheet.item .sheet-navigation .item { padding:7px 13px !important; border:1px solid #b8c9b2 !important; border-radius:13px 13px 6px 6px !important; background:#f8faf5 !important; color:#294b34 !important; }
+.tears.sheet.item .sheet-navigation .item.active { background:#fffef9 !important; border-color:#86a486 !important; color:#1e482f !important; }
+.tears.sheet.item .sheet-body { display:grid !important; grid-template-columns:minmax(190px,240px) minmax(0,1fr) !important; gap:14px !important; padding:14px !important; min-width:0 !important; }
+.tears.sheet.item .sidebar { min-width:0 !important; }
+.tears.sheet.item .main-content { min-width:0 !important; }
+.tears.sheet.item .sidebar-card { padding:12px !important; margin-bottom:12px !important; }
+.tears.sheet.item .sidebar-card h3 { margin:0 0 9px !important; color:#244b32 !important; font:700 .93rem Georgia,serif !important; }
+.tears.sheet.item label { display:flex !important; flex-direction:column !important; gap:5px !important; color:#2d5037 !important; font:700 .75rem "Roboto Condensed",sans-serif !important; }
+.tears.sheet.item input,
+.tears.sheet.item select,
+.tears.sheet.item textarea,
+.tears.dialog input,
+.tears.dialog select,
+.tears.dialog textarea,
+.tears-character-builder input,
+.tears-character-builder select,
+.tears-character-builder textarea { min-width:0 !important; border:1px solid #b7c8b1 !important; border-radius:9px !important; background:#fffefb !important; color:#111913 !important; }
+.tears.sheet.item input:focus,
+.tears.sheet.item select:focus,
+.tears.sheet.item textarea:focus,
+.tears-character-builder input:focus,
+.tears-character-builder select:focus { outline:2px solid #6b966f !important; outline-offset:1px !important; }
+.tears-weapon-main-config { margin:12px 0 0 !important; padding:16px !important; border:1px solid #bacbb5 !important; border-top:3px solid #668c68 !important; border-radius:16px !important; background:linear-gradient(145deg,#fffefb,#eff4eb) !important; color:#142019 !important; box-shadow:0 3px 12px rgba(20,52,31,.07) !important; }
+.tears-item-section-heading { display:flex !important; align-items:center !important; gap:10px !important; margin-bottom:14px !important; padding-bottom:10px !important; border-bottom:1px solid #d6e0d1 !important; }
+.tears-item-section-heading h3 { margin:0 !important; color:#20482f !important; font:700 1.05rem Georgia,serif !important; }
+.tears-item-section-heading p { margin:3px 0 0 !important; color:#526354 !important; font-size:.72rem !important; }
+.tears-item-section-mark { display:grid !important; place-items:center !important; width:36px !important; height:36px !important; flex:0 0 36px !important; border-radius:12px !important; background:#e2eddd !important; color:#315d40 !important; }
+.tears-weapon-config-grid { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:12px !important; }
+.tears-item-field { min-width:0 !important; display:flex !important; flex-direction:column !important; gap:6px !important; color:#2a4a33 !important; font:700 .75rem "Roboto Condensed",sans-serif !important; }
+.tears-item-field--wide { grid-column:1 / -1 !important; }
+.tears-item-field em { color:#9b4e2e !important; font-style:normal !important; font-size:.62rem !important; }
+.tears-item-field small { color:#59685a !important; font: .66rem/1.35 "Roboto",sans-serif !important; }
+.tears-item-check { display:flex !important; flex-direction:row !important; align-items:center !important; gap:8px !important; padding:10px 12px !important; border:1px solid #d1ddcc !important; border-radius:10px !important; background:#f5f8f2 !important; }
+.tears-item-check input { accent-color:#315d40 !important; }
+.tears-weapon-config-note { margin:13px 0 0 !important; padding:9px 11px !important; border-radius:10px !important; background:#eaf1e5 !important; color:#405446 !important; font-size:.68rem !important; }
+.tears-weapon-summary-line { display:flex !important; justify-content:space-between !important; gap:8px !important; padding:6px 0 !important; border-bottom:1px solid #e1e9dc !important; color:#526254 !important; font-size:.68rem !important; }
+.tears-weapon-summary-line strong { color:#15231a !important; text-align:right !important; }
+
+/* Character builder: a clear wizard with a fixed footer and tab-like steps. */
+.tears-character-builder {
+  width:min(1080px,calc(100vw - 24px)) !important; max-width:calc(100vw - 24px) !important;
+  min-width:0 !important; max-height:calc(100vh - 24px) !important; background:#f5f2e8 !important;
+}
+.tears-character-builder .window-content { width:100% !important; max-width:100% !important; min-width:0 !important; max-height:calc(100vh - 24px) !important; overflow:hidden !important; padding:0 !important; }
+.tears-character-builder .tears-builder-form { width:100% !important; max-width:100% !important; max-height:calc(100vh - 24px) !important; display:flex !important; flex-direction:column !important; }
+.tears-character-builder .tears-builder-header { flex:0 0 auto !important; border-radius:0 !important; }
+.tears-character-builder .tears-builder-progress { flex:0 0 auto !important; display:grid !important; grid-template-columns:repeat(4,minmax(0,1fr)) !important; gap:7px !important; padding:10px 14px !important; background:#e7eee2 !important; }
+.tears-character-builder .tears-builder-progress button { min-width:0 !important; border:1px solid #bacbb5 !important; border-radius:13px 13px 6px 6px !important; background:#fafbf7 !important; color:#2c4b34 !important; }
+.tears-character-builder .tears-builder-progress button.active { background:#315d40 !important; color:#fff !important; border-color:#315d40 !important; }
+.tears-character-builder .tears-builder-content { flex:1 1 auto !important; min-height:0 !important; overflow:auto !important; padding:18px !important; background:#f5f2e8 !important; }
+.tears-character-builder .tears-builder-footer { flex:0 0 auto !important; display:flex !important; align-items:center !important; justify-content:space-between !important; gap:10px !important; padding:12px 16px !important; border-top:1px solid #c5d2bf !important; background:#e7eee2 !important; }
+.tears-character-builder .tears-builder-card,
+.tears-character-builder .tears-builder-attribute-card,
+.tears-character-builder .tears-builder-group-card,
+.tears-character-builder .tears-builder-hobby { border-radius:15px !important; box-shadow:0 3px 12px rgba(18,49,28,.07) !important; }
+.tears-character-builder .tears-builder-card { border:1px solid #c2d0bd !important; background:#fffefb !important; color:#15231a !important; }
+.tears-character-builder .tears-builder-card h3,
+.tears-character-builder .tears-builder-field > span { color:#264b32 !important; }
+.tears-character-builder .tears-builder-button { min-height:38px !important; border-radius:11px !important; }
+.tears-character-builder .tears-builder-button--primary { background:linear-gradient(135deg,#3d734d,#214a33) !important; color:#fff !important; }
+.tears-builder-launch { display:inline-flex !important; align-items:center !important; justify-content:center !important; gap:7px !important; min-height:34px !important; margin:2px 5px !important; padding:7px 11px !important; border:1px solid #315d40 !important; border-radius:11px !important; background:linear-gradient(135deg,#3d734d,#214a33) !important; color:#fff !important; font:800 .76rem "Roboto Condensed",sans-serif !important; box-shadow:0 2px 6px rgba(20,52,31,.15) !important; cursor:pointer !important; }
+.tears-builder-launch:hover { filter:brightness(1.08) !important; }
+
+/* W20 talent check card: three separate dice, one for each linked attribute. */
+.tears-roll-card { padding:13px !important; border:1px solid #c0cdb9 !important; border-top:3px solid #315d40 !important; border-radius:15px !important; background:linear-gradient(145deg,#fffefb,#eef3e9) !important; color:#17231a !important; box-shadow:0 4px 14px rgba(20,50,30,.08) !important; }
+.tears-roll-card__header { display:flex !important; flex-direction:column !important; gap:3px !important; padding-bottom:10px !important; border-bottom:1px solid #d6e0d1 !important; }
+.tears-roll-card__header strong { color:#214a31 !important; font:700 1.12rem Georgia,serif !important; }
+.tears-roll-card__header span,.tears-roll-card__header small { color:#4c5e50 !important; }
+.tears-roll-row { display:grid !important; grid-template-columns:20px 52px minmax(0,1fr) 38px !important; gap:9px !important; align-items:center !important; padding:9px 2px !important; border-bottom:1px solid #e1e9dd !important; }
+.tears-roll-index { display:grid !important; place-items:center !important; width:20px !important; height:20px !important; border-radius:50% !important; background:#e4ede0 !important; color:#3d6044 !important; font:800 .65rem "Roboto Condensed",sans-serif !important; }
+.tears-roll-dieface { position:relative !important; display:grid !important; place-items:center !important; width:46px !important; height:46px !important; border:1px solid #9db49a !important; border-radius:13px !important; background:linear-gradient(145deg,#fafff7,#dce9d7) !important; color:#315d40 !important; box-shadow:0 2px 5px rgba(25,55,34,.09) !important; }
+.tears-roll-dieface i { position:absolute !important; top:4px !important; font-size:1.15rem !important; opacity:.42 !important; }
+.tears-roll-dieface b { position:relative !important; color:#111a13 !important; font:900 1.03rem Georgia,serif !important; }
+.tears-roll-attribute { display:flex !important; flex-direction:column !important; gap:2px !important; min-width:0 !important; }
+.tears-roll-attribute strong { color:#1d3525 !important; font:800 .78rem "Roboto Condensed",sans-serif !important; }
+.tears-roll-attribute small { color:#5a6a5d !important; font-size:.66rem !important; }
+.tears-roll-row.success .tears-roll-deficit { color:#2d7042 !important; font-weight:900 !important; }
+.tears-roll-row.failure .tears-roll-deficit { color:#a34635 !important; font-weight:900 !important; }
+.tears-roll-summary,.tears-roll-card__summary { display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important; gap:8px !important; margin-top:10px !important; }
+.tears-roll-card__summary > div { padding:8px !important; border:1px solid #d1ddcc !important; border-radius:10px !important; background:#f6f8f2 !important; text-align:center !important; }
+.tears-roll-card__summary small { display:block !important; color:#56675a !important; font-size:.62rem !important; }
+.tears-roll-card__summary strong { display:block !important; color:#121b14 !important; font:900 1.05rem Georgia,serif !important; }
+.tears-roll-outcome { margin-top:10px !important; padding:9px 12px !important; border-radius:11px !important; font:800 .82rem "Roboto Condensed",sans-serif !important; text-align:center !important; }
+.tears-roll-outcome.is-success { background:#e3f0e1 !important; color:#205b34 !important; }
+.tears-roll-outcome.is-failure { background:#f6e8e3 !important; color:#873d32 !important; }
+
+/* Numeric ink, input contrast and responsive layout. */
+.tears.sheet.actor.character input,
+.tears.sheet.actor.character select,
+.tears.sheet.actor.character textarea,
+.tears.sheet.item input,
+.tears.sheet.item select,
+.tears.sheet.item textarea,
+.tears.dialog input,
+.tears.dialog select,
+.tears.dialog textarea { color:#111913 !important; caret-color:#111913 !important; }
+.tears.sheet.actor.character .tears-attribute-card input,
+.tears.sheet.actor.character .tears-resource-number,
+.tears.sheet.actor.character .tears-resource-number strong,
+.tears.sheet.actor.character .tears-resource-number input,
+.tears.sheet.actor.character .tears-combat-stat strong,
+.tears.sheet.actor.character .tears-talent-points,
+.tears.sheet.actor.character .tears-weapon-values strong,
+.tears.sheet.actor.character .item-quantity input { color:#090f0b !important; font-variant-numeric:tabular-nums lining-nums !important; }
+@media (max-width: 900px) {
+  .tears.sheet.actor.character .tears-sheet-header { grid-template-columns:70px minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .tears-sheet-portrait { width:66px !important; height:76px !important; }
+  .tears.sheet.actor.character .tears-header-resources { grid-column:1 / -1 !important; }
+  .tears.sheet.actor.character .tears-attribute-grid { grid-template-columns:repeat(3,minmax(0,1fr)) !important; }
+  .tears.sheet.actor.character .tears-resource-grid,
+  .tears.sheet.actor.character .tears-talent-groups { grid-template-columns:minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .tears-combat-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+@media (max-width: 650px) {
+  .tears.sheet.actor.character nav.tears-tabs { gap:5px !important; padding:7px !important; }
+  .tears.sheet.actor.character nav.tears-tabs > .item { flex:1 1 calc(50% - 5px) !important; min-width:0 !important; padding:7px !important; }
+  .tears.sheet.actor.character .tears-character-fields,
+  .tears.sheet.actor.character .tears-stance-controls { grid-template-columns:minmax(0,1fr) !important; }
+  .tears.sheet.actor.character .tears-weapon-list { grid-template-columns:minmax(0,1fr) !important; }
+  .tears.sheet.item .sheet-body { grid-template-columns:minmax(0,1fr) !important; }
+  .tears.sheet.item .sidebar { display:none !important; }
+  .tears-weapon-config-grid { grid-template-columns:minmax(0,1fr) !important; }
+  .tears-item-field--wide { grid-column:auto !important; }
+  .tears-character-builder .tears-builder-progress { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .tears-character-builder .tears-builder-content { padding:12px !important; }
+  .tears-character-builder .tears-builder-field-grid,
+  .tears-character-builder .tears-builder-hobby-grid,
+  .tears-character-builder .tears-builder-review-grid,
+  .tears-character-builder .tears-builder-derived { grid-template-columns:minmax(0,1fr) !important; }
+  .tears-character-builder .tears-builder-attribute-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+}
+
+
+/* T.E.A.R.S. 0.1.9 — single horizontal top navigation and restored sheet pages. */
+.tears.sheet.actor.character .window-content { overflow: hidden !important; min-height: 0 !important; }
+.tears.sheet.actor.character form.tears-sheet {
+  display: flex !important; flex-direction: column !important; position: relative !important;
+  width: 100% !important; height: 100% !important; min-height: 0 !important;
+  overflow: hidden !important; gap: 0 !important;
+}
+.tears.sheet.actor.character .tears-sheet-header {
+  position: relative !important; inset: auto !important; flex: 0 0 auto !important;
+  width: 100% !important; margin: 0 !important;
+}
+.tears.sheet.actor.character nav.tabs.tears-tabs {
+  position: relative !important; inset: auto !important; left: auto !important; right: auto !important;
+  top: auto !important; bottom: auto !important; transform: none !important;
+  display: flex !important; flex: 0 0 auto !important; flex-direction: row !important;
+  align-items: end !important; justify-content: flex-start !important; flex-wrap: nowrap !important;
+  width: 100% !important; min-width: 0 !important; min-height: 54px !important; height: auto !important;
+  margin: 0 !important; padding: 9px 16px 0 !important; gap: 8px !important;
+  overflow-x: auto !important; overflow-y: hidden !important; z-index: 5 !important;
+  border: 0 !important; border-bottom: 1px solid #b7c9b4 !important;
+  background: linear-gradient(180deg,#e6eee3 0%,#dce7d8 100%) !important;
+  box-shadow: inset 0 -1px 0 rgba(41,77,48,.08) !important;
+}
+.tears.sheet.actor.character nav.tabs.tears-tabs > .item {
+  position: relative !important; display: inline-flex !important; flex: 0 0 auto !important;
+  align-items: center !important; justify-content: center !important; gap: 8px !important;
+  width: auto !important; min-width: 112px !important; max-width: none !important;
+  min-height: 42px !important; height: 42px !important; margin: 0 !important;
+  padding: 9px 15px !important; border: 1px solid #b8c8b3 !important;
+  border-bottom: 0 !important; border-radius: 15px 15px 0 0 !important;
+  background: linear-gradient(180deg,#fcfdf9 0%,#eaf1e6 100%) !important;
+  color: #2a4932 !important; box-shadow: 0 2px 5px rgba(25,55,34,.07) !important;
+  text-decoration: none !important; white-space: nowrap !important; opacity: 1 !important;
+}
+.tears.sheet.actor.character nav.tabs.tears-tabs > .item::after { content: none !important; display:none !important; }
+.tears.sheet.actor.character nav.tabs.tears-tabs > .item:hover {
+  transform: translateY(-1px) !important; background: #fff !important; color:#183d28 !important;
+}
+.tears.sheet.actor.character nav.tabs.tears-tabs > .item.active {
+  top: 1px !important; min-height: 46px !important; height: 46px !important;
+  border-color: #91ad8d !important; border-bottom: 1px solid #f8f6ed !important;
+  border-radius: 15px 15px 0 0 !important; background: #f8f6ed !important;
+  color: #173e29 !important; box-shadow: 0 -2px 8px rgba(27,66,39,.08) !important;
+}
+.tears.sheet.actor.character nav.tabs.tears-tabs .item i,
+.tears.sheet.actor.character nav.tabs.tears-tabs .item htbah-icon { color: currentColor !important; }
+.tears.sheet.actor.character nav.tabs.tears-tabs .item span {
+  display:inline !important; color:currentColor !important; font:700 .77rem/1.1 "Roboto Condensed",sans-serif !important;
+}
+.tears.sheet.actor.character .tears-sheet-body {
+  position: relative !important; inset: auto !important; top:auto !important; bottom:auto !important;
+  display: flex !important; flex: 1 1 auto !important; flex-direction: column !important;
+  width: 100% !important; height: auto !important; min-height: 0 !important;
+  margin: 0 !important; padding: 0 !important; overflow: hidden !important;
+  border-radius: 0 0 14px 14px !important;
+}
+.tears.sheet.actor.character .tears-sheet-body .tears-main-content,
+.tears.sheet.actor.character .tears-sheet-body .main-content.tears-main-content {
+  position: relative !important; inset: auto !important; top:auto !important; bottom:auto !important;
+  display: flex !important; flex: 1 1 auto !important; flex-direction: column !important;
+  grid-template-columns: none !important; gap: 0 !important;
+  width: 100% !important; height: 100% !important; min-width: 0 !important; min-height: 0 !important;
+  margin: 0 !important; padding: 0 !important; overflow: hidden !important;
+}
+.tears.sheet.actor.character .tears-tab-body {
+  position: relative !important; display:block !important; flex:1 1 auto !important;
+  width:100% !important; height:100% !important; min-width:0 !important; min-height:0 !important;
+  margin:0 !important; padding:0 !important; overflow-y:auto !important; overflow-x:hidden !important;
+  background:#f4f1e7 !important; scrollbar-width:thin !important;
+}
+.tears.sheet.actor.character .tears-tab-body > .tab {
+  display:none !important; position:relative !important; width:100% !important; max-width:100% !important;
+  min-width:0 !important; min-height:100% !important; margin:0 !important; padding:0 !important;
+  overflow:visible !important; box-sizing:border-box !important;
+}
+.tears.sheet.actor.character .tears-tab-body > .tab.active:not([hidden]) { display:block !important; }
+.tears.sheet.actor.character .tears-tab-body > .tab[hidden] { display:none !important; }
+.tears.sheet.actor.character .tears-character-overview,
+.tears.sheet.actor.character .tears-combat-overview,
+.tears.sheet.actor.character .tears-talents-overview,
+.tears.sheet.actor.character .tab.inventory,
+.tears.sheet.actor.character .tab.effects,
+.tears.sheet.actor.character .tab.biography {
+  width:100% !important; max-width:100% !important; min-width:0 !important;
+  min-height:100% !important; box-sizing:border-box !important;
+  padding:clamp(14px,1.7vw,24px) !important; color:#17231a !important;
+  background-color:#f4f1e7 !important;
+  background-image:repeating-linear-gradient(135deg,rgba(36,77,47,.025) 0 1px,transparent 1px 14px) !important;
+}
+.tears.sheet.actor.character .tears-talents-overview .tears-talent-groups {
+  display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  align-items:start !important; gap:14px !important; width:100% !important;
+}
+.tears.sheet.actor.character .tears-talent-group {
+  width:100% !important; min-width:0 !important; border:1px solid #d5dfce !important;
+  border-radius:16px !important; background:#fffdf7 !important;
+  box-shadow:0 3px 12px rgba(28,57,35,.055) !important; overflow:hidden !important;
+}
+.tears.sheet.actor.character .tears-talent-row {
+  display:grid !important; grid-template-columns:minmax(0,1fr) 54px auto auto !important;
+  align-items:center !important; gap:9px !important; padding:8px 10px !important;
+  border-bottom:1px solid #e5eadf !important; background:transparent !important;
+}
+.tears.sheet.actor.character .tears-talent-row:last-child { border-bottom:0 !important; }
+.tears.sheet.actor.character .tears-talent-status--weapon {
+  display:inline-flex !important; align-items:center !important; gap:5px !important;
+  padding:4px 8px !important; border:1px solid #d8cba9 !important; border-radius:999px !important;
+  background:#f7f1df !important; color:#604c25 !important; font:700 .66rem "Roboto Condensed",sans-serif !important;
+  white-space:nowrap !important;
+}
+.tears.sheet.actor.character .tears-talent-status--weapon i { font-size:.7rem !important; }
+.tears.sheet.actor.character .tears-tab-body .items-section {
+  margin:0 0 14px !important; border:1px solid #d4dfce !important;
+  border-radius:16px !important; background:#fffdf7 !important;
+  box-shadow:0 3px 12px rgba(28,57,35,.055) !important; overflow:hidden !important;
+}
+.tears.sheet.actor.character .tears-tab-body .items-header {
+  min-height:38px !important; padding:7px 12px !important;
+  border:0 !important; border-bottom:1px solid #d7e1d1 !important;
+  background:linear-gradient(180deg,#e7efe3,#dce8d7) !important;
+  color:#193d29 !important; border-radius:0 !important;
+}
+.tears.sheet.actor.character .tears-tab-body .item-list .item,
+.tears.sheet.actor.character .tears-tab-body .conditions-list .condition {
+  border-bottom:1px solid #e4e9de !important; color:#17231a !important;
+}
+.tears.sheet.actor.character .tears-tab-body .conditions-list .condition {
+  display:flex !important; align-items:center !important; gap:12px !important;
+  padding:10px 12px !important; margin:5px 8px !important;
+  border:1px solid #d9e2d3 !important; border-radius:13px !important;
+  background:#f8faf4 !important;
+}
+.tears.sheet.actor.character .tears-section-heading { margin-bottom:14px !important; }
+.tears.sheet.actor.character .tears-panel { border-radius:16px !important; }
+.tears.sheet.actor.character .tears-point-guide { border-radius:14px !important; }
+.tears.sheet.actor.character .create-child { position:absolute !important; right:20px !important; bottom:18px !important; z-index:10 !important; }
+@media (max-width: 900px) {
+  .tears.sheet.actor.character .tears-talents-overview .tears-talent-groups { grid-template-columns:1fr !important; }
+}
+@media (max-width: 760px) {
+  .tears.sheet.actor.character nav.tabs.tears-tabs { flex-wrap:nowrap !important; padding:7px 9px 0 !important; }
+  .tears.sheet.actor.character nav.tabs.tears-tabs > .item { min-width:max-content !important; padding:8px 11px !important; }
+  .tears.sheet.actor.character .tears-talent-row { grid-template-columns:minmax(0,1fr) 48px auto !important; }
+}

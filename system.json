@@ -1,8 +1,8 @@
 {
   "id": "tears",
-  "title": "T.E.A.R.S. - Version 0.1.4",
-  "description": "T.E.A.R.S. Foundry VTT system. Version 0.1.4 fixes Foundry V14 numeric clamping, safer item creation defaults, and exact weapon-talent selection. It retains the forest-green UI, crosshatched parchment background, and high-contrast numeric fields. Version 0.1.3 harmonizes the interface with a forest-green and sage palette, a subtle crosshatched parchment background, and high-contrast black numeric fields across the character sheet, inventory and item dialogs.",
-  "version": "0.1.4",
+  "title": "T.E.A.R.S. – Version 0.1.9",
+  "description": "T.E.A.R.S. Foundry VTT: top navigation with Character, Talents, Combat, Inventory, Conditions and Background tabs; restored inventory/conditions views; deduplicated talents and fixed character-builder ApplicationV2 state collision.",
+  "version": "0.1.9",
   "authors": [
     {
       "name": "T.E.A.R.S. System Conversion"
@@ -71,12 +71,13 @@
       ],
       "paths": [
         "lang",
-        "templates",
+        "module/apps",
         "module/components",
         "module/documents",
         "module/helpers",
         "module/managers",
-        "module/sheets"
+        "module/sheets",
+        "templates"
       ]
     }
   }

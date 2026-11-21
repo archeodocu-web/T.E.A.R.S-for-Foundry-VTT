@@ -644,7 +644,7 @@
     },
     "TalentGroups": {
       "Physical": "Körperliche Talente",
-      "Combat": "Kampf/Waffen-Talente",
+      "Combat": "Kampf- und Waffentalente",
       "Motor": "Motorische Talente",
       "Mental": "Geistige Talente",
       "Social": "Soziale/Gesellschaftliche Talente"
@@ -657,7 +657,7 @@
       "Group": "Talentgruppe",
       "TP": "TP",
       "SharedPoolHint": "Der Talentwert ist ein gemeinsamer Punktepool für die drei Attributwürfe. Er wird bei einer Probe nicht verbraucht.",
-      "CombatResolution": "Kampf-/Waffenfertigkeit; separate Kampfauflösung",
+      "CombatResolution": "Kampftechnik / Waffe",
       "Combat": "Kampf",
       "CombatOnly": "Kampf-/Waffentalent ohne reguläre 3-W20-Talentprobe",
       "AttributeOne": "Attribut 1",
@@ -669,7 +669,9 @@
       "PointBudget": "Punktebudget",
       "PointsRemaining": "TP frei",
       "OverBudget": "Punktebudget überschritten",
-      "PointBudgetNote": "Je Talentgruppe stehen 10 Grundpunkte zur Verfügung. Berufs- und Hobbyboni können in v0.1 über das Punktebudget ergänzt werden."
+      "PointBudgetNote": "Je Talentgruppe gibt es 10 Grund-TP plus die Berufsboni und 5 frei zugeordnete Berufspunkte. Ein berufstypisches Talent erhält einen Grundwert von 5; die Hobbys geben +5 bzw. +3 auf passende Talente. Positive Spezifika kosten Talentpunkte aus derselben Rubrik; negative Spezifika wenden den gedruckten Malus auf ihre Rubrik an. Waffentalente kosten 2 TP je Talentwertpunkt.",
+      "WeaponTalent": "Waffentalent",
+      "WeaponTalentInfo": "Über eine zugeordnete Waffe; keine normale Drei-W20-Probe"
     },
     "Details": {
       "Profession": "Beruf",
@@ -677,10 +679,17 @@
       "HobbyOne": "Hobby 1",
       "HobbyTwo": "Hobby 2",
       "PositiveSpecificum": "Positives Spezifikum",
-      "NegativeSpecificum": "Negatives Spezifikum",
+      "NegativeSpecificum": "Negatives Spezifikum (Beruf)",
+      "HobbyNegativeSpecificum": "Zusätzlicher Hobby-Nachteil",
       "Background": "Charakterdaten",
       "ProfessionCategory": "Berufskategorie",
-      "ProfessionProfile": "Attributprofil des Berufs (Zielwerte)"
+      "ProfessionProfile": "Attributprofil des Berufs (Zielwerte)",
+      "ProfessionTalent": "Beruflich geprägtes Talent",
+      "HobbyOneTalent": "Talent zu Hobby 1",
+      "HobbyTwoTalent": "Talent zu Hobby 2",
+      "VariableTalentGroup": "Talentgruppe für die 5 freien Berufspunkte",
+      "SpecialAbilities": "Sonderfähigkeiten",
+      "SpecialAbilityPointsSpent": "Ausgegebene Punkte für Sonderfähigkeiten"
     },
     "Professions": {
       "Physical": "Körperliche Berufe",
@@ -694,10 +703,11 @@
     },
     "Tabs": {
       "Character": "Charakter",
-      "Combat": "Kampf",
-      "Inventory": "Ausrüstung",
+      "Combat": "Kampf & Waffen",
+      "Inventory": "Inventar",
       "Conditions": "Zustände",
-      "Notes": "Hintergrund"
+      "Notes": "Hintergrund",
+      "Talents": "Talente"
     },
     "Combat": {
       "DerivedValues": "Abgeleitete Kampfwerte",
@@ -812,14 +822,14 @@
     "PointGuide": {
       "Title": "Wie verteile ich Punkte?",
       "AttributesTitle": "1. Grundattribute",
-      "AttributesText": "Alle sechs Attribute starten bei 8. Addiere zuerst die Berufsboni. Danach verteilst du 14 Steigerungspunkte. Die Kosten steigen mit dem erreichten Wert: Bereich 1–14 kostet 1 Punkt je Steigerung, Bereich 14–17 kostet 2 und Bereich 17–19 kostet 3.",
+      "AttributesText": "Alle sechs Attribute starten bei 8. Zuerst werden die Attributwerte der Berufsgruppe gesetzt. Danach verteilst du genau 14 zusätzliche Steigerungspunkte: jede Steigerung bis einschließlich 14 kostet 1 Punkt, Steigerungen über 14 bis 17 kosten je 2 Punkte und Steigerungen über 17 bis 19 je 3 Punkte.",
       "TalentsTitle": "2. Talentpunkte",
-      "TalentsText": "Du erhältst 10 TP für jede der fünf Talentgruppen. Verteile diese Punkte innerhalb der Gruppe auf einzelne Talente. Danach kommen die Talentpunkte deines Berufs sowie +5 TP für das erste Hobby und +3 TP für das zweite Hobby auf passende Talente hinzu.",
+      "TalentsText": "Jede der fünf Talentgruppen beginnt mit 10 TP. Dazu kommen die Berufsboni der gewählten Berufsgruppe und 5 frei zugeordnete Berufspunkte. Außerdem erhält ein berufstypisches Einzeltalent +5 TP. Das erste Hobby gibt +5, das zweite +3 auf jeweils ein passendes Talent. Positive und negative Spezifika verändern das Budget ihrer Talentgruppe entsprechend dem angegebenen Plus oder Minus.",
       "WeaponTitle": "Waffentalente",
-      "WeaponText": "Eine Steigerung eines Waffentalents um 1 kostet 2 TP statt 1 TP.",
+      "WeaponText": "Waffentalente haben keine drei Attributwerte. Jede Steigerung um 1 Talentwert kostet 2 TP. Waffen müssen mit dem passenden Waffentalent verbunden werden; der Talentwert wird auf Angriff (ATN/ATD) und Parade verteilt.",
       "ChecksTitle": "3. Proben",
       "ChecksText": "Bei einer normalen Talentprobe würfelst du drei W20 gegen die drei zugeordneten Attribute. Der Talentwert ist ein gemeinsamer Puffer für alle drei Würfe und wird nicht verbraucht.",
-      "ManualNote": "Hinweis zu dieser Version: Berufs- und Hobbyboni werden noch nicht automatisch berechnet. Erhöhe das Punktebudget der passenden Talentgruppe und trage die Talentwerte manuell ein."
+      "ManualNote": "Der Charakter-Builder setzt Berufsprofile, die 14 Attributpunkte, Talentgruppenbudgets, das berufstypische +5-Talent, Hobbyboni und Spezifika regelkonform um. Nicht verteilte Talentpunkte können für prä-katastrophale Sonderfähigkeiten verwendet werden. Die Motorrad-Zusatzqualifikation setzt den Autoführerschein voraus."
     }
   }
 }

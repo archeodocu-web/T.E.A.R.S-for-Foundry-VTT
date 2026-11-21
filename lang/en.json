@@ -675,7 +675,7 @@
       "Group": "Talent group",
       "TP": "TP",
       "SharedPoolHint": "The talent value is a shared pool used to offset the three attribute rolls. It is not spent when a check is made.",
-      "CombatResolution": "Combat/weapon proficiency; separate combat resolution",
+      "CombatResolution": "Combat technique / weapon",
       "Combat": "Combat",
       "CombatOnly": "Combat/weapon talent without a regular three-W20 talent check",
       "AttributeOne": "Attribute 1",
@@ -687,7 +687,9 @@
       "PointBudget": "Talent point budget",
       "PointsRemaining": "TP remaining",
       "OverBudget": "Talent point budget exceeded",
-      "PointBudgetNote": "Each talent group starts with 10 base points. Profession and hobby bonuses can be added through the group budget in v0.1."
+      "PointBudgetNote": "Each talent group starts with 10 base TP plus profession bonuses and 5 freely assigned profession TP. One profession-related talent receives a base value of 5; hobbies add +5 and +3 to fitting talents. Positive specifica cost TP from the same group; negative specifica apply their printed malus to their group. Weapon talents cost 2 TP per talent value point.",
+      "WeaponTalent": "Weapon talent",
+      "WeaponTalentInfo": "Resolved through an assigned weapon; not a standard three-d20 check"
     },
     "Details": {
       "Profession": "Profession",
@@ -695,10 +697,17 @@
       "HobbyOne": "Hobby 1",
       "HobbyTwo": "Hobby 2",
       "PositiveSpecificum": "Positive specificum",
-      "NegativeSpecificum": "Negative specificum",
+      "NegativeSpecificum": "Negative specificum (profession)",
+      "HobbyNegativeSpecificum": "Additional hobby drawback",
       "Background": "Character details",
       "ProfessionCategory": "Profession category",
-      "ProfessionProfile": "Profession attribute profile (targets)"
+      "ProfessionProfile": "Profession attribute profile (targets)",
+      "ProfessionTalent": "Profession-related talent",
+      "HobbyOneTalent": "Talent for hobby 1",
+      "HobbyTwoTalent": "Talent for hobby 2",
+      "VariableTalentGroup": "Talent group for the 5 free profession points",
+      "SpecialAbilities": "Special abilities",
+      "SpecialAbilityPointsSpent": "Points spent on special abilities"
     },
     "Professions": {
       "Physical": "Physical professions",
@@ -712,10 +721,11 @@
     },
     "Tabs": {
       "Character": "Character",
-      "Combat": "Combat",
-      "Inventory": "Equipment",
+      "Combat": "Combat & Weapons",
+      "Inventory": "Inventory",
       "Conditions": "Conditions",
-      "Notes": "Background"
+      "Notes": "Background",
+      "Talents": "Talents"
     },
     "Combat": {
       "DerivedValues": "Derived combat values",
@@ -828,16 +838,16 @@
       "SecondsRemaining": "Seconds remaining"
     },
     "PointGuide": {
-      "Title": "How do I distribute points?",
-      "AttributesTitle": "1. Attributes",
-      "AttributesText": "All six attributes start at 8. Apply profession bonuses first. Then distribute 14 advancement points. The cost rises with the target value: values 1–14 cost 1 point per increase, 14–17 cost 2, and 17–19 cost 3.",
+      "Title": "How do I spend points?",
+      "AttributesTitle": "1. Core attributes",
+      "AttributesText": "All six attributes start at 8. First apply the attribute profile for the profession group. Then distribute exactly 14 additional attribute points: each increase up to 14 costs 1 point, increases above 14 through 17 cost 2 points each, and increases above 17 through 19 cost 3 points each.",
       "TalentsTitle": "2. Talent points",
-      "TalentsText": "You receive 10 TP for each of the five talent groups. Distribute these points among talents within each group. Then add profession talent points, plus 5 TP for the first hobby and 3 TP for the second hobby to suitable hobby talents.",
+      "TalentsText": "Each of the five talent groups starts with 10 TP. Add the profession-group bonuses and 5 freely assigned profession points. One profession-related talent also receives +5 TP. The first hobby grants +5 and the second +3 to a fitting talent. Positive and negative specifica modify the budget of their talent group by the printed plus or minus value.",
       "WeaponTitle": "Weapon talents",
-      "WeaponText": "Increasing a weapon talent by 1 costs 2 TP instead of 1 TP.",
+      "WeaponText": "Weapon talents have no three-attribute check. Each +1 increase costs 2 TP. A weapon must be linked to the matching weapon talent; its value is allocated between attack and parry.",
       "ChecksTitle": "3. Checks",
-      "ChecksText": "A regular talent check rolls three W20 against the three assigned attributes. The talent value is one shared buffer for all three rolls and is not consumed.",
-      "ManualNote": "Version note: Profession and hobby bonuses are not calculated automatically yet. Increase the budget for the relevant talent group and enter talent values manually."
+      "ChecksText": "For a normal talent check, roll three d20s against the three assigned attributes. The talent value is one shared buffer for all three rolls and is not consumed.",
+      "ManualNote": "The guided builder applies profession profiles, the 14 attribute points, talent-group budgets, the +5 profession talent, hobby bonuses and specifica. Unspent talent points can purchase pre-catastrophe special abilities. The motorcycle add-on requires the car licence."
     }
   }
 }
