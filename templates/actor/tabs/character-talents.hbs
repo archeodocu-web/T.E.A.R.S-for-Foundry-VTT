@@ -38,7 +38,10 @@
                 <span class="tears-talent-points">{{talent.tearsEffectiveValue}}</span>
               {{/if}}
               {{#if talent.tearsProfessionBonus}}
-                <small class="tears-hobby-bonus-tag">+{{talent.tearsProfessionBonus}} Beruf</small>
+                <small class="tears-hobby-bonus-tag">Berufsgrundwert {{talent.tearsProfessionBonus}}</small>
+              {{/if}}
+              {{#if talent.tearsProfessionVariableBonus}}
+                <small class="tears-hobby-bonus-tag">+{{talent.tearsProfessionVariableBonus}} freie Berufspunkte</small>
               {{/if}}
               {{#if talent.tearsHobbyBonus}}
                 <small class="tears-hobby-bonus-tag">+{{talent.tearsHobbyBonus}} Hobby</small>

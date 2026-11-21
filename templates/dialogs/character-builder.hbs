@@ -1,4 +1,4 @@
-<form class="tears-builder-form" data-action="submit" autocomplete="off">
+<form class="tears-builder-form" data-builder-form autocomplete="off" novalidate>
   <header class="tears-builder-header">
     <div class="tears-builder-mark"><i class="fas fa-compass-drafting"></i></div>
     <div class="tears-builder-title">
@@ -82,20 +82,22 @@
           <div class="tears-builder-hobby-grid">
             <div class="tears-builder-hobby">
               <div class="tears-builder-hobby-bonus">+5 TP</div>
-              <label class="tears-builder-field"><span>Erstes Hobby</span><input type="text" data-field="hobbyOne" value="{{state.hobbyOne}}" placeholder="z. B. Klettern, Kochen …"></label>
-              <label class="tears-builder-field"><span>Passendes Talent</span>
-                <select data-field="hobbyOneTalent"><option value="">Talent auswählen …</option>{{#each talentOptions as |talent|}}<option value="{{talent.name}}" {{#if talent.selectedHobbyOne}}selected{{/if}}>{{talent.name}} · {{talent.group}}</option>{{/each}}</select>
+              <label class="tears-builder-field"><span>Wie heißt dein erstes Hobby?</span><input type="text" data-field="hobbyOne" value="{{state.hobbyOne}}" placeholder="z. B. Klettern, Kochen, Musik …" autocomplete="off"></label>
+              <label class="tears-builder-field"><span>Welches Talent wird dadurch besser?</span>
+                <select data-field="hobbyOneTalent"><option value="">Bitte ein Talent auswählen …</option>{{#each talentOptions as |talent|}}<option value="{{talent.name}}" {{#if talent.selectedHobbyOne}}selected{{/if}}>{{talent.name}} · {{talent.group}}</option>{{/each}}</select>
+                <small>Das erste Hobby gibt +5 auf dieses Talent. Zusätzlich wählst du später einen Nachteil aus derselben Talentgruppe.</small>
               </label>
             </div>
             <div class="tears-builder-hobby">
               <div class="tears-builder-hobby-bonus">+3 TP</div>
-              <label class="tears-builder-field"><span>Zweites Hobby</span><input type="text" data-field="hobbyTwo" value="{{state.hobbyTwo}}" placeholder="Optionales zweites Hobby"></label>
-              <label class="tears-builder-field"><span>Passendes Talent</span>
-                <select data-field="hobbyTwoTalent"><option value="">Talent auswählen …</option>{{#each talentOptions as |talent|}}<option value="{{talent.name}}" {{#if talent.selectedHobbyTwo}}selected{{/if}}>{{talent.name}} · {{talent.group}}</option>{{/each}}</select>
+              <label class="tears-builder-field"><span>Wie heißt dein zweites Hobby? (optional)</span><input type="text" data-field="hobbyTwo" value="{{state.hobbyTwo}}" placeholder="z. B. Gärtnern, Fotografie …" autocomplete="off"></label>
+              <label class="tears-builder-field"><span>Welches Talent wird dadurch besser?</span>
+                <select data-field="hobbyTwoTalent"><option value="">Bitte ein Talent auswählen …</option>{{#each talentOptions as |talent|}}<option value="{{talent.name}}" {{#if talent.selectedHobbyTwo}}selected{{/if}}>{{talent.name}} · {{talent.group}}</option>{{/each}}</select>
+                <small>Das zweite Hobby gibt +3 auf dieses Talent.</small>
               </label>
             </div>
           </div>
-          <p class="tears-builder-hint">Das erste Hobby gibt +5, das zweite +3 auf jeweils ein passendes Talent. Die Hobbys sind frei wählbar und können unterschiedlich intensiv betrieben werden. Für das erste Hobby muss zusätzlich ein Nachteil aus der Rubrik des gewählten Talents gewählt werden.</p>
+          <p class="tears-builder-hint">Hobbys sind frei wählbar: Gib eine eigene Bezeichnung ein und ordne jeweils ein passendes T.E.A.R.S.-Talent zu. Das erste Hobby gibt +5, das zweite +3. Für das erste Hobby ist außerdem ein Nachteil aus der Rubrik des zugeordneten Talents erforderlich – dafür gibt es keinen zusätzlichen Bonus.</p>
         </section>
       </section>
     {{/if}}
@@ -116,7 +118,7 @@
             <label class="tears-builder-attribute-card">
               <span class="tears-builder-attribute-abbr">{{attribute.abbreviation}}</span>
               <span class="tears-builder-attribute-name">{{attribute.label}}</span>
-              <small>Berufsstart: {{attribute.base}}</small>
+              <small>Start {{attribute.base}} · +{{attribute.increase}} · Kosten {{attribute.cost}} AP</small>
               <input type="number" min="{{attribute.base}}" max="19" step="1" data-field="attributes.{{attribute.key}}" value="{{attribute.value}}">
             </label>
           {{/each}}
@@ -128,7 +130,7 @@
             <span>Über 14 bis 17</span><strong>2 Punkte je Steigerung</strong>
             <span>Über 17 bis 19</span><strong>3 Punkte je Steigerung</strong>
           </div>
-          <p class="tears-builder-hint">Die Kosten werden für jeden erreichten Wert einzeln berechnet. Beispiel: von 14 auf 15 kostet die Steigerung 2 Punkte. Insgesamt müssen genau 14 Punkte verteilt werden.</p>
+          <p class="tears-builder-hint">Die Kosten werden für jeden erreichten Wert einzeln berechnet. Beispiel: von 13 auf 18 kostet die Steigerung 10 AP (1 + 2 + 2 + 2 + 3). Von 14 auf 15 kostet sie 2 AP. Insgesamt müssen genau 14 AP verteilt werden.</p>
         </section>
       </section>
     {{/if}}
@@ -138,18 +140,32 @@
         <div class="tears-builder-section-title">
           <span>03 / TALENTE & SPEZIFIKA</span>
           <h2>Verteile deine Talentpunkte</h2>
-          <p>Jede Talentgruppe beginnt mit 10 TP. Berufsboni und die 5 frei zugeordneten Berufspunkte verändern die Gruppenbudgets. Zusätzlich erhält ein berufstypisches Einzeltalent +5 TP; Hobbys geben +5 bzw. +3 auf jeweils ein passendes Talent.</p>
+          <p>Jede Talentgruppe beginnt mit 10 TP. Berufsboni, deine Verteilung der 5 freien Berufspunkte und positive bzw. negative Spezifika verändern die Gruppenbudgets. Das berufstypische Talent erhält einen Grundwert von 5; Hobbys geben +5 bzw. +3 auf die zugeordneten Talente.</p>
         </div>
+
+        <section class="tears-builder-card tears-builder-variable-card">
+          <div class="tears-builder-card-heading"><i class="fas fa-sliders"></i><div><h3>5 variable Berufspunkte auf Talente verteilen</h3><p>Diese fünf Extrapunkte werden direkt in einzelne Talente investiert – nicht in eine ganze Talentgruppe. Dasselbe Talent darf mehrfach gewählt werden.</p></div></div>
+          <div class="tears-builder-variable-grid tears-builder-variable-grid--talents">
+            {{#each variableProfessionPointRows as |row|}}
+              <label class="tears-builder-variable-row"><span>Bonuspunkt {{row.number}}</span>
+                <select data-field="variableProfessionSelections.{{row.slot}}" aria-label="Variable Berufspunkte {{row.number}}">
+                  <option value="">Noch nicht zugeordnet</option>
+                  {{#each row.options as |option|}}
+                    <option value="{{option.name}}" {{#if option.selected}}selected{{/if}}>{{option.name}} · {{option.group}} · {{option.cost}} TP je Steigerung</option>
+                  {{/each}}
+                </select>
+              </label>
+            {{/each}}
+          </div>
+          <div class="tears-builder-variable-total"><span>Verbrauch</span><strong data-live-variable-profession-points>{{variableProfessionPointsSpent}} / 5 TP eingesetzt</strong><span>Verfügbar: <b data-live-variable-profession-remaining>{{variableProfessionPointsRemaining}}</b></span></div>
+          <p class="tears-builder-hint">Normale Talente kosten 1 TP je zusätzlichem Talentpunkt, Waffentalente 2 TP. Du kannst einen Bonuspunkt leer lassen, solange die gewichteten Kosten insgesamt genau 5 TP ergeben.</p>
+        </section>
 
         <div class="tears-builder-field-grid">
           <label class="tears-builder-field">
-            <span>5 frei verteilbare Berufspunkte</span>
-            <select data-field="variableTalentGroup"><option value="">Talentgruppe wählen …</option>{{#each groupData as |group|}}<option value="{{group.key}}" {{#if (eq ../state.variableTalentGroup group.key)}}selected{{/if}}>{{group.label}}</option>{{/each}}</select>
-          </label>
-          <label class="tears-builder-field">
             <span>Positives Spezifikum</span>
-            <select data-field="positiveSpecificum"><option value="">Spezifikum wählen …</option>{{#each positiveOptions as |option|}}<option value="{{option.name}}" {{#if option.selected}}selected{{/if}}>{{option.name}} · {{option.group}} · kostet {{option.points}} TP</option>{{/each}}</select>
-            <small>Die Kosten werden aus dem Talentpunktebudget derselben Rubrik bezahlt.</small>
+            <select data-field="positiveSpecificum"><option value="">Spezifikum wählen …</option>{{#each positiveOptions as |option|}}<option value="{{option.name}}" {{#if option.selected}}selected{{/if}}>{{option.name}} · {{option.group}} · +{{option.points}} TP</option>{{/each}}</select>
+            <small>Ein positives Spezifikum erhöht das Talentpunktebudget seiner Rubrik um den angegebenen Wert.</small>
           </label>
           <label class="tears-builder-field">
             <span>Negatives Spezifikum</span>
@@ -172,7 +188,7 @@
               <div class="tears-builder-talent-list">
                 {{#each group.talents as |talent|}}
                   <label class="tears-builder-talent-row">
-                    <span><strong>{{talent.name}}</strong><small>{{#if talent.weapon}}Waffentalent · 2 TP je Talentpunkt{{else}}{{talent.attributes}}{{/if}}{{#if talent.professionFloor}} · Berufsgrundwert 5{{/if}}{{#if talent.hobbyBonus}} · Hobbybonus +{{talent.hobbyBonus}}{{/if}} · Effektiver Wert {{talent.effectiveValue}}</small></span>
+                    <span><strong>{{talent.name}}</strong><small>{{#if talent.weapon}}Waffentalent · 2 TP je Talentpunkt{{else}}{{talent.attributes}}{{/if}}{{#if talent.professionFloor}} · Berufsgrundwert 5{{/if}}{{#if talent.variableProfessionBonus}} · Variable Berufspunkte +{{talent.variableProfessionBonus}}{{/if}}{{#if talent.hobbyBonus}} · Hobbybonus +{{talent.hobbyBonus}}{{/if}} · Effektiver Wert {{talent.effectiveValue}}</small></span>
                     <input type="number" min="0" step="1" data-field="talents.{{talent.index}}" value="{{talent.value}}" aria-label="Talentwert {{talent.name}}">
                   </label>
                 {{/each}}
@@ -214,6 +230,7 @@
             {{#each groupData as |group|}}
               <div class="tears-builder-review-line"><span>{{group.label}}</span><strong>{{group.spent}} / {{group.budget}} TP</strong></div>
             {{/each}}
+            <div class="tears-builder-review-line"><span>Variable Berufspunkte</span><strong>{{variableProfessionPointsSpent}} / 5 TP</strong></div>
             <div class="tears-builder-review-line"><span>Sonderfähigkeiten</span><strong>{{specialAbilityCost}} TP</strong></div>
           </section>
           <section class="tears-builder-card">
@@ -231,7 +248,7 @@
           <div><span>Lebensenergie (LE)</span><strong>{{reviewLifeEnergy}}</strong></div>
           <div><span>Geistige Gesundheit (GG)</span><strong>{{reviewMentalHealth}}</strong></div>
         </div>
-        <p class="tears-builder-hint">Die Talentwerte werden in den Charakterbogen übernommen. Die Hobbyboni bleiben als separate, nicht aus dem Gruppenbudget bezahlte Talentboni gespeichert.</p>
+        <p class="tears-builder-hint">Die Talentwerte werden in den Charakterbogen übernommen. Berufsgrundwert, variable Berufspunkte und Hobbyboni werden separat gespeichert und nicht vom Gruppenbudget abgezogen.</p>
       </section>
     {{/if}}
   </main>
