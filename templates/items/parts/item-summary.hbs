@@ -1,0 +1,8 @@
+<div class="item-summary tears-item-summary">
+  {{#if description}}<div class="item-description">{{{description}}}</div>{{/if}}
+  {{#if properties}}
+    <ul class="item-properties">
+      {{#each properties as |property|}}<li>{{property}}</li>{{/each}}
+    </ul>
+  {{/if}}
+</div>

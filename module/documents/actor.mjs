@@ -1,4 +1,4 @@
-import { SYSTEM_ID, TEARS_DEFAULT_TALENTS, normalizeTearsWeaponTalentName } from "../helpers/config.mjs";
+import { SYSTEM_ID, TEARS_DEFAULT_TALENTS, inferTearsWeaponTalentName, normalizeTearsWeaponTalentName } from "../helpers/config.mjs";
 import { d10Roll } from "../dice/dice.mjs";
 
 
@@ -24,24 +24,45 @@ export class HowToBeAHeroActor extends Actor {
    */
   _prepareTearsTalents() {
     this.talentGroupData = {};
-    const talents = this.items.filter(item => item.type === "ability");
+    const talentsByName = new Map();
+    for (const item of this.items.filter(item => item.type === "ability")) {
+      const key = String(normalizeTearsWeaponTalentName(item.name) || item.name).trim().toLocaleLowerCase("de");
+      if (!talentsByName.has(key)) talentsByName.set(key, item);
+    }
+    const talents = Array.from(talentsByName.values());
 
     for (const [key, definition] of Object.entries(CONFIG.TEARS.talentGroups)) {
       const groupTalents = talents
         .filter(item => String(item.system?.talentGroup ?? "physical") === key)
         .sort((a, b) => a.name.localeCompare(b.name, "de"));
-      const totalPoints = groupTalents.reduce((sum, item) => sum + (Number(item.system?.value) || 0), 0);
+      const totalPoints = groupTalents.reduce((sum, item) => {
+        const value = Math.max(0, Number(item.system?.value) || 0);
+        // Weapon talents cost two Talentpunkte for each point of talent value.
+        return sum + value * (item.system?.isWeaponTalent === true ? 2 : 1);
+      }, 0);
       const poolPoints = Number(this.system?.talentPools?.[key] ?? 10);
 
       for (const talent of groupTalents) {
         const system = talent.system ?? {};
+        talent.tearsHobbyBonus = Math.max(0, Number(system.hobbyBonus) || 0);
+        talent.tearsProfessionBonus = Math.max(0, Number(system.professionBonus) || 0);
+        // The profession rule sets a selected talent to a base value of 5;
+        // it is a floor, not an additional +5 stacked on top of allocated TP.
+        talent.tearsEffectiveValue = Math.max(Math.max(0, Number(system.value) || 0), talent.tearsProfessionBonus) + talent.tearsHobbyBonus;
+        const checkPenalty = this._getTearsCheckPenalty();
         talent.tearsAttributes = system.isWeaponTalent ? [] : [system.attribute1, system.attribute2, system.attribute3]
           .filter(Boolean)
-          .map(attribute => ({
-            key: attribute,
-            abbreviation: CONFIG.TEARS.attributes[attribute]?.abbreviation ?? String(attribute).toUpperCase(),
-            label: game.i18n.localize(CONFIG.TEARS.attributes[attribute]?.label ?? attribute)
-          }));
+          .map(attribute => {
+            const value = Number(this.system?.attributes?.[attribute]) || 0;
+            return {
+              key: attribute,
+              abbreviation: CONFIG.TEARS.attributes[attribute]?.abbreviation ?? String(attribute).toUpperCase(),
+              label: game.i18n.localize(CONFIG.TEARS.attributes[attribute]?.label ?? attribute),
+              value,
+              target: Math.max(0, value - checkPenalty.total),
+              penalty: checkPenalty.total
+            };
+          });
         talent.isTearsWeaponTalent = system.isWeaponTalent === true || talent.tearsAttributes.length !== 3;
       }
 
@@ -108,27 +129,77 @@ export class HowToBeAHeroActor extends Actor {
     return { lifePenalty, mentalPenalty, total: lifePenalty + mentalPenalty, panic: gg < 10 };
   }
 
+  async ensureTearsTalentItems() {
+    if (!["character", "npc"].includes(this.type) || (!game.user.isGM && !this.isOwner)) return [];
+    const existingAbilities = this.items.filter(item => item.type === "ability");
+    const canonicalNames = new Set(TEARS_DEFAULT_TALENTS.map(talent => talent.name.toLocaleLowerCase("de")));
+    const matchesByName = new Map();
+
+    // Group legacy rows by canonical name. Old migrations sometimes created a second
+    // row instead of updating the existing one; keep the highest saved value and
+    // remove only duplicate copies of the 50 canonical rulebook talents.
+    for (const item of existingAbilities) {
+      const normalizedName = normalizeTearsWeaponTalentName(String(item.name ?? "").trim()) || String(item.name ?? "").trim();
+      const key = normalizedName.toLocaleLowerCase("de");
+      if (!canonicalNames.has(key)) continue;
+      if (!matchesByName.has(key)) matchesByName.set(key, []);
+      matchesByName.get(key).push(item);
+    }
+
+    const details = this.system?.details ?? {};
+    const professionTalentName = String(details.professionTalent ?? "").trim();
+    const hobbyOneTalentName = String(details.hobbyOneTalent ?? "").trim();
+    const hobbyTwoTalentName = String(details.hobbyTwoTalent ?? "").trim();
+    const hasBuilderMetadata = Boolean(details.builderVersion || professionTalentName || hobbyOneTalentName || hobbyTwoTalentName);
+    const additions = [];
+    const updates = [];
+    const duplicatesToDelete = [];
+
+    for (const talent of TEARS_DEFAULT_TALENTS) {
+      const key = talent.name.toLocaleLowerCase("de");
+      const matches = matchesByName.get(key) ?? [];
+      const existing = matches[0];
+      const professionBonus = professionTalentName && normalizeTearsWeaponTalentName(professionTalentName) === talent.name
+        && details.professionCategory !== "unemployed" ? 5 : 0;
+      const hobbyBonus = (hobbyOneTalentName && normalizeTearsWeaponTalentName(hobbyOneTalentName) === talent.name ? 5 : 0)
+        + (hobbyTwoTalentName && normalizeTearsWeaponTalentName(hobbyTwoTalentName) === talent.name ? 3 : 0);
+
+      if (!existing) {
+        additions.push({
+          name: talent.name, type: "ability", img: "icons/svg/d20-grey.svg",
+          system: { description: "", talentGroup: talent.talentGroup, attribute1: talent.attribute1,
+            attribute2: talent.attribute2, attribute3: talent.attribute3, isWeaponTalent: talent.isWeaponTalent,
+            value: talent.value, hobbyBonus, professionBonus, formula: talent.isWeaponTalent ? "" : "3d20" }
+        });
+        continue;
+      }
+
+      const mergedValue = Math.max(0, ...matches.map(item => Number(item.system?.value) || 0));
+      const mergedHobbyBonus = Math.max(0, ...matches.map(item => Number(item.system?.hobbyBonus) || 0), hobbyBonus);
+      const mergedProfessionBonus = Math.max(0, ...matches.map(item => Number(item.system?.professionBonus) || 0), professionBonus);
+      const patch = { _id: existing.id };
+      if (existing.name !== talent.name) patch.name = talent.name;
+      const canonicalFields = { talentGroup: talent.talentGroup, attribute1: talent.attribute1,
+        attribute2: talent.attribute2, attribute3: talent.attribute3, isWeaponTalent: talent.isWeaponTalent, value: mergedValue };
+      canonicalFields.professionBonus = hasBuilderMetadata ? mergedProfessionBonus : Math.max(0, Number(existing.system?.professionBonus) || 0);
+      canonicalFields.hobbyBonus = hasBuilderMetadata ? mergedHobbyBonus : Math.max(0, Number(existing.system?.hobbyBonus) || 0);
+      for (const [field, value] of Object.entries(canonicalFields)) {
+        if (existing.system?.[field] !== value) patch[`system.${field}`] = value;
+      }
+      if (Object.keys(patch).length > 1) updates.push(patch);
+      duplicatesToDelete.push(...matches.slice(1).map(item => item.id));
+    }
+
+    if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
+    if (additions.length) await this.createEmbeddedDocuments("Item", additions);
+    if (duplicatesToDelete.length) await this.deleteEmbeddedDocuments("Item", duplicatesToDelete);
+    return Array.from(this.items).filter(item => item.type === "ability");
+  }
+
   async _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
     if (userId !== game.user.id || !["character", "npc"].includes(this.type)) return;
-    if (this.items.some(item => item.type === "ability")) return;
-
-    const items = TEARS_DEFAULT_TALENTS.map(talent => ({
-      name: talent.name,
-      type: "ability",
-      img: "icons/svg/d20-grey.svg",
-      system: {
-        description: "",
-        talentGroup: talent.talentGroup,
-        attribute1: talent.attribute1,
-        attribute2: talent.attribute2,
-        attribute3: talent.attribute3,
-        isWeaponTalent: talent.isWeaponTalent,
-        value: talent.value,
-        formula: talent.isWeaponTalent ? "" : "3d20"
-      }
-    }));
-    await this.createEmbeddedDocuments("Item", items);
+    await this.ensureTearsTalentItems();
   }
 
   _prepareCharacterData() {
@@ -301,7 +372,10 @@ export class HowToBeAHeroActor extends Actor {
     }
 
     const totalDeficit = rolls.reduce((sum, result) => sum + result.deficit, 0);
-    const talentPoints = Number(talent.system.value) || 0;
+    const allocatedTalentPoints = Number(talent.system.value) || 0;
+    const hobbyBonus = Number(talent.system.hobbyBonus) || 0;
+    const professionBase = Number(talent.system.professionBonus) || 0;
+    const talentPoints = Math.max(allocatedTalentPoints, professionBase) + hobbyBonus;
     const effectivePoints = Math.max(0, talentPoints);
     const success = totalDeficit <= effectivePoints;
     const escapedActor = Handlebars.escapeExpression(this.name);
@@ -309,9 +383,15 @@ export class HowToBeAHeroActor extends Actor {
     const groupLabel = Handlebars.escapeExpression(game.i18n.localize(CONFIG.TEARS.talentGroups[talent.system.talentGroup]?.label ?? ""));
     const rows = rolls.map((entry, index) => {
       const attrLabel = Handlebars.escapeExpression(game.i18n.localize(CONFIG.TEARS.attributes[entry.attribute].label));
+      const attrAbbr = Handlebars.escapeExpression(CONFIG.TEARS.attributes[entry.attribute].abbreviation ?? String(entry.attribute).toUpperCase());
       const state = entry.deficit === 0 ? "success" : "failure";
       const targetText = entry.rawTarget === entry.target ? `${entry.target}` : `${entry.rawTarget} → ${entry.target}`;
-      return `<div class="tears-roll-row ${state}"><span class="tears-roll-index">${index + 1}</span><strong>${attrLabel}</strong><span class="tears-roll-die">${entry.result}</span><span class="tears-roll-target">/ ${targetText}</span><span class="tears-roll-deficit">${entry.deficit ? `+${entry.deficit}` : "✓"}</span></div>`;
+      return `<div class="tears-roll-row ${state}">
+        <span class="tears-roll-index">${index + 1}</span>
+        <span class="tears-roll-dieface" aria-label="W20-Ergebnis ${entry.result}"><i class="fas fa-dice-d20" aria-hidden="true"></i><b>${entry.result}</b></span>
+        <span class="tears-roll-attribute"><strong>${attrAbbr} · ${attrLabel}</strong><small>Attributwert ${targetText}</small></span>
+        <span class="tears-roll-deficit">${entry.deficit ? `+${entry.deficit}` : "✓"}</span>
+      </div>`;
     }).join("");
 
     const penaltyText = penalties.total
@@ -376,6 +456,10 @@ export class HowToBeAHeroActor extends Actor {
     if (!this.isOwner && !game.user.isGM) return null;
     if (!["attack", "parry"].includes(action)) return null;
 
+    // Older HTBAH/T.E.A.R.S. actors may contain only a partial set of
+    // abilities. Repair them before resolving the weapon-to-talent link.
+    const talentItems = await this.ensureTearsTalentItems();
+
     const penalties = this._getTearsCheckPenalty();
     if (penalties.panic) {
       ui.notifications.warn(game.i18n.localize("TEARS.PanicNoChecks"));
@@ -394,19 +478,48 @@ export class HowToBeAHeroActor extends Actor {
     // A weapon category can be linked to the corresponding combat talent by
     // using its exact talent name in the weapon category field. This prevents
     // silently allocating more weapon TP than the character has learned.
-    const weaponTalentName = normalizeTearsWeaponTalentName(weapon.system?.weaponType).toLocaleLowerCase("de");
-    const linkedTalent = weaponTalentName
-      ? this.items.find(item => item.type === "ability" && normalizeTearsWeaponTalentName(item.name).toLocaleLowerCase("de") === weaponTalentName)
-      : null;
+    const legacyCandidates = [
+      weapon.system?.weaponType,
+      weapon.system?.weaponTalent,
+      weapon.system?.weaponCategory,
+      weapon.system?.category
+    ].map(value => String(value ?? "").trim()).filter(Boolean);
+    let canonicalWeaponType = legacyCandidates.map(inferTearsWeaponTalentName).find(Boolean) ?? "";
+
+    // For older records that used only the item name, infer a category only
+    // from unambiguous weapon words. Do not guess for generic names.
+    if (!canonicalWeaponType) canonicalWeaponType = inferTearsWeaponTalentName(weapon.name);
+
+    if (!canonicalWeaponType) {
+      ui.notifications.warn("Diese Waffe braucht eine T.E.A.R.S.-Waffentalent-Zuordnung. Bitte wähle sie im geöffneten Waffenbogen aus.");
+      await weapon.sheet?.render(true);
+      await new Promise(resolve => requestAnimationFrame(() => resolve()));
+      const selector = weapon.sheet?.element?.querySelector('select[name="system.weaponType"]');
+      selector?.classList.add("tears-weapon-needs-talent");
+      selector?.focus();
+      selector?.scrollIntoView?.({ block: "center", behavior: "smooth" });
+      return null;
+    }
+
+    if (weapon.system?.weaponType !== canonicalWeaponType) {
+      await weapon.update({ "system.weaponType": canonicalWeaponType });
+    }
+    const weaponTalentName = canonicalWeaponType.toLocaleLowerCase("de");
+    const linkedTalent = talentItems.find(item => item.type === "ability" && normalizeTearsWeaponTalentName(item.name).toLocaleLowerCase("de") === weaponTalentName)
+      ?? Array.from(this.items).find(item => item.type === "ability" && normalizeTearsWeaponTalentName(item.name).toLocaleLowerCase("de") === weaponTalentName);
+    const definition = TEARS_DEFAULT_TALENTS.find(talent => talent.name.toLocaleLowerCase("de") === weaponTalentName);
+    const isWeaponTalent = definition?.isWeaponTalent === true || linkedTalent?.system?.isWeaponTalent === true;
+    const talentValue = Math.max(Number(linkedTalent?.system?.value) || 0, Number(linkedTalent?.system?.professionBonus) || 0)
+      + (Number(linkedTalent?.system?.hobbyBonus) || 0);
     const allocatedPoints = (Number(weapon.system?.attackValue) || 0) + (Number(weapon.system?.parryValue) || 0);
-    if (!linkedTalent || linkedTalent.system?.isWeaponTalent !== true) {
+    if (!linkedTalent || !isWeaponTalent) {
       ui.notifications.warn(game.i18n.localize("TEARS.Combat.WeaponTalentRequired"));
       return null;
     }
-    if (allocatedPoints > (Number(linkedTalent.system?.value) || 0)) {
+    if (allocatedPoints > talentValue) {
       ui.notifications.warn(game.i18n.format("TEARS.Combat.AllocationExceedsTalent", {
         allocated: allocatedPoints,
-        talent: Number(linkedTalent.system?.value) || 0,
+        talent: talentValue,
         name: linkedTalent.name
       }));
       return null;

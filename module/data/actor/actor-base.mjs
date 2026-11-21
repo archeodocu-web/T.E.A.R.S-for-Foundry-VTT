@@ -65,8 +65,8 @@ static defineSchema() {
     })
   });
 
-  // Starting talent budget: 10 points per group from the core rulebook.
-  // Profession/hobby bonuses can be incorporated by adjusting these budgets in v0.1.
+  // Starting talent budget: 10 points per group. Character creation writes
+  // profession and specificum adjustments into these per-group pool values.
   schema.talentPools = new fields.SchemaField({
     physical: new fields.NumberField({...requiredInteger, initial: 10, min: 0}),
     combat: new fields.NumberField({...requiredInteger, initial: 10, min: 0}),
@@ -81,11 +81,19 @@ static defineSchema() {
     alignment: new fields.StringField({label: "HOW_TO_BE_A_HERO.Details.Alignment"}),
     appearance: new fields.StringField({required: true, blank: true, label: "HOW_TO_BE_A_HERO.Details.Appearance"}),
     profession: new fields.StringField({blank: true, label: "TEARS.Details.Profession"}),
+    professionTalent: new fields.StringField({blank: true, label: "TEARS.Details.ProfessionTalent"}),
     professionCategory: new fields.StringField({blank: true, label: "TEARS.Details.ProfessionCategory"}),
     hobbyOne: new fields.StringField({blank: true, label: "TEARS.Details.HobbyOne"}),
+    hobbyOneTalent: new fields.StringField({blank: true, label: "TEARS.Details.HobbyOneTalent"}),
     hobbyTwo: new fields.StringField({blank: true, label: "TEARS.Details.HobbyTwo"}),
+    hobbyTwoTalent: new fields.StringField({blank: true, label: "TEARS.Details.HobbyTwoTalent"}),
+    variableTalentGroup: new fields.StringField({blank: true, label: "TEARS.Details.VariableTalentGroup"}),
     positiveSpecificum: new fields.StringField({blank: true, label: "TEARS.Details.PositiveSpecificum"}),
     negativeSpecificum: new fields.StringField({blank: true, label: "TEARS.Details.NegativeSpecificum"}),
+    hobbyNegativeSpecificum: new fields.StringField({blank: true, label: "TEARS.Details.HobbyNegativeSpecificum"}),
+    specialAbilities: new fields.StringField({blank: true, label: "TEARS.Details.SpecialAbilities"}),
+    specialAbilityPointsSpent: new fields.NumberField({...requiredInteger, initial: 0, min: 0, label: "TEARS.Details.SpecialAbilityPointsSpent"}),
+    builderVersion: new fields.StringField({initial: "", blank: true}),
     wealth: new fields.NumberField({...requiredInteger, initial: 0, label: "HOW_TO_BE_A_HERO.Details.Wealth"}),
     age: new fields.NumberField({label: "HOW_TO_BE_A_HERO.Details.Age"})
   });

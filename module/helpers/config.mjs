@@ -60,19 +60,66 @@ HOW_TO_BE_A_HERO.professionCategories = {
   unemployed: "TEARS.Professions.Unemployed"
 };
 
-// Starting attribute targets shown for each profession category in the
-// supplied profession reference. v0.1 displays these as guidance rather than
-// silently overwriting an actor's already-entered attributes.
+// Profession starting values from the supplied T.E.A.R.S. profession profiles.
+// The character builder uses these as baselines before the 14-point buy.
 HOW_TO_BE_A_HERO.professionAttributeProfiles = {
   physical: { kk: 13, au: 11 },
   handcraft: { ge: 13, kk: 11 },
   customer: { ch: 13, ge: 11 },
   creative: { mb: 13, in: 11 },
   thinking: { in: 13, mb: 11 },
-  military: { au: 12, ge: 12 },
+  military: { au: 12, ge: 10 },
   medical: { ge: 13, in: 11 },
   unemployed: { au: 11, ch: 11, in: 9, ge: 9 }
 };
+
+/** Profession talent-point bonuses transcribed from the T.E.A.R.S. profession tables (pp. 19-22). */
+HOW_TO_BE_A_HERO.professionTalentBonuses = {
+  physical: { physical: 30, motor: 10, variable: 5, negativeGroup: "mental" },
+  handcraft: { motor: 30, physical: 10, variable: 5, negativeGroup: "mental" },
+  customer: { social: 30, motor: 10, variable: 5, negativeGroup: "physical" },
+  creative: { mental: 20, motor: 10, social: 10, variable: 5, negativeGroup: "physical" },
+  thinking: { mental: 30, social: 10, variable: 5, negativeGroup: "motor" },
+  military: { combat: 30, motor: 10, variable: 5, negativeGroup: "social" },
+  medical: { motor: 20, social: 10, mental: 10, variable: 5, negativeGroup: "combat" },
+  unemployed: { social: 10, mental: 10, motor: 10, physical: 5, combat: 5, variable: 5, negativeGroup: null }
+};
+
+/**
+ * Positive and negative specifica from the tables on rulebook pp. 32-35.
+ * `points` retains the printed sign and is applied to the matching talent-group budget.
+ */
+export const TEARS_SPECIFICA = {
+  physical: {
+    positive: [{ name: "Haudrauf", points: 5 }, { name: "Wurstfinger", points: 3 }],
+    negative: [{ name: "Mehr Bums", points: -5 }, { name: "Mit einem Bein auf der Hölle", points: -10 }]
+  },
+  combat: {
+    positive: [{ name: "Sir Shake-a-lot", points: 5 }, { name: "Die verdammte Sicherung", points: 3 }],
+    negative: [{ name: "Tief durchatmen", points: -5 }, { name: "Querschläger deluxe", points: -10 }]
+  },
+  motor: {
+    positive: [{ name: "Grobmotoriker", points: 5 }, { name: "Schmutzige Finger", points: 3 }],
+    negative: [{ name: "Improvisationstalent", points: -10 }, { name: "Noch mal auf Anfang", points: -5 }]
+  },
+  mental: {
+    positive: [{ name: "Schussel", points: 5 }, { name: "WirrWarr", points: 3 }],
+    negative: [{ name: "Harte Nuss", points: -10 }, { name: "Querdenker", points: -5 }]
+  },
+  social: {
+    positive: [{ name: "Sturkopf", points: 5 }, { name: "Lustmolch", points: 3 }, { name: "Gier", points: 3 }],
+    negative: [{ name: "Promibonus", points: -10 }, { name: "Respektsperson", points: -5 }]
+  }
+};
+
+/** Pre-catastrophe special abilities and their stated costs in Talentpunkten (rulebook p. 30). */
+export const TEARS_SPECIAL_ABILITIES = [
+  { key: "carLicence", name: "Führerschein Auto", points: 3 },
+  { key: "motorcycleLicence", name: "Motorradführerschein (zusätzlich)", points: 2 },
+  { key: "smallAircraftLicence", name: "Flugschein Kleinmaschinen", points: 12 },
+  { key: "sailingLicence", name: "Segelschein", points: 12 },
+  { key: "otherLicence", name: "Sonstige Führerscheine", points: 25 }
+];
 
 /**
  * Starter talents taken from the supplied T.E.A.R.S. rulebook, pp. 24-27.
@@ -156,6 +203,11 @@ export const TEARS_WEAPON_TALENTS = TEARS_DEFAULT_TALENTS
 const TEARS_WEAPON_TALENT_ALIASES = {
   "klinge": "Klingenwaffen",
   "klingenwaffe": "Klingenwaffen",
+  "schwert": "Klingenwaffen",
+  "säbel": "Klingenwaffen",
+  "saebel": "Klingenwaffen",
+  "dolch": "Klingenwaffen",
+  "messer": "Klingenwaffen",
   "pistole": "Schusswaffen Pistolen",
   "pistolen": "Schusswaffen Pistolen",
   "gewehr": "Schusswaffen Gewehre",
@@ -163,7 +215,12 @@ const TEARS_WEAPON_TALENT_ALIASES = {
   "bogen": "Bögen",
   "wurfwaffe": "Wurfwaffen",
   "nahkampfwaffe stumpf": "Nahkampfwaffen stumpf",
+  "keule": "Nahkampfwaffen stumpf",
+  "knüppel": "Nahkampfwaffen stumpf",
+  "knueppel": "Nahkampfwaffen stumpf",
   "nahkampfwaffe spitz": "Nahkampfwaffen spitz",
+  "speer": "Nahkampfwaffen spitz",
+  "lanze": "Nahkampfwaffen spitz",
   "faustkampf": "Ringen/Faustkampf",
   "ringen": "Ringen/Faustkampf"
 };
@@ -175,6 +232,30 @@ export function normalizeTearsWeaponTalentName(value) {
   const exact = TEARS_WEAPON_TALENTS.find(talent => talent.name.toLocaleLowerCase("de") === raw.toLocaleLowerCase("de"));
   if (exact) return exact.name;
   return TEARS_WEAPON_TALENT_ALIASES[raw.toLocaleLowerCase("de")] ?? raw;
+}
+
+/** Resolve canonical T.E.A.R.S. weapon talents from legacy category fields or explicit weapon names. */
+export function inferTearsWeaponTalentName(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+  const normalized = normalizeTearsWeaponTalentName(raw);
+  const known = TEARS_WEAPON_TALENTS.find(talent => talent.name.toLocaleLowerCase("de") === normalized.toLocaleLowerCase("de"));
+  if (known) return known.name;
+
+  // Only infer from specific weapon words; leave generic labels for manual choice.
+  const name = raw.toLocaleLowerCase("de");
+  const rules = [
+    [/pistole|revolver/, "Schusswaffen Pistolen"],
+    [/gewehr|flinte|büchse|buechse/, "Schusswaffen Gewehre"],
+    [/bogen|armbrust/, "Bögen"],
+    [/schwert|säbel|saebel|klinge|dolch|messer/, "Klingenwaffen"],
+    [/keule|knüppel|knueppel|schlagstock/, "Nahkampfwaffen stumpf"],
+    [/speer|lanze|spieß|spiess/, "Nahkampfwaffen spitz"],
+    [/wurfwaffe|wurfaxt|wurfmesser/, "Wurfwaffen"],
+    [/faustkampf|ringen/, "Ringen/Faustkampf"]
+  ];
+  const match = rules.find(([pattern]) => pattern.test(name));
+  return match?.[1] ?? "";
 }
 
 

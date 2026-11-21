@@ -28,7 +28,10 @@ export default class HowToBeAHeroAbility extends HowToBeAHeroItemBase {
     schema.isWeaponTalent = new fields.BooleanField({ initial: false });
     // Talentpunkte are the shared pool used to compensate the combined
     // deficits of all three W20 results. They are not spent by a successful roll.
-    schema.value = new fields.NumberField({...requiredInteger, initial: 0});
+    schema.value = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
+    // Hobby bonuses are granted to one matching talent and do not consume the group's TP budget.
+    schema.hobbyBonus = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
+    schema.professionBonus = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
   
     // Break down roll formula into three independent fields
     schema.roll = new fields.SchemaField({

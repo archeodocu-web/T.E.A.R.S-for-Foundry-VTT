@@ -2,6 +2,7 @@ import { HowToBeAHeroActor } from '../documents/actor.mjs';
 import { HowToBeAHeroDragDropHandler } from '../helpers/drag-drop-handler.mjs';
 import { initializeCustomElements } from '../components/_module.mjs';
 import { ITEM_ICON_CATALOG, resolveItemIconPath } from '../helpers/item-icons.mjs';
+import { TEARS_WEAPON_TALENTS, inferTearsWeaponTalentName, normalizeTearsWeaponTalentName } from '../helpers/config.mjs';
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -82,12 +83,18 @@ class TabsHtbah {
 
 class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
   constructor({ defaultName = "", onSubmit, initialType = "", itemPicker = true } = {}) {
-    super();
+    const viewportWidth = Math.max(360, Number(window.innerWidth) || 1280);
+    const viewportHeight = Math.max(420, Number(window.innerHeight) || 900);
+    const width = Math.min(620, viewportWidth - 24);
+    const height = Math.min(760, viewportHeight - 32);
+    super({ position: { width, height, left: Math.max(8, Math.round((viewportWidth - width) / 2)), top: Math.max(24, Math.round((viewportHeight - height) / 2)) } });
     this.defaultName = defaultName;
     this.onSubmit = onSubmit;
     this.itemPicker = itemPicker;
+    this.initialType = initialType;
     this.selectedType = initialType || (itemPicker ? (ITEM_ICON_CATALOG[0]?.type ?? "item") : "");
     this.selectedIcon = ITEM_ICON_CATALOG.find(icon => icon.type === this.selectedType)?.path ?? "";
+    this.selectedWeaponTalent = "";
   }
 
   static DEFAULT_OPTIONS = {
@@ -112,7 +119,9 @@ class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixi
         { type: "tool", label: game.i18n.localize("HTBAH.CreateCategoryTool") },
         { type: "item", label: game.i18n.localize("HTBAH.CreateCategoryItem") }
       ],
-      selectedType: this.selectedType, selectedIcon: this.selectedIcon
+      selectedType: this.selectedType, selectedIcon: this.selectedIcon,
+      weaponTalents: TEARS_WEAPON_TALENTS,
+      showWeaponConfiguration: this.selectedType === "weapon"
     };
   }
 
@@ -124,6 +133,8 @@ class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixi
     const categoryButtons = this.element.querySelectorAll('[data-item-type]');
     const iconButtons = this.element.querySelectorAll('[data-icon-path]');
     const iconSearch = this.element.querySelector('[data-create-icon-search]');
+    const weaponTalentSelect = this.element.querySelector('select[name="weaponTalent"]');
+    const weaponConfiguration = this.element.querySelector('[data-weapon-configuration]');
     const updateSelection = () => {
       const query = (iconSearch?.value || '').trim().toLocaleLowerCase(game.i18n.lang || undefined);
       categoryButtons.forEach(button => button.classList.toggle("active", button.dataset.itemType === this.selectedType));
@@ -135,7 +146,22 @@ class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixi
         button.classList.toggle("selected", button.dataset.iconPath === this.selectedIcon);
         button.setAttribute("aria-pressed", String(button.dataset.iconPath === this.selectedIcon));
       });
+      if (weaponConfiguration) weaponConfiguration.hidden = this.selectedType !== "weapon";
     };
+    // If a weapon name is unambiguous (e.g. "Klinge", "Pistole" or "Bogen"),
+    // preselect its matching T.E.A.R.S. weapon talent. The player can still
+    // override this suggestion manually in the dropdown.
+    if (nameInput && !nameInput.dataset.tearsWeaponInferenceBound) {
+      nameInput.dataset.tearsWeaponInferenceBound = "true";
+      nameInput.addEventListener("input", () => {
+        if (this.selectedType !== "weapon" || !weaponTalentSelect || weaponTalentSelect.value) return;
+        const inferred = inferTearsWeaponTalentName(nameInput.value);
+        if (!inferred || !TEARS_WEAPON_TALENTS.some(entry => entry.name === inferred)) return;
+        this.selectedWeaponTalent = inferred;
+        weaponTalentSelect.value = inferred;
+      });
+    }
+
     categoryButtons.forEach(button => button.addEventListener("click", () => {
       this.selectedType = button.dataset.itemType;
       if (iconSearch) iconSearch.value = "";
@@ -148,6 +174,8 @@ class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixi
       updateSelection();
     }));
     iconSearch?.addEventListener("input", updateSelection);
+    weaponTalentSelect?.addEventListener("change", () => { this.selectedWeaponTalent = weaponTalentSelect.value; });
+    if (weaponTalentSelect) weaponTalentSelect.value = this.selectedWeaponTalent;
     updateSelection();
   }
 
@@ -158,8 +186,17 @@ class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixi
     const name = this.element.querySelector('input[name="name"]')?.value?.trim();
     if (!name) { ui.notifications.warn(game.i18n.localize("HTBAH.WarnNameRequired")); return; }
     if (this.itemPicker && (!this.selectedType || !this.selectedIcon)) { ui.notifications.warn("Bitte wähle eine Kategorie und ein Icon aus."); return; }
+    const explicitWeaponType = this.element.querySelector('select[name="weaponTalent"]')?.value || this.selectedWeaponTalent;
+    const weaponType = this.selectedType === "weapon"
+      ? (normalizeTearsWeaponTalentName(explicitWeaponType) || inferTearsWeaponTalentName(name))
+      : "";
+    if (this.selectedType === "weapon" && !TEARS_WEAPON_TALENTS.some(entry => entry.name === weaponType)) {
+      ui.notifications.warn("Bitte ordne die Waffe einem T.E.A.R.S.-Waffentalent zu. Bei eindeutigen Namen wird die Kategorie automatisch vorgeschlagen.");
+      return;
+    }
     this.close();
-    this.onSubmit?.(this.itemPicker ? { name, type: this.selectedType, icon: this.selectedIcon } : name);
+    const selection = { name, type: this.selectedType || this.initialType, icon: this.selectedIcon, weaponType };
+    this.onSubmit?.(this.itemPicker || this.initialType === "weapon" ? selection : name);
   }
 }
 
@@ -171,10 +208,18 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
   constructor(options = {}) {
     const key = `character${options.document?.limited ? ":limited" : ""}`;
     const prefs = game.user.getFlag("tears", `sheetPrefs.${key}`) ?? {};
-    
-    if (prefs.width) options.position = { ...options.position, width: prefs.width };
-    if (prefs.height) options.position = { ...options.position, height: prefs.height };
-    
+    const viewportWidth = Math.max(420, Number(window.innerWidth) || 1280);
+    const viewportHeight = Math.max(480, Number(window.innerHeight) || 900);
+    const width = Math.max(390, Math.min(Number(prefs.width) || 1120, viewportWidth - 24));
+    const height = Math.max(460, Math.min(Number(prefs.height) || 760, viewportHeight - 32));
+    options.position = {
+      ...(options.position ?? {}),
+      width,
+      height,
+      left: Math.max(8, Math.round((viewportWidth - width) / 2)),
+      top: Math.max(24, Math.round((viewportHeight - height) / 2))
+    };
+
     super(options);
     this.dragDropHandler = new HowToBeAHeroDragDropHandler(this);
     this._activeTab = "details";
@@ -228,8 +273,9 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
   
   static TABS = [
     { tab: "details", label: "TEARS.Tabs.Character", icon: "fas fa-user" },
+    { tab: "talents", label: "TEARS.Tabs.Talents", icon: "fas fa-list-check" },
     { tab: "combat", label: "TEARS.Tabs.Combat", icon: "fas fa-crosshairs" },
-    { tab: "inventory", label: "TEARS.Tabs.Inventory", svg: "hand-bag" },
+    { tab: "inventory", label: "TEARS.Tabs.Inventory", icon: "fas fa-box-open" },
     { tab: "effects", label: "TEARS.Tabs.Conditions", icon: "fas fa-heart-pulse" },
     { tab: "biography", label: "TEARS.Tabs.Notes", icon: "fas fa-book-open" }
   ];
@@ -246,7 +292,9 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
    * Prepare context data for rendering
    */
   async _prepareContext(options) {
-    
+    // Populate missing T.E.A.R.S. talent items when an older HTBAH character
+    // is first opened, so weapon links do not depend on a brand-new actor.
+    if (this.document?.type === "character") await this.document.ensureTearsTalentItems?.();
     const context = await super._prepareContext(options);
     
     const isEditable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
@@ -318,7 +366,21 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
   _onRender(context, options) {
     try {
       super._onRender(context, options);
-      
+
+      // Clamp restored window positions/sizes after Foundry has applied user preferences.
+      const viewportWidth = Math.max(420, Number(window.innerWidth) || 1280);
+      const viewportHeight = Math.max(480, Number(window.innerHeight) || 900);
+      const fittedWidth = Math.max(360, Math.min(Number(this.position?.width) || 1160, viewportWidth - 28));
+      const fittedHeight = Math.max(420, Math.min(Number(this.position?.height) || 820, viewportHeight - 28));
+      // Re-center after Foundry restores old window coordinates from the former
+      // HTBAH sheet. Stale saved positions must not push T.E.A.R.S. off-screen.
+      this.setPosition({
+        width: fittedWidth,
+        height: fittedHeight,
+        left: Math.max(8, Math.round((viewportWidth - fittedWidth) / 2)),
+        top: Math.max(20, Math.round((viewportHeight - fittedHeight) / 2))
+      });
+
       // Verify this.element exists and is an HTMLElement
       if (!this.element || !(this.element instanceof HTMLElement)) {
         console.error("HowToBeAHero | this.element is not a valid HTMLElement:", this.element);
@@ -591,56 +653,61 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
    * Setup tab handling using simple click events
    */
   _setupTabHandling() {
-    // Find all tab navigation elements
-    const tabNavigation = this.element.querySelectorAll('[data-tab]');
-    
-    tabNavigation.forEach(tabElement => {
-      tabElement.addEventListener('click', (event) => {
+    // Bind only to the visible top navigation. Content panels also carry
+    // data-tab attributes and must not act as navigation triggers.
+    const navigation = this.element?.querySelector('.tears-tabs[data-group="primary"]');
+    if (navigation && navigation.dataset.tearsTabsBound !== "true") {
+      navigation.dataset.tearsTabsBound = "true";
+      navigation.addEventListener("click", event => {
+        const trigger = event.target instanceof Element ? event.target.closest('[data-tab]') : null;
+        if (!trigger || !navigation.contains(trigger)) return;
         event.preventDefault();
-        const tabName = event.currentTarget.dataset.tab;
-        if (tabName) {
-          this._activateTab(tabName);
-        }
+        const requested = trigger.dataset.tab;
+        if (requested) this._activateTab(requested);
       });
-    });
+    }
 
-    // Activate the initial tab
-    this._activateTab(this._activeTab);
+    const available = new Set(Array.from(navigation?.querySelectorAll('[data-tab]') ?? []).map(entry => entry.dataset.tab));
+    const requested = available.has(this._activeTab) ? this._activeTab : "details";
+    this._activateTab(requested);
   }
 
   /**
-   * Activate a specific tab
+   * Activate one primary page without allowing nested inventory/effect controls
+   * to be mistaken for tab navigation.
    */
   _activateTab(tabName) {
+    const navigation = this.element?.querySelector('.tears-tabs[data-group="primary"]');
+    const available = new Set(Array.from(navigation?.querySelectorAll('[data-tab]') ?? []).map(entry => entry.dataset.tab));
+    if (!available.has(tabName)) tabName = "details";
     this._activeTab = tabName;
-    
-    // Update navigation active states
-    this.element.querySelectorAll('[data-tab]').forEach(nav => {
-      nav.classList.toggle('active', nav.dataset.tab === tabName);
+
+    navigation?.querySelectorAll('[data-tab]').forEach(entry => {
+      const active = entry.dataset.tab === tabName;
+      entry.classList.toggle('active', active);
+      if (active) entry.setAttribute('aria-current', 'page');
+      else entry.removeAttribute('aria-current');
     });
-    
-    // Update tab content visibility
-    const tabBody = this.element.querySelector('.tab-body');
-    if (tabBody) {
-      tabBody.querySelectorAll('.tab[data-tab]').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.tab === tabName);
-      });
+
+    const tabBody = this.element?.querySelector('.tears-tab-body');
+    tabBody?.querySelectorAll(':scope > .tab[data-tab]').forEach(panel => {
+      const active = panel.dataset.tab === tabName;
+      panel.classList.toggle('active', active);
+      panel.hidden = !active;
+    });
+
+    if (this.element) {
+      this.element.className = this.element.className.replace(/tab-[\w-]+/g, '').trim();
+      this.element.classList.add(`tab-${tabName}`);
     }
-    
-    // Update form class for styling
-    this.element.className = this.element.className.replace(/tab-\w+/g, "");
-    this.element.classList.add(`tab-${tabName}`);
-    
-    // Update create child button
-    const createChild = this.element.querySelector(".create-child");
+
+    const createChild = this.element?.querySelector('.create-child');
     if (createChild) {
-      const createMagic = false;
-      createChild.dataset.type = "item";
-      createChild.hidden = tabName !== "inventory";
-      const typeLabel = game.i18n.localize("DOCUMENT.Item");
-      createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", { type: typeLabel }));
+      createChild.dataset.type = 'item';
+      createChild.hidden = tabName !== 'inventory';
+      const typeLabel = game.i18n.localize('DOCUMENT.Item');
+      createChild.setAttribute('aria-label', game.i18n.format('SIDEBAR.Create', { type: typeLabel }));
     }
-    
   }
 
   /**
@@ -1550,12 +1617,15 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
         initialType: chooseItemType ? "" : requestedType,
         itemPicker: chooseItemType,
         onSubmit: async selection => {
+          const isWeaponSelection = (chooseItemType && selection?.type === "weapon") || requestedType === "weapon";
           const data = chooseItemType
-            ? { name: selection.name, type: selection.type, system: { ...systemData, icon: selection.icon } }
-            : { name: selection, type: requestedType, system: systemData };
+            ? { name: selection.name, type: selection.type, system: { ...systemData, icon: selection.icon, ...(isWeaponSelection ? { weaponType: selection.weaponType, attackMode: "melee" } : {}) } }
+            : isWeaponSelection
+              ? { name: selection.name, type: "weapon", system: { ...systemData, weaponType: selection.weaponType, attackMode: "melee" } }
+              : { name: selection, type: requestedType, system: systemData };
           try {
             const created = await this.document.createEmbeddedDocuments(documentClass, [data]);
-            if (requestedType === "magic" && created[0]) created[0].sheet.render(true);
+            if ((requestedType === "magic" || created[0]?.type === "weapon") && created[0]) created[0].sheet.render(true);
             resolve(created);
           } catch (error) {
             console.error("HowToBeAHero | Could not create child document:", error);

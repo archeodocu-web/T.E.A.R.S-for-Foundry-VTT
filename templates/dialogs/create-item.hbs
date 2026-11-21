@@ -24,6 +24,18 @@
   </div>
   {{/if}}
 
+
+  <section class="tears-quick-weapon-config" data-weapon-configuration {{#unless showWeaponConfiguration}}hidden{{/unless}}>
+    <label for="quick-weapon-talent">T.E.A.R.S.-Waffentalent</label>
+    <select id="quick-weapon-talent" name="weaponTalent" required>
+      <option value="">Waffentalent wählen …</option>
+      {{#each weaponTalents as |talent|}}
+        <option value="{{talent.name}}">{{talent.name}}</option>
+      {{/each}}
+    </select>
+    <p>Die Zuordnung verbindet die Waffe mit dem Talent, aus dessen Wert Angriff und Parade gespeist werden.</p>
+  </section>
+
   <div class="form-group">
     <label for="item-name">{{localize "Name"}}</label>
     <input type="text" id="item-name" name="name" value="{{defaultName}}" placeholder="{{localize 'Name'}}" required autofocus>

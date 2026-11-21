@@ -19,6 +19,7 @@ export const preloadHandlebarsTemplates = async function () {
     // Tab partials (can be used if you switch back to multi-part rendering)
     tabs: [
       "systems/tears/templates/actor/tabs/character-details.hbs",
+      "systems/tears/templates/actor/tabs/character-talents.hbs",
       "systems/tears/templates/actor/tabs/character-combat.hbs",
       "systems/tears/templates/actor/tabs/character-inventory.hbs",
       "systems/tears/templates/actor/tabs/character-biography.hbs",
@@ -53,7 +54,8 @@ export const preloadHandlebarsTemplates = async function () {
 
     // Dialog templates (for AppV2 dialogs)
     dialogs: [
-      "systems/tears/templates/dialogs/create-item.hbs"
+      "systems/tears/templates/dialogs/create-item.hbs",
+      "systems/tears/templates/dialogs/character-builder.hbs"
     ]
   };
 
@@ -123,6 +125,7 @@ export const preloadHandlebarsTemplates = async function () {
     // STEP 5: Verify partials are registered
     const expectedPartials = [
       'htbah.character-details',
+      'htbah.character-talents',
       'htbah.character-combat',
       'htbah.character-inventory', 
       'htbah.character-effects',

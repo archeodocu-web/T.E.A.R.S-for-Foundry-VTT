@@ -1,0 +1,7 @@
+<section class="sidebar-card tears-item-editor tears-weapon-summary">
+  <h3>Waffenprofil</h3>
+  <p>Die vollständige Waffenkonfiguration befindet sich im Hauptbereich.</p>
+  <div class="tears-weapon-summary-line"><span>Waffentalent</span><strong>{{#if weaponTypeSelection}}{{weaponTypeSelection}}{{else}}Noch nicht zugeordnet{{/if}}</strong></div>
+  <div class="tears-weapon-summary-line"><span>Angriffsart</span><strong>{{#if (eq system.attackMode "ranged")}}Distanzkampf{{else}}Nahkampf{{/if}}</strong></div>
+  <div class="tears-weapon-summary-line"><span>Schaden</span><strong>{{system.formula}}</strong></div>
+</section>

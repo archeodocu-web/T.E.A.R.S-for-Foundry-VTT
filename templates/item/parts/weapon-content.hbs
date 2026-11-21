@@ -1,0 +1,44 @@
+<section class="tears-weapon-main-config">
+  <header class="tears-item-section-heading">
+    <span class="tears-item-section-mark"><i class="fas fa-shield-halved"></i></span>
+    <div><h3>Waffenkonfiguration</h3><p>Diese Zuordnung verbindet die Waffe mit dem passenden T.E.A.R.S.-Waffentalent.</p></div>
+  </header>
+  <div class="tears-weapon-config-grid">
+    <label class="tears-item-field tears-item-field--wide">
+      <span>T.E.A.R.S.-Waffentalent <em>Pflichtfeld</em></span>
+      <select name="system.weaponType" required>
+        <option value="">Waffentalent auswählen …</option>
+        {{#each weaponTalents as |talent|}}
+          <option value="{{talent.name}}" {{#if (eq ../weaponTypeSelection talent.name)}}selected{{/if}}>{{talent.name}}</option>
+        {{/each}}
+      </select>
+      <small>Wähle exakt das Talent, aus dessen Gesamtwert die Angriffs- und Paradewerte gespeist werden.</small>
+    </label>
+    <label class="tears-item-field"><span>Angriffsart</span>
+      <select name="system.attackMode">
+        <option value="melee" {{#if (eq system.attackMode "melee")}}selected{{/if}}>Nahkampf</option>
+        <option value="ranged" {{#if (eq system.attackMode "ranged")}}selected{{/if}}>Distanzkampf</option>
+      </select>
+    </label>
+    <label class="tears-item-field"><span>Schadensformel</span>
+      <input type="text" name="system.formula" value="{{system.formula}}" placeholder="z. B. 1W6+2">
+    </label>
+    <label class="tears-item-field"><span>Talentpunkte Angriff</span>
+      <input type="number" min="0" step="1" name="system.attackValue" value="{{system.attackValue}}">
+    </label>
+    <label class="tears-item-field"><span>Talentpunkte Parade</span>
+      <input type="number" min="0" step="1" name="system.parryValue" value="{{system.parryValue}}">
+    </label>
+    <label class="tears-item-field"><span>Initiativemodifikator</span>
+      <input type="number" step="1" name="system.initiativeModifier" value="{{system.initiativeModifier}}">
+    </label>
+    <label class="tears-item-field"><span>Reichweite</span>
+      <input type="text" name="system.range" value="{{system.range}}" placeholder="z. B. Nahkampf / 20 m">
+    </label>
+    <label class="tears-item-field"><span>Anzahl</span>
+      <input type="number" min="0" step="1" name="system.quantity" value="{{system.quantity}}">
+    </label>
+    <label class="tears-item-check"><input type="checkbox" name="system.equipped" {{checked system.equipped}}> <span>Ausgerüstet</span></label>
+  </div>
+  <p class="tears-weapon-config-note"><i class="fas fa-info-circle"></i> Die Summe der Angriff- und Paradepunkte darf den erlernten Wert des gewählten Waffentalents nicht überschreiten.</p>
+</section>

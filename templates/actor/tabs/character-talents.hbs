@@ -1,0 +1,62 @@
+<section class="tears-character-overview tears-talents-overview">
+  <header class="tears-section-heading">
+    <div><span class="tears-eyebrow">T.E.A.R.S. / TALENTREGISTER</span><h2>{{localize "TEARS.Talents.Title"}}</h2></div>
+    <span class="tears-talent-note">{{localize "TEARS.Talents.SharedPoolHint"}}</span>
+  </header>
+  <div class="tears-talent-groups">
+    {{#each talentGroups as |group key|}}
+      <section class="tears-panel tears-talent-group" data-talent-group="{{key}}">
+        <div class="tears-panel-heading">
+          <h3>{{group.label}}</h3>
+          <span class="tears-group-total">{{group.totalPoints}} / {{group.poolPoints}} {{localize "TEARS.Talents.TP"}}</span>
+        </div>
+        {{#if @root.editable}}
+          <label class="tears-pool-budget">{{localize "TEARS.Talents.PointBudget"}} <input type="number" min="0" step="1" name="system.talentPools.{{key}}" value="{{group.poolPoints}}"></label>
+        {{/if}}
+        <div class="tears-talent-list">
+          {{#each group.talents as |talent|}}
+            <div class="tears-talent-row" data-item-id="{{talent.id}}">
+              <div class="tears-talent-name">
+                <strong>{{talent.name}}</strong>
+                {{#if talent.isTearsWeaponTalent}}
+                  <small>{{localize "TEARS.Talents.WeaponTalentInfo"}}</small>
+                {{else}}
+                  <span class="tears-talent-dice-preview" aria-label="Drei W20-Probenattribute">
+                    {{#each talent.tearsAttributes as |attribute|}}
+                      <span class="tears-talent-die-chip" title="{{attribute.label}}: W20 gegen {{attribute.target}}">
+                        <i class="fas fa-dice-d20" aria-hidden="true"></i>
+                        <b>{{attribute.abbreviation}}</b>
+                        <strong>{{attribute.target}}</strong>
+                      </span>
+                    {{/each}}
+                  </span>
+                {{/if}}
+              </div>
+              {{#if @root.editable}}
+                <input class="tears-talent-points" type="number" min="0" step="1" name="system.value" data-item-id="{{talent.id}}" value="{{talent.system.value}}" aria-label="{{talent.name}} {{localize 'TEARS.Talents.TP'}}">
+              {{else}}
+                <span class="tears-talent-points">{{talent.tearsEffectiveValue}}</span>
+              {{/if}}
+              {{#if talent.tearsProfessionBonus}}
+                <small class="tears-hobby-bonus-tag">+{{talent.tearsProfessionBonus}} Beruf</small>
+              {{/if}}
+              {{#if talent.tearsHobbyBonus}}
+                <small class="tears-hobby-bonus-tag">+{{talent.tearsHobbyBonus}} Hobby</small>
+              {{/if}}
+              {{#if talent.isTearsWeaponTalent}}
+                <span class="tears-talent-status tears-talent-status--weapon"><i class="fas fa-crossed-swords" aria-hidden="true"></i> {{localize "TEARS.Talents.WeaponTalent"}}</span>
+              {{else}}
+                <button type="button" class="tears-roll-button" data-action="itemAction" data-sub-action="roll" data-item-id="{{talent.id}}" title="{{localize 'TEARS.Talents.Roll'}}"><i class="fas fa-dice-d20"></i></button>
+              {{/if}}
+              {{#if @root.editable}}
+                <button type="button" class="tears-edit-button" data-action="itemAction" data-sub-action="edit" data-item-id="{{talent.id}}" title="{{localize 'HTBAH.ItemEdit'}}"><i class="fas fa-pen"></i></button>
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+        {{#if (lt group.remainingPoints 0)}}<p class="tears-overbudget">{{localize "TEARS.Talents.OverBudget"}}</p>{{else}}<p class="tears-budget-remaining">{{group.remainingPoints}} {{localize "TEARS.Talents.PointsRemaining"}}</p>{{/if}}
+      </section>
+    {{/each}}
+  </div>
+  <p class="tears-rule-hint">{{localize "TEARS.Talents.PointBudgetNote"}}</p>
+</section>

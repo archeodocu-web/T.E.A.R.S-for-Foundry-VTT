@@ -154,6 +154,39 @@ export class HowToBeAHeroItemSheet extends HandlebarsApplicationMixin(foundry.ap
     // Setup form input handling for automatic saving
     this._setupFormHandling();
 
+    // Save and normalize the T.E.A.R.S. weapon talent immediately. This is
+    // explicit because a weapon cannot be rolled until it is linked to a
+    // canonical T.E.A.R.S. weapon talent.
+    const weaponTalentSelect = this.element.querySelector('select[name="system.weaponType"]');
+    if (weaponTalentSelect && this.document.type === "weapon" && !weaponTalentSelect.value) {
+      weaponTalentSelect.classList.add("tears-weapon-needs-talent");
+      weaponTalentSelect.title = "Bitte ordne diese Waffe einem T.E.A.R.S.-Waffentalent zu.";
+      window.setTimeout(() => {
+        if (this.rendered && !weaponTalentSelect.value) {
+          weaponTalentSelect.focus();
+          weaponTalentSelect.scrollIntoView?.({ block: "center", behavior: "smooth" });
+        }
+      }, 80);
+    }
+    if (weaponTalentSelect && !weaponTalentSelect.dataset.tearsBound) {
+      weaponTalentSelect.dataset.tearsBound = "true";
+      weaponTalentSelect.addEventListener("change", async () => {
+        const normalized = normalizeTearsWeaponTalentName(weaponTalentSelect.value);
+        weaponTalentSelect.value = normalized;
+        try {
+          if (!normalized) throw new Error("Bitte wähle ein Waffentalent aus.");
+          await this.document.update({ "system.weaponType": normalized });
+          // Refresh the selected value from the persisted document after saving.
+          weaponTalentSelect.value = normalizeTearsWeaponTalentName(this.document.system?.weaponType);
+          weaponTalentSelect.classList.remove("tears-weapon-needs-talent");
+          ui.notifications.info(`Waffe mit „${normalized}“ verknüpft.`);
+        } catch (error) {
+          console.error("T.E.A.R.S. | Could not save weapon talent assignment:", error);
+          ui.notifications.error("Die Waffentalent-Zuordnung konnte nicht gespeichert werden.");
+        }
+      });
+    }
+
     // Show or hide the configured magic-effect fields when the effect type changes.
     const effectTypeSelect = this.element.querySelector('select[name="system.effectType"]');
     const effectFields = this.element.querySelector('.magic-effect-fields');
@@ -210,7 +243,7 @@ export class HowToBeAHeroItemSheet extends HandlebarsApplicationMixin(foundry.ap
     // Handle all input changes for automatic saving
     this.element.querySelectorAll('input[type="text"], input[type="number"], textarea, select').forEach(input => {
       // Skip inputs that shouldn't auto-save (like disabled fields or rollable checkbox)
-      if (input.name && (input.name.startsWith('system.') || input.name === 'name') && !input.disabled && input.name !== 'system.rollable') {
+      if (input.name && (input.name.startsWith('system.') || input.name === 'name') && !input.disabled && input.name !== 'system.rollable' && input.name !== 'system.weaponType') {
         input.addEventListener('change', this._onFormInput.bind(this));
         input.addEventListener('blur', this._onFormInput.bind(this)); // Also save on blur
       }
@@ -242,10 +275,11 @@ export class HowToBeAHeroItemSheet extends HandlebarsApplicationMixin(foundry.ap
     
     // Handle different data types
     let processedValue = value;
-    if (target.dataset.dtype === "Number") {
+    if (name === "system.weaponType") processedValue = normalizeTearsWeaponTalentName(value);
+    if (target.type === "number" || target.dataset.dtype === "Number") {
       processedValue = Number(value) || 0;
-    } else if (target.dataset.dtype === "Boolean") {
-      processedValue = target.checked;
+    } else if (target.type === "checkbox" || target.dataset.dtype === "Boolean") {
+      processedValue = Boolean(target.checked);
     }
     
     updateData[name] = processedValue;

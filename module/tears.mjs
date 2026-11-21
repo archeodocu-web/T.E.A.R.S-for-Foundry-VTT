@@ -17,6 +17,7 @@ import { Tooltips } from './helpers/tooltips.mjs';
 import { HOW_TO_BE_A_HERO, SYSTEM_ID } from './helpers/config.mjs';
 import { registerSystemSettings, enforceDarkMode } from './helpers/settings.mjs';
 import { registerDamageApplicationContextMenu } from "./helpers/damage-application.mjs";
+import { installTearsCharacterBuilder } from "./apps/character-builder.mjs";
 
 // Register chat context hooks at module load, before the core ChatLog builds
 // its ApplicationV2 context menu during startup.
@@ -491,7 +492,8 @@ Hooks.once('ready', async function () {
     }
   });
 
-  console.log("HowToBeAHero | System fully ready and configured");
+  installTearsCharacterBuilder();
+  console.log("T.E.A.R.S. | System fully ready and character builder registered");
 });
 
 /* -------------------------------------------- */
