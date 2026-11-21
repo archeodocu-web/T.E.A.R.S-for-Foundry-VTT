@@ -1,0 +1,42 @@
+<div class="sidebar-card magic-item-settings">
+  <h3>{{localize "HTBAH.Magic.Settings"}}</h3>
+  <label for="magic-mana-cost">{{localize "HTBAH.Magic.ManaCost"}}</label>
+  <input id="magic-mana-cost" name="system.manaCost" type="number" min="0" step="1" value="{{system.manaCost}}" data-dtype="Number" />
+
+  <div class="rollable-field">
+    <label class="checkbox" for="magic-rollable-checkbox">
+      <input type="checkbox" id="magic-rollable-checkbox" name="system.rollable" {{checked system.rollable}} />
+      {{localize "HTBAH.Magic.Rollable"}}
+    </label>
+    <p class="hint">{{localize "HTBAH.Magic.RollableHint"}}</p>
+  </div>
+
+  <div class="roll-fields" style="{{#unless system.rollable}}display:none;{{/unless}}">
+    <label for="magic-dice-num">{{localize "HTBAH.Item.DiceNumber"}}</label>
+    <input id="magic-dice-num" name="system.roll.diceNum" type="number" min="1" value="{{system.roll.diceNum}}" data-dtype="Number" />
+    <label for="magic-dice-size">{{localize "HTBAH.Item.DiceSize"}}</label>
+    <select id="magic-dice-size" name="system.roll.diceSize">{{selectOptions diceTypes selected=system.roll.diceSize}}</select>
+    <label for="magic-roll-type">{{localize "HTBAH.RollType"}}</label>
+    <select id="magic-roll-type" name="system.rollType">
+      <option value="check" {{#if (eq system.rollType "check")}}selected{{/if}}>{{localize "HTBAH.RollTypeCheck"}}</option>
+    </select>
+    <label for="magic-formula">{{localize "HOW_TO_BE_A_HERO.Item.Formula"}}</label>
+    <input id="magic-formula" name="system.formula" type="text" value="{{system.formula}}" disabled />
+  </div>
+
+  <hr />
+  <h3>{{localize "HTBAH.Magic.Effect"}}</h3>
+  <label for="magic-effect-type">{{localize "HTBAH.Magic.EffectType"}}</label>
+  <select id="magic-effect-type" name="system.effectType">
+    <option value="none" {{#if (eq system.effectType "none")}}selected{{/if}}>{{localize "HTBAH.Magic.NoEffect"}}</option>
+    <option value="armor" {{#if (eq system.effectType "armor")}}selected{{/if}}>{{localize "HTBAH.Magic.ArmorBonus"}}</option>
+  </select>
+  <div class="magic-effect-fields" {{#if (eq system.effectType "none")}}hidden{{/if}}>
+    <label for="magic-effect-value">{{localize "HTBAH.Magic.EffectValue"}}</label>
+    <input id="magic-effect-value" name="system.effectValue" type="number" min="0" step="1" value="{{system.effectValue}}" data-dtype="Number" />
+    <label for="magic-duration-rounds">{{localize "HTBAH.Magic.DurationRounds"}}</label>
+    <input id="magic-duration-rounds" name="system.durationRounds" type="number" min="0" step="1" value="{{system.durationRounds}}" data-dtype="Number" />
+    <p class="hint">{{localize "HTBAH.Magic.DurationHint"}}</p>
+  <p class="hint">{{localize "HTBAH.Magic.EffectTargetHint"}}</p>
+  </div>
+</div>

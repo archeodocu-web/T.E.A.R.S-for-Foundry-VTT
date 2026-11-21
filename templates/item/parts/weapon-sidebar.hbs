@@ -1,0 +1,17 @@
+<section class="sidebar-card tears-item-editor">
+  <h3>{{localize "TEARS.Combat.WeaponDetails"}}</h3>
+  <label>{{localize "TEARS.Combat.WeaponCategory"}}<input type="text" name="system.weaponType" value="{{system.weaponType}}" placeholder="z. B. Klingenwaffen"></label>
+  <label>{{localize "TEARS.Combat.AttackMode"}}
+    <select name="system.attackMode">
+      <option value="melee" {{#if (eq system.attackMode "melee")}}selected{{/if}}>{{localize "TEARS.Combat.MeleeAttack"}}</option>
+      <option value="ranged" {{#if (eq system.attackMode "ranged")}}selected{{/if}}>{{localize "TEARS.Combat.RangedAttack"}}</option>
+    </select>
+  </label>
+  <label>{{localize "TEARS.Combat.WeaponAttack"}}<input type="number" min="0" name="system.attackValue" value="{{system.attackValue}}"></label>
+  <label>{{localize "TEARS.Combat.WeaponParry"}}<input type="number" min="0" name="system.parryValue" value="{{system.parryValue}}"></label>
+  <label>{{localize "TEARS.Combat.WeaponInitiative"}}<input type="number" name="system.initiativeModifier" value="{{system.initiativeModifier}}"></label>
+  <label>{{localize "TEARS.Combat.Range"}}<input type="text" name="system.range" value="{{system.range}}"></label>
+  <label>{{localize "TEARS.Combat.Quantity"}}<input type="number" min="0" name="system.quantity" value="{{system.quantity}}"></label>
+  <label>{{localize "TEARS.Combat.DamageFormula"}}<input type="text" name="system.formula" value="{{system.formula}}" placeholder="z. B. 3W6+5"></label>
+  <label class="tears-checkbox-label"><input type="checkbox" name="system.equipped" {{checked system.equipped}}> {{localize "HTBAH.Equipped"}}</label>
+</section>

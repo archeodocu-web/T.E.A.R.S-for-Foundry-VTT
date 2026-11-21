@@ -1,0 +1,9 @@
+<section class="tears-effect-tooltip">
+  <header class="effect-tooltip-header">
+    <strong>{{name}}</strong>
+    {{#if isCondition}}<span class="tag">{{localize "TEARS.Effects.Condition"}}</span>{{/if}}
+  </header>
+  {{#if disabled}}<p class="effect-tooltip-state">{{localize "TEARS.Effects.Disabled"}}</p>{{/if}}
+  {{#if duration.rounds}}<p>{{localize "TEARS.Effects.RoundsRemaining"}}: {{duration.rounds}}</p>{{/if}}
+  {{#if duration.seconds}}<p>{{localize "TEARS.Effects.SecondsRemaining"}}: {{duration.seconds}}</p>{{/if}}
+</section>

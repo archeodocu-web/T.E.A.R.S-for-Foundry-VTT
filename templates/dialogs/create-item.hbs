@@ -1,0 +1,35 @@
+<form class="htbah-create-item" data-action="submit">
+  {{#if showItemPicker}}
+  <div class="htbah-create-categories">
+    <h3>{{localize "HTBAH.CreateItemPrompt"}}</h3>
+    <div class="htbah-create-category-grid">
+      {{#each categories}}
+      <button type="button" class="htbah-create-category" data-item-type="{{type}}" aria-pressed="false">{{label}}</button>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="htbah-create-icons">
+    <h3>{{localize "HTBAH.SelectItemIcon"}}</h3>
+    <input type="search" class="htbah-icon-search" data-create-icon-search
+           placeholder="{{localize 'HTBAH.SearchIcons'}}" aria-label="{{localize 'HTBAH.SearchIcons'}}">
+    <div class="htbah-icon-grid">
+      {{#each iconCatalog}}
+      <button type="button" class="htbah-icon-choice" data-icon-type="{{type}}" data-icon-path="{{path}}" data-icon-name="{{name}}" title="{{name}}" aria-label="{{name}}" aria-pressed="false">
+        <img src="{{path}}" alt="" loading="lazy">
+        <span>{{name}}</span>
+      </button>
+      {{/each}}
+    </div>
+  </div>
+  {{/if}}
+
+  <div class="form-group">
+    <label for="item-name">{{localize "Name"}}</label>
+    <input type="text" id="item-name" name="name" value="{{defaultName}}" placeholder="{{localize 'Name'}}" autofocus>
+  </div>
+  <footer class="form-footer flexrow">
+    <button type="submit" class="default"><i class="fas fa-check"></i> {{localize "Confirm"}}</button>
+    <button type="button" data-action="cancel"><i class="fas fa-times"></i> {{localize "Cancel"}}</button>
+  </footer>
+</form>
