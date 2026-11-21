@@ -42,13 +42,18 @@ function calculateAttributeSpend(category, attributes) {
 
 function calculateTalentBudgets(state) {
   const bonuses = HOW_TO_BE_A_HERO.professionTalentBonuses[state.professionCategory] ?? {};
-  const budgets = Object.fromEntries(GROUP_KEYS.map(key => [key, 10 + (Number(bonuses[key]) || 0)]));
-  if (state.variableTalentGroup && budgets[state.variableTalentGroup] !== undefined) budgets[state.variableTalentGroup] += Number(bonuses.variable) || 0;
+  // Group pools contain the fixed 10 TP plus the profession/specificum rubric
+  // bonuses. The +5 "variabel in Absprache" are separate points invested in
+  // individual talents (rulebook pp. 20-22), not a group-budget increase.
+  const budgets = Object.fromEntries(GROUP_KEYS.map(key => [
+    key,
+    10 + (Number(bonuses[key]) || 0)
+  ]));
 
-  // Positive specifica are purchased by sacrificing Talentpunkte from the
-  // same rubric (rulebook p. 31); the printed +3/+5 is the sacrifice amount.
+  // Positive specifica add the printed +3/+5 Talentpunkte to their rubric.
+  // Negative specifica retain their printed negative sign and reduce that pool.
   const positive = findSpecificum(state.positiveSpecificum, "positive");
-  if (positive && budgets[positive.group] !== undefined) budgets[positive.group] -= Math.abs(positive.points);
+  if (positive && budgets[positive.group] !== undefined) budgets[positive.group] += Math.abs(Number(positive.points) || 0);
   // The profession determines one negative specificum. A first hobby can
   // require an additional disadvantage from the hobby talent's own rubric.
   const negative = findSpecificum(state.negativeSpecificum, "negative");
@@ -67,6 +72,22 @@ function calculateTalentSpend(state) {
     spent[talent.talentGroup] += value * (talent.isWeaponTalent ? 2 : 1);
   });
   return spent;
+}
+
+function calculateVariableProfessionSpend(state) {
+  return (state.variableProfessionSelections ?? []).reduce((sum, name) => {
+    const talent = TEARS_DEFAULT_TALENTS.find(entry => entry.name === name);
+    return sum + (talent ? (talent.isWeaponTalent ? 2 : 1) : 0);
+  }, 0);
+}
+
+function calculateVariableProfessionBonuses(state) {
+  const bonuses = new Map();
+  for (const name of state.variableProfessionSelections ?? []) {
+    if (!name) continue;
+    bonuses.set(name, (bonuses.get(name) ?? 0) + 1);
+  }
+  return bonuses;
 }
 
 function calculateSpecialAbilityCost(state) {
@@ -110,7 +131,9 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       hobbyTwo: "",
       hobbyTwoTalent: "",
       hobbyNegativeSpecificum: "",
-      variableTalentGroup: "",
+      variableProfessionSelections: Array(5).fill(""),
+      variableTalentPoints: Object.fromEntries(GROUP_KEYS.map(key => [key, 0])), // legacy compatibility only
+      variableTalentGroup: "", // legacy compatibility only
       positiveSpecificum: "",
       negativeSpecificum: "",
       attributes: baseAttributesForProfession(""),
@@ -145,12 +168,29 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       abbreviation: HOW_TO_BE_A_HERO.attributes[key].abbreviation,
       label: game.i18n.localize(HOW_TO_BE_A_HERO.attributes[key].label),
       value: Number(this.builderData.attributes[key] ?? baseAttributes[key]),
-      base: baseAttributes[key]
+      base: baseAttributes[key],
+      increase: Number(this.builderData.attributes[key] ?? baseAttributes[key]) - baseAttributes[key],
+      cost: attributeCost(baseAttributes[key], Number(this.builderData.attributes[key] ?? baseAttributes[key]))
     }));
     const attributePointsSpent = calculateAttributeSpend(this.builderData.professionCategory, this.builderData.attributes);
     const talentBudgets = calculateTalentBudgets(this.builderData);
     const talentSpent = calculateTalentSpend(this.builderData);
     const talentRemaining = Object.fromEntries(GROUP_KEYS.map(key => [key, talentBudgets[key] - talentSpent[key]]));
+    const variableProfessionBonuses = calculateVariableProfessionBonuses(this.builderData);
+    const variableProfessionPointsSpent = calculateVariableProfessionSpend(this.builderData);
+    const variableProfessionPointsRemaining = 5 - variableProfessionPointsSpent;
+    const variableProfessionPointRows = Array.from({ length: 5 }, (_, slot) => ({
+      slot,
+      number: slot + 1,
+      value: this.builderData.variableProfessionSelections?.[slot] ?? "",
+      options: TEARS_DEFAULT_TALENTS.map(talent => ({
+        name: talent.name,
+        group: label(talent.talentGroup),
+        weapon: talent.isWeaponTalent,
+        cost: talent.isWeaponTalent ? 2 : 1,
+        selected: (this.builderData.variableProfessionSelections?.[slot] ?? "") === talent.name
+      }))
+    }));
     const freeTalentPoints = GROUP_KEYS.reduce((sum, key) => sum + Math.max(0, talentRemaining[key]), 0);
     const specialAbilityCost = calculateSpecialAbilityCost(this.builderData);
     const professionKeys = Object.keys(HOW_TO_BE_A_HERO.professionCategories);
@@ -167,6 +207,7 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       label: label(key),
       abbreviation: HOW_TO_BE_A_HERO.talentGroups[key].abbreviation,
       budget: talentBudgets[key],
+      variableBonus: Number(this.builderData.variableTalentPoints?.[key]) || 0,
       spent: talentSpent[key],
       remaining: talentRemaining[key],
       talents: TEARS_DEFAULT_TALENTS.map((talent, index) => ({ talent, index }))
@@ -177,7 +218,9 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
           value: Number(this.builderData.talentValues[index]) || 0,
           professionFloor: this.builderData.professionCategory !== "unemployed" && this.builderData.professionTalent === talent.name ? 5 : 0,
           hobbyBonus: (this.builderData.hobbyOneTalent === talent.name ? 5 : 0) + (this.builderData.hobbyTwoTalent === talent.name ? 3 : 0),
+          variableProfessionBonus: variableProfessionBonuses.get(talent.name) ?? 0,
           effectiveValue: Math.max(Number(this.builderData.talentValues[index]) || 0, this.builderData.professionCategory !== "unemployed" && this.builderData.professionTalent === talent.name ? 5 : 0)
+            + (variableProfessionBonuses.get(talent.name) ?? 0)
             + (this.builderData.hobbyOneTalent === talent.name ? 5 : 0) + (this.builderData.hobbyTwoTalent === talent.name ? 3 : 0),
           cost: talent.isWeaponTalent ? 2 : 1,
           weapon: talent.isWeaponTalent,
@@ -222,7 +265,7 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       .filter(key => Number(professionBonuses[key]) > 0)
       .map(key => ({ label: label(key), points: Number(professionBonuses[key]) }));
     if (Number(professionBonuses.variable) > 0) {
-      professionTalentProfile.push({ label: "Frei zugeordnet", points: Number(professionBonuses.variable), variable: true });
+      professionTalentProfile.push({ label: "frei auf einzelne Talente verteilbar", points: Number(professionBonuses.variable), variable: true });
     }
 
     return {
@@ -239,6 +282,10 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       attributeValid: attributePointsSpent === 14,
       professionProfile: Object.entries(profile).map(([key, value]) => ({ abbreviation: HOW_TO_BE_A_HERO.attributes[key].abbreviation, value })),
       professionTalentProfile,
+      variableProfessionPointRows,
+      variableProfessionPointsSpent,
+      variableProfessionPointsRemaining,
+      variableProfessionPointsValid: variableProfessionPointsSpent === 5,
       professionNegativeGroupLabel: professionBonuses.negativeGroup ? label(professionBonuses.negativeGroup) : "freie Wahl",
       groupData,
       talentOptions,
@@ -277,6 +324,11 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       });
     });
 
+    const form = this.element.querySelector("form.tears-builder-form");
+    // A click on any form field must never be interpreted as a submit action.
+    // Only real form submission (e.g. Enter in a text field) advances the wizard.
+    form?.addEventListener("submit", event => this._onFormSubmit(event));
+
     this.element.querySelectorAll("[data-field]").forEach(input => {
       input.addEventListener("input", () => {
         this._captureForm();
@@ -288,6 +340,8 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
         if (field === "professionCategory") {
           this.builderData.attributes = baseAttributesForProfession(this.builderData.professionCategory);
           this.builderData.variableTalentGroup = "";
+          this.builderData.variableTalentPoints = Object.fromEntries(GROUP_KEYS.map(key => [key, 0]));
+          this.builderData.variableProfessionSelections = Array(5).fill("");
           this.builderData.professionTalent = "";
           this.builderData.positiveSpecificum = "";
           this.builderData.negativeSpecificum = "";
@@ -304,9 +358,13 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
           this.render(true);
           return;
         }
+        if (field.startsWith("variableProfessionSelections.")) {
+          this.render(true);
+          return;
+        }
         if (field === "hobbyOneTalent" || (field === "hobbyOne" && !String(input.value ?? "").trim())) {
           this.builderData.hobbyNegativeSpecificum = "";
-          this.render(true);
+          this._updateLiveNumbers();
           return;
         }
         if (field === "specialAbilities.carLicence" && !this.builderData.specialAbilities.carLicence) {
@@ -323,10 +381,14 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
     if (!this.element) return;
     for (const input of this.element.querySelectorAll("[data-field]")) {
       const field = input.dataset.field;
+      if (!field) continue;
+      if (input.type === "radio" && !input.checked) continue;
       let value = input.type === "checkbox" ? input.checked : input.value;
       if (input.type === "number") value = Number(value || 0);
       if (field.startsWith("attributes.")) this.builderData.attributes[field.split(".")[1]] = value;
       else if (field.startsWith("talents.")) this.builderData.talentValues[Number(field.split(".")[1])] = value;
+      else if (field.startsWith("variableTalentPoints.")) this.builderData.variableTalentPoints[field.split(".")[1]] = value;
+      else if (field.startsWith("variableProfessionSelections.")) this.builderData.variableProfessionSelections[Number(field.split(".")[1])] = value;
       else if (field.startsWith("specialAbilities.")) this.builderData.specialAbilities[field.split(".")[1]] = Boolean(value);
       else this.builderData[field] = value;
     }
@@ -343,6 +405,15 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
     }
     const apRemainingNode = this.element.querySelector("[data-live-attribute-remaining]");
     if (apRemainingNode) apRemainingNode.textContent = String(14 - ap);
+    const variableSpent = calculateVariableProfessionSpend(this.builderData);
+    const variableNode = this.element.querySelector("[data-live-variable-profession-points]");
+    if (variableNode) {
+      variableNode.textContent = `${variableSpent} / 5 TP eingesetzt`;
+      variableNode.classList.toggle("is-valid", variableSpent === 5);
+      variableNode.classList.toggle("is-invalid", variableSpent > 5);
+    }
+    const variableRemainingNode = this.element.querySelector("[data-live-variable-profession-remaining]");
+    if (variableRemainingNode) variableRemainingNode.textContent = String(5 - variableSpent);
     const budgets = calculateTalentBudgets(this.builderData);
     const spent = calculateTalentSpend(this.builderData);
     for (const key of GROUP_KEYS) {
@@ -399,7 +470,8 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       return true;
     }
     if (this.step === 2) {
-      if (!this.builderData.variableTalentGroup) return this._warn("Bitte ordne die 5 frei verteilbaren Berufspunkte einer Talentgruppe zu.");
+      const variablePointsSpent = calculateVariableProfessionSpend(this.builderData);
+      if (variablePointsSpent !== 5) return this._warn(`Verteile genau 5 variable Berufspunkte direkt auf einzelne Talente. Normale Talente kosten 1 TP je Steigerung, Waffentalente 2 TP. Aktuell eingesetzt: ${variablePointsSpent} / 5 TP.`);
       if (!this.builderData.positiveSpecificum) return this._warn("Bitte wähle ein positives Spezifikum.");
       if (!this.builderData.negativeSpecificum) return this._warn("Bitte wähle ein negatives Spezifikum.");
       const selectedProfessionNegative = findSpecificum(this.builderData.negativeSpecificum, "negative");
@@ -493,6 +565,7 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
       const talentPools = calculateTalentBudgets(this.builderData);
       const hobbyBonusByTalent = new Map();
       const professionBonusByTalent = new Map();
+      const professionVariableBonusByTalent = calculateVariableProfessionBonuses(this.builderData);
       if (this.builderData.professionCategory !== "unemployed" && this.builderData.professionTalent) professionBonusByTalent.set(this.builderData.professionTalent, 5);
       if (this.builderData.hobbyOneTalent) hobbyBonusByTalent.set(this.builderData.hobbyOneTalent, (hobbyBonusByTalent.get(this.builderData.hobbyOneTalent) ?? 0) + 5);
       if (this.builderData.hobbyTwoTalent) hobbyBonusByTalent.set(this.builderData.hobbyTwoTalent, (hobbyBonusByTalent.get(this.builderData.hobbyTwoTalent) ?? 0) + 3);
@@ -518,13 +591,18 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
             hobbyOneTalent: this.builderData.hobbyOneTalent,
             hobbyTwo: this.builderData.hobbyTwo.trim(),
             hobbyTwoTalent: this.builderData.hobbyTwoTalent,
-            variableTalentGroup: this.builderData.variableTalentGroup,
+            // Retain legacy fields as zeroed metadata; the new system invests
+            // variable profession points directly into individual talent items.
+            variableTalentGroup: "",
+            variableTalentPoints: Object.fromEntries(GROUP_KEYS.map(key => [key, 0])),
+            variableProfessionSelections: [...this.builderData.variableProfessionSelections],
+            variableProfessionPointsSpent: calculateVariableProfessionSpend(this.builderData),
             positiveSpecificum: this.builderData.positiveSpecificum,
             negativeSpecificum: this.builderData.negativeSpecificum,
             hobbyNegativeSpecificum: this.builderData.hobbyNegativeSpecificum,
             specialAbilities: specialAbilityNames.join("; "),
             specialAbilityPointsSpent,
-            builderVersion: "0.1.8"
+            builderVersion: "0.1.11"
           }
         }
       });
@@ -560,7 +638,8 @@ export class TearsCharacterBuilder extends HandlebarsApplicationMixin(foundry.ap
           _id: item.id,
           "system.value": Math.max(0, Number(this.builderData.talentValues[index]) || 0),
           "system.hobbyBonus": hobbyBonusByTalent.get(definition.name) ?? 0,
-          "system.professionBonus": professionBonusByTalent.get(definition.name) ?? 0
+          "system.professionBonus": professionBonusByTalent.get(definition.name) ?? 0,
+          "system.professionVariableBonus": professionVariableBonusByTalent.get(definition.name) ?? 0
         });
       }
       if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);

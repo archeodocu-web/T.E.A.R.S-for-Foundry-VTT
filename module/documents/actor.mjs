@@ -46,9 +46,11 @@ export class HowToBeAHeroActor extends Actor {
         const system = talent.system ?? {};
         talent.tearsHobbyBonus = Math.max(0, Number(system.hobbyBonus) || 0);
         talent.tearsProfessionBonus = Math.max(0, Number(system.professionBonus) || 0);
-        // The profession rule sets a selected talent to a base value of 5;
-        // it is a floor, not an additional +5 stacked on top of allocated TP.
-        talent.tearsEffectiveValue = Math.max(Math.max(0, Number(system.value) || 0), talent.tearsProfessionBonus) + talent.tearsHobbyBonus;
+        talent.tearsProfessionVariableBonus = Math.max(0, Number(system.professionVariableBonus) || 0);
+        // Fixed profession base is a floor at 5. The five flexible profession
+        // points and hobby bonuses are additive to the final effective value.
+        talent.tearsEffectiveValue = Math.max(Math.max(0, Number(system.value) || 0), talent.tearsProfessionBonus)
+          + talent.tearsProfessionVariableBonus + talent.tearsHobbyBonus;
         const checkPenalty = this._getTearsCheckPenalty();
         talent.tearsAttributes = system.isWeaponTalent ? [] : [system.attribute1, system.attribute2, system.attribute3]
           .filter(Boolean)
@@ -150,6 +152,11 @@ export class HowToBeAHeroActor extends Actor {
     const professionTalentName = String(details.professionTalent ?? "").trim();
     const hobbyOneTalentName = String(details.hobbyOneTalent ?? "").trim();
     const hobbyTwoTalentName = String(details.hobbyTwoTalent ?? "").trim();
+    const variableProfessionSelections = Array.isArray(details.variableProfessionSelections) ? details.variableProfessionSelections : [];
+    const variableProfessionBonusByTalent = new Map();
+    for (const name of variableProfessionSelections) {
+      if (name) variableProfessionBonusByTalent.set(name, (variableProfessionBonusByTalent.get(name) ?? 0) + 1);
+    }
     const hasBuilderMetadata = Boolean(details.builderVersion || professionTalentName || hobbyOneTalentName || hobbyTwoTalentName);
     const additions = [];
     const updates = [];
@@ -169,7 +176,9 @@ export class HowToBeAHeroActor extends Actor {
           name: talent.name, type: "ability", img: "icons/svg/d20-grey.svg",
           system: { description: "", talentGroup: talent.talentGroup, attribute1: talent.attribute1,
             attribute2: talent.attribute2, attribute3: talent.attribute3, isWeaponTalent: talent.isWeaponTalent,
-            value: talent.value, hobbyBonus, professionBonus, formula: talent.isWeaponTalent ? "" : "3d20" }
+            value: talent.value, hobbyBonus, professionBonus,
+            professionVariableBonus: variableProfessionBonusByTalent.get(talent.name) ?? 0,
+            formula: talent.isWeaponTalent ? "" : "3d20" }
         });
         continue;
       }
@@ -182,6 +191,9 @@ export class HowToBeAHeroActor extends Actor {
       const canonicalFields = { talentGroup: talent.talentGroup, attribute1: talent.attribute1,
         attribute2: talent.attribute2, attribute3: talent.attribute3, isWeaponTalent: talent.isWeaponTalent, value: mergedValue };
       canonicalFields.professionBonus = hasBuilderMetadata ? mergedProfessionBonus : Math.max(0, Number(existing.system?.professionBonus) || 0);
+      canonicalFields.professionVariableBonus = hasBuilderMetadata
+        ? (variableProfessionBonusByTalent.get(talent.name) ?? Math.max(0, Number(existing.system?.professionVariableBonus) || 0))
+        : Math.max(0, Number(existing.system?.professionVariableBonus) || 0);
       canonicalFields.hobbyBonus = hasBuilderMetadata ? mergedHobbyBonus : Math.max(0, Number(existing.system?.hobbyBonus) || 0);
       for (const [field, value] of Object.entries(canonicalFields)) {
         if (existing.system?.[field] !== value) patch[`system.${field}`] = value;
@@ -375,7 +387,8 @@ export class HowToBeAHeroActor extends Actor {
     const allocatedTalentPoints = Number(talent.system.value) || 0;
     const hobbyBonus = Number(talent.system.hobbyBonus) || 0;
     const professionBase = Number(talent.system.professionBonus) || 0;
-    const talentPoints = Math.max(allocatedTalentPoints, professionBase) + hobbyBonus;
+    const professionVariableBonus = Number(talent.system.professionVariableBonus) || 0;
+    const talentPoints = Math.max(allocatedTalentPoints, professionBase) + professionVariableBonus + hobbyBonus;
     const effectivePoints = Math.max(0, talentPoints);
     const success = totalDeficit <= effectivePoints;
     const escapedActor = Handlebars.escapeExpression(this.name);
@@ -510,6 +523,7 @@ export class HowToBeAHeroActor extends Actor {
     const definition = TEARS_DEFAULT_TALENTS.find(talent => talent.name.toLocaleLowerCase("de") === weaponTalentName);
     const isWeaponTalent = definition?.isWeaponTalent === true || linkedTalent?.system?.isWeaponTalent === true;
     const talentValue = Math.max(Number(linkedTalent?.system?.value) || 0, Number(linkedTalent?.system?.professionBonus) || 0)
+      + (Number(linkedTalent?.system?.professionVariableBonus) || 0)
       + (Number(linkedTalent?.system?.hobbyBonus) || 0);
     const allocatedPoints = (Number(weapon.system?.attackValue) || 0) + (Number(weapon.system?.parryValue) || 0);
     if (!linkedTalent || !isWeaponTalent) {
@@ -579,10 +593,10 @@ export class HowToBeAHeroActor extends Actor {
   }
 
   /**
-   * Register the T.E.A.R.S. initiative score in Foundry's combat tracker.
-   * Lower T.E.A.R.S. INI acts earlier; Foundry sorts larger scores first, so
-   * the value is inverted for tracker ordering. Repeating actions at INI
-   * multiples are still a manual GM step in v0.1.
+   * Register the positive T.E.A.R.S. initiative score in Foundry's combat tracker.
+   * T.E.A.R.S. uses ascending initiative order: lower INI acts earlier. The
+   * TearsCombat document class handles that ordering without negating the value.
+   * Repeating actions at INI multiples are still a manual GM step in v0.1.
    */
   async rollInitiative(options = {}) {
     const combat = game.combat;
@@ -624,7 +638,7 @@ export class HowToBeAHeroActor extends Actor {
     }
     const baseInitiative = Number(this.combatData?.baseInitiative ?? this.combatData?.initiative) || 0;
     const tearsInitiative = baseInitiative + weaponModifier;
-    await combat.setInitiative(combatant.id, -tearsInitiative);
+    await combat.setInitiative(combatant.id, tearsInitiative);
 
     const content = `<section class="tears-roll-card"><header class="tears-roll-card__header"><span>${Handlebars.escapeExpression(this.name)}</span><strong>${game.i18n.localize("TEARS.Combat.Initiative")}</strong></header><div class="tears-roll-single"><span>${tearsInitiative}</span><small>${game.i18n.localize("TEARS.Combat.LowerInitiativeFirst")}</small></div><p>${selectedWeapon ? `${game.i18n.localize("TEARS.Combat.Weapon")}: ${Handlebars.escapeExpression(selectedWeapon.name)} (${weaponModifier >= 0 ? "+" : ""}${weaponModifier})` : game.i18n.localize("TEARS.Combat.BaseInitiativeOnly")}</p><p>${game.i18n.localize("TEARS.Combat.InitiativeTrackerNote")}</p></section>`;
     await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor: this }), flavor: game.i18n.localize("TEARS.Combat.Initiative"), content });

@@ -4,6 +4,7 @@
 import { HowToBeAHeroActor } from './documents/actor.mjs';
 import { HowToBeAHeroItem } from './documents/item.mjs';
 import { HowToBeAHeroActiveEffect } from './documents/active-effect.mjs';
+import { TearsCombat } from './documents/combat.mjs';
 // Import sheet classes.
 import { HowToBeAHeroActorSheet } from './sheets/actor-sheet.mjs'
 import { HowToBeAHeroItemSheet } from './sheets/item-sheet.mjs';
@@ -138,11 +139,12 @@ Hooks.once('init', function () {
    * @type {String}
    */
   CONFIG.Combat.initiative = {
-    formula: '-@combatData.initiative',
+    formula: '@combatData.initiative',
     decimals: 2,
   };
 
   // Define custom Document and DataModel classes
+  CONFIG.Combat.documentClass = TearsCombat;
   CONFIG.Actor.documentClass = HowToBeAHeroActor;
   CONFIG.Actor.dataModels = {
     character: models.HowToBeAHeroCharacter,
@@ -606,3 +608,31 @@ function _getMacroSpeaker() {
   if (!actor) actor = game.actors.get(speaker.actor);
   return actor;
 }
+
+/** Convert initiative values saved by versions <= 0.1.11. Those versions
+ * stored -INI only to reverse Foundry sorting; T.E.A.R.S. now stores real INI.
+ */
+async function migrateLegacyTearsInitiativeValues() {
+  let migrated = 0;
+  for (const combat of game.combats ?? []) {
+    const currentCombatantId = combat.turns?.[combat.turn]?.id ?? null;
+    for (const combatant of combat.combatants ?? []) {
+      const isTearsActor = combatant.actor?.system?.attributes
+        && (combatant.actor.type === 'character' || combatant.actor.type === 'npc');
+      const oldValue = Number(combatant.initiative);
+      if (!isTearsActor || !Number.isFinite(oldValue) || oldValue >= 0) continue;
+      await combatant.update({ initiative: Math.abs(oldValue) });
+      migrated += 1;
+    }
+    if (currentCombatantId) {
+      const nextTurns = combat.setupTurns();
+      const nextTurn = nextTurns.findIndex(turn => turn.id === currentCombatantId);
+      if (nextTurn >= 0 && nextTurn !== combat.turn) await combat.update({ turn: nextTurn });
+    }
+  }
+  if (migrated) console.info(`T.E.A.R.S. | ${migrated} alte negative INI-Werte in positive T.E.A.R.S.-Werte umgewandelt.`);
+}
+
+Hooks.once('ready', () => migrateLegacyTearsInitiativeValues().catch(error => {
+  console.error('T.E.A.R.S. | Initiative-Migration fehlgeschlagen:', error);
+}));

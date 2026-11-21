@@ -32,6 +32,9 @@ export default class HowToBeAHeroAbility extends HowToBeAHeroItemBase {
     // Hobby bonuses are granted to one matching talent and do not consume the group's TP budget.
     schema.hobbyBonus = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
     schema.professionBonus = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
+    // Additional, freely invested profession points; unlike the fixed profession
+    // baseline these are additive to the effective talent value.
+    schema.professionVariableBonus = new fields.NumberField({...requiredInteger, initial: 0, min: 0});
   
     // Break down roll formula into three independent fields
     schema.roll = new fields.SchemaField({

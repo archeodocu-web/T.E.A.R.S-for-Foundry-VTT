@@ -88,6 +88,14 @@ static defineSchema() {
     hobbyTwo: new fields.StringField({blank: true, label: "TEARS.Details.HobbyTwo"}),
     hobbyTwoTalent: new fields.StringField({blank: true, label: "TEARS.Details.HobbyTwoTalent"}),
     variableTalentGroup: new fields.StringField({blank: true, label: "TEARS.Details.VariableTalentGroup"}),
+    variableProfessionPointsSpent: new fields.NumberField({...requiredInteger, initial: 0, min: 0, max: 5, label: "TEARS.Details.VariableProfessionPointsSpent"}),
+    variableTalentPoints: new fields.SchemaField({
+      physical: new fields.NumberField({...requiredInteger, initial: 0, min: 0, max: 5}),
+      combat: new fields.NumberField({...requiredInteger, initial: 0, min: 0, max: 5}),
+      motor: new fields.NumberField({...requiredInteger, initial: 0, min: 0, max: 5}),
+      mental: new fields.NumberField({...requiredInteger, initial: 0, min: 0, max: 5}),
+      social: new fields.NumberField({...requiredInteger, initial: 0, min: 0, max: 5})
+    }),
     positiveSpecificum: new fields.StringField({blank: true, label: "TEARS.Details.PositiveSpecificum"}),
     negativeSpecificum: new fields.StringField({blank: true, label: "TEARS.Details.NegativeSpecificum"}),
     hobbyNegativeSpecificum: new fields.StringField({blank: true, label: "TEARS.Details.HobbyNegativeSpecificum"}),
