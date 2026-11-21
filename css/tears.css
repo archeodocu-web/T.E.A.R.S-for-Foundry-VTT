@@ -7720,3 +7720,272 @@ item-list-controls search .filter-control:hover:not(.disabled),
   .tears.sheet.actor.character nav.tabs.tears-tabs > .item { min-width:max-content !important; padding:8px 11px !important; }
   .tears.sheet.actor.character .tears-talent-row { grid-template-columns:minmax(0,1fr) 48px auto !important; }
 }
+
+
+/* T.E.A.R.S. 0.1.10 — background and condition panels share the forest palette. */
+.tears.sheet.actor.character .tab.biography .biography {
+  display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  align-content:start !important; gap:14px !important; width:100% !important;
+  padding:clamp(14px,1.7vw,24px) !important; color:#16251b !important;
+}
+.tears.sheet.actor.character .tab.biography .biography > .top {
+  grid-column:1 / -1 !important; margin:0 !important; padding:14px !important;
+  border:1px solid #c7d6c0 !important; border-top:3px solid #47764e !important;
+  border-radius:16px !important; background:linear-gradient(145deg,#fbfcf7,#eaf1e5) !important;
+}
+.tears.sheet.actor.character .tab.biography .characteristics {
+  display:grid !important; grid-template-columns:repeat(3,minmax(0,1fr)) !important;
+  gap:12px !important; margin:0 !important; padding:0 !important; list-style:none !important;
+}
+.tears.sheet.actor.character .tab.biography .characteristics li { min-width:0 !important; margin:0 !important; }
+.tears.sheet.actor.character .tab.biography .characteristics label {
+  display:flex !important; flex-direction:column !important; gap:6px !important;
+  padding:10px 12px !important; border:1px solid #d2dfcb !important; border-radius:12px !important;
+  background:#fffef9 !important; color:#244b32 !important;
+}
+.tears.sheet.actor.character .tab.biography .characteristics .label,
+.tears.sheet.actor.character .tab.biography .biography h3 {
+  color:#285438 !important; font-weight:800 !important; letter-spacing:.06em !important;
+}
+.tears.sheet.actor.character .tab.biography .biography > .middle,
+.tears.sheet.actor.character .tab.biography .biography > .bottom {
+  min-width:0 !important; margin:0 !important; padding:14px !important;
+  border:1px solid #cbd9c5 !important; border-top:3px solid #668d68 !important;
+  border-radius:16px !important; background:linear-gradient(145deg,#fffef9,#edf3e9) !important;
+  box-shadow:0 3px 12px rgba(24,57,35,.055) !important; color:#17231a !important;
+}
+.tears.sheet.actor.character .tab.biography .biography h3 {
+  margin:0 0 10px !important; padding:0 0 8px !important;
+  border-bottom:1px solid #d5e0cf !important; font:800 .8rem "Roboto Condensed",sans-serif !important;
+}
+.tears.sheet.actor.character .tab.biography input,
+.tears.sheet.actor.character .tab.biography textarea {
+  min-width:0 !important; border:1px solid #b7cbb0 !important; border-radius:10px !important;
+  background:#fffefb !important; color:#101913 !important; box-shadow:inset 0 1px 2px rgba(19,43,26,.035) !important;
+}
+.tears.sheet.actor.character .tab.biography input { min-height:36px !important; padding:7px 9px !important; }
+.tears.sheet.actor.character .tab.biography textarea { min-height:170px !important; padding:10px 12px !important; resize:vertical !important; }
+.tears.sheet.actor.character .tab.biography input:focus,
+.tears.sheet.actor.character .tab.biography textarea:focus { outline:2px solid #719975 !important; outline-offset:1px !important; }
+.tears.sheet.actor.character .tab.biography .value,
+.tears.sheet.actor.character .tab.biography p { color:#19281e !important; }
+
+.tears.sheet.actor.character .tab.effects .items-section {
+  margin:0 0 14px !important; overflow:hidden !important;
+  border:1px solid #cbd9c5 !important; border-top:3px solid #47764e !important;
+  border-radius:16px !important; background:#fffef9 !important;
+  box-shadow:0 3px 12px rgba(24,57,35,.06) !important;
+}
+.tears.sheet.actor.character .tab.effects .items-header {
+  display:flex !important; align-items:center !important; gap:10px !important;
+  min-height:42px !important; padding:9px 13px !important;
+  border:0 !important; border-bottom:1px solid #cddbc7 !important;
+  border-radius:0 !important; background:linear-gradient(100deg,#e6efe1,#d9e7d5) !important;
+  color:#1d482e !important;
+}
+.tears.sheet.actor.character .tab.effects .items-header h3,
+.tears.sheet.actor.character .tab.effects .items-header * { color:#1d482e !important; }
+.tears.sheet.actor.character .tab.effects .item-list { padding:7px 10px !important; background:#fffefb !important; }
+.tears.sheet.actor.character .tab.effects .item-list .item {
+  min-height:42px !important; margin:3px 0 !important; padding:7px 10px !important;
+  border:1px solid #e0e9da !important; border-radius:11px !important;
+  background:#fbfcf8 !important; color:#15231a !important;
+}
+.tears.sheet.actor.character .tab.effects .item-list .item:hover { background:#f0f6ed !important; border-color:#b6cbb0 !important; }
+.tears.sheet.actor.character .tab.effects .conditions-list { display:grid !important; grid-template-columns:repeat(2,minmax(0,1fr)) !important; gap:6px !important; padding:9px !important; }
+.tears.sheet.actor.character .tab.effects .conditions-list .condition {
+  min-width:0 !important; margin:0 !important; padding:10px 12px !important;
+  border:1px solid #d2dfcb !important; border-radius:12px !important;
+  background:linear-gradient(145deg,#fffefb,#f0f5ec) !important; color:#17251c !important;
+}
+.tears.sheet.actor.character .tab.effects .conditions-list .condition.active {
+  border-color:#86a987 !important; background:linear-gradient(145deg,#eaf3e6,#dcebd7) !important;
+}
+.tears.sheet.actor.character .tab.effects .conditions-list .condition .title { color:#17251c !important; }
+.tears.sheet.actor.character .tab.effects .conditions-list .condition > i,
+.tears.sheet.actor.character .tab.effects .conditions-list .condition htbah-icon { color:#315d40 !important; }
+
+/* Builder usability: roomy window, obvious interactive hobby controls, five-point split. */
+.tears-character-builder {
+  width:min(1120px,calc(100vw - 40px)) !important;
+  min-width:min(900px,calc(100vw - 40px)) !important;
+  height:min(900px,calc(100vh - 40px)) !important;
+  max-width:calc(100vw - 40px) !important;
+  max-height:calc(100vh - 40px) !important;
+}
+.tears-character-builder .window-content,
+.tears-character-builder .tears-builder-form { height:100% !important; max-height:calc(100vh - 40px) !important; }
+.tears-character-builder .tears-builder-content { min-height:0 !important; overflow-y:auto !important; overflow-x:hidden !important; }
+.tears-character-builder .tears-builder-hobby,
+.tears-character-builder .tears-builder-hobby * { pointer-events:auto !important; }
+.tears-character-builder .tears-builder-hobby { position:relative !important; z-index:1 !important; }
+.tears-character-builder .tears-builder-hobby .tears-builder-field { position:relative !important; z-index:2 !important; }
+.tears-character-builder .tears-builder-hobby input,
+.tears-character-builder .tears-builder-hobby select { position:relative !important; z-index:3 !important; min-height:42px !important; cursor:pointer !important; }
+.tears-builder-variable-card { border-top:3px solid #58835b !important; background:linear-gradient(145deg,#fbfcf7,#edf4e9) !important; }
+.tears-builder-variable-grid { display:grid !important; grid-template-columns:repeat(5,minmax(0,1fr)) !important; gap:9px !important; }
+.tears-builder-variable-row { display:flex !important; flex-direction:column !important; gap:6px !important; padding:9px !important; border:1px solid #d1dfcb !important; border-radius:12px !important; background:#fffefb !important; color:#244b32 !important; font:700 .72rem "Roboto Condensed",sans-serif !important; }
+.tears-builder-variable-row input { width:100% !important; min-height:38px !important; border:1px solid #a9c29f !important; border-radius:9px !important; background:#fff !important; color:#101913 !important; text-align:center !important; font:800 1rem "Roboto",sans-serif !important; }
+.tears-builder-variable-total { display:flex !important; flex-wrap:wrap !important; align-items:center !important; gap:10px !important; margin-top:10px !important; padding:9px 11px !important; border-radius:11px !important; background:#e3eee0 !important; color:#264c32 !important; font:.75rem "Roboto Condensed",sans-serif !important; }
+.tears-builder-variable-total strong { color:#193e29 !important; font-weight:900 !important; }
+.tears-builder-variable-total [data-live-variable-points].is-invalid { color:#a02f2f !important; }
+.tears-builder-variable-total [data-live-variable-points].is-valid { color:#24613a !important; }
+@media (max-width:900px) {
+  .tears-character-builder { min-width:0 !important; width:calc(100vw - 24px) !important; }
+  .tears-builder-variable-grid { grid-template-columns:repeat(2,minmax(0,1fr)) !important; }
+  .tears.sheet.actor.character .tab.effects .conditions-list { grid-template-columns:1fr !important; }
+}
+@media (max-width:640px) {
+  .tears.sheet.actor.character .tab.biography .biography { grid-template-columns:1fr !important; }
+  .tears.sheet.actor.character .tab.biography .biography > .top { grid-column:auto !important; }
+  .tears.sheet.actor.character .tab.biography .characteristics { grid-template-columns:1fr !important; }
+  .tears-builder-variable-grid { grid-template-columns:1fr 1fr !important; }
+}
+
+
+/* ========================================================================== */
+/* T.E.A.R.S. 0.1.11 — builder handle, talent-level profession bonuses,       */
+/* and a unified Forest-Green biography/background tab.                      */
+/* ========================================================================== */
+
+/* ApplicationV2 uses its native window header as the drag handle. It had been
+   hidden to avoid a duplicate title bar, which also made the wizard immovable. */
+.tears-character-builder .window-header {
+  display: flex !important;
+  flex: 0 0 27px !important;
+  min-height: 27px !important;
+  height: 27px !important;
+  padding: 2px 9px !important;
+  align-items: center !important;
+  gap: 8px !important;
+  border: 0 !important;
+  border-bottom: 1px solid #456b50 !important;
+  background: linear-gradient(90deg, #173526, #24543a) !important;
+  color: #edf4e8 !important;
+  cursor: move !important;
+  user-select: none !important;
+}
+.tears-character-builder .window-header .window-title {
+  color: #edf4e8 !important;
+  font: 700 .68rem "Roboto Condensed", sans-serif !important;
+  letter-spacing: .08em !important;
+}
+.tears-character-builder .window-header .window-controls,
+.tears-character-builder .window-header .header-control {
+  margin-left: auto !important;
+}
+.tears-character-builder .window-header button {
+  color: #f5f6ed !important;
+  border-radius: 7px !important;
+}
+.tears-character-builder .window-content {
+  min-height: 0 !important;
+  border-radius: 0 0 15px 15px !important;
+}
+.tears-character-builder .tears-builder-header { cursor: default; }
+
+/* Five flexible profession points are selected on individual talents. */
+.tears-builder-variable-grid--talents {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 9px 12px;
+}
+.tears-builder-variable-row {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 9px 10px;
+  border: 1px solid #c4d3bf;
+  border-radius: 11px;
+  background: linear-gradient(145deg, #fbfcf7, #eef4e9);
+  color: #24452f;
+  font: 800 .74rem "Roboto Condensed", sans-serif;
+}
+.tears-builder-variable-row select {
+  width: 100%;
+  min-height: 34px;
+  border: 1px solid #9db59a !important;
+  border-radius: 9px !important;
+  background: #fff !important;
+  color: #121a14 !important;
+  padding: 6px 8px;
+  font: 500 .74rem "Roboto", sans-serif;
+}
+.tears-builder-variable-total [data-live-variable-profession-points].is-valid { color: #28653b !important; }
+.tears-builder-variable-total [data-live-variable-profession-points].is-invalid { color: #a12f2f !important; }
+.tears-builder-talent-row small { line-height: 1.35; }
+
+/* Biography/background: replace the inherited HTBAH burgundy bars and dark
+   controls with the same sage, forest and parchment palette as the other tabs. */
+.tears.sheet.actor.character .tab.biography {
+  color: #15251a !important;
+  background-color: #f5f2e8 !important;
+  background-image: repeating-linear-gradient(135deg, rgba(39,83,52,.025) 0 1px, transparent 0 11px) !important;
+}
+.tears.sheet.actor.character .tab.biography .top,
+.tears.sheet.actor.character .tab.biography .middle,
+.tears.sheet.actor.character .tab.biography .bottom {
+  padding: 14px !important;
+  border: 1px solid #bdcbb8 !important;
+  border-radius: 15px !important;
+  background: linear-gradient(145deg, #fffefb 0%, #f0f4ec 100%) !important;
+  box-shadow: 0 3px 11px rgba(20,49,29,.07) !important;
+  color: #15251a !important;
+}
+.tears.sheet.actor.character .tab.biography .characteristics .label,
+.tears.sheet.actor.character .tab.biography .middle h3,
+.tears.sheet.actor.character .tab.biography .bottom h3 {
+  padding: 8px 11px !important;
+  border: 1px solid #52785b !important;
+  border-radius: 11px !important;
+  background: linear-gradient(110deg, #214936, #3c6b49) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 5px rgba(18,49,29,.10) !important;
+}
+.tears.sheet.actor.character .tab.biography .characteristics input,
+.tears.sheet.actor.character .tab.biography .characteristics .value,
+.tears.sheet.actor.character .tab.biography .middle textarea.untext,
+.tears.sheet.actor.character .tab.biography .bottom textarea.untext,
+.tears.sheet.actor.character .tab.biography .middle p,
+.tears.sheet.actor.character .tab.biography .bottom p {
+  border: 1px solid #b8c9b4 !important;
+  border-radius: 11px !important;
+  background: #fffefb !important;
+  color: #111913 !important;
+  box-shadow: inset 0 1px 2px rgba(13,31,18,.04) !important;
+}
+.tears.sheet.actor.character .tab.biography .characteristics input,
+.tears.sheet.actor.character .tab.biography .characteristics .value {
+  min-height: 40px !important;
+  padding: 8px 10px !important;
+}
+.tears.sheet.actor.character .tab.biography .middle textarea.untext,
+.tears.sheet.actor.character .tab.biography .bottom textarea.untext {
+  padding: 11px 12px !important;
+  line-height: 1.5 !important;
+  resize: vertical !important;
+}
+.tears.sheet.actor.character .tab.biography .middle p,
+.tears.sheet.actor.character .tab.biography .bottom p {
+  padding: 11px 12px !important;
+  min-height: 100px !important;
+  color: #111913 !important;
+}
+.tears.sheet.actor.character .tab.biography .top,
+.tears.sheet.actor.character .tab.biography .middle,
+.tears.sheet.actor.character .tab.biography .bottom,
+.tears.sheet.actor.character .tab.biography .middle h3,
+.tears.sheet.actor.character .tab.biography .bottom h3,
+.tears.sheet.actor.character .tab.biography .characteristics .label {
+  border-radius: 15px !important;
+}
+.tears.sheet.actor.character .tab.biography textarea:focus,
+.tears.sheet.actor.character .tab.biography input:focus {
+  outline: 2px solid #47764e !important;
+  outline-offset: 1px !important;
+  box-shadow: 0 0 0 3px rgba(71,118,78,.14) !important;
+}
+
+@media (max-width: 700px) {
+  .tears-builder-variable-grid--talents { grid-template-columns: 1fr; }
+}

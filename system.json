@@ -1,8 +1,8 @@
 {
   "id": "tears",
-  "title": "T.E.A.R.S. – Version 0.1.9",
-  "description": "T.E.A.R.S. Foundry VTT: top navigation with Character, Talents, Combat, Inventory, Conditions and Background tabs; restored inventory/conditions views; deduplicated talents and fixed character-builder ApplicationV2 state collision.",
-  "version": "0.1.9",
+  "title": "T.E.A.R.S. – Version 0.1.12",
+  "description": "T.E.A.R.S. Foundry VTT: displays and stores positive initiative values and sorts combatants by ascending T.E.A.R.S. INI. Includes a one-time migration from legacy negative initiative values.",
+  "version": "0.1.12",
   "authors": [
     {
       "name": "T.E.A.R.S. System Conversion"
