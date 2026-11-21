@@ -1,0 +1,68 @@
+<form class="{{cssClass}}" autocomplete="off">
+  {{!-- Header --}}
+  <header class="sheet-header">
+    <button type="button" class="htbah-item-icon-trigger" data-action="openItemIconGallery"
+            title="{{localize 'HTBAH.ItemIconChoose'}}" aria-label="{{localize 'HTBAH.ItemIconChoose'}}"
+            {{#unless editable}}disabled{{/unless}}>
+      <img class="profile-img" data-item-icon-preview
+           src="{{displayImage}}" alt="{{document.name}}" />
+    </button>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{document.name}}" placeholder="Name" /></h1>
+    </div>
+    <div class="item-subtitle">
+      <h4 class="item-type">{{itemType}}</h4>
+    </div>
+  </header>
+
+  {{!-- Navigation --}}
+  <nav class="sheet-navigation tabs" data-group="primary">
+    <a class="item active" data-tab="description">{{ localize "HTBAH.Description" }}</a>
+  </nav>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+    <div class="sidebar">
+      <section class="sidebar-card htbah-item-icon-editor">
+        <h3>{{localize "HTBAH.ItemIcon"}}</h3>
+        <p class="hint">{{localize "HTBAH.ItemIconHelp"}}</p>
+        <button type="button" class="htbah-item-icon-open" data-action="openItemIconGallery"
+                {{#unless editable}}disabled{{/unless}}>
+          {{localize "HTBAH.ItemIconChoose"}}
+        </button>
+        <button type="button" class="htbah-item-image-open" data-action="showPortrait"
+                {{#unless editable}}disabled{{/unless}}>
+          {{localize "HTBAH.ItemImageChoose"}}
+        </button>
+        <button type="button" class="htbah-icon-reset {{#unless system.icon}}selected{{/unless}}"
+                data-action="selectItemIcon" data-icon-path=""
+                aria-pressed="{{#unless system.icon}}true{{else}}false{{/unless}}"
+                {{#unless editable}}disabled{{/unless}}>
+          {{localize "HTBAH.ItemIconUseOriginal"}}
+        </button>
+      </section>
+      {{!-- Dynamic sidebar content based on item type --}}
+      {{#if document.type}}
+        {{> (concat "htbah." document.type "-sidebar")}}
+      {{else}}
+        {{> "htbah.item-sidebar"}}
+      {{/if}}
+    </div>
+
+    <div class="main-content">
+      <div class="tab description" data-group="primary" data-tab="description">
+        <div class="description-field">
+          <label for="description">Description:</label>
+          <textarea name="system.description" id="description" rows="6" placeholder="Enter item description...">{{system.description}}</textarea>
+        </div>
+      </div>
+      
+      {{!-- Dynamic main content based on item type --}}
+      {{#if document.type}}
+        {{> (concat "htbah." document.type "-content")}}
+      {{else}}
+        {{> "htbah.item-content"}}
+      {{/if}}
+    </div>
+  </section>
+</form>

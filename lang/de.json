@@ -749,7 +749,8 @@
       "WeaponNotFound": "Die ausgewählte Waffe wurde nicht gefunden.",
       "BaseInitiativeOnly": "Ohne ausgewählte Waffe wird nur der Basis-INI-Wert verwendet.",
       "PlaceTokenFirst": "Setze zuerst einen Token dieses Charakters auf die aktuelle Kampfszene.",
-      "WeaponTalentRequired": "Trage bei Waffenkategorie den Namen eines vorhandenen T.E.A.R.S.-Waffentalents exakt ein (z. B. „Klingenwaffen“)."
+      "WeaponTalentRequired": "Trage bei Waffenkategorie den Namen eines vorhandenen T.E.A.R.S.-Waffentalents exakt ein (z. B. „Klingenwaffen“).",
+      "ChooseWeaponTalent": "Waffentalent auswählen"
     },
     "Roll": {
       "TalentProbe": "Talentprobe",
@@ -807,6 +808,18 @@
       "Disabled": "Deaktiviert",
       "RoundsRemaining": "Verbleibende Runden",
       "SecondsRemaining": "Verbleibende Sekunden"
+    },
+    "PointGuide": {
+      "Title": "Wie verteile ich Punkte?",
+      "AttributesTitle": "1. Grundattribute",
+      "AttributesText": "Alle sechs Attribute starten bei 8. Addiere zuerst die Berufsboni. Danach verteilst du 14 Steigerungspunkte. Die Kosten steigen mit dem erreichten Wert: Bereich 1–14 kostet 1 Punkt je Steigerung, Bereich 14–17 kostet 2 und Bereich 17–19 kostet 3.",
+      "TalentsTitle": "2. Talentpunkte",
+      "TalentsText": "Du erhältst 10 TP für jede der fünf Talentgruppen. Verteile diese Punkte innerhalb der Gruppe auf einzelne Talente. Danach kommen die Talentpunkte deines Berufs sowie +5 TP für das erste Hobby und +3 TP für das zweite Hobby auf passende Talente hinzu.",
+      "WeaponTitle": "Waffentalente",
+      "WeaponText": "Eine Steigerung eines Waffentalents um 1 kostet 2 TP statt 1 TP.",
+      "ChecksTitle": "3. Proben",
+      "ChecksText": "Bei einer normalen Talentprobe würfelst du drei W20 gegen die drei zugeordneten Attribute. Der Talentwert ist ein gemeinsamer Puffer für alle drei Würfe und wird nicht verbraucht.",
+      "ManualNote": "Hinweis zu dieser Version: Berufs- und Hobbyboni werden noch nicht automatisch berechnet. Erhöhe das Punktebudget der passenden Talentgruppe und trage die Talentwerte manuell ein."
     }
   }
 }

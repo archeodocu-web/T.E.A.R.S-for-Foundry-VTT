@@ -1,0 +1,153 @@
+<section class="tears-character-overview">
+  <header class="tears-section-heading">
+    <div>
+      <span class="tears-eyebrow">T.E.A.R.S. / CHARACTER FILE</span>
+      <h2>{{localize "TEARS.Tabs.Character"}}</h2>
+    </div>
+    <div class="tears-character-meta"><span>{{system.details.profession}}</span></div>
+  </header>
+
+  <details class="tears-point-guide">
+    <summary><i class="fas fa-book-open"></i> {{localize "TEARS.PointGuide.Title"}}</summary>
+    <div class="tears-point-guide-grid">
+      <section><h4>{{localize "TEARS.PointGuide.AttributesTitle"}}</h4><p>{{localize "TEARS.PointGuide.AttributesText"}}</p></section>
+      <section><h4>{{localize "TEARS.PointGuide.TalentsTitle"}}</h4><p>{{localize "TEARS.PointGuide.TalentsText"}}</p></section>
+      <section><h4>{{localize "TEARS.PointGuide.WeaponTitle"}}</h4><p>{{localize "TEARS.PointGuide.WeaponText"}}</p></section>
+      <section><h4>{{localize "TEARS.PointGuide.ChecksTitle"}}</h4><p>{{localize "TEARS.PointGuide.ChecksText"}}</p></section>
+    </div>
+    <p class="tears-point-guide-note"><i class="fas fa-info-circle"></i> {{localize "TEARS.PointGuide.ManualNote"}}</p>
+  </details>
+
+  <section class="tears-panel">
+    <div class="tears-panel-heading"><h3>{{localize "TEARS.Attributes.Title"}}</h3><span>{{localize "TEARS.Attributes.RollHint"}}</span></div>
+    <div class="tears-attribute-grid">
+      {{#each config.attributes as |attribute key|}}
+        <div class="tears-attribute-card">
+          <button type="button" class="tears-attribute-roll" data-action="rollAttribute" data-attribute="{{key}}" title="{{localize 'TEARS.Attributes.Roll'}}: {{localize attribute.label}}">
+            <span class="tears-attribute-abbr">{{attribute.abbreviation}}</span>
+            <span class="tears-attribute-name">{{localize attribute.label}}</span>
+          </button>
+          {{#if @root.editable}}
+            <input type="number" min="0" step="1" name="system.attributes.{{key}}" value="{{lookup @root.system.attributes key}}" aria-label="{{localize attribute.label}}">
+          {{else}}
+            <strong class="tears-attribute-value">{{lookup @root.system.attributes key}}</strong>
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+    <p class="tears-rule-hint">{{localize "TEARS.Attributes.CreationHint"}}</p>
+  </section>
+
+  <div class="tears-resource-grid">
+    <section class="tears-panel tears-resource-panel">
+      <div class="tears-panel-heading"><h3>{{localize "TEARS.Resources.LifeEnergy"}}</h3><span>LE</span></div>
+      <div class="tears-resource-number">
+        {{#if editable}}
+          <input type="number" min="0" name="system.attributes.health.value" value="{{system.attributes.health.value}}" aria-label="{{localize 'TEARS.Resources.Current'}}">
+        {{else}}
+          <strong>{{system.attributes.health.value}}</strong>
+        {{/if}}
+        <span>/ {{system.attributes.health.max}}</span>
+      </div>
+      <div class="tears-resource-track"><span class="tears-life-track" style="width: {{healthPercentage}}%"></span></div>
+      <small>{{localize "TEARS.Resources.LifeFormula"}}</small>
+    </section>
+    <section class="tears-panel tears-resource-panel">
+      <div class="tears-panel-heading"><h3>{{localize "TEARS.Resources.MentalHealth"}}</h3><span>GG</span></div>
+      <div class="tears-resource-number">
+        {{#if editable}}
+          <input type="number" min="0" name="system.attributes.mentalHealth.value" value="{{system.attributes.mentalHealth.value}}" aria-label="{{localize 'TEARS.Resources.Current'}}">
+        {{else}}
+          <strong>{{system.attributes.mentalHealth.value}}</strong>
+        {{/if}}
+        <span>/ {{system.attributes.mentalHealth.max}}</span>
+      </div>
+      <div class="tears-resource-track"><span class="tears-mental-track" style="width: {{mentalHealthPercentage}}%"></span></div>
+      <small>{{localize "TEARS.Resources.MentalFormula"}}</small>
+    </section>
+  </div>
+
+  <section class="tears-panel">
+    <div class="tears-panel-heading"><h3>{{localize "TEARS.Details.Background"}}</h3></div>
+    <div class="tears-character-fields">
+      <label>{{localize "TEARS.Details.ProfessionCategory"}}
+        {{#if editable}}
+          <select name="system.details.professionCategory"><option value="">—</option>{{#each config.professionCategories as |label key|}}<option value="{{key}}" {{#if (eq ../system.details.professionCategory key)}}selected{{/if}}>{{localize label}}</option>{{/each}}</select>
+        {{else}}<span>{{localize (lookup config.professionCategories system.details.professionCategory)}}</span>{{/if}}
+      </label>
+      {{#if system.details.professionCategory}}
+        <div class="tears-profession-profile">
+          <small>{{localize "TEARS.Details.ProfessionProfile"}}</small>
+          <div>
+            {{#each (lookup config.professionAttributeProfiles system.details.professionCategory) as |value key|}}
+              <span>{{lookup (lookup @root.config.attributes key) "abbreviation"}} {{value}}</span>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+      <label>{{localize "TEARS.Details.Profession"}}
+        {{#if editable}}<input type="text" name="system.details.profession" value="{{system.details.profession}}" placeholder="{{localize 'TEARS.Details.ProfessionPlaceholder'}}">{{else}}<span>{{system.details.profession}}</span>{{/if}}
+      </label>
+      <label>{{localize "TEARS.Details.HobbyOne"}}
+        {{#if editable}}<input type="text" name="system.details.hobbyOne" value="{{system.details.hobbyOne}}">{{else}}<span>{{system.details.hobbyOne}}</span>{{/if}}
+      </label>
+      <label>{{localize "TEARS.Details.HobbyTwo"}}
+        {{#if editable}}<input type="text" name="system.details.hobbyTwo" value="{{system.details.hobbyTwo}}">{{else}}<span>{{system.details.hobbyTwo}}</span>{{/if}}
+      </label>
+      <label>{{localize "TEARS.Details.PositiveSpecificum"}}
+        {{#if editable}}<input type="text" name="system.details.positiveSpecificum" value="{{system.details.positiveSpecificum}}">{{else}}<span>{{system.details.positiveSpecificum}}</span>{{/if}}
+      </label>
+      <label>{{localize "TEARS.Details.NegativeSpecificum"}}
+        {{#if editable}}<input type="text" name="system.details.negativeSpecificum" value="{{system.details.negativeSpecificum}}">{{else}}<span>{{system.details.negativeSpecificum}}</span>{{/if}}
+      </label>
+    </div>
+  </section>
+
+  <header class="tears-section-heading tears-talent-heading">
+    <div><span class="tears-eyebrow">SKILLS & PROFICIENCIES</span><h2>{{localize "TEARS.Talents.Title"}}</h2></div>
+    <span class="tears-talent-note">{{localize "TEARS.Talents.SharedPoolHint"}}</span>
+  </header>
+
+  <div class="tears-talent-groups">
+    {{#each talentGroups as |group key|}}
+      <section class="tears-panel tears-talent-group" data-talent-group="{{key}}">
+        <div class="tears-panel-heading">
+          <h3>{{group.label}}</h3>
+          <span class="tears-group-total">{{group.totalPoints}} / {{group.poolPoints}} {{localize "TEARS.Talents.TP"}}</span>
+        </div>
+        {{#if @root.editable}}
+          <label class="tears-pool-budget">{{localize "TEARS.Talents.PointBudget"}} <input type="number" min="0" step="1" name="system.talentPools.{{key}}" value="{{group.poolPoints}}"></label>
+        {{/if}}
+        <div class="tears-talent-list">
+          {{#each group.talents as |talent|}}
+            <div class="tears-talent-row" data-item-id="{{talent.id}}">
+              <div class="tears-talent-name">
+                <strong>{{talent.name}}</strong>
+                {{#if talent.isTearsWeaponTalent}}
+                  <small>{{localize "TEARS.Talents.CombatResolution"}}</small>
+                {{else}}
+                  <small>{{#each talent.tearsAttributes}}{{#if @index}} · {{/if}}{{abbreviation}}{{/each}}</small>
+                {{/if}}
+              </div>
+              {{#if @root.editable}}
+                <input class="tears-talent-points" type="number" min="0" step="1" name="system.value" data-item-id="{{talent.id}}" value="{{talent.system.value}}" aria-label="{{talent.name}} {{localize 'TEARS.Talents.TP'}}">
+              {{else}}
+                <span class="tears-talent-points">{{talent.system.value}}</span>
+              {{/if}}
+              {{#if talent.isTearsWeaponTalent}}
+                <span class="tears-talent-status">{{localize "TEARS.Talents.Combat"}}</span>
+              {{else}}
+                <button type="button" class="tears-roll-button" data-action="itemAction" data-sub-action="roll" data-item-id="{{talent.id}}" title="{{localize 'TEARS.Talents.Roll'}}"><i class="fas fa-dice-d20"></i></button>
+              {{/if}}
+              {{#if @root.editable}}
+                <button type="button" class="tears-edit-button" data-action="itemAction" data-sub-action="edit" data-item-id="{{talent.id}}" title="{{localize 'HTBAH.ItemEdit'}}"><i class="fas fa-pen"></i></button>
+              {{/if}}
+            </div>
+          {{/each}}
+        </div>
+        {{#if (lt group.remainingPoints 0)}}<p class="tears-overbudget">{{localize "TEARS.Talents.OverBudget"}}</p>{{else}}<p class="tears-budget-remaining">{{group.remainingPoints}} {{localize "TEARS.Talents.PointsRemaining"}}</p>{{/if}}
+      </section>
+    {{/each}}
+  </div>
+  <p class="tears-rule-hint">{{localize "TEARS.Talents.PointBudgetNote"}}</p>
+</section>

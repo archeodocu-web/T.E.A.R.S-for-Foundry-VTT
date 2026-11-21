@@ -1,0 +1,91 @@
+{{!-- T.E.A.R.S. v0.1 character sheet: DSA-inspired tab and dossier layout. --}}
+<form class="interactable {{actor.type}} flexcol tears-sheet" autocomplete="off">
+  <header class="sheet-header tears-sheet-header">
+    <div class="tears-sheet-portrait portrait {{#if portrait.token}}token{{/if}}">
+      <img src="{{portrait.src}}" alt="{{actor.name}}"
+        {{#if (and editable portrait.path)}}data-edit="{{portrait.path}}"{{/if}}
+        data-action="showPortrait">
+    </div>
+
+    <div class="tears-sheet-identity">
+      <span class="tears-eyebrow">T.E.A.R.S. / CHARACTER RECORD</span>
+      {{#if editable}}
+        <input type="text" name="name" class="document-name uninput" value="{{actor.name}}" aria-label="{{localize 'DOCUMENT.Actor'}}">
+      {{else}}
+        <h1 class="document-name">{{actor.name}}</h1>
+      {{/if}}
+      <div class="tears-sheet-subtitle">
+        {{#if system.details.profession}}{{system.details.profession}}{{else}}{{localize "TEARS.Details.ProfessionPlaceholder"}}{{/if}}
+        {{#if system.details.professionCategory}} · {{localize (lookup config.professionCategories system.details.professionCategory)}}{{/if}}
+      </div>
+      <div class="tears-sheet-tags">
+        {{#if system.details.hobbyOne}}<span>{{system.details.hobbyOne}}</span>{{/if}}
+        {{#if system.details.hobbyTwo}}<span>{{system.details.hobbyTwo}}</span>{{/if}}
+      </div>
+    </div>
+
+    <div class="tears-header-resources">
+      <div class="tears-header-resource tears-header-le">
+        <div class="tears-header-resource-title"><strong>LE</strong><span>{{localize "TEARS.Resources.LifeEnergy"}}</span></div>
+        {{#if editable}}
+          <input type="number" min="0" name="system.attributes.health.value" value="{{system.attributes.health.value}}" aria-label="{{localize 'TEARS.Resources.LifeEnergy'}}">
+        {{else}}
+          <strong class="tears-header-resource-value">{{system.attributes.health.value}}</strong>
+        {{/if}}
+        <span class="tears-header-resource-max">/ {{system.attributes.health.max}}</span>
+        <div class="tears-resource-track"><span class="tears-life-track" style="width: {{healthPercentage}}%"></span></div>
+      </div>
+      <div class="tears-header-resource tears-header-gg">
+        <div class="tears-header-resource-title"><strong>GG</strong><span>{{localize "TEARS.Resources.MentalHealth"}}</span></div>
+        {{#if editable}}
+          <input type="number" min="0" name="system.attributes.mentalHealth.value" value="{{system.attributes.mentalHealth.value}}" aria-label="{{localize 'TEARS.Resources.MentalHealth'}}">
+        {{else}}
+          <strong class="tears-header-resource-value">{{system.attributes.mentalHealth.value}}</strong>
+        {{/if}}
+        <span class="tears-header-resource-max">/ {{system.attributes.mentalHealth.max}}</span>
+        <div class="tears-resource-track"><span class="tears-mental-track" style="width: {{mentalHealthPercentage}}%"></span></div>
+      </div>
+      <button type="button" class="tears-initiative-button" data-action="rollInitiative">
+        <i class="fas fa-dice-d20"></i><span>{{localize "TEARS.Combat.RollInitiative"}}</span>
+      </button>
+    </div>
+  </header>
+
+  <nav class="tabs tears-tabs" data-group="primary" aria-label="{{localize 'TEARS.Tabs.Character'}}">
+    {{#each tabs}}
+      <a class="item control {{#if (eq ../activeTab tab)}}active{{/if}}" data-group="primary" data-tab="{{tab}}" data-tooltip="{{localize label}}">
+        {{#if icon}}<i class="{{icon}}"></i>{{/if}}
+        {{#if svg}}<htbah-icon src="systems/tears/ui/icons/svg/{{svg}}.svg"></htbah-icon>{{/if}}
+        <span>{{localize label}}</span>
+      </a>
+    {{/each}}
+  </nav>
+
+  <section class="sheet-body tears-sheet-body">
+    <div class="main-content tears-main-content">
+      <section class="tab-body tears-tab-body">
+        <div class="tab details {{#if (eq activeTab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+          {{> "htbah.character-details"}}
+        </div>
+        <div class="tab combat {{#if (eq activeTab 'combat')}}active{{/if}}" data-group="primary" data-tab="combat">
+          {{> "htbah.character-combat"}}
+        </div>
+        <div class="tab inventory {{#if (eq activeTab 'inventory')}}active{{/if}}" data-group="primary" data-tab="inventory">
+          {{> "htbah.character-inventory"}}
+        </div>
+        <div class="tab effects {{#if (eq activeTab 'effects')}}active{{/if}}" data-group="primary" data-tab="effects">
+          {{> "htbah.character-effects"}}
+        </div>
+        <div class="tab biography {{#if (eq activeTab 'biography')}}active{{/if}}" data-group="primary" data-tab="biography">
+          {{> "htbah.character-biography"}}
+        </div>
+      </section>
+    </div>
+
+    <button type="button" class="create-child gold-button" data-action="createDocument"
+      data-document-class="Item" data-type="item"
+      aria-label="{{localize 'SIDEBAR.Create' type=(localize 'DOCUMENT.Item')}}" hidden>
+      <i class="fas fa-plus"></i>
+    </button>
+  </section>
+</form>

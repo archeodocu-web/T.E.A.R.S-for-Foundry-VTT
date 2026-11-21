@@ -767,7 +767,8 @@
       "WeaponNotFound": "The selected weapon could not be found.",
       "BaseInitiativeOnly": "Without a selected weapon, only the base initiative value is used.",
       "PlaceTokenFirst": "Place a token for this character on the active combat scene first.",
-      "WeaponTalentRequired": "Enter the exact name of an existing T.E.A.R.S. weapon talent in Weapon Category (for example, “Klingenwaffen”)."
+      "WeaponTalentRequired": "Enter the exact name of an existing T.E.A.R.S. weapon talent in Weapon Category (for example, “Klingenwaffen”).",
+      "ChooseWeaponTalent": "Choose weapon talent"
     },
     "Roll": {
       "TalentProbe": "Talent check",
@@ -825,6 +826,18 @@
       "Disabled": "Disabled",
       "RoundsRemaining": "Rounds remaining",
       "SecondsRemaining": "Seconds remaining"
+    },
+    "PointGuide": {
+      "Title": "How do I distribute points?",
+      "AttributesTitle": "1. Attributes",
+      "AttributesText": "All six attributes start at 8. Apply profession bonuses first. Then distribute 14 advancement points. The cost rises with the target value: values 1–14 cost 1 point per increase, 14–17 cost 2, and 17–19 cost 3.",
+      "TalentsTitle": "2. Talent points",
+      "TalentsText": "You receive 10 TP for each of the five talent groups. Distribute these points among talents within each group. Then add profession talent points, plus 5 TP for the first hobby and 3 TP for the second hobby to suitable hobby talents.",
+      "WeaponTitle": "Weapon talents",
+      "WeaponText": "Increasing a weapon talent by 1 costs 2 TP instead of 1 TP.",
+      "ChecksTitle": "3. Checks",
+      "ChecksText": "A regular talent check rolls three W20 against the three assigned attributes. The talent value is one shared buffer for all three rolls and is not consumed.",
+      "ManualNote": "Version note: Profession and hobby bonuses are not calculated automatically yet. Increase the budget for the relevant talent group and enter talent values manually."
     }
   }
 }

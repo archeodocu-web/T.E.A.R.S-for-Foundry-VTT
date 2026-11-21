@@ -83,7 +83,7 @@ People and credits are listed in no particular order.
 
 
 ==============================================
-#### Additional item silhouettes introduced in v1.1.15
+#### Compact item icon gallery (T.E.A.R.S. v0.1.1)
 ==============================================
 
-The 80 additional item pictograms in `ui/icons/svg/items/` were newly drawn for this system release as simple, single-colour SVG silhouettes. They are original project assets and are not copied from the Game-icons.net collection.
+This build ships 23 shared item-category pictograms in `ui/icons/svg/items/`. The gallery reuses broad silhouettes for multiple item records to keep the UI asset folder small. The retained category images are drawn from the original project icon set and the third-party assets attributed above; their original attribution/licence terms continue to apply.

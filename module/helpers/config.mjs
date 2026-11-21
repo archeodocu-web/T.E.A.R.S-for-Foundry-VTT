@@ -148,6 +148,35 @@ export const TEARS_DEFAULT_TALENTS = [
   value: 0
 }));
 
+/** Weapon talents are selected from their exact rulebook names on weapon items. */
+export const TEARS_WEAPON_TALENTS = TEARS_DEFAULT_TALENTS
+  .filter(talent => talent.isWeaponTalent)
+  .map(talent => ({ name: talent.name }));
+
+const TEARS_WEAPON_TALENT_ALIASES = {
+  "klinge": "Klingenwaffen",
+  "klingenwaffe": "Klingenwaffen",
+  "pistole": "Schusswaffen Pistolen",
+  "pistolen": "Schusswaffen Pistolen",
+  "gewehr": "Schusswaffen Gewehre",
+  "gewehre": "Schusswaffen Gewehre",
+  "bogen": "Bögen",
+  "wurfwaffe": "Wurfwaffen",
+  "nahkampfwaffe stumpf": "Nahkampfwaffen stumpf",
+  "nahkampfwaffe spitz": "Nahkampfwaffen spitz",
+  "faustkampf": "Ringen/Faustkampf",
+  "ringen": "Ringen/Faustkampf"
+};
+
+/** Normalize common short labels from early weapon entries to the exact T.E.A.R.S. talent name. */
+export function normalizeTearsWeaponTalentName(value) {
+  const raw = String(value ?? "").trim();
+  if (!raw) return "";
+  const exact = TEARS_WEAPON_TALENTS.find(talent => talent.name.toLocaleLowerCase("de") === raw.toLocaleLowerCase("de"));
+  if (exact) return exact.name;
+  return TEARS_WEAPON_TALENT_ALIASES[raw.toLocaleLowerCase("de")] ?? raw;
+}
+
 
 /**
 * Conditions that can affect an actor.
@@ -609,12 +638,12 @@ HOW_TO_BE_A_HERO.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  */
 HOW_TO_BE_A_HERO.defaultArtwork = {
   Item: {
-    item: "systems/tears/ui/icons/svg/items/swap-bag.svg",
-    consumable: "systems/tears/ui/icons/svg/items/potion-ball.svg",
-    weapon: "systems/tears/ui/icons/svg/items/sharp-axe.svg",
+    item: "systems/tears/ui/icons/svg/items/backpack.svg",
+    consumable: "systems/tears/ui/icons/svg/items/vial.svg",
+    weapon: "systems/tears/ui/icons/svg/items/sword.svg",
     armor: "systems/tears/ui/icons/svg/items/armor-vest.svg",
-    tool: "systems/tears/ui/icons/svg/items/3d-hammer.svg",
-    ability: "systems/tears/ui/icons/svg/items/skills.svg",
+    tool: "systems/tears/ui/icons/svg/items/hammer-tool.svg",
+    ability: "systems/tears/ui/icons/svg/brainstorm.svg",
   }
 };
 

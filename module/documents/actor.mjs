@@ -1,4 +1,4 @@
-import { SYSTEM_ID, TEARS_DEFAULT_TALENTS } from "../helpers/config.mjs";
+import { SYSTEM_ID, TEARS_DEFAULT_TALENTS, normalizeTearsWeaponTalentName } from "../helpers/config.mjs";
 import { d10Roll } from "../dice/dice.mjs";
 
 
@@ -394,9 +394,9 @@ export class HowToBeAHeroActor extends Actor {
     // A weapon category can be linked to the corresponding combat talent by
     // using its exact talent name in the weapon category field. This prevents
     // silently allocating more weapon TP than the character has learned.
-    const weaponTalentName = String(weapon.system?.weaponType ?? "").trim().toLocaleLowerCase("de");
+    const weaponTalentName = normalizeTearsWeaponTalentName(weapon.system?.weaponType).toLocaleLowerCase("de");
     const linkedTalent = weaponTalentName
-      ? this.items.find(item => item.type === "ability" && item.name.trim().toLocaleLowerCase("de") === weaponTalentName)
+      ? this.items.find(item => item.type === "ability" && normalizeTearsWeaponTalentName(item.name).toLocaleLowerCase("de") === weaponTalentName)
       : null;
     const allocatedPoints = (Number(weapon.system?.attackValue) || 0) + (Number(weapon.system?.parryValue) || 0);
     if (!linkedTalent || linkedTalent.system?.isWeaponTalent !== true) {

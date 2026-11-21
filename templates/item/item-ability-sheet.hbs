@@ -1,0 +1,11 @@
+<form class="{{cssClass}} tears-ability-sheet" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{document.img}}" data-edit="img" title="{{document.name}}">
+    <div class="header-fields"><h1 class="charname"><input name="name" type="text" value="{{document.name}}" placeholder="{{localize 'TEARS.Talents.Name'}}"></h1></div>
+    <div class="item-subtitle"><h4>{{localize "TEARS.Talents.Talent"}}</h4></div>
+  </header>
+  <section class="sheet-body">
+    <div class="sidebar">{{> "htbah.ability-sidebar"}}</div>
+    <div class="main-content">{{> "htbah.ability-content"}}</div>
+  </section>
+</form>

@@ -1,0 +1,28 @@
+<section class="sidebar-card tears-item-editor">
+  <h3>{{localize "TEARS.Talents.Details"}}</h3>
+  <label>{{localize "TEARS.Talents.Group"}}
+    <select name="system.talentGroup">
+      {{#each config.talentGroups as |group key|}}
+        <option value="{{key}}" {{#if (eq ../system.talentGroup key)}}selected{{/if}}>{{localize group.label}}</option>
+      {{/each}}
+    </select>
+  </label>
+  <label>{{localize "TEARS.Talents.TP"}}
+    <input type="number" min="0" step="1" name="system.value" value="{{system.value}}">
+  </label>
+  <label class="tears-checkbox-label">
+    <input type="checkbox" name="system.isWeaponTalent" {{checked system.isWeaponTalent}}>
+    {{localize "TEARS.Talents.CombatOnly"}}
+  </label>
+  <div class="tears-talent-attributes" {{#if system.isWeaponTalent}}hidden{{/if}}>
+    <label>{{localize "TEARS.Talents.AttributeOne"}}
+      <select name="system.attribute1">{{#each config.attributes as |attribute key|}}<option value="{{key}}" {{#if (eq ../system.attribute1 key)}}selected{{/if}}>{{attribute.abbreviation}} – {{localize attribute.label}}</option>{{/each}}</select>
+    </label>
+    <label>{{localize "TEARS.Talents.AttributeTwo"}}
+      <select name="system.attribute2">{{#each config.attributes as |attribute key|}}<option value="{{key}}" {{#if (eq ../system.attribute2 key)}}selected{{/if}}>{{attribute.abbreviation}} – {{localize attribute.label}}</option>{{/each}}</select>
+    </label>
+    <label>{{localize "TEARS.Talents.AttributeThree"}}
+      <select name="system.attribute3">{{#each config.attributes as |attribute key|}}<option value="{{key}}" {{#if (eq ../system.attribute3 key)}}selected{{/if}}>{{attribute.abbreviation}} – {{localize attribute.label}}</option>{{/each}}</select>
+    </label>
+  </div>
+</section>

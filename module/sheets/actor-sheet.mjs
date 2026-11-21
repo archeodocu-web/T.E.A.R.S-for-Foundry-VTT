@@ -1,7 +1,7 @@
 import { HowToBeAHeroActor } from '../documents/actor.mjs';
 import { HowToBeAHeroDragDropHandler } from '../helpers/drag-drop-handler.mjs';
 import { initializeCustomElements } from '../components/_module.mjs';
-import { ITEM_ICON_CATALOG } from '../helpers/item-icons.mjs';
+import { ITEM_ICON_CATALOG, resolveItemIconPath } from '../helpers/item-icons.mjs';
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -86,8 +86,8 @@ class NameInputDialog extends foundry.applications.api.HandlebarsApplicationMixi
     this.defaultName = defaultName;
     this.onSubmit = onSubmit;
     this.itemPicker = itemPicker;
-    this.selectedType = initialType;
-    this.selectedIcon = ITEM_ICON_CATALOG.find(icon => icon.type === initialType)?.path ?? "";
+    this.selectedType = initialType || (itemPicker ? (ITEM_ICON_CATALOG[0]?.type ?? "item") : "");
+    this.selectedIcon = ITEM_ICON_CATALOG.find(icon => icon.type === this.selectedType)?.path ?? "";
   }
 
   static DEFAULT_OPTIONS = {
@@ -300,7 +300,7 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
         return {
           id: item.id,
           name: item.name,
-          img: item.img,
+          img: resolveItemIconPath(item.system?.icon || item.img, item.type),
           system: item.system,
           attackTarget: Math.max(0, attackBase + (Number(item.system.attackValue) || 0) + stanceAttack - checkPenalty.total),
           parryTarget: Math.max(0, context.combatData.pa + (Number(item.system.parryValue) || 0) + stanceParry - checkPenalty.total),
@@ -757,7 +757,7 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
         headerItems.ability = {
           id: item.id,
           name: item.name,
-          img: item.img,
+          img: resolveItemIconPath(item.system?.icon || item.img, item.type),
           type: item.type
         };
       }
@@ -769,7 +769,7 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
         headerItems.weapon = {
           id: item.id,
           name: item.name,
-          img: item.img,
+          img: resolveItemIconPath(item.system?.icon || item.img, item.type),
           type: item.type
         };
       }
@@ -781,7 +781,7 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
         headerItems.parry = {
           id: item.id,
           name: item.name,
-          img: item.img,
+          img: resolveItemIconPath(item.system?.icon || item.img, item.type),
           type: item.type
         };
       }
@@ -833,6 +833,8 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
 
     for (const item of allItems) {
       item.img ||= Item.DEFAULT_ICON;
+      // UI-only image fallback keeps old v0.1 item paths working after icon consolidation.
+      item.displayIcon = resolveItemIconPath(item.system?.icon || item.img, item.type);
 
       // Prepare item context for template usage
       item.ctx = this._prepareItemContext(item);
@@ -961,8 +963,12 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
       
       const finalRollableClass = rollableClass.filterJoin(" ");
       
+      const displayImg = favorite?.documentName === "Item"
+        ? resolveItemIconPath(img, favorite.type)
+        : img;
+
       return {
-        id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level,
+        id, img: displayImg, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level,
         itemId: type === "item" ? favorite.id : null,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id : null,
@@ -1265,10 +1271,9 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
 
       if (input.value !== value.textContent) {
         await this.document.update({
-          "system.attributes.health.value": Math.clamped(
-            parseInt(input.value) || 0,
-            0,
-            this.document.system.attributes.health.max
+          "system.attributes.health.value": Math.min(
+            this.document.system.attributes.health.max,
+            Math.max(0, parseInt(input.value, 10) || 0)
           )
         });
       }
@@ -1304,10 +1309,9 @@ export class HowToBeAHeroActorSheet extends HandlebarsApplicationMixin(foundry.a
 
       if (input.value !== value.textContent) {
         await this.document.update({
-          "system.attributes.mana.value": Math.clamped(
-            parseInt(input.value) || 0,
-            0,
-            this.document.system.attributes.mana.max
+          "system.attributes.mana.value": Math.min(
+            this.document.system.attributes.mana.max,
+            Math.max(0, parseInt(input.value, 10) || 0)
           )
         });
       }

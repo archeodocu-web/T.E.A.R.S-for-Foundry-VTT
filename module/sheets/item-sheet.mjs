@@ -1,6 +1,7 @@
 import { HowToBeAHeroItem } from '../documents/item.mjs';
-import { ITEM_ICON_CATALOG } from '../helpers/item-icons.mjs';
+import { ITEM_ICON_CATALOG, resolveItemIconPath } from '../helpers/item-icons.mjs';
 import { MAGIC_ICON_CATALOG } from '../helpers/magic-icons.mjs';
+import { TEARS_WEAPON_TALENTS, normalizeTearsWeaponTalentName } from '../helpers/config.mjs';
 
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
@@ -90,7 +91,10 @@ export class HowToBeAHeroItemSheet extends HandlebarsApplicationMixin(foundry.ap
       context.document = this.document; // Ensure document is available in template
       context.editable = this.isEditable;
       context.iconCatalog = this._getAvailableIcons(item.type);
-      context.selectedIcon = item.system?.icon ?? "";
+      context.weaponTalents = TEARS_WEAPON_TALENTS;
+      context.weaponTypeSelection = normalizeTearsWeaponTalentName(item.system?.weaponType);
+      context.selectedIcon = item.system?.icon ? resolveItemIconPath(item.system.icon, item.type) : "";
+      context.displayImage = resolveItemIconPath(item.system?.icon || item.img, item.type);
 
       // Ensure rollable property exists with proper default for template rendering
       if (this.document.system.rollable === undefined) {

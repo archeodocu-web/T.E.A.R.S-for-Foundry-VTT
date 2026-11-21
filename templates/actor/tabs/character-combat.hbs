@@ -1,0 +1,57 @@
+<section class="tears-character-overview tears-combat-overview">
+  <header class="tears-section-heading"><div><span class="tears-eyebrow">T.E.A.R.S. / ENCOUNTER</span><h2>{{localize "TEARS.Tabs.Combat"}}</h2></div></header>
+  <section class="tears-panel">
+    <div class="tears-panel-heading"><h3>{{localize "TEARS.Combat.DerivedValues"}}</h3><span>{{localize "TEARS.Combat.FromWorkbook"}}</span></div>
+    <div class="tears-combat-grid">
+      <div class="tears-combat-stat"><small>ATN</small><strong>{{numberFormat combatData.atn decimals=0}}</strong><span>{{localize "TEARS.Combat.MeleeAttack"}}</span></div>
+      <div class="tears-combat-stat"><small>PA</small><strong>{{numberFormat combatData.pa decimals=0}}</strong><span>{{localize "TEARS.Combat.Parry"}}</span></div>
+      <div class="tears-combat-stat"><small>ATD</small><strong>{{numberFormat combatData.atd decimals=0}}</strong><span>{{localize "TEARS.Combat.RangedAttack"}}</span></div>
+      <div class="tears-combat-stat"><small>INI</small><strong>{{numberFormat combatData.initiative decimals=0}}</strong><span>{{localize "TEARS.Combat.Initiative"}}</span></div>
+    </div>
+    <p class="tears-rule-hint">{{localize "TEARS.Combat.FormulaHint"}}</p>
+    <div class="tears-stance-controls">
+      {{#if editable}}
+        <label>{{localize "TEARS.Combat.StanceAttackModifier"}} <input type="number" step="1" name="system.attributes.combat.attackModifier" value="{{combatSettings.attackModifier}}"></label>
+        <label>{{localize "TEARS.Combat.StanceParryModifier"}} <input type="number" step="1" name="system.attributes.combat.parryModifier" value="{{combatSettings.parryModifier}}"></label>
+      {{else}}
+        <span>{{localize "TEARS.Combat.StanceAttackModifier"}}: {{combatSettings.attackModifier}}</span>
+        <span>{{localize "TEARS.Combat.StanceParryModifier"}}: {{combatSettings.parryModifier}}</span>
+      {{/if}}
+    </div>
+    <button type="button" class="tears-primary-action" data-action="rollInitiative"><i class="fas fa-arrow-down-wide-short"></i> {{localize "TEARS.Combat.SetInitiative"}}</button>
+  </section>
+
+  <section class="tears-panel">
+    <div class="tears-panel-heading"><h3>{{localize "TEARS.Combat.Weapons"}}</h3><span>{{weapons.length}} {{localize "TEARS.Combat.Entries"}}</span></div>
+    {{#if combatWeapons.length}}
+      <div class="tears-weapon-list">
+        {{#each combatWeapons as |weapon|}}
+          <div class="tears-weapon-row" data-item-id="{{weapon.id}}">
+            <img src="{{weapon.img}}" alt="{{weapon.name}}">
+            <div class="tears-talent-name">
+              <strong>{{weapon.name}}</strong>
+              <small>{{weapon.system.weaponType}} · {{weapon.modeLabel}} · {{weapon.system.range}}</small>
+            </div>
+            <div class="tears-weapon-values">
+              <span>ATN/ATD <strong>{{weapon.attackTarget}}</strong></span>
+              <span>PA <strong>{{weapon.parryTarget}}</strong></span>
+              <span>{{weapon.system.formula}}</span>
+              <span>INI {{weapon.system.initiativeModifier}}</span>
+            </div>
+            <div class="tears-weapon-actions">
+              <button type="button" data-action="itemAction" data-sub-action="attack" data-item-id="{{weapon.id}}" title="{{localize 'TEARS.Combat.RollAttack'}}">AT</button>
+              <button type="button" data-action="itemAction" data-sub-action="parry" data-item-id="{{weapon.id}}" title="{{localize 'TEARS.Combat.RollParry'}}">PA</button>
+              <button type="button" data-action="itemAction" data-sub-action="damage" data-item-id="{{weapon.id}}" title="{{localize 'TEARS.Combat.RollDamage'}}"><i class="fas fa-dice"></i></button>
+              <button type="button" data-action="itemAction" data-sub-action="criticalDamage" data-item-id="{{weapon.id}}" title="{{localize 'TEARS.Combat.RollCriticalDamage'}}">×2</button>
+              <button type="button" data-action="itemAction" data-sub-action="initiative" data-item-id="{{weapon.id}}" title="{{localize 'TEARS.Combat.RollInitiativeWithWeapon'}}">INI</button>
+              <button type="button" data-action="itemAction" data-sub-action="edit" data-item-id="{{weapon.id}}" title="{{localize 'HTBAH.ItemEdit'}}"><i class="fas fa-pen"></i></button>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p class="tears-empty-state">{{localize "TEARS.Combat.NoWeapons"}}</p>
+    {{/if}}
+  </section>
+  <p class="tears-rule-hint">{{localize "TEARS.Combat.CombatLimitations"}}</p>
+</section>

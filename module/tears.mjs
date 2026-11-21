@@ -243,6 +243,9 @@ Handlebars.registerHelper('filterJoin', function(array, separator) {
 });
 
 Handlebars.registerHelper('localize', function(key) {
+  // Templates sometimes localize optional labels that are absent for legacy or custom entries.
+  // Return an empty string for an absent key rather than logging a warning on every render.
+  if (key === undefined || key === null || key === '') return '';
   // Handle different key formats.
   let localizationKey;
   if (typeof key === 'string') localizationKey = key;
