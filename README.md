@@ -1,38 +1,57 @@
-# T.E.A.R.S. Foundry VTT — Version 0.1.11
+# T.E.A.R.S. – Pen & Paper
 
-## Character builder fixes
-The wizard no longer attaches an ApplicationV2 `data-action="submit"` to the whole form. That parent action could capture clicks on hobby and select fields; real submission is now handled through the form submit event only. Hobby names are free text and each is linked to a matching T.E.A.R.S. talent through a separate selector.
+## Overview
 
-## Profession-point allocation
-The five variable profession points can be split among all five talent groups. Enter integer values from 0–5; the total must equal exactly 5. The allocation is saved on the character sheet details.
+T.E.A.R.S. is a post-apocalyptic tabletop role-playing game (Pen & Paper) created by Hauke Gerdes and introduced by Rocket Beans TV.
 
-Positive specifica add their printed +3/+5 points to the corresponding group's budget. Negative specifica apply the printed -5/-10 malus. Waffentalente still cost 2 TP per talent point. Hobby bonuses remain separate talent bonuses (+5 for the first hobby, +3 for the second) and are not paid from the group pools.
+The game takes place in a fictional version of present-day Germany after the outbreak of the mysterious T.E.A.R.S. virus. Society has collapsed, infrastructure has failed, and most of the population has either died or become infected.
 
-## Background and Conditions UI
-The Background and Conditions tabs now use the forest-green/sage palette, rounded cards and high-contrast dark text.
+The remaining survivors must navigate a dangerous world filled with infected creatures known as *Trauernde*, hostile survivors, scarce resources and difficult decisions.
 
-## Install
-1. Back up `FoundryVTT/Data/systems/tears` and your world data.
-2. Extract this ZIP.
-3. Copy the contained `tears` folder into `FoundryVTT/Data/systems/`.
-4. Restart Foundry and reopen your test world.
+## The World
 
-The release was checked for JavaScript syntax, JSON validity, template references and ZIP integrity. The hobby event path and point-budget calculations also have focused logic checks. This was not live-tested inside your Foundry installation.
+The T.E.A.R.S. setting explores a world where civilization has fallen apart almost overnight.
 
+Electricity, communication networks and public institutions have largely disappeared. Small groups of survivors struggle to establish new communities while facing constant threats from the infected and other desperate people.
 
-## Version 0.1.11 updates
+Survival, cooperation, exploration and the consequences of individual decisions are central elements of the setting.
 
-- The character builder uses the native Foundry ApplicationV2 window header again, so the wizard can be dragged.
-- The 5 variable profession points are invested directly into individual talents, as described on rulebook pp. 20-22. Each normal talent increase costs 1 TP; each weapon-talent increase costs 2 TP. The selection is shown as five talent selectors with a live weighted total.
-- Group budgets now contain the base 10 TP, fixed profession rubric bonuses, and specificum adjustments. The 5 variable profession points no longer inflate a group budget.
-- Talent effective values separately show the fixed profession floor, variable profession bonus, and hobby bonuses.
-- The biography/background tab now uses the same forest-green, sage and parchment styling as the rest of the sheet; inherited burgundy bars and dark fields are overridden.
-- The attribute step shows the per-attribute AP cost and an explicit 13→18 example (10 AP).
+## The Game System
 
+T.E.A.R.S. uses its own role-playing system rather than relying on an established ruleset such as Dungeons & Dragons or DSA.
 
-## Version 0.1.12 – Initiative handling
+Its mechanics draw inspiration from several existing role-playing systems, combining different approaches into an independent rules framework.
 
-T.E.A.R.S. initiative is now stored and displayed as the positive rulebook value. The custom Combat document sorts values ascending, so INI 8 acts before INI 11. On startup, negative initiative values saved by older T.E.A.R.S. builds are converted to their positive values.
+Players create individual characters with attributes, skills, talents and personal backgrounds. Dice rolls determine the outcomes of uncertain actions and dangerous situations.
+
+An additional feature of the original game is its use of physical item cards, which represent equipment, discoveries and other objects encountered during an adventure.
+
+## Original Series
+
+T.E.A.R.S. was the first major Pen & Paper adventure series produced by Rocket Beans TV.
+
+The original campaign was directed by Hauke Gerdes and featured Budi, Etienne, Nils and Simon as players.
+
+The series helped establish the Rocket Beans Pen & Paper format and introduced its post-apocalyptic setting to a wider audience.
+
+## About This Repository
+
+This repository is dedicated to the T.E.A.R.S. Pen & Paper project and its associated material.
+
+It serves as a place to collect, organize and document project-related resources.
+
+## Links & References
+
+- [Rocket Beans TV – Pen & Paper](https://rocketbeans.de/portfolio/pen-paper/)
+- [Original T.E.A.R.S. series](https://www.youtube.com/watch?v=KkuYt5xpCUk)
+- [T.E.A.R.S. Wiki](https://tears.wiki/)
+- [T.E.A.R.S. Rulebook presentation](https://www.youtube.com/watch?v=FulxHZebLqE)
+
+## Credits & Disclaimer
+
+T.E.A.R.S. was created by Hauke Gerdes and presented by Rocket Beans TV.
+
+This repository is an independent community project and is not an official Rocket Beans TV release. All original rights to T.E.A.R.S., its setting, characters and associated materials remain with their respective owners.
 
 
 <img width="1714" height="1351" alt="grafik" src="https://github.com/user-attachments/assets/87302b90-d97a-4d9c-ac7c-33dff5b76613" />
