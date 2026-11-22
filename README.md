@@ -36,3 +36,5 @@ T.E.A.R.S. initiative is now stored and displayed as the positive rulebook value
 
 
 <img width="1714" height="1351" alt="grafik" src="https://github.com/user-attachments/assets/87302b90-d97a-4d9c-ac7c-33dff5b76613" />
+<img width="1513" height="1231" alt="grafik" src="https://github.com/user-attachments/assets/279351af-7f41-4698-8232-ddc6a6b64944" />
+
