@@ -33,3 +33,6 @@ The release was checked for JavaScript syntax, JSON validity, template reference
 ## Version 0.1.12 – Initiative handling
 
 T.E.A.R.S. initiative is now stored and displayed as the positive rulebook value. The custom Combat document sorts values ascending, so INI 8 acts before INI 11. On startup, negative initiative values saved by older T.E.A.R.S. builds are converted to their positive values.
+
+
+<img width="1714" height="1351" alt="grafik" src="https://github.com/user-attachments/assets/87302b90-d97a-4d9c-ac7c-33dff5b76613" />
